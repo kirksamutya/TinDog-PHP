@@ -8,6 +8,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .form-control {
   border-radius: 8px;
 }
