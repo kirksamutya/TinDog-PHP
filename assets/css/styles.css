@@ -49,6 +49,14 @@ body {
   text-align: center;
 }
 
+/* This is for the forgot.html */
+
+.moving-background {
+  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
@@ -68,6 +76,11 @@ body {
 .small {
   font-size: 20px;
   text-align: center;
+  color: white;
+}
+
+.paw-button {
+  height: 10px;
 }
 
 img {
