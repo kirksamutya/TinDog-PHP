@@ -8,8 +8,8 @@ Lack of socialization is a known cause of behavioral issues in dogs, such as anx
 
 ![Project Screenshot](<img width="1874" height="915" alt="image" src="https://github.com/user-attachments/assets/e4ffe852-12d9-4b2d-b398-7ea6378186f3" />
 )
-![Project Screenshot](<img width="1843" height="906" alt="image" src="https://github.com/user-attachments/assets/e9244d57-1112-4427-8a2c-0b9211730bda" />
-)
+![Project Screenshot]<img width="1843" height="906" alt="image" src="https://github.com/user-attachments/assets/e9244d57-1112-4427-8a2c-0b9211730bda" />
+
 ![Project Screenshot](<img width="1850" height="908" alt="image" src="https://github.com/user-attachments/assets/c86337b4-bd33-467d-aa2c-c37c7c876fe4" />
 )
 ![Project Screenshot](<img width="1844" height="904" alt="image" src="https://github.com/user-attachments/assets/1283cdf4-f55c-492e-9cea-364a9e136e7f" />
