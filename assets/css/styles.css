@@ -1,16 +1,4 @@
 /*Todo: Fix the selectors, avoid element selectors as mush as possible */
-
-body {
-  background: linear-gradient(
-    290deg,
-    rgba(117, 134, 217, 1) 0%,
-    rgba(252, 70, 107, 1) 65%
-  );
-  background-size: 180% 180%;
-  animation: gradient-animation 18s ease infinite;
-  min-height: 100vh;
-}
-
 .form-container {
   max-width: 500px;
   margin: 5% auto;
@@ -23,6 +11,7 @@ body {
 .form-control {
   border-radius: 8px;
 }
+
 .form-control:focus {
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
   border-color: #0d6efd;
@@ -49,22 +38,6 @@ body {
   text-align: center;
 }
 
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.container {
-  height: 100vh;
-}
-
 .small {
   font-size: 20px;
   text-align: center;
@@ -74,7 +47,7 @@ img {
   height: 200px;
 }
 
-/*! This is for the index  */
+/*! This is for the index */
 .gradient-background {
   background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
   background-size: 180% 180%;
@@ -136,4 +109,15 @@ img {
 
 .testimonial-image {
   height: 30px;
+}
+
+.navbar-glass {
+  background: rgba(255, 255, 255, 0.25);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
