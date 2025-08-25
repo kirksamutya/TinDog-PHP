@@ -45,7 +45,6 @@
   text-align: center;
 }
 
-<<<<<<< HEAD
 /* This is for the forgot.html */
 
 .moving-background {
@@ -70,15 +69,13 @@
   height: 100vh;
 }
 
-=======
->>>>>>> 51387dd6cc81295fab1de7172a7536ecc9503141
 .small {
   font-size: 20px;
   text-align: center;
   color: white;
 }
 
-.paw-button {
+.button-paw {
   height: 10px;
 }
 
