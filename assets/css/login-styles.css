@@ -12,6 +12,19 @@ body {
   min-height: 100vh;
 }
 
+.custom-card {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-dark {
+  transition: background-color 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: #ff4c68;
+  border-color: #ff4c68;
+}
+
 @keyframes gradient-animation {
   0% {
     background-position: 0% 50%;
