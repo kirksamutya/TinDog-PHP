@@ -1,47 +1,30 @@
-/** Register CSS */
-
-.form-container {
-  max-width: 500px;
-  margin: 5% auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+/* Global CSS */
+.gradient-background {
+  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
 }
 
-.login-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.form-control {
-  border-radius: 8px;
-}
+/* TODO: Use for later */
+/* .navbar-glass {
+  background: rgba(255, 255, 255, 0.25);
 
-.form-control:focus {
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
-  border-color: #0d6efd;
-}
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); For Safari Support
 
-.back-btn {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-}
+  border: 1px solid rgba(255, 255, 255, 0.3);
 
-.header-bar {
-  display: grid;
-  grid-template-columns: 36px 1fr 36px;
-  align-items: center;
-  gap: 8px;
-}
-.header-bar h2 {
-  margin: 0;
-  text-align: center;
-}
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+} */
