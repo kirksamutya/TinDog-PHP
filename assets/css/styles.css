@@ -1,5 +1,4 @@
-/* ! Only use this for Main Styles, keep each html style separate */
-/* Side note: This is only cause we dumb */
+/** Register CSS */
 
 .form-container {
   max-width: 500px;
@@ -45,42 +44,4 @@
 .header-bar h2 {
   margin: 0;
   text-align: center;
-}
-
-/* This is for the forgot.html */
-
-.moving-background {
-  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
-  background-size: 180% 180%;
-  animation: gradient-animation 18s ease infinite;
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.container {
-  height: 100vh;
-}
-
-.small {
-  font-size: 20px;
-  text-align: center;
-  color: white;
-}
-
-.button-paw {
-  height: 10px;
-}
-
-img {
-  height: 200px;
 }
