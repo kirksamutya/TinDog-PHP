@@ -27,6 +27,11 @@
   }
 }
 
+/* Prefab: Consistent light gray background for a clean, modern look */
+.bg-light-gray {
+  background-color: #f8f9fa; /* A subtle, light gray color */
+}
+
 /* ====================
  * Reusable Components
  * ==================== */
@@ -171,4 +176,18 @@ body {
 .small {
   font-size: 20px;
   text-align: center;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
