@@ -1,0 +1,13 @@
+.accordion-button {
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #ff4c68;
+  color: #fff;
+}
+
+footer {
+  font-size: 0.9rem;
+}
