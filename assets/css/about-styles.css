@@ -1,0 +1,18 @@
+/*
+ * Tindog About Page Styles
+ *
+ * This file contains styles specific to the About Us page.
+ */
+
+.team-name-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.team-name {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 1rem;
+}
