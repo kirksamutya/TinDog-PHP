@@ -3,10 +3,11 @@
  *
  * This file contains styles specific to the About Us page.
  */
-
-.team-name-section {
-  text-align: center;
-  margin-bottom: 2rem;
+.intro-text {
+  font-size: 1.25rem;
+  color: #fff;
+  max-width: 700px;
+  margin: 0 auto 1.5rem auto;
 }
 
 .team-name {
@@ -14,5 +15,4 @@
   font-weight: bold;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin-top: 1rem;
 }

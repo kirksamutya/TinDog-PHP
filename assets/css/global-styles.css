@@ -36,13 +36,14 @@
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Prefab: Consistent red hover effect for dark and outline-dark buttons */
+/* Prefab: Consistent red hover effect for dark buttons */
 .btn-dark:hover,
 .btn-dark:focus {
   background-color: #ff4c68;
   border-color: #ff4c68;
 }
 
+/* Prefab: Consistent red hover effect for outline-dark buttons */
 .btn-tindog.btn-outline-dark:hover,
 .btn-tindog.btn-outline-dark:focus {
   background-color: #ff4c68;
@@ -128,10 +129,10 @@
 }
 
 /* Footer & Nav */
-.footer-section {
-  border-top: 1px solid #eee;
+.site-footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   font-size: 0.9rem;
-  margin-bottom: 0px !important;
 }
 
 .navbar {
