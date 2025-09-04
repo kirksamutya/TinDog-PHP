@@ -5,44 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TinDog</title>
     <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicon-transparent.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="stylesheet" href="./assets/css/global-styles.css" />
     <link rel="stylesheet" href="./assets/css/index-styles.css" />
   </head>
-
   <body>
-    <!-- TODO: Use for later -->
-    <!--* <nav class="navbar navbar-expand-lg sticky-top navbar-glass">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">TinDog</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="index.html"
-              >Home</a
-            >
-            <a class="nav-link" href="register.html">Register</a>
-            <a class="nav-link" href="login.html">Login</a>
-            <a class="nav-link" href="forgot.html">Forgot Password</a>
-          </div>
-        </div>
-      </div>
-    </nav> -->
-    <!-- Title -->
     <section id="title" class="gradient-background">
       <div
         class="container col-xxl-8 px-4 py-5"
@@ -83,8 +65,8 @@
                 Login
               </a>
               <a
-                href="././register.html"
-                class="btn btn-outline-light btn-lg px-4"
+                href="./register.html"
+                class="btn btn-outline-light btn-lg px-4 btn-tindog"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +87,6 @@
         </div>
       </div>
     </section>
-    <!-- Features -->
     <section id="features">
       <div class="container px-4 py-5" id="hanging-icons">
         <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
@@ -182,7 +163,6 @@
         </div>
       </div>
     </section>
-    <!-- Testimonial -->
     <section id="testimonial">
       <div class="container">
         <h2>
@@ -227,7 +207,6 @@
         </div>
       </div>
     </section>
-    <!-- Pricing -->
     <section id="pricing">
       <div class="container py-3">
         <header>
@@ -259,7 +238,7 @@
                   </ul>
                   <button
                     type="button"
-                    class="w-100 btn btn-lg btn-outline-dark"
+                    class="w-100 btn btn-lg btn-outline-dark btn-tindog"
                   >
                     Sign up for free
                   </button>
@@ -282,7 +261,7 @@
                   </ul>
                   <button
                     type="button"
-                    class="w-100 btn btn-lg btn-outline-dark"
+                    class="w-100 btn btn-lg btn-outline-dark btn-tindog"
                   >
                     Get started
                   </button>
@@ -303,7 +282,10 @@
                     <li>Unlimited Matches & Messages</li>
                     <li>Unlimited App Usage</li>
                   </ul>
-                  <button type="button" class="w-100 btn btn-lg btn-dark">
+                  <button
+                    type="button"
+                    class="w-100 btn btn-lg btn-dark btn-tindog"
+                  >
                     Contact us
                   </button>
                 </div>
@@ -313,13 +295,9 @@
         </main>
       </div>
     </section>
-    <!-- Footer -->
-    <section id="footer" class="gradient-background">
+    <footer class="site-footer gradient-background">
       <div class="container">
-        <footer
-          class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5"
-          style="margin-bottom: 0px !important"
-        >
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-3 my-3">
           <div class="col mb-3">
             <p class="text-body-secondary">© Tindog by UnMotivated</p>
           </div>
@@ -343,10 +321,9 @@
               ><h5>FAQ</h5></a
             >
           </div>
-        </footer>
+        </div>
       </div>
-    </section>
-
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -354,5 +331,3 @@
     ></script>
   </body>
 </html>
-<!-- TODO: Credit Font Awesome -->
-<!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->

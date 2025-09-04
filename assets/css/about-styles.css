@@ -1,0 +1,78 @@
+/*
+ * Tindog About Page Styles
+ *
+ * This file contains styles specific to the About Us page.
+ */
+.intro-text {
+  font-size: 1.25rem;
+  color: #fff;
+  max-width: 700px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.team-name {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.about-bg {
+  background-color: white;
+  position: relative;
+  min-height: 100vh;
+}
+
+.about-bg::before {
+  content: "";
+  position: absolute;
+  width: 90vw;
+  height: 90vw;
+  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  border-radius: 50%;
+  z-index: 0;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+/* Updated styling for the contact cards */
+.contact-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: #343a40; /* Dark background for the card */
+  color: #fff; /* White text for contrast */
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Card titles and paragraphs */
+.contact-card h3 {
+  color: #fff;
+}
+
+.contact-card p {
+  color: #adb5bd; /* Lighter gray for paragraph text */
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
