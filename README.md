@@ -6,17 +6,28 @@ Lack of socialization is a known cause of behavioral issues in dogs, such as anx
 
 **Live Demo:** [https://itsanthonysaavedra.github.io/TinDog-PHP/](https://itsanthonysaavedra.github.io/TinDog-PHP/)
 
-![Project Screenshot]<img width="1874" height="915" alt="image" src="https://github.com/user-attachments/assets/e4ffe852-12d9-4b2d-b398-7ea6378186f3" />
+![Project Screenshots]
+<img width="1903" height="989" alt="image" src="https://github.com/user-attachments/assets/e14ff6c6-8caa-460b-aeb2-db28bf6e7961" />
 
-![Project Screenshot]<img width="1843" height="906" alt="image" src="https://github.com/user-attachments/assets/e9244d57-1112-4427-8a2c-0b9211730bda" />
+<img width="1903" height="989" alt="Screenshot 2025-09-05 015327" src="https://github.com/user-attachments/assets/1bdcc6d7-844e-428f-99cc-6f8f96799100" />
 
-![Project Screenshot]<img width="1850" height="908" alt="image" src="https://github.com/user-attachments/assets/c86337b4-bd33-467d-aa2c-c37c7c876fe4" />
+<img width="1896" height="415" alt="Screenshot 2025-09-05 015422" src="https://github.com/user-attachments/assets/06b3a7a5-84cd-49e4-83e5-b5547b001daa" />
 
-![Project Screenshot]<img width="1844" height="904" alt="image" src="https://github.com/user-attachments/assets/1283cdf4-f55c-492e-9cea-364a9e136e7f" />
+<img width="1904" height="805" alt="Screenshot 2025-09-05 015428" src="https://github.com/user-attachments/assets/d96ffa6f-6cc4-436f-b46b-55cc232f18e0" />
 
-![Project Screenshot]<img width="1844" height="494" alt="image" src="https://github.com/user-attachments/assets/8ed39eeb-e29c-4a8d-8408-66873e571092" />
+<img width="1919" height="1079" alt="Screenshot 2025-09-05 015509" src="https://github.com/user-attachments/assets/36339bf6-b37b-415e-857a-132dc90f029d" />
 
-![Project Screenshot]<img width="1847" height="917" alt="image" src="https://github.com/user-attachments/assets/1ebc009b-ce21-43ec-ba07-37bbe6f0777a" />
+<img width="1913" height="1071" alt="Screenshot 2025-09-05 015516" src="https://github.com/user-attachments/assets/21acab53-c287-43ca-ab2e-5e695be918fb" />
+
+<img width="1919" height="1075" alt="Screenshot 2025-09-05 015521" src="https://github.com/user-attachments/assets/5146c06d-3c7e-417b-8657-6f88b37c850d" />
+
+<img width="1899" height="822" alt="Screenshot 2025-09-05 015536" src="https://github.com/user-attachments/assets/ffc8382a-bfef-419f-bb4c-bfede8a8d3ec" />
+
+<img width="1898" height="516" alt="Screenshot 2025-09-05 015541" src="https://github.com/user-attachments/assets/8a61f911-cea6-40c0-b388-a37d6b5cbfbc" />
+
+<img width="1919" height="1079" alt="Screenshot 2025-09-05 015549" src="https://github.com/user-attachments/assets/d00d2207-c2fb-4e99-9b49-f2d6ab6fe983" />
+
+<img width="1919" height="1079" alt="Screenshot 2025-09-05 015554" src="https://github.com/user-attachments/assets/8d7528eb-bbc3-4880-bc19-a67b03447720" />
 
 
 ### 🛠️ Built With
