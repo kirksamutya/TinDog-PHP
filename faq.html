@@ -5,160 +5,291 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TinDog - FAQ</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicon-transparent.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/global-styles.css" />
+    <style>
+      .accordion-button:not(.collapsed) {
+        background-color: var(--brand-primary);
+        color: white;
+      }
+    </style>
   </head>
-  <body>
-    <!-- start of FAQ container -->
-    <div class="container py-5">
-      <h2 class="text-center mb-4">Frequently Asked Questions</h2>
-      <p class="text-center text-muted mb-5">
-        Everything you need to know about TinDog 🐕
-      </p>
-
-      <div class="accordion shadow-lg" id="faqAccordion">
-        <!-- accordion -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="faq1">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#answer1"
-            >
-              How does TinDog work?
-            </button>
-          </h2>
-          <div
-            id="answer1"
-            class="accordion-collapse collapse show"
-            data-bs-parent="#faqAccordion"
+  <body class="d-flex flex-column min-vh-100">
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+          <a class="navbar-brand" href="./index.html">tindog</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
           >
-            <div class="accordion-body">
-              TinDog connects dog owners to set up safe and fun playdates.
-              Create a profile, browse nearby pups, and start scheduling
-              playdates with just a few clicks!
-            </div>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="./about.html">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./contact.html">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="./faq.html">FAQ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./login.html">Login</a>
+              </li>
+            </ul>
           </div>
         </div>
+      </nav>
+    </header>
 
-        <!-- acq 2 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="faq2">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#answer2"
-            >
-              Is TinDog free to use?
-            </button>
-          </h2>
-          <div
-            id="answer2"
-            class="accordion-collapse collapse"
-            data-bs-parent="#faqAccordion"
-          >
-            <div class="accordion-body">
-              Yes, creating a profile and browsing dogs is completely free!
-              Premium features (like unlimited matches and priority listing) are
-              optional.
-            </div>
-          </div>
-        </div>
-
-        <!-- acq 3 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="faq3">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#answer3"
-            >
-              How do I make sure my dog’s playdate is safe?
-            </button>
-          </h2>
-          <div
-            id="answer3"
-            class="accordion-collapse collapse"
-            data-bs-parent="#faqAccordion"
-          >
-            <div class="accordion-body">
-              We recommend meeting in public parks, checking vaccination
-              records, and always supervising your dogs. TinDog also allows you
-              to set preferences for size, breed, and temperament.
-            </div>
-          </div>
-        </div>
-
-        <!-- acq 4 -->
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="faq4">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#answer4"
-            >
-              What is 'Priority Listing?'
-            </button>
-          </h2>
-          <div
-            id="answer4"
-            class="accordion-collapse collapse"
-            data-bs-parent="#faqAccordion"
-          >
-            <div class="accordion-body">
-              Priority Listing is a premium feature that highlights your dog’s
-              profile so more owners can discover it. When you enable Priority
-              Listing, your pup appears at the top of search results and
-              suggestions, making it easier to find playdates quickly. It’s a
-              great way to stand out in the pack 🐾.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- footer from anthony -->
-    <section id="footer" class="gradient-background">
+    <main class="content-wrapper py-5 bg-light">
       <div class="container">
-        <footer
-          class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5"
-          style="margin-bottom: 0px !important"
-        >
-          <div class="col mb-3">
-            <p class="text-body-secondary">© TinDog by UnMotivated</p>
-          </div>
-
-          <div class="col mb-3"></div>
-
-          <div class="col mb-3">
-            <a href="./about.html" class="text-decoration-none text-dark"
-              ><h5>About Us</h5></a
+        <div class="text-center mb-5">
+          <h1>Frequently Asked Questions</h1>
+          <p class="lead text-muted">Have a question? We're here to help. 🐕</p>
+        </div>
+        <div class="accordion shadow-sm" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer1"
+              >
+                How does matching work on TinDog?
+              </button>
+            </h2>
+            <div
+              id="answer1"
+              class="accordion-collapse collapse show"
+              data-bs-parent="#faqAccordion"
             >
+              <div class="accordion-body">
+                Matching is simple! You swipe right on a dog's profile if you'd
+                like your pup to meet them, and left if not. If the other dog
+                owner also swipes right on your dog's profile, it's a match! You
+                can then start chatting to arrange a playdate.
+              </div>
+            </div>
           </div>
-
-          <div class="col mb-3">
-            <a href="" class="text-decoration-none text-dark"
-              ><h5>Contact Us</h5></a
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer2"
+              >
+                Is my personal information safe?
+              </button>
+            </h2>
+            <div
+              id="answer2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordion"
             >
+              <div class="accordion-body">
+                Absolutely. We take your privacy seriously. Your profile only
+                shows your first name and general location to other users. Your
+                full name, email, and other sensitive information are never
+                shared. You can read more in our Privacy Policy.
+              </div>
+            </div>
           </div>
-          <!-- TODO: fix contact html once ready -->
-
-          <div class="col mb-3">
-            <a href="./faq.html" class="text-decoration-none text-dark"
-              ><h5>FAQ</h5></a
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer3"
+              >
+                How do I report a user or a concern?
+              </button>
+            </h2>
+            <div
+              id="answer3"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordion"
             >
+              <div class="accordion-body">
+                If you encounter a user or profile that violates our community
+                guidelines, you can report them directly from their profile
+                page. Our moderation team will review the report and take
+                appropriate action to keep our community safe.
+              </div>
+            </div>
           </div>
-        </footer>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer4"
+              >
+                Can I filter dogs by breed, size, or age?
+              </button>
+            </h2>
+            <div
+              id="answer4"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                Yes! Our premium subscription plans allow you to use advanced
+                filters to search for specific breeds, sizes, ages, and even
+                energy levels. This helps you find the perfect playmate for your
+                furry friend.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer5"
+              >
+                What if a playdate doesn't go well?
+              </button>
+            </h2>
+            <div
+              id="answer5"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                We always recommend meeting in a neutral, public space like a
+                dog park for the first time. Keep the dogs on leashes initially
+                and watch their body language. If they don't get along, that's
+                okay! Not every dog is a perfect match. You can simply end the
+                playdate politely and unmatch if you wish.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer6"
+              >
+                Is TinDog a dating app for humans?
+              </button>
+            </h2>
+            <div
+              id="answer6"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordion"
+            >
+              <div class="accordion-body">
+                While we love seeing human connections spark over a shared love
+                for dogs, our primary focus is on helping dogs make new friends.
+                TinDog is strictly for finding canine companions.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </main>
 
-    <!-- Bootstrap JS -->
+    <footer class="site-footer bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <h5 class="navbar-brand">tindog</h5>
+            <p class="small text-muted">
+              Helping dogs find their soulmate. © 2025 UnMotivated Studios. All
+              rights reserved.
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="mb-3">Navigate</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="./about.html"
+                  class="text-white text-decoration-none small"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="./contact.html"
+                  class="text-white text-decoration-none small"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a
+                  href="./faq.html"
+                  class="text-white text-decoration-none small"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h5 class="mb-3">Legal</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="./terms.html"
+                  class="text-white text-decoration-none small"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a
+                  href="./privacy.html"
+                  class="text-white text-decoration-none small"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4 text-md-end">
+            <h5 class="mb-3">Connect</h5>
+            <a href="#" class="text-white me-2"
+              ><i class="fab fa-facebook fa-lg"></i
+            ></a>
+            <a href="#" class="text-white me-2"
+              ><i class="fab fa-twitter fa-lg"></i
+            ></a>
+            <a href="#" class="text-white"
+              ><i class="fab fa-instagram fa-lg"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

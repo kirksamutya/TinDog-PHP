@@ -1,0 +1,129 @@
+:root {
+  /* Color Palette */
+  --brand-primary: #ff4c68;
+  --brand-secondary: #00bfff;
+  --brand-accent: #ef8172;
+  --text-dark: #343a40;
+  --text-light: #ffffff;
+  --background-light: #f8f9fa;
+  --border-color: #dee2e6;
+
+  /* Typography */
+  --font-primary: "Poppins", sans-serif;
+
+  /* Spacing & Borders */
+  --border-radius-medium: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: var(--font-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+}
+
+.gradient-background {
+  background: linear-gradient(
+    300deg,
+    var(--brand-secondary),
+    var(--brand-primary),
+    var(--brand-accent)
+  );
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Reusable Components */
+.tindog-card {
+  background-color: var(--text-light);
+  padding: 2.5rem;
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow-heavy);
+  max-width: 500px;
+  width: 95%;
+  margin: 2rem auto;
+}
+
+.form-control:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25);
+}
+
+.btn-tindog-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transition: opacity 0.2s ease-in-out;
+}
+.btn-tindog-primary:hover {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  opacity: 0.9;
+}
+
+.btn-tindog-outline {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.btn-tindog-outline:hover {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+}
+
+/* Site Header & Footer */
+.site-header .navbar-brand {
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.site-header .nav-link {
+  color: var(--text-dark);
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+  color: var(--brand-primary);
+}
+
+.site-footer {
+  font-size: 0.9rem;
+}
+
+.site-footer a {
+  text-decoration: none;
+  color: var(--text-dark);
+}
+.site-footer a:hover {
+  text-decoration: underline;
+}
