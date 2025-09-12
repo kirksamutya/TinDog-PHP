@@ -1,0 +1,69 @@
+/* Dashboard Header */
+.dashboard-header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: white;
+}
+
+/* Tab Navigation Styling */
+.profile-tabs .nav-link {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.profile-tabs .nav-link.active {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary) var(--brand-primary) white;
+  border-width: 3px;
+}
+
+.profile-tabs .nav-link:hover:not(.active) {
+  border-color: transparent;
+  color: var(--brand-primary);
+}
+
+/* New: Smaller profile image for the tab */
+.profile-tab-img {
+  width: 120px; /* Smaller fixed width */
+  height: 120px; /* Fixed height for a perfect circle */
+  object-fit: cover; /* Ensures image covers the area without distortion */
+  border-radius: 50%;
+  margin-bottom: 1rem; /* Add some space below the image */
+}
+
+/* Photo Gallery Management */
+.photo-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.photo-gallery-grid img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.upload-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  color: var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-placeholder:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  background-color: #f8f9fa;
+}
+
+/* Personality Tags */
+.personality-tag {
+  font-weight: 500;
+}

@@ -1,16 +1,50 @@
-/*
- * Tindog Global Styles
- *
- * This file contains styles that are shared across all pages to ensure
- * a consistent look and feel.
- */
+:root {
+  /* Color Palette */
+  --brand-primary: #ff4c68;
+  --brand-secondary: #00bfff;
+  --brand-accent: #ef8172;
+  --text-dark: #343a40;
+  --text-light: #ffffff;
+  --background-light: #f8f9fa;
+  --border-color: #dee2e6;
 
-/* ====================
- * Global Background
- * ==================== */
+  /* Typography */
+  --font-primary: "Poppins", sans-serif;
+
+  /* Spacing & Borders */
+  --border-radius-medium: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: var(--font-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+}
 
 .gradient-background {
-  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  background: linear-gradient(
+    300deg,
+    var(--brand-secondary),
+    var(--brand-primary),
+    var(--brand-accent)
+  );
   background-size: 180% 180%;
   animation: gradient-animation 18s ease infinite;
 }
@@ -27,167 +61,69 @@
   }
 }
 
-/* Prefab: Consistent light gray background for a clean, modern look */
-.bg-light-gray {
-  background-color: #f8f9fa; /* A subtle, light gray color */
-}
-
-/* ====================
- * Reusable Components
- * ==================== */
-
-/* Buttons */
-.btn-dark {
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Prefab: Consistent red hover effect for dark buttons */
-.btn-dark:hover,
-.btn-dark:focus {
-  background-color: #ff4c68;
-  border-color: #ff4c68;
-}
-
-/* Prefab: Consistent red hover effect for outline-dark buttons */
-.btn-tindog.btn-outline-dark:hover,
-.btn-tindog.btn-outline-dark:focus {
-  background-color: #ff4c68;
-  border-color: #ff4c68;
-  color: #fff;
-}
-
-/* Forms */
-.form-control:focus {
-  box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25);
-  border-color: #ff4c68;
-}
-
-/* Cards */
-.custom-card {
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-
-.contact-card {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* Prefab: Contact card hover effect */
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Social Icons */
-.social-icon {
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.social-icon:hover {
-  transform: scale(1.2);
-}
-
-/* Images */
-.profile-img {
-  height: 100px;
-  border-radius: 50%;
-}
-
-.testimonial-dog {
-  border-radius: 50%;
-  height: 100px;
-  margin-top: 2rem;
-}
-
-.thinking-dog {
-  height: 200px;
-}
-
-/* ====================
- * Layout Helpers
- * ==================== */
-
-/* Prefab: Centers content on a page with a gradient background */
-.login-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-/* Prefab: Card-like container for forms (e.g., register, login) */
-.form-card-container {
-  background-color: white;
+/* Reusable Components */
+.tindog-card {
+  background-color: var(--text-light);
   padding: 2.5rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  max-width: 450px;
-  width: 90%;
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow-heavy);
+  max-width: 500px;
+  width: 95%;
   margin: 2rem auto;
 }
 
-/* Prefab: Basic back button container */
-.back-button-container {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+.form-control:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25);
 }
 
-/* Footer & Nav */
+.btn-tindog-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transition: opacity 0.2s ease-in-out;
+}
+.btn-tindog-primary:hover {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  opacity: 0.9;
+}
+
+.btn-tindog-outline {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.btn-tindog-outline:hover {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+}
+
+/* Site Header & Footer */
+.site-header .navbar-brand {
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.site-header .nav-link {
+  color: var(--text-dark);
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+  color: var(--brand-primary);
+}
+
 .site-footer {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   font-size: 0.9rem;
 }
 
-.navbar {
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-}
-
-.navbar-brand {
-  color: #ff4c68;
-  font-weight: bold;
-  font-size: 1.25rem;
+.site-footer a {
   text-decoration: none;
+  color: var(--text-dark);
 }
-
-.nav-link {
-  color: #333;
-  margin-left: 0.75rem;
-}
-
-.nav-link.active,
-.nav-link:hover {
-  color: #ff4c68;
-}
-
-/* Other global styles */
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-
-.content {
-  flex: 1;
-}
-
-.small {
-  font-size: 20px;
-  text-align: center;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
+.site-footer a:hover {
+  text-decoration: underline;
 }
