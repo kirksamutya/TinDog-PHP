@@ -97,7 +97,11 @@
 }
 
 .btn-filter.active {
-  background-color: var(--brand-primary);
+  background-image: linear-gradient(
+    45deg,
+    var(--brand-accent),
+    var(--brand-primary)
+  );
   border-color: var(--brand-primary);
   color: white;
   box-shadow: 0 5px 15px rgba(255, 76, 104, 0.3);
