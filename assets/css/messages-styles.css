@@ -174,21 +174,14 @@
 /* --- Mobile Responsive Styles --- */
 @media (max-width: 767.98px) {
   .chat-container {
-    grid-template-columns: 1fr; /* Stack the panes */
-    height: calc(100vh - 160px); /* Adjust height for mobile */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 160px);
   }
-
-  /* By default on mobile, only show the conversation list */
   .chat-window {
     display: none;
   }
-
-  /* The back button is for display logic, but let's style it */
-  .back-button {
-    color: var(--text-dark);
-    padding-left: 0;
-  }
-  .back-button:hover {
-    color: var(--brand-primary);
+  .conversation-list {
+    flex-grow: 1;
   }
 }

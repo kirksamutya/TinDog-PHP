@@ -5,21 +5,82 @@
 # and other components shared between the user's personal
 # profile and the admin's view of a user record.
 --------------------------------------------------------------*/
+.main-content {
+  perspective: 1000px;
+}
+
+/* --- Page Background Elements --- */
+.background-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(100px);
+}
+.background-shape.shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  background-color: rgba(255, 76, 104, 0.15);
+}
+.background-shape.shape-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -200px;
+  background-color: rgba(0, 191, 255, 0.15);
+}
+
+/* --- Profile Card & Animations --- */
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: fade-slide-in 0.5s ease-out forwards;
+}
+
+.card:hover {
+  transform: translateY(-5px) rotateX(2deg) scale(1.01);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+    0 15px 40px rgba(255, 76, 104, 0.2);
+}
+
+.card-header,
+.card-body {
+  transform: translateZ(10px);
+}
 
 /* --- Profile Tab UI --- */
 .profile-tabs .nav-link {
   color: var(--text-dark);
   font-weight: 500;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
 }
-
 .profile-tabs .nav-link.active {
-  color: var(--brand-primary);
-  border-color: var(--brand-primary) var(--brand-primary) white;
-  border-width: 3px;
+  color: var(--text-light);
+  background-image: linear-gradient(
+    45deg,
+    var(--brand-accent),
+    var(--brand-primary)
+  );
+  border-color: var(--brand-primary);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 5px 15px rgba(255, 76, 104, 0.2);
 }
-
 .profile-tabs .nav-link:hover:not(.active) {
-  border-color: transparent;
+  border-color: var(--brand-primary);
   color: var(--brand-primary);
 }
 
@@ -31,8 +92,17 @@
   margin-bottom: 1rem;
 }
 
+/* --- Personality Tags --- */
 .personality-tag {
   font-weight: 500;
+  color: white !important;
+  background-image: linear-gradient(
+    45deg,
+    var(--brand-accent),
+    var(--brand-primary)
+  );
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 /* --- Photo Gallery --- */
@@ -41,14 +111,12 @@
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1rem;
 }
-
 .photo-gallery-grid img {
   width: 100%;
   height: 120px;
   object-fit: cover;
   border-radius: 8px;
 }
-
 .upload-placeholder {
   display: flex;
   align-items: center;
@@ -61,7 +129,6 @@
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
 .upload-placeholder:hover {
   border-color: var(--brand-primary);
   color: var(--brand-primary);
