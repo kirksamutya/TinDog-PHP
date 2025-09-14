@@ -174,10 +174,12 @@
 /* --- Mobile Responsive Styles --- */
 @media (max-width: 767.98px) {
   .chat-container {
-    display: flex;
+    display: flex; /* Use flexbox for single-column layout */
     flex-direction: column;
     height: calc(100vh - 160px);
   }
+
+  /* By default on mobile, only show the conversation list */
   .chat-window {
     display: none;
   }
