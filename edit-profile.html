@@ -9,8 +9,6 @@
       type="image/png"
       href="./assets/images/favicon-transparent.png"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
@@ -41,7 +39,7 @@
           </div>
           <div class="edit-profile-card card mt-4">
             <div class="card-header bg-transparent">
-              <ul class="nav nav-tabs card-header-tabs">
+              <ul class="nav nav-tabs card-header-tabs" id="edit-profile-tabs">
                 <li class="nav-item">
                   <a
                     class="nav-link active"
@@ -206,6 +204,12 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                         />
                       </div>
                     </div>
+                    <div class="mb-3">
+                      <label for="ownerBio" class="form-label">About Me</label>
+                      <textarea class="form-control" id="ownerBio" rows="3">
+Guides our technical direction and translates creative concepts into functional, polished applications.</textarea
+                      >
+                    </div>
                   </form>
                 </div>
               </div>
@@ -226,5 +230,6 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/tab-handler.js"></script>
   </body>
 </html>

@@ -1,5 +1,4 @@
-/* REVAMPED PROFILE & EDIT STYLES */
-
+/* REVAMPED PROFILE, EDIT & SETTINGS STYLES */
 .main-content {
   padding-top: 1.5rem;
 }
@@ -15,7 +14,6 @@
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
 .profile-cover-photo img {
   width: 100%;
   height: 100%;
@@ -31,11 +29,9 @@
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
 .profile-card {
   margin-top: -80px;
   position: relative;
-  padding: 1.5rem;
   padding-top: 0;
 }
 
@@ -43,7 +39,6 @@
   text-align: center;
   margin-bottom: 1rem;
 }
-
 .profile-avatar {
   width: 160px;
   height: 160px;
@@ -54,7 +49,23 @@
   margin-top: -80px;
 }
 
-/* Personality Tags Gradient Style */
+.profile-card .nav-tabs {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 1.5rem;
+}
+.profile-card .nav-tabs .nav-link {
+  color: var(--text-dark);
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 500;
+}
+.profile-card .nav-tabs .nav-link.active {
+  color: var(--brand-primary);
+  background-color: transparent;
+  border-color: var(--brand-primary);
+}
+
+.btn-check:checked + .btn,
 .personality-tag {
   color: white !important;
   background-image: linear-gradient(
@@ -62,28 +73,40 @@
     var(--brand-accent),
     var(--brand-primary)
   );
-  border: none;
+  border-color: transparent;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Edit Profile Form Styles */
 .edit-profile-card .nav-tabs {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .edit-profile-card .nav-tabs .nav-link {
   color: var(--text-dark);
   border: none;
   border-bottom: 3px solid transparent;
 }
-
 .edit-profile-card .nav-tabs .nav-link.active {
   color: var(--brand-primary);
   background-color: transparent;
   border-color: var(--brand-primary);
 }
 
-/* --- Animated Background Shapes --- */
+.settings-card {
+  background: #fff;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+.settings-card .card-header {
+  background-color: transparent;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+}
+.settings-card .card-body {
+  padding: 1.5rem;
+}
+
 @keyframes slow-rotate {
   from {
     transform: rotate(0deg);
@@ -92,7 +115,6 @@
     transform: rotate(360deg);
   }
 }
-
 .background-shape {
   position: absolute;
   border-radius: 50%;
@@ -101,7 +123,6 @@
   opacity: 0.8;
   animation: slow-rotate 60s linear infinite;
 }
-
 .background-shape.shape-1 {
   width: 400px;
   height: 400px;
@@ -110,7 +131,6 @@
   background-color: rgba(255, 76, 104, 0.2);
   animation-duration: 70s;
 }
-
 .background-shape.shape-2 {
   width: 500px;
   height: 500px;
@@ -121,17 +141,33 @@
   animation-direction: reverse;
 }
 
-/* --- Responsive Styles for Profile Page --- */
-@media (max-width: 576px) {
+/* --- Definitive Mobile Profile Fix --- */
+@media (max-width: 767.98px) {
   .profile-cover-photo {
-    height: 180px;
+    height: 150px;
+  }
+  .profile-card {
+    margin-top: 0;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff; /* Use solid background on mobile for clarity */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
   .profile-avatar {
     width: 120px;
     height: 120px;
-    margin-top: -60px;
+    margin-top: -60px; /* Overlap just the cover photo */
   }
-  .profile-card {
-    margin-top: -60px;
+  .profile-card .nav-tabs {
+    padding: 0;
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .tab-content {
+    width: 100%;
   }
 }

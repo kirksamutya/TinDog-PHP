@@ -1,17 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loadComponent = (selector, url) => {
-    const element = document.querySelector(selector);
-    if (element) {
+  const loadComponent = (element) => {
+    const url = element.dataset.component;
+    if (url) {
       fetch(url)
         .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Component not found at ${url}`);
-          }
+          if (!response.ok) throw new Error(`Component not found at ${url}`);
           return response.text();
         })
         .then((data) => {
           element.innerHTML = data;
-          if (selector === "#sidebar-nav-container") {
+          if (element.id === "sidebar-nav-container") {
             setActiveNavLink();
           }
         })
@@ -34,8 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  loadComponent("#site-header", "./header.html");
-  loadComponent("#app-header", "./app-header.html");
-  loadComponent("#site-footer", "./footer.html");
-  loadComponent("#sidebar-nav-container", "./sidebar-nav-content.html");
+  const specificComponents = [
+    { selector: "#app-header", url: "./app-header.html" },
+    { selector: "#sidebar-nav-container", url: "./sidebar-nav-content.html" },
+  ];
+
+  specificComponents.forEach((comp) => {
+    const element = document.querySelector(comp.selector);
+    if (element) {
+      element.dataset.component = comp.url;
+      loadComponent(element);
+    }
+  });
+
+  document.querySelectorAll("[data-component]").forEach(loadComponent);
 });
