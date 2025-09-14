@@ -1,0 +1,73 @@
+/*--------------------------------------------------------------
+# DASHBOARD LAYOUT STYLES
+#
+# Contains core layout styles for the entire logged-in
+# experience (both user and admin), including the shared
+# header, sidebar, and swipe card.
+--------------------------------------------------------------*/
+
+/* --- Core Layout --- */
+body {
+  font-size: 0.875rem;
+  background-color: var(--background-light);
+}
+
+.dashboard-header {
+  z-index: 101;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 48px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+  padding-top: 64px;
+}
+
+/* --- Sidebar Navigation --- */
+.sidebar-nav .nav-link {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active {
+  color: var(--brand-primary);
+}
+
+.sidebar-nav .nav-link .bi {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+/* --- Swipe Card Component --- */
+.swipe-card {
+  max-width: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.swipe-card-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.swipe-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}

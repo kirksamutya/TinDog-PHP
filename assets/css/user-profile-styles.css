@@ -1,10 +1,12 @@
-/* Dashboard Header */
-.dashboard-header {
-  border-bottom: 1px solid var(--border-color);
-  background-color: white;
-}
+/*--------------------------------------------------------------
+# STYLES FOR: user-profile.html & user-record.html
+#
+# Contains styles for the tabbed interface, photo gallery,
+# and other components shared between the user's personal
+# profile and the admin's view of a user record.
+--------------------------------------------------------------*/
 
-/* Tab Navigation Styling */
+/* --- Profile Tab UI --- */
 .profile-tabs .nav-link {
   color: var(--text-dark);
   font-weight: 500;
@@ -21,16 +23,19 @@
   color: var(--brand-primary);
 }
 
-/* New: Smaller profile image for the tab */
 .profile-tab-img {
-  width: 120px; /* Smaller fixed width */
-  height: 120px; /* Fixed height for a perfect circle */
-  object-fit: cover; /* Ensures image covers the area without distortion */
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 1rem; /* Add some space below the image */
+  margin-bottom: 1rem;
 }
 
-/* Photo Gallery Management */
+.personality-tag {
+  font-weight: 500;
+}
+
+/* --- Photo Gallery --- */
 .photo-gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -61,9 +66,4 @@
   border-color: var(--brand-primary);
   color: var(--brand-primary);
   background-color: #f8f9fa;
-}
-
-/* Personality Tags */
-.personality-tag {
-  font-weight: 500;
 }

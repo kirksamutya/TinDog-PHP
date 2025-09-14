@@ -1,3 +1,9 @@
+/*--------------------------------------------------------------
+# STYLES FOR: index.html
+#
+# Contains unique styles for the homepage sections like
+# the hero, features, and testimonials.
+--------------------------------------------------------------*/
 #title {
   padding-bottom: 0;
 }
@@ -14,6 +20,7 @@
   display: flex;
   align-items: flex-end;
 }
+
 .hero-iphone-img img {
   display: block;
   max-width: 100%;

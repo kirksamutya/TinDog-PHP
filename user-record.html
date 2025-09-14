@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TinDog - User Record</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicon-transparent.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./assets/css/global-styles.css" />
+    <link rel="stylesheet" href="./assets/css/dashboard-layout-styles.css" />
+    <link rel="stylesheet" href="./assets/css/user-profile-styles.css" />
+  </head>
+  <body>
+    <header
+      class="navbar sticky-top bg-light flex-md-nowrap p-0 shadow dashboard-header"
+    >
+      <a
+        class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6"
+        href="./index.html"
+      >
+        <img
+          src="./assets/images/favicon-transparent.png"
+          width="30"
+          class="me-2"
+        />
+        TinDog Admin
+      </a>
+      <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+          <a class="nav-link px-3" href="./index.html">Sign out</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav
+          id="sidebarMenu"
+          class="col-md-3 col-lg-2 d-md-block bg-light sidebar-nav dashboard-sidebar collapse"
+        >
+          <div class="position-sticky pt-3">
+            <h6
+              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase"
+            >
+              <span>Admin Panel</span>
+            </h6>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-speedometer2"></i> Admin Overview</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="./user-management.html"
+                  ><i class="bi bi-people"></i> User Management</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"
+                  ><i class="bi bi-bar-chart-line"></i> Reports</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">User Record: Eugene Stepnov</h1>
+          </div>
+
+          <div class="card shadow-sm">
+            <div class="card-header bg-white border-0">
+              <ul class="nav nav-tabs profile-tabs card-header-tabs">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    href="#overview"
+                    >Overview</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#activity"
+                    >Activity</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#billing"
+                    >Billing</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="card-body p-4">
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="overview">
+                  <h5 class="fw-bold mb-3">User Properties</h5>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <dl class="row">
+                        <dt class="col-sm-4">First Name</dt>
+                        <dd class="col-sm-8">Eugene</dd>
+                        <dt class="col-sm-4">Last Name</dt>
+                        <dd class="col-sm-8">Stepnov</dd>
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">eugene.stepnov@example.com</dd>
+                      </dl>
+                    </div>
+                    <div class="col-md-6">
+                      <dl class="row">
+                        <dt class="col-sm-4">Signed Up</dt>
+                        <dd class="col-sm-8">6 years ago</dd>
+                        <dt class="col-sm-4">Last Seen</dt>
+                        <dd class="col-sm-8">Yesterday</dd>
+                        <dt class="col-sm-4">Dogs Owned</dt>
+                        <dd class="col-sm-8">1</dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="activity">
+                  <h5 class="fw-bold mb-3">Recent Activity</h5>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      Logged in yesterday at 8:43 PM
+                    </li>
+                    <li class="list-group-item">
+                      Updated profile picture 2 days ago
+                    </li>
+                    <li class="list-group-item">Matched with Jorjee</li>
+                  </ul>
+                </div>
+                <div class="tab-pane fade" id="billing">
+                  <h5 class="fw-bold mb-3">Billing Information</h5>
+                  <dl class="row">
+                    <dt class="col-sm-3">Plan</dt>
+                    <dd class="col-sm-9">Mastiff (₱299/mo)</dd>
+                    <dt class="col-sm-3">Next Payment</dt>
+                    <dd class="col-sm-9">Oct 12, 2025</dd>
+                    <dt class="col-sm-3">Payment Method</dt>
+                    <dd class="col-sm-9">
+                      <i class="bi bi-credit-card-2-front-fill me-2"></i> Visa
+                      **** 4242
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
