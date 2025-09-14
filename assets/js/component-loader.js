@@ -10,17 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((data) => {
           element.innerHTML = data;
           if (element.id === "sidebar-nav-container") {
-            setActiveNavLink();
+            setActiveNavLink(element);
           }
         })
         .catch((error) => console.error(`Error loading component:`, error));
     }
   };
 
-  const setActiveNavLink = () => {
-    const navLinks = document.querySelectorAll(
-      "#sidebar-nav-container .nav-link"
-    );
+  const setActiveNavLink = (sidebar) => {
+    const navLinks = sidebar.querySelectorAll(".nav-link");
     const currentPage = window.location.pathname.split("/").pop();
     navLinks.forEach((link) => {
       const linkPage = link.getAttribute("href").split("/").pop();
@@ -31,19 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   };
-
-  const specificComponents = [
-    { selector: "#app-header", url: "./app-header.html" },
-    { selector: "#sidebar-nav-container", url: "./sidebar-nav-content.html" },
-  ];
-
-  specificComponents.forEach((comp) => {
-    const element = document.querySelector(comp.selector);
-    if (element) {
-      element.dataset.component = comp.url;
-      loadComponent(element);
-    }
-  });
 
   document.querySelectorAll("[data-component]").forEach(loadComponent);
 });

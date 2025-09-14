@@ -9,6 +9,8 @@
       type="image/png"
       href="./assets/images/favicon-transparent.png"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
@@ -26,10 +28,11 @@
     <link rel="stylesheet" href="./assets/css/find-matches-styles.css" />
   </head>
   <body class="bg-light">
-    <div id="app-header"></div>
+    <div data-component="./app-header.html"></div>
     <div class="container-fluid">
       <div class="row">
         <nav
+          data-component="./sidebar-nav-content.html"
           id="sidebar-nav-container"
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
@@ -42,13 +45,13 @@
                 <div class="stamp dislike">Nope</div>
                 <div class="stamp like">Like</div>
                 <img
-                  src="./assets/images/frances.jpg"
-                  alt="Yo Mama"
+                  src="./assets/images/bruce.jpg"
+                  alt="Bruce"
                   class="card-img-top"
                 />
                 <div class="card-info-overlay">
-                  <h5 class="card-title">Dumbledoor, 17</h5>
-                  <p class="card-text">A gentle giant who loves naps.</p>
+                  <h5 class="card-title">Bruce, 3</h5>
+                  <p class="card-text">A tough guy with a heart of gold.</p>
                 </div>
               </div>
               <div class="match-card">
@@ -68,13 +71,13 @@
                 <div class="stamp dislike">Nope</div>
                 <div class="stamp like">Like</div>
                 <img
-                  src="./assets/images/bruce.jpg"
-                  alt="Bruce"
+                  src="./assets/images/frances.jpg"
+                  alt="Yo Mama"
                   class="card-img-top"
                 />
                 <div class="card-info-overlay">
-                  <h5 class="card-title">Bruce, 3</h5>
-                  <p class="card-text">A tough guy with a heart of gold.</p>
+                  <h5 class="card-title">Dumbledoor, 17</h5>
+                  <p class="card-text">A gentle giant who loves naps.</p>
                 </div>
               </div>
             </div>
