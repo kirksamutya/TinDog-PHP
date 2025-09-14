@@ -1,3 +1,6 @@
+/*--------------------------------------------------------------
+# 1. Design Tokens & Root Variables
+--------------------------------------------------------------*/
 :root {
   /* Color Palette */
   --brand-primary: #ff4c68;
@@ -17,6 +20,9 @@
   --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+/*--------------------------------------------------------------
+# 2. Global Styles
+--------------------------------------------------------------*/
 body {
   font-family: var(--font-primary);
   display: flex;
@@ -61,7 +67,9 @@ h6 {
   }
 }
 
-/* Reusable Components */
+/*--------------------------------------------------------------
+# 3. Reusable Components
+--------------------------------------------------------------*/
 .tindog-card {
   background-color: var(--text-light);
   padding: 2.5rem;
@@ -100,7 +108,9 @@ h6 {
   color: var(--text-light);
 }
 
-/* Site Header & Footer */
+/*--------------------------------------------------------------
+# 4. Site Header & Footer (Public)
+--------------------------------------------------------------*/
 .site-header .navbar-brand {
   color: var(--brand-primary);
   font-weight: 700;
@@ -116,14 +126,47 @@ h6 {
   color: var(--brand-primary);
 }
 
-.site-footer {
-  font-size: 0.9rem;
+/*--------------------------------------------------------------
+# 5. Page-Specific Component Styles
+--------------------------------------------------------------*/
+/* Contact Page */
+.contact-wrapper {
+  background: var(--text-light);
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-heavy);
 }
 
-.site-footer a {
-  text-decoration: none;
-  color: var(--text-dark);
+.contact-info-panel {
+  background: var(--text-dark);
+  padding: 40px;
+  color: var(--text-light);
 }
-.site-footer a:hover {
-  text-decoration: underline;
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.contact-form-panel {
+  padding: 40px;
+}
+
+/* FAQ Page */
+.accordion-button:not(.collapsed) {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
 }
