@@ -9,8 +9,6 @@
       type="image/png"
       href="./assets/images/favicon-transparent.png"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
@@ -27,175 +25,85 @@
     <link rel="stylesheet" href="./assets/css/app-styles.css" />
     <link rel="stylesheet" href="./assets/css/dashboard-styles.css" />
   </head>
-  <body>
-    <header
-      class="navbar sticky-top bg-light flex-md-nowrap py-2 px-3 shadow dashboard-header"
-    >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0" href="./index.html">
-        <img
-          src="./assets/images/favicon-transparent.png"
-          width="30"
-          class="me-2"
-        />
-        tindog
-      </a>
-      <button
-        class="navbar-toggler d-md-none collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-nav ms-auto">
-        <div class="nav-item text-nowrap">
-          <a class="btn btn-sm btn-tindog-outline" href="./index.html"
-            >Sign out</a
-          >
-        </div>
-      </div>
-    </header>
-
+  <body class="bg-light">
+    <div id="app-header"></div>
     <div class="container-fluid">
       <div class="row">
         <nav
-          id="sidebarMenu"
-          class="col-md-3 col-lg-2 d-md-block bg-light sidebar-nav dashboard-sidebar collapse"
-        >
-          <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="./dashboard.html"
-                  ><i class="bi bi-grid-1x2"></i> Dashboard</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./find-matches.html"
-                  ><i class="bi bi-heart"></i> Find Matches</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./my-matches.html"
-                  ><i class="bi bi-star"></i> My Matches</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./messages.html"
-                  ><i class="bi bi-chat-dots"></i> Messages</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./user-profile.html"
-                  ><i class="bi bi-person"></i> My Profile</a
-                >
-              </li>
-            </ul>
-          </div>
-        </nav>
-
+          id="sidebar-nav-container"
+          class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
+        ></nav>
         <main
           class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content position-relative overflow-hidden"
         >
           <div class="background-shape shape-1"></div>
           <div class="background-shape shape-2"></div>
-
           <div class="dashboard-welcome-header gradient-background">
-            <h2>Welcome Back, Kirk!</h2>
+            <h2>Welcome Back!</h2>
             <p class="lead mb-0">Here's what's new with your pack today.</p>
           </div>
-
           <div class="row g-4 mb-4">
             <div class="col-md-6 col-lg-3">
-              <div class="kpi-card matches h-100">
-                <div class="kpi-icon icon-matches">
-                  <i class="bi bi-star-fill"></i>
+              <a href="./my-matches.html" class="kpi-card-link">
+                <div class="kpi-card matches h-100">
+                  <div class="kpi-icon icon-matches">
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                  <div class="kpi-content">
+                    <h6 class="kpi-title">New Matches</h6>
+                    <div class="kpi-value">6</div>
+                    <div class="kpi-caption">in the last 7 days</div>
+                  </div>
                 </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">New Matches</h6>
-                  <div class="kpi-value">6</div>
-                  <div class="kpi-caption">in the last 7 days</div>
-                </div>
-              </div>
+              </a>
             </div>
             <div class="col-md-6 col-lg-3">
-              <div class="kpi-card messages h-100">
-                <div class="kpi-icon icon-messages">
-                  <i class="bi bi-chat-dots-fill"></i>
+              <a href="./messages.html" class="kpi-card-link">
+                <div class="kpi-card messages h-100">
+                  <div class="kpi-icon icon-messages">
+                    <i class="bi bi-chat-dots-fill"></i>
+                  </div>
+                  <div class="kpi-content">
+                    <h6 class="kpi-title">Unread Messages</h6>
+                    <div class="kpi-value">3</div>
+                    <div class="kpi-caption">from 2 conversations</div>
+                  </div>
                 </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">Unread Messages</h6>
-                  <div class="kpi-value">3</div>
-                  <div class="kpi-caption">from 2 conversations</div>
-                </div>
-              </div>
+              </a>
             </div>
             <div class="col-md-6 col-lg-3">
-              <div class="kpi-card views h-100">
-                <div class="kpi-icon icon-views">
-                  <i class="bi bi-eye-fill"></i>
+              <a href="./user-profile.html" class="kpi-card-link">
+                <div class="kpi-card views h-100">
+                  <div class="kpi-icon icon-views">
+                    <i class="bi bi-eye-fill"></i>
+                  </div>
+                  <div class="kpi-content">
+                    <h6 class="kpi-title">Profile Views</h6>
+                    <div class="kpi-value">42</div>
+                    <div class="kpi-caption">in the last 7 days</div>
+                  </div>
                 </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">Profile Views</h6>
-                  <div class="kpi-value">42</div>
-                  <div class="kpi-caption">in the last 7 days</div>
-                </div>
-              </div>
+              </a>
             </div>
             <div class="col-md-6 col-lg-3">
-              <div class="kpi-card plan h-100">
-                <div class="kpi-icon icon-plan">
-                  <i class="bi bi-gem"></i>
+              <a href="./pricing.html" class="kpi-card-link">
+                <div class="kpi-card plan h-100">
+                  <div class="kpi-icon icon-plan">
+                    <i class="bi bi-gem"></i>
+                  </div>
+                  <div class="kpi-content">
+                    <h6 class="kpi-title">Current Plan</h6>
+                    <div class="kpi-value">Labrador</div>
+                    <div class="kpi-caption">Upgrade Plan →</div>
+                  </div>
                 </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">Current Plan</h6>
-                  <div class="kpi-value">Labrador</div>
-                  <a href="./pricing.html" class="kpi-link">Upgrade Plan →</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="activity-card-wrapper">
-            <div class="card shadow-sm activity-card">
-              <div class="card-header bg-white">
-                <h5 class="mb-0">Recent Activity</h5>
-              </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex align-items-center">
-                    <i class="bi bi-heart-fill text-danger me-3"></i>
-                    <div>
-                      You matched with <strong>Bruce</strong>.
-                      <small class="d-block text-muted">2 hours ago</small>
-                    </div>
-                  </li>
-                  <li class="list-group-item d-flex align-items-center">
-                    <i class="bi bi-chat-dots-fill text-primary me-3"></i>
-                    <div>
-                      New message from <strong>Pebbles</strong>.
-                      <small class="d-block text-muted">Yesterday</small>
-                    </div>
-                  </li>
-                  <li class="list-group-item d-flex align-items-center">
-                    <i class="bi bi-person-fill text-success me-3"></i>
-                    <div>
-                      You updated your dog's profile.
-                      <small class="d-block text-muted">3 days ago</small>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              </a>
             </div>
           </div>
         </main>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/component-loader.js"></script>
   </body>
 </html>

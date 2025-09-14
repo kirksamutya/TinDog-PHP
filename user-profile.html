@@ -9,8 +9,6 @@
       type="image/png"
       href="./assets/images/favicon-transparent.png"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
@@ -27,185 +25,99 @@
     <link rel="stylesheet" href="./assets/css/app-styles.css" />
     <link rel="stylesheet" href="./assets/css/user-profile-styles.css" />
   </head>
-  <body class="d-flex flex-column min-vh-100 bg-light">
-    <header
-      class="navbar sticky-top bg-light flex-md-nowrap py-2 px-3 shadow dashboard-header"
-    >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0" href="./index.html">
-        <img
-          src="./assets/images/favicon-transparent.png"
-          width="30"
-          class="me-2"
-        />
-        tindog
-      </a>
-      <button
-        class="navbar-toggler d-md-none collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-nav ms-auto">
-        <div class="nav-item text-nowrap">
-          <a class="btn btn-sm btn-tindog-outline" href="./index.html"
-            >Sign out</a
-          >
-        </div>
-      </div>
-    </header>
-
+  <body class="bg-light">
+    <div id="app-header"></div>
     <div class="container-fluid">
       <div class="row">
         <nav
-          id="sidebarMenu"
-          class="col-md-3 col-lg-2 d-md-block bg-light sidebar-nav dashboard-sidebar collapse"
-        >
-          <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="./dashboard.html"
-                  ><i class="bi bi-grid-1x2"></i> Dashboard</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./find-matches.html"
-                  ><i class="bi bi-heart"></i> Find Matches</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./my-matches.html"
-                  ><i class="bi bi-star"></i> My Matches</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./messages.html"
-                  ><i class="bi bi-chat-dots"></i> Messages</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="./user-profile.html"
-                  ><i class="bi bi-person"></i> My Profile</a
-                >
-              </li>
-            </ul>
-          </div>
-        </nav>
-
+          id="sidebar-nav-container"
+          class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
+        ></nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
           <div class="background-shape shape-1"></div>
           <div class="background-shape shape-2"></div>
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h2">My Profile</h1>
-            <a href="#" class="btn btn-tindog-outline btn-sm"
-              ><i class="bi bi-pencil me-2"></i>Edit Profile</a
-            >
-          </div>
 
-          <div class="card shadow-sm">
-            <div class="card-header bg-white border-0 py-2">
-              <ul class="nav nav-tabs profile-tabs card-header-tabs">
+          <div class="profile-container">
+            <div class="profile-cover-photo">
+              <img src="./assets/images/jorjee-three.jpg" alt="Cover Photo" />
+            </div>
+            <div class="profile-card">
+              <div class="profile-avatar-wrapper">
+                <img
+                  src="./assets/images/jorjee-one.jpg"
+                  class="profile-avatar"
+                  alt="Jorjee"
+                />
+              </div>
+              <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a
                     class="nav-link active"
                     data-bs-toggle="tab"
-                    href="#profile"
-                    >Profile</a
+                    href="#dog-profile"
+                    >Dog's Profile</a
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-bs-toggle="tab" href="#gallery"
-                    >Photo Gallery</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-bs-toggle="tab" href="#settings"
-                    >Account Settings</a
+                  <a class="nav-link" data-bs-toggle="tab" href="#owner-profile"
+                    >Owner's Profile</a
                   >
                 </li>
               </ul>
-            </div>
-            <div class="card-body p-4">
               <div class="tab-content">
-                <div class="tab-pane fade show active" id="profile">
-                  <div class="row">
-                    <div class="col-md-4 text-center">
-                      <img
-                        src="./assets/images/jorjee-one.jpg"
-                        class="profile-tab-img mb-3"
-                        alt="Jorjee's profile picture"
-                      />
-                      <h4 class="fw-bold fs-5">Jorjee</h4>
-                      <p class="text-muted small">Shih Tzu</p>
-                    </div>
-                    <div class="col-md-8">
-                      <h5 class="fw-bold mt-2">Details</h5>
-                      <ul class="list-group list-group-flush small">
-                        <li class="list-group-item py-1">
-                          <strong>Age:</strong> 2 years old
-                        </li>
-                        <li class="list-group-item py-1">
-                          <strong>Sex:</strong> Female
-                        </li>
-                        <li class="list-group-item py-1">
-                          <strong>Location:</strong> Consolacion, PH
-                        </li>
-                      </ul>
-                      <h5 class="fw-bold mt-4">Personality</h5>
-                      <span
-                        class="badge rounded-pill text-bg-info personality-tag"
+                <div class="tab-pane fade show active" id="dog-profile">
+                  <div class="profile-info text-center pt-3">
+                    <h2 class="h3 mb-0">Jorjee</h2>
+                    <p class="text-muted">Shih Tzu</p>
+                    <a
+                      href="./edit-profile.html?tab=dog"
+                      class="btn btn-sm btn-tindog-primary"
+                      ><i class="bi bi-pencil me-1"></i> Edit Dog's Profile</a
+                    >
+                  </div>
+                  <hr />
+                  <div class="profile-bio p-3">
+                    <h5 class="mb-2">About Jorjee</h5>
+                    <p class="text-muted">
+                      Energetic and playful, loves chasing balls and long walks.
+                      Looking for a companion to explore with!
+                    </p>
+                    <div
+                      class="d-flex flex-wrap justify-content-center gap-2 mb-4"
+                    >
+                      <span class="badge rounded-pill personality-tag"
                         >Playful</span
                       >
-                      <span
-                        class="badge rounded-pill text-bg-success personality-tag"
+                      <span class="badge rounded-pill personality-tag"
                         >Cuddly</span
                       >
-                      <span
-                        class="badge rounded-pill text-bg-warning personality-tag"
+                      <span class="badge rounded-pill personality-tag"
                         >Loves Treats</span
                       >
-                      <span
-                        class="badge rounded-pill text-bg-primary personality-tag"
+                      <span class="badge rounded-pill personality-tag"
                         >Friendly</span
                       >
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="gallery">
-                  <h5 class="fw-bold mb-3">Manage Photos</h5>
-                  <div class="photo-gallery-grid">
-                    <img
-                      src="./assets/images/jorjee-one.jpg"
-                      alt="Jorjee wearing a cone"
-                    />
-                    <img
-                      src="./assets/images/jorjee-two.jpg"
-                      alt="Jorjee on the couch"
-                    />
-                    <img
-                      src="./assets/images/jorjee-three.jpg"
-                      alt="Jorjee with a friend"
-                    />
-                    <div class="upload-placeholder" role="button">
-                      <i class="bi bi-plus-lg fs-1"></i>
-                    </div>
+                <div class="tab-pane fade" id="owner-profile">
+                  <div class="profile-info text-center pt-3">
+                    <h2 class="h3 mb-0">Roel Anthony Saavedra</h2>
+                    <p class="text-muted">Jorjee's Human</p>
+                    <a
+                      href="./edit-profile.html?tab=owner"
+                      class="btn btn-sm btn-tindog-primary"
+                      ><i class="bi bi-pencil me-1"></i> Edit Owner's Profile</a
+                    >
                   </div>
-                </div>
-                <div class="tab-pane fade" id="settings">
-                  <h5 class="fw-bold mb-3">Account Settings</h5>
-                  <dl class="row small">
-                    <dt class="col-sm-3">Email Address</dt>
-                    <dd class="col-sm-9">user@example.com</dd>
-                    <dt class="col-sm-3">Subscription Plan</dt>
-                    <dd class="col-sm-9">Labrador Tier (₱149/mo)</dd>
-                  </dl>
-                  <a href="#" class="btn btn-tindog-primary btn-sm mt-3"
-                    >Manage Subscription</a
-                  >
+                  <hr />
+                  <div class="profile-bio p-3">
+                    <h5 class="mb-2">About Roel</h5>
+                    <p class="text-muted">
+                      Guides our technical direction and translates creative
+                      concepts into functional, polished applications.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -214,5 +126,6 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/component-loader.js"></script>
   </body>
 </html>

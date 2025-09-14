@@ -1,114 +1,156 @@
 /*--------------------------------------------------------------
-# FIND MATCHES STYLES
-#
-# Contains custom component styles for the "Find Matches" page.
+# FIND MATCHES STYLES (CREATIVE REWORK)
 --------------------------------------------------------------*/
 
-/* --- Page Background Elements --- */
-.background-shape {
-  position: absolute;
-  border-radius: 50%;
-  z-index: -1;
-  filter: blur(100px);
-}
-.background-shape.shape-1 {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  left: -150px;
-  background-color: rgba(255, 76, 104, 0.15);
-}
-.background-shape.shape-2 {
-  width: 500px;
-  height: 500px;
-  bottom: -150px;
-  right: -200px;
-  background-color: rgba(0, 191, 255, 0.15);
+.main-content {
+  display: flex;
+  flex-direction: column;
 }
 
-/* --- Page Header --- */
-.page-header {
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  animation: fade-slide-in 0.5s ease-out forwards;
+.swipe-deck-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  position: relative;
+  min-height: 500px;
+  padding-bottom: 2rem;
 }
 
-/* --- Match Card & Buttons --- */
+.swipe-deck {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 520px;
+}
+
 .match-card {
   width: 100%;
-  max-width: 400px;
+  height: 100%;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  animation: fade-slide-in 0.7s ease-out forwards;
+  position: absolute;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  background-color: #fff;
+  cursor: grab;
 }
-
-.match-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
-}
-
 .match-card .card-img-top {
-  height: 400px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
-.match-card .card-body {
-  text-align: center;
+.card-info-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
 }
-
-.match-card .card-title {
-  color: var(--brand-primary);
-  font-size: 1.75rem;
+.card-info-overlay .card-title {
+  font-weight: 700;
+  font-size: 2rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
-
-.match-card .card-text {
+.card-info-overlay .card-text {
   font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-dark);
+  opacity: 0.9;
+}
+
+/* UI Stamps (Like/Nope) */
+.stamp {
+  position: absolute;
+  top: 40px;
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 5px solid;
+  border-radius: 10px;
+  padding: 0.25rem 1rem;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+.stamp.like {
+  color: #43e97b;
+  border-color: #43e97b;
+  right: 20px;
+  transform: rotate(15deg);
+}
+.stamp.dislike {
+  color: #ff758c;
+  border-color: #ff758c;
+  left: 20px;
+  transform: rotate(-15deg);
+}
+
+/* Card stacking effect */
+.match-card:nth-child(2) {
+  transform: translateY(10px) scale(0.95);
+  z-index: 2;
+}
+.match-card:nth-child(3) {
+  transform: translateY(20px) scale(0.9);
+  z-index: 1;
+}
+.match-card:not(:first-child) {
+  opacity: 1;
+}
+.match-card:nth-child(n + 4) {
+  display: none;
+}
+.match-card:first-child {
+  z-index: 3;
+}
+
+/* Swipe animation classes */
+.match-card.swiped-left {
+  transform: translateX(-150%) rotate(-30deg) !important;
+  opacity: 0;
+}
+.match-card.swiped-left .stamp.dislike {
+  opacity: 1;
+}
+
+.match-card.swiped-right {
+  transform: translateX(150%) rotate(30deg) !important;
+  opacity: 0;
+}
+.match-card.swiped-right .stamp.like {
+  opacity: 1;
+}
+
+.swipe-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .btn-swipe {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  font-size: 2.5rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  color: white;
 }
-
 .btn-swipe:hover {
   transform: scale(1.1);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
-
-.btn-danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
+.btn-swipe.dislike {
+  background-image: linear-gradient(45deg, #ff758c, #ff7eb3);
 }
-
-.btn-success {
-  background-color: #198754;
-  border-color: #198754;
-}
-
-/* --- Animations --- */
-@keyframes fade-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn-swipe.like {
+  background-image: linear-gradient(45deg, #43e97b, #38f9d7);
 }

@@ -39,6 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--background-light);
 }
 
 h1,
@@ -76,6 +77,34 @@ h6 {
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* --- Scroll to Top Button --- */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+  border: none;
+  font-size: 1.5rem;
+  box-shadow: var(--box-shadow-light);
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+}
+.scroll-to-top-btn:hover {
+  transform: scale(1.1);
 }
 
 /*--------------------------------------------------------------
@@ -117,6 +146,25 @@ h6 {
 .btn-tindog-outline:hover {
   background-color: var(--brand-primary);
   color: var(--text-light);
+}
+
+.btn-check:checked + .btn-outline-primary {
+  background-image: linear-gradient(
+    45deg,
+    var(--brand-accent),
+    var(--brand-primary)
+  );
+  color: white;
+  border-color: transparent;
+}
+.btn-check:checked + .btn-outline-dark {
+  background-image: linear-gradient(
+    45deg,
+    var(--brand-accent),
+    var(--brand-primary)
+  );
+  color: white;
+  border-color: transparent;
 }
 
 /*--------------------------------------------------------------

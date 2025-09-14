@@ -9,7 +9,7 @@
 /* --- Core Layout --- */
 body {
   font-size: 0.875rem;
-  background-color: var(--background-light);
+  overflow-x: hidden; /* Prevents horizontal scroll */
 }
 
 .dashboard-header {
@@ -38,7 +38,36 @@ body {
   padding-top: 64px;
 }
 
-/* --- Sidebar Navigation --- */
+/* --- Enhanced Sidebar --- */
+.sidebar-nav {
+  background-color: #fff;
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar-profile-card {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+}
+
+.sidebar-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--brand-primary);
+}
+
+.main-nav {
+  flex-grow: 1;
+}
+
+.bottom-nav {
+  padding-bottom: 1rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
 .sidebar-nav .nav-link {
   font-weight: 500;
   color: #555;
@@ -64,10 +93,50 @@ body {
   margin-right: 0.5rem;
 }
 
+.logout-link {
+  color: var(--brand-primary) !important;
+  font-weight: 700 !important;
+}
+
+.logout-link:hover {
+  color: var(--text-light) !important;
+  background-color: var(--brand-primary) !important;
+}
+
+/* --- Repurposed Header Styles --- */
+.header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Fix for dropdowns expanding the navbar */
+.navbar-nav .nav-item.dropdown {
+  position: static;
+}
+.navbar-nav .dropdown-menu {
+  position: absolute;
+  min-width: 240px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.6em;
+  padding: 0.3em 0.5em;
+}
+
 /* --- Mobile Responsive Styles --- */
 @media (max-width: 767.98px) {
   .dashboard-sidebar {
-    top: 56px;
+    top: 60px; /* Adjusted for new header height */
     padding-top: 0;
   }
   .dashboard-header .navbar-brand {
