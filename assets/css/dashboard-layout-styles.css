@@ -1,6 +1,12 @@
 /*--------------------------------------------------------------
-# Dashboard Layout & Core Components
+# DASHBOARD LAYOUT STYLES
+#
+# Contains core layout styles for the entire logged-in
+# experience (both user and admin), including the shared
+# header, sidebar, and swipe card.
 --------------------------------------------------------------*/
+
+/* --- Core Layout --- */
 body {
   font-size: 0.875rem;
   background-color: var(--background-light);
@@ -21,6 +27,11 @@ body {
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
+.main-content {
+  padding-top: 64px;
+}
+
+/* --- Sidebar Navigation --- */
 .sidebar-nav .nav-link {
   font-weight: 500;
   color: var(--text-dark);
@@ -37,13 +48,7 @@ body {
   margin-right: 0.5rem;
 }
 
-.main-content {
-  padding-top: 64px;
-}
-
-/*--------------------------------------------------------------
-# Page-Specific Components (Dashboard)
---------------------------------------------------------------*/
+/* --- Swipe Card Component --- */
 .swipe-card {
   max-width: 350px;
   border-radius: 20px;

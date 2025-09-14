@@ -1,4 +1,15 @@
 /*--------------------------------------------------------------
+# TIN-DOG GLOBAL STYLES
+#
+# CONTENTS:
+# 1. Design Tokens & Root Variables
+# 2. Global Styles (body, headings, etc.)
+# 3. Reusable Components (cards, buttons, forms)
+# 4. Public Site Header & Footer
+# 5. Page-Specific Component Styles (Contact, FAQ)
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
 # 1. Design Tokens & Root Variables
 --------------------------------------------------------------*/
 :root {
