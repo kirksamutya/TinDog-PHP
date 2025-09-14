@@ -1,136 +1,137 @@
-/*--------------------------------------------------------------
-# STYLES FOR: user-profile.html & user-record.html
-#
-# Contains styles for the tabbed interface, photo gallery,
-# and other components shared between the user's personal
-# profile and the admin's view of a user record.
---------------------------------------------------------------*/
+/* REVAMPED PROFILE & EDIT STYLES */
+
 .main-content {
-  perspective: 1000px;
+  padding-top: 1.5rem;
 }
 
-/* --- Page Background Elements --- */
-.background-shape {
-  position: absolute;
-  border-radius: 50%;
-  z-index: -1;
-  filter: blur(100px);
-}
-.background-shape.shape-1 {
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -100px;
-  background-color: rgba(255, 76, 104, 0.15);
-}
-.background-shape.shape-2 {
-  width: 500px;
-  height: 500px;
-  bottom: -150px;
-  left: -200px;
-  background-color: rgba(0, 191, 255, 0.15);
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
 }
 
-/* --- Profile Card & Animations --- */
-@keyframes fade-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.profile-cover-photo {
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.card {
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  animation: fade-slide-in 0.5s ease-out forwards;
-}
-
-.card:hover {
-  transform: translateY(-5px) rotateX(2deg) scale(1.01);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
-    0 15px 40px rgba(255, 76, 104, 0.2);
-}
-
-.card-header,
-.card-body {
-  transform: translateZ(10px);
-}
-
-/* --- Profile Tab UI --- */
-.profile-tabs .nav-link {
-  color: var(--text-dark);
-  font-weight: 500;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-}
-.profile-tabs .nav-link.active {
-  color: var(--text-light);
-  background-image: linear-gradient(
-    45deg,
-    var(--brand-accent),
-    var(--brand-primary)
-  );
-  border-color: var(--brand-primary);
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 5px 15px rgba(255, 76, 104, 0.2);
-}
-.profile-tabs .nav-link:hover:not(.active) {
-  border-color: var(--brand-primary);
-  color: var(--brand-primary);
-}
-
-.profile-tab-img {
-  width: 120px;
-  height: 120px;
+.profile-cover-photo img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 50%;
+}
+
+.profile-card,
+.edit-profile-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card {
+  margin-top: -80px;
+  position: relative;
+  padding: 1.5rem;
+  padding-top: 0;
+}
+
+.profile-avatar-wrapper {
+  text-align: center;
   margin-bottom: 1rem;
 }
 
-/* --- Personality Tags --- */
+.profile-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  margin-top: -80px;
+}
+
+/* Personality Tags Gradient Style */
 .personality-tag {
-  font-weight: 500;
   color: white !important;
   background-image: linear-gradient(
     45deg,
     var(--brand-accent),
     var(--brand-primary)
   );
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Photo Gallery --- */
-.photo-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
+/* Edit Profile Form Styles */
+.edit-profile-card .nav-tabs {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-.photo-gallery-grid img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
+
+.edit-profile-card .nav-tabs .nav-link {
+  color: var(--text-dark);
+  border: none;
+  border-bottom: 3px solid transparent;
 }
-.upload-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 120px;
-  border: 2px dashed var(--border-color);
-  border-radius: 8px;
-  color: var(--border-color);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.upload-placeholder:hover {
-  border-color: var(--brand-primary);
+
+.edit-profile-card .nav-tabs .nav-link.active {
   color: var(--brand-primary);
-  background-color: #f8f9fa;
+  background-color: transparent;
+  border-color: var(--brand-primary);
+}
+
+/* --- Animated Background Shapes --- */
+@keyframes slow-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.background-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(120px);
+  opacity: 0.8;
+  animation: slow-rotate 60s linear infinite;
+}
+
+.background-shape.shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  background-color: rgba(255, 76, 104, 0.2);
+  animation-duration: 70s;
+}
+
+.background-shape.shape-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -200px;
+  background-color: rgba(0, 191, 255, 0.2);
+  animation-duration: 90s;
+  animation-direction: reverse;
+}
+
+/* --- Responsive Styles for Profile Page --- */
+@media (max-width: 576px) {
+  .profile-cover-photo {
+    height: 180px;
+  }
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+  }
+  .profile-card {
+    margin-top: -60px;
+  }
 }

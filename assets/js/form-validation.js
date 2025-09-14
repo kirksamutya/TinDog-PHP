@@ -1,44 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const registerForm = document.getElementById("register-form");
-  const createProfileForm = document.getElementById("create-profile-form");
-  const loginForm = document.getElementById("login-form");
-
-  if (registerForm) {
-    registerForm.addEventListener("submit", function (event) {
-      if (!registerForm.checkValidity()) {
+  const handleFormSubmit = (formId, redirectUrl) => {
+    const form = document.getElementById(formId);
+    if (form) {
+      form.addEventListener("submit", function (event) {
         event.preventDefault();
-        event.stopPropagation();
-      } else {
-        event.preventDefault(); // Prevent default submission
-        window.location.href = "./create-profile.html";
-      }
-      registerForm.classList.add("was-validated");
-    });
-  }
+        if (!form.checkValidity()) {
+          event.stopPropagation();
+        } else {
+          window.location.href = redirectUrl;
+        }
+        form.classList.add("was-validated");
+      });
+    }
+  };
 
-  if (createProfileForm) {
-    createProfileForm.addEventListener("submit", function (event) {
-      if (!createProfileForm.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        event.preventDefault(); // Prevent default submission
-        window.location.href = "./dashboard.html";
-      }
-      createProfileForm.classList.add("was-validated");
-    });
-  }
-
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (event) {
-      if (!loginForm.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        event.preventDefault(); // Prevent default submission
-        window.location.href = "./dashboard.html";
-      }
-      loginForm.classList.add("was-validated");
-    });
-  }
+  handleFormSubmit("register-form", "./create-profile.html");
+  handleFormSubmit("create-profile-form", "./dashboard.html");
+  handleFormSubmit("login-form", "./dashboard.html");
 });

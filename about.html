@@ -30,43 +30,7 @@
     <link rel="stylesheet" href="./assets/css/global-styles.css" />
   </head>
   <body class="d-flex flex-column min-vh-100">
-    <header class="site-header">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-          <a class="navbar-brand" href="./index.html">tindog</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="./about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./contact.html">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./blog.html">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./faq.html">FAQ</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./pricing.html">Pricing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./login.html">Login</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+    <div id="site-header"></div>
 
     <main class="content-wrapper">
       <section class="gradient-background text-white text-center py-5">
@@ -284,81 +248,9 @@
       </section>
     </main>
 
-    <footer class="site-footer bg-dark text-white pt-5 pb-4">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4">
-            <h5 class="navbar-brand">tindog</h5>
-            <p class="small text-muted">
-              Helping dogs find their soulmate. © 2025 UnMotivated Studios. All
-              rights reserved.
-            </p>
-          </div>
-          <div class="col-lg-2 col-md-6 mb-4">
-            <h5 class="mb-3">Navigate</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  href="./about.html"
-                  class="text-white text-decoration-none small"
-                  >About Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="./contact.html"
-                  class="text-white text-decoration-none small"
-                  >Contact</a
-                >
-              </li>
-              <li>
-                <a
-                  href="./blog.html"
-                  class="text-white text-decoration-none small"
-                  >Blog</a
-                >
-              </li>
-              <li>
-                <a
-                  href="./faq.html"
-                  class="text-white text-decoration-none small"
-                  >FAQ</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-2 col-md-6 mb-4">
-            <h5 class="mb-3">Legal</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a
-                  href="./terms.html"
-                  class="text-white text-decoration-none small"
-                  >Terms of Service</a
-                >
-              </li>
-              <li>
-                <a
-                  href="./privacy.html"
-                  class="text-white text-decoration-none small"
-                  >Privacy Policy</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-4 col-md-6 mb-4 text-md-end">
-            <h5 class="mb-3">Connect</h5>
-            <a href="#" class="text-white me-2"
-              ><i class="fab fa-facebook fa-lg"></i></a
-            ><a href="#" class="text-white me-2"
-              ><i class="fab fa-twitter fa-lg"></i></a
-            ><a href="#" class="text-white"
-              ><i class="fab fa-instagram fa-lg"></i
-            ></a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <div id="site-footer"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/component-loader.js"></script>
   </body>
 </html>
