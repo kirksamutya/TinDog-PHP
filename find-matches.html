@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TinDog - My Matches</title>
+    <title>TinDog - Find Matches</title>
     <link
       rel="icon"
       type="image/png"
@@ -25,7 +25,7 @@
     />
     <link rel="stylesheet" href="./assets/css/global-styles.css" />
     <link rel="stylesheet" href="./assets/css/app-styles.css" />
-    <link rel="stylesheet" href="./assets/css/my-matches-styles.css" />
+    <link rel="stylesheet" href="./assets/css/find-matches-styles.css" />
   </head>
   <body>
     <header
@@ -73,12 +73,12 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./find-matches.html"
+                <a class="nav-link active" href="./find-matches.html"
                   ><i class="bi bi-heart"></i> Find Matches</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="./my-matches.html"
+                <a class="nav-link" href="./my-matches.html"
                   ><i class="bi bi-star"></i> My Matches</a
                 >
               </li>
@@ -103,53 +103,33 @@
           <div class="background-shape shape-2"></div>
 
           <div class="page-header">
-            <h1 class="h2">My Matches</h1>
+            <h1 class="h2">Find Matches</h1>
+            <p class="lead text-muted mb-0">
+              Find new playdates for your dog by swiping!
+            </p>
           </div>
 
-          <div class="filter-bar">
-            <button class="btn btn-filter active">All Matches</button>
-            <button class="btn btn-filter">New</button>
-            <button class="btn btn-filter">Unread Messages</button>
-          </div>
-
-          <div
-            class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4"
-          >
-            <div class="col">
-              <div class="card match-card h-100">
-                <div class="new-match-badge">New!</div>
-                <img
-                  src="./assets/images/bruce.jpg"
-                  class="match-card-img"
-                  alt="Bruce the dog"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Bruce, 3</h5>
-                  <p class="card-text text-muted">American Bulldog</p>
-                </div>
-                <div class="card-footer">
-                  <a href="#" class="btn btn-tindog-primary w-100"
-                    ><i class="bi bi-chat-dots-fill me-2"></i>Send Message</a
-                  >
-                </div>
+          <div class="d-flex justify-content-center align-items-center h-75">
+            <div class="match-card">
+              <img
+                src="./assets/images/jorjee-one.jpg"
+                alt="Jorjee the dog"
+                class="card-img-top"
+              />
+              <div class="card-body">
+                <h5 class="card-title fw-bold">Jorjee, 3 🐾</h5>
+                <p class="card-text">
+                  Energetic and playful, loves chasing balls and long walks.
+                  Looking for a companion to explore with!
+                </p>
               </div>
-            </div>
-            <div class="col">
-              <div class="card match-card h-100">
-                <img
-                  src="./assets/images/dog-img.jpg"
-                  class="match-card-img"
-                  alt="Pebbles the dog"
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Pebbles, 5</h5>
-                  <p class="card-text text-muted">Corgi</p>
-                </div>
-                <div class="card-footer">
-                  <a href="#" class="btn btn-tindog-primary w-100"
-                    ><i class="bi bi-chat-dots-fill me-2"></i>Send Message</a
-                  >
-                </div>
+              <div class="card-footer d-flex justify-content-between p-3">
+                <button class="btn btn-swipe btn-danger">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+                <button class="btn btn-swipe btn-success">
+                  <i class="bi bi-heart-fill"></i>
+                </button>
               </div>
             </div>
           </div>

@@ -1,0 +1,114 @@
+/*--------------------------------------------------------------
+# FIND MATCHES STYLES
+#
+# Contains custom component styles for the "Find Matches" page.
+--------------------------------------------------------------*/
+
+/* --- Page Background Elements --- */
+.background-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(100px);
+}
+.background-shape.shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -150px;
+  background-color: rgba(255, 76, 104, 0.15);
+}
+.background-shape.shape-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -200px;
+  background-color: rgba(0, 191, 255, 0.15);
+}
+
+/* --- Page Header --- */
+.page-header {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  animation: fade-slide-in 0.5s ease-out forwards;
+}
+
+/* --- Match Card & Buttons --- */
+.match-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: fade-slide-in 0.7s ease-out forwards;
+}
+
+.match-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+.match-card .card-img-top {
+  height: 400px;
+  object-fit: cover;
+}
+
+.match-card .card-body {
+  text-align: center;
+}
+
+.match-card .card-title {
+  color: var(--brand-primary);
+  font-size: 1.75rem;
+}
+
+.match-card .card-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.btn-swipe {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-swipe:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+/* --- Animations --- */
+@keyframes fade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

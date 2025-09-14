@@ -67,7 +67,7 @@ body {
 /* --- Mobile Responsive Styles --- */
 @media (max-width: 767.98px) {
   .dashboard-sidebar {
-    top: 56px; /* Position below the header */
+    top: 56px;
     padding-top: 0;
   }
   .dashboard-header .navbar-brand {
