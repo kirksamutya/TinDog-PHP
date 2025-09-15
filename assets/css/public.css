@@ -1,0 +1,289 @@
+/*
+* TinDog Public-Facing Styles
+* ---------------------------
+* Contains all styles for the public marketing pages,
+* including the homepage, about, contact, blog, and pricing.
+*/
+
+:root {
+  --brand-primary: #ff4c68;
+  --brand-secondary: #00bfff;
+  --brand-accent: #ef8172;
+  --text-dark: #343a40;
+  --text-light: #ffffff;
+  --background-light: #f8f9fa;
+  --border-color: #dee2e6;
+  --font-primary: "Poppins", sans-serif;
+  --border-radius-medium: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+body {
+  font-family: var(--font-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+.content-wrapper {
+  flex-grow: 1;
+}
+.gradient-background {
+  background: linear-gradient(
+    300deg,
+    var(--brand-secondary),
+    var(--brand-primary),
+    var(--brand-accent)
+  );
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+  border: none;
+  font-size: 1.5rem;
+  box-shadow: var(--box-shadow-light);
+  cursor: pointer;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.scroll-to-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+}
+.scroll-to-top-btn:hover {
+  transform: scale(1.1);
+}
+.btn-tindog-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+.btn-tindog-primary:hover {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 76, 104, 0.3);
+  opacity: 0.9;
+}
+.btn-tindog-outline {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.btn-tindog-outline:hover {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+}
+.btn-check:checked + .btn-outline-primary,
+.btn-check:checked + .btn-outline-dark {
+  background-image: linear-gradient(
+    45deg,
+    var(--brand-accent),
+    var(--brand-primary)
+  );
+  color: white;
+  border-color: transparent;
+}
+.site-header .navbar-brand {
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.site-header .nav-link {
+  color: var(--text-dark);
+}
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+  color: var(--brand-primary);
+}
+#title {
+  padding-bottom: 0;
+}
+#title .container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.hero-iphone-img {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-iphone-img img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+#testimonial {
+  background-color: var(--background-light);
+  text-align: center;
+  padding: 5rem 1.5rem;
+}
+#testimonial img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 1rem 0;
+}
+#testimonial .company-logo {
+  width: auto;
+  height: 30px;
+  border-radius: 0;
+  margin: 1rem;
+}
+#pricing {
+  padding: 5rem 1.5rem;
+}
+#features {
+  background-color: #fff;
+}
+#features .icon-square {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+}
+.pricing-header {
+  max-width: 700px;
+}
+.card.popular {
+  border: 2px solid var(--brand-primary);
+  transform: scale(1.05);
+}
+.card.popular:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  background-color: var(--brand-primary);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.card-header {
+  background-color: transparent;
+  border-bottom: 1px solid #dee2e6;
+}
+.pricing-card-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.blog-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://placedog.net/1200/400?id=10") no-repeat center center;
+  background-size: cover;
+}
+.post-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border: none;
+}
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.post-card-img {
+  height: 200px;
+  object-fit: cover;
+}
+.category-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.post-header-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.article-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+.article-body h2,
+.article-body h3 {
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.blockquote {
+  border-left: 4px solid var(--brand-primary);
+  padding-left: 1.5rem;
+  font-style: italic;
+  font-size: 1.2rem;
+}
+.sidebar-widget {
+  margin-bottom: 2rem;
+}
+.contact-wrapper {
+  background: var(--text-light);
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-heavy);
+}
+.contact-info-panel {
+  background: var(--text-dark);
+  padding: 40px;
+  color: var(--text-light);
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+.contact-form-panel {
+  padding: 40px;
+}
+.accordion-button:not(.collapsed) {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+}

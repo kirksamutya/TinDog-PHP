@@ -1,28 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const loadComponent = (element) => {
-    const url = element.dataset.component;
-    if (url) {
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) throw new Error(`Component not found at ${url}`);
-          return response.text();
-        })
-        .then((data) => {
-          element.innerHTML = data;
-          if (element.id === "sidebar-nav-container") {
-            setActiveNavLink(element);
-          }
-        })
-        .catch((error) => console.error(`Error loading component:`, error));
-    }
+  const fetchAndInjectComponent = (componentContainer) => {
+    const componentUrl = componentContainer.dataset.component;
+    if (!componentUrl) return;
+
+    fetch(componentUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Component not found at ${componentUrl}`);
+        }
+        return response.text();
+      })
+      .then((htmlContent) => {
+        componentContainer.innerHTML = htmlContent;
+        if (componentContainer.id === "sidebar-nav-container") {
+          setActiveSidebarLink(componentContainer);
+        }
+      })
+      .catch((error) => console.error("Component Loader Error:", error));
   };
 
-  const setActiveNavLink = (sidebar) => {
+  const setActiveSidebarLink = (sidebar) => {
+    const currentPageFileName = window.location.pathname.split("/").pop();
     const navLinks = sidebar.querySelectorAll(".nav-link");
-    const currentPage = window.location.pathname.split("/").pop();
+
     navLinks.forEach((link) => {
-      const linkPage = link.getAttribute("href").split("/").pop();
-      if (linkPage === currentPage) {
+      const linkFileName = link.getAttribute("href").split("/").pop();
+      if (linkFileName === currentPageFileName) {
         link.classList.add("active");
       } else {
         link.classList.remove("active");
@@ -30,5 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  document.querySelectorAll("[data-component]").forEach(loadComponent);
+  document
+    .querySelectorAll("[data-component]")
+    .forEach(fetchAndInjectComponent);
 });
