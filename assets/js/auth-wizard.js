@@ -1,26 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
   const wizardFormContainer = document.querySelector(".wizard-form-container");
+  if (!wizardFormContainer) return;
+
   const nextButtons = document.querySelectorAll(".btn-next");
   const backButtons = document.querySelectorAll(".btn-back");
   const finishButton = document.querySelector(".btn-finish");
   const progressBar = document.querySelector(".progress-bar");
   const formSteps = document.querySelectorAll(".wizard-form-step");
-  let currentStep = 0;
+  let currentStepIndex = 0;
 
   const updateWizardState = () => {
     const stepWidthPercentage = 100 / formSteps.length;
     wizardFormContainer.style.transform = `translateX(-${
-      currentStep * stepWidthPercentage
+      currentStepIndex * stepWidthPercentage
     }%)`;
-
-    const progressPercentage = ((currentStep + 1) / formSteps.length) * 100;
+    const progressPercentage =
+      ((currentStepIndex + 1) / formSteps.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
   };
 
   nextButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (currentStep < formSteps.length - 1) {
-        currentStep++;
+      if (currentStepIndex < formSteps.length - 1) {
+        currentStepIndex++;
         updateWizardState();
       }
     });
@@ -28,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   backButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (currentStep > 0) {
-        currentStep--;
+      if (currentStepIndex > 0) {
+        currentStepIndex--;
         updateWizardState();
       }
     });
@@ -37,12 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (finishButton) {
     finishButton.addEventListener("click", () => {
-      // In a real application, you would validate the whole form here before redirecting.
-      // For this prototype, we will redirect directly to the dashboard.
-      window.location.href = "./dashboard.html";
+      window.location.href = "./app-dashboard.html";
     });
   }
 
-  // Recalculate width on resize to prevent issues
   window.addEventListener("resize", updateWizardState);
 });

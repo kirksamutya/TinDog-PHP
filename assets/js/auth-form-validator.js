@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const handleFormSubmission = (event) => {
       event.preventDefault();
-
       const isFormValid = formToValidate.checkValidity();
 
       if (!isFormValid) {
@@ -16,15 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         window.location.href = redirectUrl;
       }
-
       formToValidate.classList.add("was-validated");
     };
 
     formToValidate.addEventListener("submit", handleFormSubmission);
   };
 
-  initializeFormValidation("register-form", "./create-profile.html");
-  initializeFormValidation("create-profile-form", "./dashboard.html");
-  initializeFormValidation("login-form", "./dashboard.html");
-  initializeFormValidation("checkout-form", "./create-profile.html"); // Corrected Redirect
+  initializeFormValidation("register-form", "./auth-create-profile.html");
+  initializeFormValidation("login-form", "./app-dashboard.html");
+  initializeFormValidation("checkout-form", "./auth-create-profile.html");
 });

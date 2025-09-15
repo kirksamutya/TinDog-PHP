@@ -37,8 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const updateFeaturesList = (features) => {
     const featuresListElement = document.getElementById("plan-features");
     if (!featuresListElement) return;
-
-    featuresListElement.innerHTML = ""; // Clear existing features
+    featuresListElement.innerHTML = "";
     features.forEach((featureText) => {
       const listItem = document.createElement("li");
       listItem.className = "mb-2";
@@ -48,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const initializeCheckoutPage = () => {
-    const selectedPlanKey = getUrlParameter("plan") || "labrador"; // Default to labrador
+    const selectedPlanKey = getUrlParameter("plan") || "labrador";
     const currentPlan = planDetails[selectedPlanKey];
 
     if (currentPlan) {

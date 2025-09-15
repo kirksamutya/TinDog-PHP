@@ -1,0 +1,10 @@
+/*
+* TinDog Master Stylesheet
+* ------------------------
+* This file imports all other stylesheets for the project.
+* Every HTML page should only link to this one file.
+*/
+
+@import url("public.css");
+@import url("auth.css");
+@import url("app.css");
