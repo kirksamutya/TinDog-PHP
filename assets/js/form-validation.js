@@ -1,20 +1,30 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const handleFormSubmit = (formId, redirectUrl) => {
-    const form = document.getElementById(formId);
-    if (form) {
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (!form.checkValidity()) {
-          event.stopPropagation();
-        } else {
-          window.location.href = redirectUrl;
-        }
-        form.classList.add("was-validated");
-      });
+document.addEventListener("DOMContentLoaded", () => {
+  const initializeFormValidation = (formId, redirectUrl) => {
+    const formToValidate = document.getElementById(formId);
+
+    if (!formToValidate) {
+      return;
     }
+
+    const handleFormSubmission = (event) => {
+      event.preventDefault();
+
+      const isFormValid = formToValidate.checkValidity();
+
+      if (!isFormValid) {
+        event.stopPropagation();
+      } else {
+        window.location.href = redirectUrl;
+      }
+
+      formToValidate.classList.add("was-validated");
+    };
+
+    formToValidate.addEventListener("submit", handleFormSubmission);
   };
 
-  handleFormSubmit("register-form", "./create-profile.html");
-  handleFormSubmit("create-profile-form", "./dashboard.html");
-  handleFormSubmit("login-form", "./dashboard.html");
+  initializeFormValidation("register-form", "./create-profile.html");
+  initializeFormValidation("create-profile-form", "./dashboard.html");
+  initializeFormValidation("login-form", "./dashboard.html");
+  initializeFormValidation("checkout-form", "./create-profile.html"); // Corrected Redirect
 });
