@@ -57,38 +57,43 @@
                   <h2 class="h3 mt-3">About Your Dog</h2>
                   <p class="text-muted">Let's start with the basics.</p>
                 </div>
-                <div class="mb-3 text-start">
-                  <label for="dogName" class="form-label">Dog's Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="dogName"
-                    required
-                  />
-                </div>
-                <div class="row">
-                  <div class="col-md-6 mb-3 text-start">
-                    <label for="dogBreed" class="form-label">Breed</label>
+                <div class="wizard-form-content">
+                  <div class="mb-3 text-start">
+                    <label for="dogName" class="form-label">Dog's Name</label>
                     <input
                       type="text"
                       class="form-control"
-                      id="dogBreed"
+                      id="dogName"
                       required
                     />
                   </div>
-                  <div class="col-md-6 mb-3 text-start">
-                    <label for="dogAge" class="form-label">Age</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="dogAge"
-                      min="0"
-                      required
-                    />
+                  <div class="row">
+                    <div class="col-md-6 mb-3 text-start">
+                      <label for="dogBreed" class="form-label">Breed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="dogBreed"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6 mb-3 text-start">
+                      <label for="dogAge" class="form-label">Age</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="dogAge"
+                        min="0"
+                        required
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="d-flex justify-content-end mt-4">
-                  <button type="button" class="btn btn-tindog-primary btn-next">
+                  <button
+                    type="button"
+                    class="btn btn-tindog-primary btn-lg btn-next"
+                  >
                     Next
                   </button>
                 </div>
@@ -100,48 +105,56 @@
                     Select up to 4 tags to describe your dog.
                   </p>
                 </div>
-                <div class="d-flex flex-wrap gap-2 justify-content-center">
-                  <input
-                    type="checkbox"
-                    class="btn-check"
-                    id="tag-playful"
-                  /><label class="btn btn-outline-dark" for="tag-playful"
-                    >Playful</label
-                  >
-                  <input
-                    type="checkbox"
-                    class="btn-check"
-                    id="tag-cuddly"
-                  /><label class="btn btn-outline-dark" for="tag-cuddly"
-                    >Cuddly</label
-                  >
-                  <input
-                    type="checkbox"
-                    class="btn-check"
-                    id="tag-loyal"
-                  /><label class="btn btn-outline-dark" for="tag-loyal"
-                    >Loyal</label
-                  >
-                  <input
-                    type="checkbox"
-                    class="btn-check"
-                    id="tag-energetic"
-                  /><label class="btn btn-outline-dark" for="tag-energetic"
-                    >Energetic</label
-                  >
-                  <input
-                    type="checkbox"
-                    class="btn-check"
-                    id="tag-friendly"
-                  /><label class="btn btn-outline-dark" for="tag-friendly"
-                    >Friendly</label
-                  >
+                <div class="wizard-form-content">
+                  <div class="d-flex flex-wrap gap-2 justify-content-center">
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag-playful"
+                    /><label class="btn btn-outline-dark" for="tag-playful"
+                      >Playful</label
+                    >
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag-cuddly"
+                    /><label class="btn btn-outline-dark" for="tag-cuddly"
+                      >Cuddly</label
+                    >
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag-loyal"
+                    /><label class="btn btn-outline-dark" for="tag-loyal"
+                      >Loyal</label
+                    >
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag-energetic"
+                    /><label class="btn btn-outline-dark" for="tag-energetic"
+                      >Energetic</label
+                    >
+                    <input
+                      type="checkbox"
+                      class="btn-check"
+                      id="tag-friendly"
+                    /><label class="btn btn-outline-dark" for="tag-friendly"
+                      >Friendly</label
+                    >
+                  </div>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                  <button type="button" class="btn btn-secondary btn-back">
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-lg btn-back"
+                  >
                     Back
                   </button>
-                  <button type="button" class="btn btn-tindog-primary btn-next">
+                  <button
+                    type="button"
+                    class="btn btn-tindog-primary btn-lg btn-next"
+                  >
                     Next
                   </button>
                 </div>
@@ -153,33 +166,38 @@
                     A picture and a few words is all it takes!
                   </p>
                 </div>
-                <div class="mb-3 text-start">
-                  <label for="dogBio" class="form-label">Bio</label>
-                  <textarea
-                    class="form-control"
-                    id="dogBio"
-                    rows="3"
-                  ></textarea>
-                </div>
-                <div class="mb-4 text-start">
-                  <label for="dogPhoto" class="form-label"
-                    >Profile Picture</label
-                  >
-                  <input
-                    type="file"
-                    class="form-control"
-                    id="dogPhoto"
-                    accept="image/*"
-                    required
-                  />
+                <div class="wizard-form-content">
+                  <div class="mb-3 text-start">
+                    <label for="dogBio" class="form-label">Bio</label>
+                    <textarea
+                      class="form-control"
+                      id="dogBio"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div class="mb-4 text-start">
+                    <label for="dogPhoto" class="form-label"
+                      >Profile Picture</label
+                    >
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="dogPhoto"
+                      accept="image/*"
+                      required
+                    />
+                  </div>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
-                  <button type="button" class="btn btn-secondary btn-back">
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-lg btn-back"
+                  >
                     Back
                   </button>
                   <button
                     type="button"
-                    class="btn btn-tindog-primary btn-finish"
+                    class="btn btn-tindog-primary btn-lg btn-finish"
                   >
                     Finish
                   </button>

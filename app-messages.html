@@ -35,7 +35,7 @@
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
         <main
-          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content position-relative overflow-hidden"
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content page-messages position-relative overflow-hidden"
         >
           <div class="background-shape shape-1"></div>
           <div class="background-shape shape-2"></div>
@@ -48,6 +48,7 @@
                 <input
                   type="text"
                   class="form-control"
+                  id="conversation-search"
                   placeholder="Search matches..."
                 />
               </div>
@@ -106,16 +107,17 @@
                   <span class="message-time">5:42 PM</span>
                 </div>
               </div>
-              <div class="chat-footer">
+              <form class="chat-footer" id="message-form">
                 <input
                   type="text"
                   class="form-control"
+                  id="message-input"
                   placeholder="Type a message..."
                 />
-                <button class="btn btn-tindog-primary">
+                <button class="btn btn-tindog-primary" type="submit">
                   <i class="bi bi-send-fill"></i>
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </main>
