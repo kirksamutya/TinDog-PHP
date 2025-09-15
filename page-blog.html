@@ -23,12 +23,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="./assets/css/global-styles.css" />
-    <link rel="stylesheet" href="./assets/css/blog-styles.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
   <body class="d-flex flex-column min-vh-100">
     <div data-component="./header.html"></div>
@@ -47,7 +42,7 @@
             <div class="col-lg-8">
               <h2 class="h4 mb-4">Recent Posts</h2>
               <div class="row row-cols-1 row-cols-md-2 g-4">
-                <div class="col">
+                <div class="col post-card-container">
                   <div class="card post-card shadow-sm h-100">
                     <img
                       class="post-card-img"
@@ -64,14 +59,14 @@
                         ensure your pup's first meeting goes smoothly.
                       </p>
                       <a
-                        href="./blog-post-1.html"
+                        href="./page-blog-post-1.html"
                         class="btn btn-sm btn-tindog-outline mt-auto align-self-start"
                         >Read More</a
                       >
                     </div>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col post-card-container">
                   <div class="card post-card shadow-sm h-100">
                     <img
                       class="post-card-img"
@@ -88,14 +83,14 @@
                         with these top-rated toys.
                       </p>
                       <a
-                        href="./blog-post-2.html"
+                        href="./page-blog-post-2.html"
                         class="btn btn-sm btn-tindog-outline mt-auto align-self-start"
                         >Read More</a
                       >
                     </div>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col post-card-container">
                   <div class="card post-card shadow-sm h-100">
                     <img
                       class="post-card-img"
@@ -112,14 +107,14 @@
                         best parks for you and your dog.
                       </p>
                       <a
-                        href="./blog-post-3.html"
+                        href="./page-blog-post-3.html"
                         class="btn btn-sm btn-tindog-outline mt-auto align-self-start"
                         >Read More</a
                       >
                     </div>
                   </div>
                 </div>
-                <div class="col">
+                <div class="col post-card-container">
                   <div class="card post-card shadow-sm h-100">
                     <img
                       class="post-card-img"
@@ -136,7 +131,7 @@
                         strengthen your bond and improve safety.
                       </p>
                       <a
-                        href="./blog-post-4.html"
+                        href="./page-blog-post-4.html"
                         class="btn btn-sm btn-tindog-outline mt-auto align-self-start"
                         >Read More</a
                       >
@@ -154,7 +149,7 @@
                       type="text"
                       class="form-control"
                       placeholder="Search blog..."
-                      id="blog-search"
+                      id="blog-search-input"
                     /><button class="btn btn-tindog-primary" type="button">
                       Go
                     </button>
@@ -217,7 +212,7 @@
     </button>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
-    <script src="./assets/js/blog-filters.js"></script>
-    <script src="./assets/js/scroll-to-top.js"></script>
+    <script src="./assets/js/page-blog-filter.js"></script>
+    <script src="./assets/js/ui-scroll-to-top.js"></script>
   </body>
 </html>
