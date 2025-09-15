@@ -1,8 +1,8 @@
 .checkout-card {
   background-color: #ffffff;
   padding: 2.5rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--box-shadow-heavy);
   max-width: 1000px;
   width: 100%;
   margin: 2rem auto;
@@ -11,31 +11,13 @@
   gap: 2rem;
 }
 
-.checkout-card .form-control,
-.checkout-card .form-select {
-  font-size: 1.1rem;
-  padding: 0.75rem;
+.checkout-card .form-control:focus,
+.checkout-card .form-select:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25);
 }
 
 .checkout-card .form-label {
   font-weight: 600;
-  color: #343a40;
-}
-
-.btn-checkout-primary {
-  background-color: #ff4c68;
-  border-color: #ff4c68;
-  color: #ffffff;
-}
-.btn-checkout-primary:hover {
-  opacity: 0.9;
-}
-
-.btn-checkout-outline {
-  border-color: #ff4c68;
-  color: #ff4c68;
-}
-.btn-checkout-outline:hover {
-  background-color: #ff4c68;
-  color: #fff;
+  color: var(--text-dark);
 }

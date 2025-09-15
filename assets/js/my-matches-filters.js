@@ -1,27 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const filterButtons = document.querySelectorAll(".btn-filter");
-  const matchCards = document.querySelectorAll(".match-card");
+  const matchCardContainers = document.querySelectorAll(
+    ".match-card-container"
+  );
 
-  function filterMatches(filter) {
-    matchCards.forEach((card) => {
+  const filterMatches = (filter) => {
+    matchCardContainers.forEach((cardContainer) => {
+      const card = cardContainer.querySelector(".match-card");
       const status = card.dataset.status;
-      if (filter === "all" || status === filter) {
-        card.parentElement.style.display = "block";
+      const shouldBeVisible = filter === "all" || status === filter;
+
+      if (shouldBeVisible) {
+        cardContainer.classList.remove("hidden");
       } else {
-        card.parentElement.style.display = "none";
+        cardContainer.classList.add("hidden");
       }
     });
-  }
+  };
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", function () {
       filterButtons.forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-
-      const filter = button.dataset.filter;
-      filterMatches(filter);
+      this.classList.add("active");
+      const filterValue = this.dataset.filter;
+      filterMatches(filterValue);
     });
   });
-
-  filterMatches("all");
 });
