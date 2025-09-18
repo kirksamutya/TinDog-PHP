@@ -7,8 +7,6 @@
 
 body {
   font-size: 0.875rem;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 /* Core Application Flexbox Layout */
@@ -16,8 +14,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
-  position: relative;
 }
 
 .app-body .dashboard-header {
@@ -51,6 +47,8 @@ body {
   padding-top: 1.5rem;
   flex-grow: 1;
   overflow-y: auto;
+  position: relative;
+  overflow-x: hidden;
 }
 /* End of Core Layout */
 
@@ -143,7 +141,7 @@ body {
   .app-body {
     display: block;
     height: auto;
-    overflow: auto;
+    overflow-x: hidden;
   }
   .app-body .dashboard-header {
     position: sticky;
