@@ -79,13 +79,13 @@ body {
   height: 1rem;
   margin-right: 0.5rem;
 }
-.logout-link {
-  color: var(--brand-primary) !important;
-  font-weight: 700 !important;
+.sidebar-nav .bottom-nav .logout-link {
+  color: var(--brand-primary);
+  font-weight: 700;
 }
-.logout-link:hover {
-  color: var(--text-light) !important;
-  background-color: var(--brand-primary) !important;
+.sidebar-nav .bottom-nav .logout-link:hover {
+  color: var(--text-light);
+  background-color: var(--brand-primary);
 }
 .header-avatar {
   width: 32px;

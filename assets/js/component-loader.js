@@ -20,12 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const setActiveSidebarLink = (sidebar) => {
-    const currentPageFileName = window.location.pathname.split("/").pop();
+    const currentPagePath = window.location.pathname;
     const navLinks = sidebar.querySelectorAll(".nav-link");
 
     navLinks.forEach((link) => {
-      const linkFileName = link.getAttribute("href").split("/").pop();
-      if (linkFileName === currentPageFileName) {
+      const linkPath = new URL(link.href).pathname;
+      if (currentPagePath === linkPath) {
         link.classList.add("active");
       } else {
         link.classList.remove("active");
