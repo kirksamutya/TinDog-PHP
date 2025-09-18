@@ -1,17 +1,20 @@
 <div class="card activity-feed-container">
-  <div class="card-header">
-    <h5 class="mb-0">Activity Feed</h5>
-  </div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex align-items-center activity-match">
+      <li
+        class="list-group-item d-flex align-items-center activity-item activity-match"
+        data-category="match"
+      >
         <div class="icon-wrapper me-3"><i class="bi bi-heart-fill"></i></div>
         <div class="activity-text">
           You have a new match with <strong>Bruce</strong>!
         </div>
         <small class="ms-auto text-muted">15m</small>
       </li>
-      <li class="list-group-item d-flex align-items-center activity-message">
+      <li
+        class="list-group-item d-flex align-items-center activity-item activity-message"
+        data-category="message"
+      >
         <div class="icon-wrapper me-3">
           <i class="bi bi-chat-dots-fill"></i>
         </div>
@@ -20,10 +23,23 @@
         </div>
         <small class="ms-auto text-muted">2h</small>
       </li>
-      <li class="list-group-item d-flex align-items-center activity-profile">
+      <li
+        class="list-group-item d-flex align-items-center activity-item activity-profile"
+        data-category="profile"
+      >
         <div class="icon-wrapper me-3"><i class="bi bi-person-fill"></i></div>
         <div class="activity-text">You updated your dog's profile.</div>
         <small class="ms-auto text-muted">1d</small>
+      </li>
+      <li
+        class="list-group-item d-flex align-items-center activity-item activity-match"
+        data-category="match"
+      >
+        <div class="icon-wrapper me-3"><i class="bi bi-heart-fill"></i></div>
+        <div class="activity-text">
+          <strong>Dumbledoor</strong> liked your profile!
+        </div>
+        <small class="ms-auto text-muted">2d</small>
       </li>
     </ul>
   </div>

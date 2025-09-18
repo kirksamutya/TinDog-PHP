@@ -39,6 +39,103 @@
           <div class="row g-4">
             <div class="col-lg-6">
               <div class="card settings-card h-100">
+                <div class="card-header">Discovery Settings</div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label
+                      for="distanceRange"
+                      class="form-label d-flex justify-content-between"
+                    >
+                      <span>Maximum Distance</span
+                      ><span class="text-muted">50 km</span>
+                    </label>
+                    <input
+                      type="range"
+                      class="form-range"
+                      id="distanceRange"
+                      min="1"
+                      max="100"
+                      value="50"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label
+                      for="ageRange"
+                      class="form-label d-flex justify-content-between"
+                    >
+                      <span>Age Range</span
+                      ><span class="text-muted">1 - 8 years</span>
+                    </label>
+                    <input
+                      type="range"
+                      class="form-range"
+                      id="ageRange"
+                      min="1"
+                      max="15"
+                      value="8"
+                    />
+                  </div>
+                  <div class="form-check form-switch mb-3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="show-on-tindog"
+                      checked
+                    />
+                    <label class="form-check-label" for="show-on-tindog"
+                      >Show my profile on TinDog</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card settings-card h-100">
+                <div class="card-header">Notification Settings</div>
+                <div class="card-body">
+                  <div class="form-check form-switch mb-3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="notify-matches"
+                      checked
+                    />
+                    <label class="form-check-label" for="notify-matches"
+                      >New Matches</label
+                    >
+                  </div>
+                  <div class="form-check form-switch mb-3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="notify-messages"
+                      checked
+                    />
+                    <label class="form-check-label" for="notify-messages"
+                      >New Messages</label
+                    >
+                  </div>
+                  <div class="form-check form-switch mb-3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="notify-promos"
+                    />
+                    <label class="form-check-label" for="notify-promos"
+                      >App Promotions</label
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="card settings-card h-100">
                 <div class="card-header">Account</div>
                 <div class="card-body">
                   <form>
@@ -53,18 +150,6 @@
                         value="roel.saavedra@example.com"
                       />
                     </div>
-                    <button type="submit" class="btn btn-tindog-primary">
-                      Update Account
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="card settings-card h-100">
-                <div class="card-header">Change Password</div>
-                <div class="card-body">
-                  <form>
                     <div class="mb-3">
                       <label for="currentPassword" class="form-label"
                         >Current Password</label
@@ -85,13 +170,50 @@
                         id="newPassword"
                       />
                     </div>
-                    <button type="submit" class="btn btn-tindog-primary">
-                      Set New Password
-                    </button>
                   </form>
                 </div>
               </div>
             </div>
+
+            <div class="col-lg-6">
+              <div class="card settings-card h-100">
+                <div class="card-header">General</div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <label class="form-label">Theme</label>
+                    <div class="theme-selector">
+                      <div class="theme-option active" data-theme="light">
+                        <i class="bi bi-sun-fill"></i> Light
+                      </div>
+                      <div class="theme-option" data-theme="dark">
+                        <i class="bi bi-moon-stars-fill"></i> Dark
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div>
+                      <h6 class="mb-0">Clear App Cache</h6>
+                      <small class="text-muted"
+                        >Frees up space and fixes minor glitches.</small
+                      >
+                    </div>
+                    <button
+                      class="btn btn-sm btn-outline-secondary"
+                      id="clear-cache-btn"
+                    >
+                      <span id="clear-cache-text">Clear Now</span>
+                      <span id="cache-cleared-text" style="display: none"
+                        ><i class="bi bi-check-circle-fill"></i> Cleared!</span
+                      >
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="col-12">
               <div class="card settings-card border-danger">
                 <div class="card-header bg-danger text-white">Danger Zone</div>
@@ -117,5 +239,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/app-settings-handler.js"></script>
   </body>
 </html>

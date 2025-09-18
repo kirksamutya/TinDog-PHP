@@ -34,22 +34,21 @@
         ></nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
           <div class="page-header">
-            <h1 class="h2">My Matches</h1>
+            <h1 class="h2 mb-0">My Matches</h1>
           </div>
+
           <div class="filter-bar">
-            <button class="btn btn-filter active" data-filter="all">
-              All Matches
-            </button>
+            <button class="btn btn-filter active" data-filter="all">All</button>
             <button class="btn btn-filter" data-filter="new">New</button>
-            <button class="btn btn-filter" data-filter="unread">
-              Unread Messages
-            </button>
+            <button class="btn btn-filter" data-filter="unread">Unread</button>
           </div>
+
           <div
             class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4"
+            id="matches-grid"
           >
-            <div class="col match-card-container">
-              <div class="card match-card h-100" data-status="new">
+            <div class="col match-card-container" data-status="new">
+              <div class="card match-card h-100">
                 <div class="new-match-badge">New!</div>
                 <img
                   src="./assets/images/bruce.jpg"
@@ -57,7 +56,9 @@
                   alt="Bruce the dog"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Bruce, 3</h5>
+                  <h5 class="card-title d-flex align-items-center">
+                    Bruce, 3 <span class="online-indicator ms-2"></span>
+                  </h5>
                   <p class="card-text text-muted">American Bulldog</p>
                 </div>
                 <div class="card-footer">
@@ -69,15 +70,17 @@
                 </div>
               </div>
             </div>
-            <div class="col match-card-container">
-              <div class="card match-card h-100" data-status="unread">
+            <div class="col match-card-container" data-status="unread">
+              <div class="card match-card h-100">
                 <img
                   src="./assets/images/dog-img.jpg"
                   class="match-card-img"
                   alt="Pebbles the dog"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Pebbles, 5</h5>
+                  <h5 class="card-title d-flex align-items-center">
+                    Pebbles, 5
+                  </h5>
                   <p class="card-text text-muted">Golden Retriever</p>
                 </div>
                 <div class="card-footer">
@@ -89,15 +92,15 @@
                 </div>
               </div>
             </div>
-            <div class="col match-card-container">
-              <div class="card match-card h-100" data-status="read">
+            <div class="col match-card-container" data-status="read">
+              <div class="card match-card h-100">
                 <img
                   src="https://placedog.net/400/400?id=45"
                   class="match-card-img"
                   alt="Rocky the dog"
                 />
                 <div class="card-body">
-                  <h5 class="card-title">Rocky, 4</h5>
+                  <h5 class="card-title d-flex align-items-center">Rocky, 4</h5>
                   <p class="card-text text-muted">German Shepherd</p>
                 </div>
                 <div class="card-footer">
@@ -109,6 +112,14 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            class="notifications-empty-state"
+            id="no-matches-found"
+            style="display: none"
+          >
+            <i class="bi bi-search-heart"></i>
+            <p class="mt-3 mb-0">No matches in this category.</p>
           </div>
         </main>
       </div>
