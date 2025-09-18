@@ -1,9 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const animateDashboardComponents = () => {
+    const kpiCards = document.querySelectorAll(".kpi-card");
+    const activityFeed = document.querySelector(".activity-feed-container");
+    const pupsNearby = document.querySelector(".pups-nearby-card");
+    const tipCard = document.querySelector(".tip-card");
+
+    const componentsToAnimate = [
+      ...kpiCards,
+      pupsNearby,
+      activityFeed,
+      tipCard,
+    ];
+
+    componentsToAnimate.forEach((el, index) => {
+      if (el) {
+        setTimeout(() => {
+          el.classList.add("visible");
+        }, index * 100);
+      }
+    });
+  };
+
   const fetchAndInjectComponent = (componentContainer) => {
     const componentUrl = componentContainer.dataset.component;
     if (!componentUrl) return;
 
-    fetch(componentUrl)
+    return fetch(componentUrl)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Component not found at ${componentUrl}`);
@@ -33,7 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  document
-    .querySelectorAll("[data-component]")
-    .forEach(fetchAndInjectComponent);
+  const componentPromises = Array.from(
+    document.querySelectorAll("[data-component]")
+  ).map(fetchAndInjectComponent);
+
+  Promise.all(componentPromises).then(() => {
+    if (document.body.querySelector(".page-find-matches, .kpi-card")) {
+      animateDashboardComponents();
+    }
+  });
 });

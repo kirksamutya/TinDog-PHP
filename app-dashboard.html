@@ -32,69 +32,79 @@
           id="sidebar-nav-container"
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
-        <main
-          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content position-relative overflow-hidden"
-        >
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
           <div class="dashboard-welcome-header gradient-background">
             <h2 id="welcome-greeting">Welcome Back!</h2>
             <p class="lead mb-0">Here's what's new with your pack today.</p>
           </div>
-          <div class="row g-4 mb-4">
-            <div class="col-md-6 col-lg-3">
-              <a href="./app-matches.html" class="kpi-card-link">
-                <div class="kpi-card matches h-100">
-                  <div class="kpi-icon icon-matches">
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="kpi-content">
-                    <h6 class="kpi-title">New Matches</h6>
-                    <div class="kpi-value">6</div>
-                    <div class="kpi-caption">in the last 7 days</div>
-                  </div>
+
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                <div class="col">
+                  <a href="./app-matches.html" class="kpi-card-link">
+                    <div class="kpi-card matches h-100">
+                      <div class="kpi-icon icon-matches">
+                        <i class="bi bi-star-fill"></i>
+                      </div>
+                      <div class="kpi-content">
+                        <h6 class="kpi-title">New Matches</h6>
+                        <div class="kpi-value">6</div>
+                        <div class="kpi-caption">in the last 7 days</div>
+                      </div>
+                    </div>
+                  </a>
                 </div>
-              </a>
+                <div class="col">
+                  <a href="./app-messages.html" class="kpi-card-link">
+                    <div class="kpi-card messages h-100">
+                      <div class="kpi-icon icon-messages">
+                        <i class="bi bi-chat-dots-fill"></i>
+                      </div>
+                      <div class="kpi-content">
+                        <h6 class="kpi-title">Unread Messages</h6>
+                        <div class="kpi-value">3</div>
+                        <div class="kpi-caption">from 2 conversations</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col">
+                  <a href="./app-profile.html" class="kpi-card-link">
+                    <div class="kpi-card views h-100">
+                      <div class="kpi-icon icon-views">
+                        <i class="bi bi-eye-fill"></i>
+                      </div>
+                      <div class="kpi-content">
+                        <h6 class="kpi-title">Profile Views</h6>
+                        <div class="kpi-value">42</div>
+                        <div class="kpi-caption">in the last 7 days</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="col">
+                  <a href="./page-pricing.html" class="kpi-card-link">
+                    <div class="kpi-card plan h-100">
+                      <div class="kpi-icon icon-plan">
+                        <i class="bi bi-gem"></i>
+                      </div>
+                      <div class="kpi-content">
+                        <h6 class="kpi-title">Current Plan</h6>
+                        <div class="kpi-value">Labrador</div>
+                        <div class="kpi-caption">Upgrade Plan →</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              <div data-component="./app-pups-nearby.html"></div>
             </div>
-            <div class="col-md-6 col-lg-3">
-              <a href="./app-messages.html" class="kpi-card-link">
-                <div class="kpi-card messages h-100">
-                  <div class="kpi-icon icon-messages">
-                    <i class="bi bi-chat-dots-fill"></i>
-                  </div>
-                  <div class="kpi-content">
-                    <h6 class="kpi-title">Unread Messages</h6>
-                    <div class="kpi-value">3</div>
-                    <div class="kpi-caption">from 2 conversations</div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <a href="./app-profile.html" class="kpi-card-link">
-                <div class="kpi-card views h-100">
-                  <div class="kpi-icon icon-views">
-                    <i class="bi bi-eye-fill"></i>
-                  </div>
-                  <div class="kpi-content">
-                    <h6 class="kpi-title">Profile Views</h6>
-                    <div class="kpi-value">42</div>
-                    <div class="kpi-caption">in the last 7 days</div>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <a href="./page-pricing.html" class="kpi-card-link">
-                <div class="kpi-card plan h-100">
-                  <div class="kpi-icon icon-plan">
-                    <i class="bi bi-gem"></i>
-                  </div>
-                  <div class="kpi-content">
-                    <h6 class="kpi-title">Current Plan</h6>
-                    <div class="kpi-value">Labrador</div>
-                    <div class="kpi-caption">Upgrade Plan →</div>
-                  </div>
-                </div>
-              </a>
+
+            <div class="col-lg-4">
+              <div data-component="./app-activity-feed.html" class="mb-4"></div>
+              <div data-component="./app-tip-of-the-day.html"></div>
             </div>
           </div>
         </main>
@@ -103,5 +113,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
     <script src="./assets/js/app-dashboard-logic.js"></script>
+    <script src="./assets/js/app-dashboard-dynamics.js"></script>
   </body>
 </html>
