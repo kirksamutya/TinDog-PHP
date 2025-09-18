@@ -3,19 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const matchCardContainers = document.querySelectorAll(
     ".match-card-container"
   );
+  const noMatchesMessage = document.getElementById("no-matches-found");
 
   const filterMatches = (filter) => {
+    let matchesFound = false;
     matchCardContainers.forEach((cardContainer) => {
-      const card = cardContainer.querySelector(".match-card");
-      const status = card.dataset.status;
+      const status = cardContainer.dataset.status;
       const shouldBeVisible = filter === "all" || status === filter;
 
+      cardContainer.style.display = shouldBeVisible ? "block" : "none";
+
       if (shouldBeVisible) {
-        cardContainer.classList.remove("hidden");
-      } else {
-        cardContainer.classList.add("hidden");
+        matchesFound = true;
       }
     });
+
+    if (noMatchesMessage) {
+      noMatchesMessage.style.display = matchesFound ? "none" : "block";
+    }
   };
 
   filterButtons.forEach((button) => {

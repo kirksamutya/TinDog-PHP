@@ -25,7 +25,7 @@
     />
     <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
-  <body class="bg-light app-body">
+  <body class="app-body">
     <div data-component="./app-header.html"></div>
     <div class="container-fluid">
       <div class="row">
@@ -37,11 +37,12 @@
         <main
           class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content page-profile"
         >
-          <div class="background-shape shape-1"></div>
-          <div class="background-shape shape-2"></div>
           <div class="profile-container">
-            <div class="profile-cover-photo">
+            <div class="profile-cover-photo position-relative">
               <img src="./assets/images/jorjee-three.jpg" alt="Cover Photo" />
+              <a href="#" class="edit-cover-btn btn btn-light btn-sm">
+                <i class="bi bi-camera-fill me-1"></i> Edit Cover
+              </a>
             </div>
             <div class="profile-card">
               <div class="profile-avatar-wrapper">
@@ -50,6 +51,9 @@
                   class="profile-avatar"
                   alt="Profile Avatar"
                 />
+                <a href="#" class="edit-avatar-btn btn btn-light btn-sm">
+                  <i class="bi bi-camera-fill"></i>
+                </a>
               </div>
               <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -74,8 +78,22 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="dog-profile">
                   <div class="profile-info text-center pt-3">
-                    <h2 class="h3 mb-0">Jorjee</h2>
-                    <p class="text-muted">Shih Tzu</p>
+                    <h2 class="h3 mb-1">Jorjee</h2>
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-3 text-muted mb-3"
+                    >
+                      <span
+                        ><i class="bi bi-person-badge me-1"></i> Shih Tzu</span
+                      >
+                      <span
+                        ><i class="bi bi-calendar-heart me-1"></i> 3 years
+                        old</span
+                      >
+                      <span
+                        ><i class="bi bi-geo-alt me-1"></i> Consolacion,
+                        PH</span
+                      >
+                    </div>
                     <a
                       href="./app-profile-edit.html?tab=dog"
                       class="btn btn-sm btn-tindog-primary"
@@ -83,25 +101,27 @@
                     >
                   </div>
                   <hr />
-                  <div class="profile-bio p-3">
+                  <div class="profile-details p-3">
                     <h5 class="mb-2">About Jorjee</h5>
                     <p class="text-muted">
                       Energetic and playful, loves chasing balls and long walks.
                       Looking for a companion to explore with!
                     </p>
-                    <div class="mt-4">
+                    <h5 class="mt-4 mb-3">Personality</h5>
+                    <div class="mt-2">
                       <span class="profile-tag">Playful</span>
                       <span class="profile-tag">Cuddly</span>
                       <span class="profile-tag">Loves Treats</span>
                       <span class="profile-tag">Friendly</span>
                     </div>
-                    <h6 class="mt-4 mb-3">Photo Gallery</h6>
+                    <h5 class="mt-4 mb-3">Photo Gallery</h5>
                     <div class="photo-gallery-grid">
                       <a
                         href="#"
                         data-bs-toggle="modal"
                         data-bs-target="#galleryModal"
                         data-bs-image-src="./assets/images/jorjee-one.jpg"
+                        class="gallery-item"
                         ><img
                           src="./assets/images/jorjee-one.jpg"
                           alt="Jorjee photo 1"
@@ -111,6 +131,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#galleryModal"
                         data-bs-image-src="./assets/images/jorjee-two.jpg"
+                        class="gallery-item"
                         ><img
                           src="./assets/images/jorjee-two.jpg"
                           alt="Jorjee photo 2"
@@ -120,6 +141,7 @@
                         data-bs-toggle="modal"
                         data-bs-target="#galleryModal"
                         data-bs-image-src="./assets/images/jorjee-three.jpg"
+                        class="gallery-item"
                         ><img
                           src="./assets/images/jorjee-three.jpg"
                           alt="Jorjee photo 3"
@@ -129,7 +151,7 @@
                 </div>
                 <div class="tab-pane fade" id="owner-profile">
                   <div class="profile-info text-center pt-3">
-                    <h2 class="h3 mb-0">Roel Anthony Saavedra</h2>
+                    <h2 class="h3 mb-1">Roel Anthony Saavedra</h2>
                     <p class="text-muted">Jorjee's Human</p>
                     <a
                       href="./app-profile-edit.html?tab=owner"
@@ -138,8 +160,8 @@
                     >
                   </div>
                   <hr />
-                  <div class="profile-bio p-3">
-                    <h5 class="mb-2">About Roel</h5>
+                  <div class="profile-details p-3">
+                    <h5 class="mb-2">About Me</h5>
                     <p class="text-muted">
                       Guides our technical direction and translates creative
                       concepts into functional, polished applications.

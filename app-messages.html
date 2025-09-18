@@ -25,7 +25,7 @@
     />
     <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
-  <body class="bg-light app-body">
+  <body class="app-body">
     <div data-component="./app-header.html"></div>
     <div class="container-fluid">
       <div class="row">
@@ -37,22 +37,18 @@
         <main
           class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content page-messages"
         >
-          <div class="background-shape shape-1"></div>
-          <div class="background-shape shape-2"></div>
-          <div class="page-header">
-            <h1 class="h2">Messages</h1>
-          </div>
-          <div class="chat-container">
+          <div class="chat-container-wrapper">
             <div class="conversation-list">
               <div class="conv-list-header">
+                <h5 class="mb-0">Matches</h5>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control mt-2"
                   id="conversation-search"
                   placeholder="Search matches..."
                 />
               </div>
-              <ul class="list-unstyled mb-0">
+              <ul class="list-unstyled mb-0 conv-list-body">
                 <li class="conversation-item active">
                   <img
                     src="./assets/images/bruce.jpg"
@@ -83,11 +79,17 @@
             </div>
             <div class="chat-window">
               <div class="chat-header">
-                <button class="btn btn-link d-md-none me-2 back-button">
-                  <i class="bi bi-arrow-left"></i>
+                <button class="btn btn-link d-md-none me-2 back-button p-0">
+                  <i class="bi bi-arrow-left fs-4"></i>
                 </button>
-                <h5 class="mb-0">Bruce</h5>
-                <small class="text-success ms-auto">Online</small>
+                <img
+                  src="./assets/images/bruce.jpg"
+                  id="chat-header-avatar"
+                  alt="Bruce"
+                  class="avatar me-3"
+                />
+                <h5 class="mb-0" id="chat-header-name">Bruce</h5>
+                <span class="online-indicator ms-auto"></span>
               </div>
               <div class="chat-body">
                 <div class="message received">
@@ -106,6 +108,14 @@
                   <p>Sure, let's meet at the park!</p>
                   <span class="message-time">5:42 PM</span>
                 </div>
+                <div
+                  class="message received typing-indicator"
+                  style="display: none"
+                >
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
               </div>
               <form class="chat-footer" id="message-form">
                 <input
@@ -113,6 +123,7 @@
                   class="form-control"
                   id="message-input"
                   placeholder="Type a message..."
+                  autocomplete="off"
                 />
                 <button class="btn btn-tindog-primary" type="submit">
                   <i class="bi bi-send-fill"></i>
@@ -126,5 +137,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
     <script src="./assets/js/app-messages-view.js"></script>
+    <script src="./assets/js/app-messaging-enhancements.js"></script>
   </body>
 </html>
