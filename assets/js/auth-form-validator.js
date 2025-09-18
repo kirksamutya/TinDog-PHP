@@ -24,4 +24,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeFormValidation("register-form", "./auth-create-profile.html");
   initializeFormValidation("login-form", "./app-dashboard.html");
   initializeFormValidation("checkout-form", "./auth-create-profile.html");
+  initializeFormValidation("edit-profile-form", "./app-profile.html");
 });

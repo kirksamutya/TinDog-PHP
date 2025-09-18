@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const chatPane = document.querySelector(".chat-window");
   const conversationPane = document.querySelector(".conversation-list");
   const backButton = document.querySelector(".back-button");
+  let isChatActive = false;
 
   const showChatPane = () => {
     conversationPane.style.display = "none";
@@ -19,7 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
       conversationPane.style.display = "flex";
       chatPane.style.display = "flex";
     } else {
-      showConversationPane();
+      if (isChatActive) {
+        showChatPane();
+      } else {
+        showConversationPane();
+      }
     }
   };
 
@@ -27,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     conversation.addEventListener("click", () => {
       conversationItems.forEach((item) => item.classList.remove("active"));
       conversation.classList.add("active");
+      isChatActive = true;
 
       if (window.innerWidth < 768) {
         showChatPane();
@@ -35,14 +41,15 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   if (backButton) {
-    backButton.addEventListener("click", showConversationPane);
+    backButton.addEventListener("click", () => {
+      isChatActive = false;
+      showConversationPane();
+    });
   }
 
-  // Initial setup
   handleResponsiveView();
   window.addEventListener("resize", handleResponsiveView);
 
-  // Search functionality
   const searchInput = document.getElementById("conversation-search");
   if (searchInput) {
     searchInput.addEventListener("input", function (e) {
@@ -58,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Send message functionality
   const messageForm = document.getElementById("message-form");
   const messageInput = document.getElementById("message-input");
   const chatBody = document.querySelector(".chat-body");

@@ -7,36 +7,63 @@
 
 body {
   font-size: 0.875rem;
-  overflow-y: auto; /* Restores vertical scroll for public pages */
-  overflow-x: hidden; /* Globally removes horizontal scrollbar */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-.dashboard-header {
+
+/* Core Application Flexbox Layout */
+.app-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.app-body .dashboard-header {
+  flex-shrink: 0;
+  position: relative;
   z-index: 101;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
+
+.app-body .container-fluid {
+  flex-grow: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.app-body .container-fluid > .row {
+  display: flex;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.app-body .dashboard-sidebar {
+  position: static;
+  padding-top: 0;
+  height: auto;
+  flex-shrink: 0;
+  overflow-y: auto;
+}
+
+.app-body .main-content {
+  height: auto;
+  padding-top: 1.5rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+/* End of Core Layout */
+
 .dashboard-header .navbar-brand {
   color: var(--brand-primary);
   font-weight: 700;
   font-size: 1.5rem;
   padding: 0;
 }
-.dashboard-sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  padding: 48px 0 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
-}
-.main-content {
-  padding-top: 70px;
-  height: 100vh;
-  overflow-y: auto;
-}
 .sidebar-nav {
   background-color: #fff;
   border-right: 1px solid var(--border-color);
+  height: 100%;
 }
 .sidebar-profile-card {
   padding: 1.5rem 1rem;
@@ -79,13 +106,13 @@ body {
   height: 1rem;
   margin-right: 0.5rem;
 }
-.logout-link {
-  color: var(--brand-primary) !important;
-  font-weight: 700 !important;
+.sidebar-nav .bottom-nav .logout-link {
+  color: var(--brand-primary);
+  font-weight: 700;
 }
-.logout-link:hover {
-  color: var(--text-light) !important;
-  background-color: var(--brand-primary) !important;
+.sidebar-nav .bottom-nav .logout-link:hover {
+  color: var(--text-light);
+  background-color: var(--brand-primary);
 }
 .header-avatar {
   width: 32px;
@@ -113,9 +140,14 @@ body {
 }
 
 @media (max-width: 767.98px) {
-  .dashboard-sidebar {
-    top: 60px;
-    padding-top: 0;
+  .app-body {
+    display: block;
+    height: auto;
+    overflow: auto;
+  }
+  .app-body .dashboard-header {
+    position: sticky;
+    top: 0;
   }
   .dashboard-header .navbar-brand {
     flex-grow: 1;
@@ -312,14 +344,18 @@ body {
 }
 
 /* Find Matches (Swipe) Specific Styles */
+.page-find-matches.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .swipe-deck-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
-  height: calc(100vh - 200px);
-  min-height: 400px;
+  min-height: 550px;
   padding: 1rem;
 }
 
@@ -328,7 +364,7 @@ body {
   width: 100%;
   max-width: 350px;
   height: 100%;
-  max-height: 500px;
+  max-height: 550px;
 }
 
 .swipe-deck .match-card {
@@ -458,10 +494,12 @@ body {
 .chat-container {
   display: flex;
   height: 100%;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: var(--border-radius-medium);
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .conversation-list {
@@ -512,6 +550,7 @@ body {
 
 .conversation-item .conv-name {
   font-weight: 600;
+  margin-right: 0.5rem;
 }
 
 .conversation-item .conv-preview {
@@ -589,17 +628,10 @@ body {
   gap: 0.5rem;
 }
 
-@media (max-width: 767.98px) {
-  .conversation-list {
-    flex-basis: 100%;
-  }
-}
-
 /* Profile Page Specific Styles */
 .page-profile.main-content {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   padding-bottom: 1.5rem;
 }
 
@@ -720,6 +752,7 @@ body {
   justify-content: center;
   color: #fff;
   font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .activity-match .icon-wrapper {

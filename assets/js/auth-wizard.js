@@ -21,6 +21,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nextButtons.forEach((button) => {
     button.addEventListener("click", () => {
+      const currentStep = formSteps[currentStepIndex];
+      const form = currentStep.closest("form");
+      const inputs = currentStep.querySelectorAll(
+        "input[required], select[required], textarea[required]"
+      );
+      let isStepValid = true;
+
+      inputs.forEach((input) => {
+        if (!input.checkValidity()) {
+          isStepValid = false;
+        }
+      });
+
+      form.classList.add("was-validated");
+
+      if (!isStepValid) {
+        return;
+      }
+
       if (currentStepIndex < formSteps.length - 1) {
         currentStepIndex++;
         updateWizardState();

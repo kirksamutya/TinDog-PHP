@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const termsCheckbox = document.getElementById("terms");
   const registerButton = document.getElementById("register-button");
   const termsModal = document.getElementById("termsModal");
+  let termsContent = null;
 
   const toggleRegisterButton = () => {
     if (termsCheckbox && registerButton) {
@@ -11,14 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const fetchTermsContent = () => {
     const modalBody = termsModal.querySelector(".modal-body");
+
+    if (termsContent) {
+      modalBody.innerHTML = termsContent;
+      return;
+    }
+
     fetch("./page-terms.html")
       .then((response) => response.text())
       .then((html) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
-        const content = doc.querySelector("#terms-main-content");
-        if (content) {
-          modalBody.innerHTML = content.innerHTML;
+        const contentElement = doc.querySelector("#terms-main-content");
+
+        if (contentElement) {
+          termsContent = contentElement.innerHTML;
+          modalBody.innerHTML = termsContent;
         } else {
           modalBody.innerHTML = "Could not load the terms and conditions.";
         }
