@@ -38,7 +38,7 @@
           class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content page-messages"
         >
           <div class="chat-container-wrapper">
-            <div class="conversation-list">
+            <div class="conversation-list d-flex">
               <div class="conv-list-header">
                 <h5 class="mb-0">Matches</h5>
                 <input
@@ -49,12 +49,15 @@
                 />
               </div>
               <ul class="list-unstyled mb-0 conv-list-body">
-                <li class="conversation-item active">
-                  <img
-                    src="./assets/images/bruce.jpg"
-                    alt="Bruce"
-                    class="avatar"
-                  />
+                <li class="conversation-item" data-dog="Bruce">
+                  <div class="avatar-wrapper">
+                    <img
+                      src="./assets/images/bruce.jpg"
+                      alt="Bruce"
+                      class="avatar"
+                    />
+                    <span class="status-indicator online"></span>
+                  </div>
                   <div class="conv-details">
                     <div class="conv-name">Bruce</div>
                     <div class="conv-preview">
@@ -63,12 +66,15 @@
                   </div>
                   <div class="conv-time">12m</div>
                 </li>
-                <li class="conversation-item">
-                  <img
-                    src="./assets/images/dog-img.jpg"
-                    alt="Pebbles"
-                    class="avatar"
-                  />
+                <li class="conversation-item" data-dog="Pebbles">
+                  <div class="avatar-wrapper">
+                    <img
+                      src="./assets/images/dog-img.jpg"
+                      alt="Pebbles"
+                      class="avatar"
+                    />
+                    <span class="status-indicator recent"></span>
+                  </div>
                   <div class="conv-details">
                     <div class="conv-name">Pebbles</div>
                     <div class="conv-preview">Haha, my human is so slow.</div>
@@ -77,46 +83,20 @@
                 </li>
               </ul>
             </div>
-            <div class="chat-window">
+            <div class="chat-window flex-column">
               <div class="chat-header">
                 <button class="btn btn-link d-md-none me-2 back-button p-0">
                   <i class="bi bi-arrow-left fs-4"></i>
                 </button>
                 <img
-                  src="./assets/images/bruce.jpg"
+                  src=""
                   id="chat-header-avatar"
-                  alt="Bruce"
+                  alt=""
                   class="avatar me-3"
                 />
-                <h5 class="mb-0" id="chat-header-name">Bruce</h5>
-                <span class="online-indicator ms-auto"></span>
+                <h5 class="mb-0" id="chat-header-name"></h5>
               </div>
-              <div class="chat-body">
-                <div class="message received">
-                  <p>Hey! Is your human free for a playdate this weekend?</p>
-                  <span class="message-time">5:30 PM</span>
-                </div>
-                <div class="message sent">
-                  <p>Woof! Yes! I would love that!</p>
-                  <span class="message-time">5:31 PM</span>
-                </div>
-                <div class="message received">
-                  <p>Great! How about the dog park on Saturday around 3 PM?</p>
-                  <span class="message-time">5:32 PM</span>
-                </div>
-                <div class="message sent">
-                  <p>Sure, let's meet at the park!</p>
-                  <span class="message-time">5:42 PM</span>
-                </div>
-                <div
-                  class="message received typing-indicator"
-                  style="display: none"
-                >
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
-                </div>
-              </div>
+              <div class="chat-body"></div>
               <form class="chat-footer" id="message-form">
                 <input
                   type="text"
@@ -136,7 +116,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
-    <script src="./assets/js/app-messages-view.js"></script>
-    <script src="./assets/js/app-messaging-enhancements.js"></script>
+    <script src="./assets/js/app-messages-logic.js"></script>
   </body>
 </html>

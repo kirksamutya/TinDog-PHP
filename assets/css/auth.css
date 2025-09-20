@@ -14,10 +14,12 @@
   width: 95%;
   margin: 2rem auto;
 }
+
 .form-control:focus {
   border-color: var(--brand-primary);
   box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25);
 }
+
 .wizard-card {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(15px);
@@ -30,33 +32,40 @@
   margin: 1rem auto 2rem auto;
   overflow: hidden;
 }
+
 .wizard-form-wrapper {
   overflow: hidden;
 }
+
 .wizard-form-container {
   display: flex;
   transition: transform 0.4s ease-in-out;
-  width: 300%;
+  width: 400%;
 }
+
 .wizard-form-step {
-  width: calc(100% / 3);
+  width: calc(100% / 4);
   padding: 2.5rem;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   min-height: 450px;
 }
+
 .wizard-form-content {
   flex-grow: 1;
 }
+
 .wizard-decorative-image {
   max-height: 150px;
   opacity: 0.5;
 }
+
 .progress-bar {
   background-color: var(--brand-primary);
   transition: width 0.4s ease-in-out;
 }
+
 .checkout-card {
   background-color: #ffffff;
   padding: 2.5rem;
@@ -69,11 +78,13 @@
   flex-wrap: wrap;
   gap: 2rem;
 }
+
 .checkout-card .form-control:focus,
 .checkout-card .form-select:focus {
   border-color: var(--brand-primary);
   box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25);
 }
+
 .checkout-card .form-label {
   font-weight: 600;
   color: var(--text-dark);
