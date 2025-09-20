@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentStepIndex * stepWidthPercentage
     }%)`;
     const progressPercentage =
-      ((currentStepIndex + 1) / formSteps.length) * 100;
+      (currentStepIndex / (formSteps.length - 1)) * 100;
     progressBar.style.width = `${progressPercentage}%`;
   };
 
@@ -58,9 +58,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (finishButton) {
     finishButton.addEventListener("click", () => {
-      window.location.href = "./app-dashboard.html";
+      const form = finishButton.closest("form");
+      if (form.checkValidity()) {
+        window.location.href = "./app-dashboard.html";
+      } else {
+        form.classList.add("was-validated");
+      }
     });
   }
 
   window.addEventListener("resize", updateWizardState);
+
+  updateWizardState();
 });

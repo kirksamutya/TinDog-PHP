@@ -36,200 +36,375 @@
           <div class="page-header">
             <h1 class="h2">Settings</h1>
           </div>
-          <div class="row g-4">
-            <div class="col-lg-6">
-              <div class="card settings-card h-100">
-                <div class="card-header">Discovery Settings</div>
-                <div class="card-body">
-                  <div class="mb-3">
-                    <label
-                      for="distanceRange"
-                      class="form-label d-flex justify-content-between"
-                    >
-                      <span>Maximum Distance</span
-                      ><span class="text-muted">50 km</span>
-                    </label>
-                    <input
-                      type="range"
-                      class="form-range"
-                      id="distanceRange"
-                      min="1"
-                      max="100"
-                      value="50"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label
-                      for="ageRange"
-                      class="form-label d-flex justify-content-between"
-                    >
-                      <span>Age Range</span
-                      ><span class="text-muted">1 - 8 years</span>
-                    </label>
-                    <input
-                      type="range"
-                      class="form-range"
-                      id="ageRange"
-                      min="1"
-                      max="15"
-                      value="8"
-                    />
-                  </div>
-                  <div class="form-check form-switch mb-3">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      role="switch"
-                      id="show-on-tindog"
-                      checked
-                    />
-                    <label class="form-check-label" for="show-on-tindog"
-                      >Show my profile on TinDog</label
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="card settings-card h-100">
-                <div class="card-header">Notification Settings</div>
-                <div class="card-body">
-                  <div class="form-check form-switch mb-3">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      role="switch"
-                      id="notify-matches"
-                      checked
-                    />
-                    <label class="form-check-label" for="notify-matches"
-                      >New Matches</label
-                    >
-                  </div>
-                  <div class="form-check form-switch mb-3">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      role="switch"
-                      id="notify-messages"
-                      checked
-                    />
-                    <label class="form-check-label" for="notify-messages"
-                      >New Messages</label
-                    >
-                  </div>
-                  <div class="form-check form-switch mb-3">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      role="switch"
-                      id="notify-promos"
-                    />
-                    <label class="form-check-label" for="notify-promos"
-                      >App Promotions</label
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="card settings-card h-100">
-                <div class="card-header">Account</div>
-                <div class="card-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="email" class="form-label"
-                        >Email Address</label
-                      >
-                      <input
-                        type="email"
-                        class="form-control"
-                        id="email"
-                        value="roel.saavedra@example.com"
-                      />
-                    </div>
-                    <div class="mb-3">
-                      <label for="currentPassword" class="form-label"
-                        >Current Password</label
-                      >
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="currentPassword"
-                      />
-                    </div>
-                    <div class="mb-3">
-                      <label for="newPassword" class="form-label"
-                        >New Password</label
-                      >
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="newPassword"
-                      />
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="card settings-card h-100">
-                <div class="card-header">General</div>
-                <div class="card-body">
-                  <div class="mb-3">
-                    <label class="form-label">Theme</label>
-                    <div class="theme-selector">
-                      <div class="theme-option active" data-theme="light">
-                        <i class="bi bi-sun-fill"></i> Light
-                      </div>
-                      <div class="theme-option" data-theme="dark">
-                        <i class="bi bi-moon-stars-fill"></i> Dark
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <div
-                    class="d-flex justify-content-between align-items-center"
-                  >
-                    <div>
-                      <h6 class="mb-0">Clear App Cache</h6>
-                      <small class="text-muted"
-                        >Frees up space and fixes minor glitches.</small
-                      >
-                    </div>
+          <div class="card settings-card">
+            <div class="row g-0">
+              <div class="col-md-4 col-lg-3">
+                <div class="settings-nav">
+                  <div class="nav flex-column nav-pills" role="tablist">
                     <button
-                      class="btn btn-sm btn-outline-secondary"
-                      id="clear-cache-btn"
+                      class="nav-link active"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-account"
+                      type="button"
+                      role="tab"
                     >
-                      <span id="clear-cache-text">Clear Now</span>
-                      <span id="cache-cleared-text" style="display: none"
-                        ><i class="bi bi-check-circle-fill"></i> Cleared!</span
-                      >
+                      <i class="bi bi-person-circle"></i> Account
+                    </button>
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-discovery"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-compass"></i> Discovery
+                    </button>
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-notifications"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-bell"></i> Notifications
+                    </button>
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-appearance"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-display"></i> Appearance
+                    </button>
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-privacy"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-shield-check"></i> Privacy
+                    </button>
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-support"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-question-circle"></i> Support
+                    </button>
+                    <button
+                      class="nav-link text-danger"
+                      data-bs-toggle="pill"
+                      data-bs-target="#v-pills-danger"
+                      type="button"
+                      role="tab"
+                    >
+                      <i class="bi bi-exclamation-octagon"></i> Danger Zone
                     </button>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col-12">
-              <div class="card settings-card border-danger">
-                <div class="card-header bg-danger text-white">Danger Zone</div>
-                <div
-                  class="card-body d-md-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <h6 class="mb-1">Delete this account</h6>
-                    <p class="text-muted small mb-md-0">
-                      Once you delete your account, there is no going back.
-                      Please be certain.
-                    </p>
+              <div class="col-md-8 col-lg-9">
+                <div class="settings-content">
+                  <div class="tab-content">
+                    <div
+                      class="tab-pane fade show active"
+                      id="v-pills-account"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title">Account Information</h4>
+                      <p class="text-muted">
+                        Update your account details and password.
+                      </p>
+                      <div class="mb-3">
+                        <label for="email" class="form-label"
+                          >Email Address</label
+                        >
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          value="roel.saavedra@example.com"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="currentPassword" class="form-label"
+                          >Current Password</label
+                        >
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="currentPassword"
+                          placeholder="Enter current password"
+                        />
+                      </div>
+                      <div>
+                        <label for="newPassword" class="form-label"
+                          >New Password</label
+                        >
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="newPassword"
+                          placeholder="Enter new password"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-discovery"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title">Discovery Settings</h4>
+                      <p class="text-muted">
+                        Control who you see and who sees you.
+                      </p>
+                      <div class="mb-4">
+                        <label
+                          for="distanceRange"
+                          class="form-label d-flex justify-content-between"
+                        >
+                          <span>Maximum Distance</span>
+                          <span id="distance-value">50 km</span>
+                        </label>
+                        <input
+                          type="range"
+                          class="form-range"
+                          id="distanceRange"
+                          min="1"
+                          max="100"
+                          value="50"
+                        />
+                      </div>
+                      <div class="mb-4">
+                        <label
+                          for="ageRange"
+                          class="form-label d-flex justify-content-between"
+                        >
+                          <span>Age Range</span>
+                          <span id="age-value">1 - 8 years</span>
+                        </label>
+                        <input
+                          type="range"
+                          class="form-range"
+                          id="ageRange"
+                          min="1"
+                          max="15"
+                          value="8"
+                        />
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id="show-on-tindog"
+                          checked
+                        />
+                        <label class="form-check-label" for="show-on-tindog"
+                          >Show my profile on TinDog</label
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-notifications"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title">Notification Settings</h4>
+                      <p class="text-muted">
+                        Choose how you want to be notified.
+                      </p>
+                      <h6 class="card-subtitle my-3 text-muted">By Type</h6>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="notify-matches"
+                          checked
+                        />
+                        <label class="form-check-label" for="notify-matches"
+                          >New Matches</label
+                        >
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="notify-messages"
+                          checked
+                        />
+                        <label class="form-check-label" for="notify-messages"
+                          >New Messages</label
+                        >
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="notify-likes"
+                        />
+                        <label class="form-check-label" for="notify-likes"
+                          >Profile Likes</label
+                        >
+                      </div>
+                      <hr />
+                      <h6 class="card-subtitle my-3 text-muted">By Channel</h6>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="notify-push"
+                          checked
+                        />
+                        <label class="form-check-label" for="notify-push"
+                          >Push Notifications</label
+                        >
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="notify-email"
+                        />
+                        <label class="form-check-label" for="notify-email"
+                          >Email Notifications</label
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-appearance"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title">Appearance</h4>
+                      <p class="text-muted">
+                        Customize the look and feel of the app.
+                      </p>
+                      <label class="form-label">Theme</label>
+                      <div class="theme-selector mb-4">
+                        <div class="theme-option active" data-theme="light">
+                          <i class="bi bi-sun-fill"></i> Light
+                        </div>
+                        <div class="theme-option" data-theme="dark">
+                          <i class="bi bi-moon-stars-fill"></i> Dark
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="form-check form-switch mt-4">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="reduce-motion"
+                        />
+                        <label class="form-check-label" for="reduce-motion"
+                          >Reduce Motion</label
+                        >
+                        <p class="small text-muted mb-0">
+                          Reduces animations and motion effects in the app.
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-privacy"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title">Privacy & Safety</h4>
+                      <p class="text-muted">
+                        Manage your data and blocked users.
+                      </p>
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-3"
+                      >
+                        <div>
+                          <h6 class="mb-0">Download Your Data</h6>
+                          <p class="small text-muted mb-0">
+                            Get a copy of your account information.
+                          </p>
+                        </div>
+                        <button class="btn btn-sm btn-tindog-outline">
+                          Request Data
+                        </button>
+                      </div>
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <h6 class="mb-0">Manage Blocked Users</h6>
+                          <p class="small text-muted mb-0">
+                            View and edit your blocked users list.
+                          </p>
+                        </div>
+                        <a
+                          href="./app-privacy.html"
+                          class="btn btn-sm btn-tindog-outline"
+                          >Manage</a
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-support"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title">Support</h4>
+                      <p class="text-muted">
+                        Find help and review our policies.
+                      </p>
+                      <div class="list-group">
+                        <a
+                          href="./page-faq.html"
+                          class="list-group-item list-group-item-action"
+                          >Help Center & FAQ</a
+                        >
+                        <a
+                          href="./page-contact.html"
+                          class="list-group-item list-group-item-action"
+                          >Contact Us</a
+                        >
+                        <a
+                          href="./page-terms.html"
+                          class="list-group-item list-group-item-action"
+                          >Terms of Service</a
+                        >
+                        <a
+                          href="./page-privacy.html"
+                          class="list-group-item list-group-item-action"
+                          >Privacy Policy</a
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade"
+                      id="v-pills-danger"
+                      role="tabpanel"
+                    >
+                      <h4 class="settings-pane-title text-danger">
+                        Danger Zone
+                      </h4>
+                      <p class="text-muted">
+                        These actions are permanent and cannot be undone.
+                      </p>
+                      <div
+                        class="d-flex justify-content-between align-items-center border rounded p-3"
+                      >
+                        <div>
+                          <h6 class="mb-1">Delete this account</h6>
+                          <p class="text-muted small mb-0">
+                            Once you delete your account, there is no going
+                            back.
+                          </p>
+                        </div>
+                        <button class="btn btn-danger mt-2 mt-md-0">
+                          Delete Account
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <button class="btn btn-danger mt-2 mt-md-0">
-                    Delete My Account
-                  </button>
                 </div>
               </div>
             </div>
