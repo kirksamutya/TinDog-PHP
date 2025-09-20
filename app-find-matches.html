@@ -50,6 +50,12 @@
                 <div class="card-info-overlay">
                   <h5 class="card-title">Bruce, 3</h5>
                   <p class="card-text">A tough guy with a heart of gold.</p>
+                  <button
+                    class="btn btn-sm btn-light info-button"
+                    data-dog="Bruce"
+                  >
+                    <i class="bi bi-info-circle"></i>
+                  </button>
                 </div>
               </div>
               <div class="match-card">
@@ -63,6 +69,12 @@
                 <div class="card-info-overlay">
                   <h5 class="card-title">Pebbles, 4</h5>
                   <p class="card-text">Loves fetch and swimming.</p>
+                  <button
+                    class="btn btn-sm btn-light info-button"
+                    data-dog="Pebbles"
+                  >
+                    <i class="bi bi-info-circle"></i>
+                  </button>
                 </div>
               </div>
               <div class="match-card">
@@ -76,6 +88,12 @@
                 <div class="card-info-overlay">
                   <h5 class="card-title">Dumbledoor, 17</h5>
                   <p class="card-text">A gentle giant who loves naps.</p>
+                  <button
+                    class="btn btn-sm btn-light info-button"
+                    data-dog="Dumbledoor"
+                  >
+                    <i class="bi bi-info-circle"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -91,8 +109,41 @@
         </main>
       </div>
     </div>
+
+    <div class="modal fade" id="profileDetailModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="profileModalLabel">Profile Details</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <img
+              src=""
+              id="modal-main-image"
+              class="img-fluid rounded mb-3"
+              alt="Dog profile image"
+            />
+            <div
+              class="profile-meta-info justify-content-start mb-3"
+              id="modal-meta-info"
+            ></div>
+            <h6>About</h6>
+            <p class="text-muted" id="modal-bio"></p>
+            <h6>Personality</h6>
+            <div id="modal-tags"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
     <script src="./assets/js/app-swipe-logic.js"></script>
+    <script src="./assets/js/app-profile-modal.js"></script>
   </body>
 </html>

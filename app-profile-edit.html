@@ -33,44 +33,49 @@
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-          <div class="page-header">
-            <h1 class="h2">Edit Profile</h1>
-          </div>
           <form id="edit-profile-form" novalidate>
-            <div class="card edit-profile-card">
-              <div class="card-header">
-                <ul
-                  class="nav nav-tabs card-header-tabs"
-                  id="edit-profile-tabs"
+            <div
+              class="page-header d-flex justify-content-between align-items-center"
+            >
+              <h1 class="h2">Edit Profile</h1>
+              <div>
+                <a href="./app-profile.html" class="btn btn-secondary"
+                  >Cancel</a
                 >
-                  <li class="nav-item">
-                    <a
-                      class="nav-link active"
-                      data-bs-toggle="tab"
-                      href="#dog-info"
-                      >Dog's Information</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#owner-info"
-                      >Owner's Information</a
-                    >
-                  </li>
-                </ul>
+                <button type="submit" class="btn btn-tindog-primary">
+                  Save Changes
+                </button>
               </div>
-              <div class="card-body p-4">
-                <div class="tab-content">
-                  <div class="tab-pane fade show active" id="dog-info">
+            </div>
+
+            <ul class="nav nav-tabs mb-4">
+              <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#dog-info"
+                  >Dog's Information</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#owner-info"
+                  >Owner's Information</a
+                >
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="dog-info">
+                <div class="card settings-card">
+                  <div class="card-body p-4">
                     <div class="row">
-                      <div class="col-lg-4">
+                      <div class="col-lg-4 text-center">
+                        <h5 class="form-section-title">Profile Picture</h5>
                         <label
                           for="dogPhoto"
-                          class="photo-upload-container text-center"
+                          class="photo-upload-container mt-3"
                         >
                           <img
                             src="./assets/images/jorjee-one.jpg"
                             alt="Dog's Avatar"
-                            class="photo-upload-preview mb-3"
+                            class="photo-upload-preview mb-2"
                             id="dog-photo-preview"
                           />
                           <div class="photo-upload-prompt">
@@ -85,8 +90,8 @@
                           />
                         </label>
                       </div>
-
                       <div class="col-lg-8">
+                        <h5 class="form-section-title">Basic Info</h5>
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label for="dogName" class="form-label"
@@ -133,6 +138,8 @@
                             </select>
                           </div>
                         </div>
+                        <hr class="my-4" />
+                        <h5 class="form-section-title">Location & Bio</h5>
                         <div class="mb-3">
                           <label for="dogLocation" class="form-label"
                             >Location</label
@@ -145,7 +152,7 @@
                             required
                           />
                         </div>
-                        <div class="mb-3">
+                        <div>
                           <label for="dogBio" class="form-label">Bio</label>
                           <textarea class="form-control" id="dogBio" rows="3">
 Energetic and playful, loves chasing balls and long walks. Looking for a companion to explore with!</textarea
@@ -154,74 +161,73 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                       </div>
                     </div>
                     <hr class="my-4" />
-                    <div class="mb-4">
-                      <label class="form-label"
-                        >Personality Tags
-                        <small class="text-muted"
-                          >(Select up to 4)</small
-                        ></label
+                    <h5 class="form-section-title">Personality</h5>
+                    <p class="text-muted">
+                      Select up to 4 tags that best describe your dog.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2 tag-selector mt-2">
+                      <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="tag-playful"
+                        autocomplete="off"
+                        checked
+                      />
+                      <label class="profile-tag" for="tag-playful"
+                        >Playful</label
                       >
-                      <div class="d-flex flex-wrap gap-2">
-                        <input
-                          type="checkbox"
-                          class="btn-check"
-                          id="tag-playful"
-                          autocomplete="off"
-                          checked
-                        /><label class="btn btn-outline-dark" for="tag-playful"
-                          >Playful</label
-                        >
-                        <input
-                          type="checkbox"
-                          class="btn-check"
-                          id="tag-cuddly"
-                          autocomplete="off"
-                          checked
-                        /><label class="btn btn-outline-dark" for="tag-cuddly"
-                          >Cuddly</label
-                        >
-                        <input
-                          type="checkbox"
-                          class="btn-check"
-                          id="tag-loyal"
-                          autocomplete="off"
-                        /><label class="btn btn-outline-dark" for="tag-loyal"
-                          >Loyal</label
-                        >
-                        <input
-                          type="checkbox"
-                          class="btn-check"
-                          id="tag-energetic"
-                          autocomplete="off"
-                        /><label
-                          class="btn btn-outline-dark"
-                          for="tag-energetic"
-                          >Energetic</label
-                        >
-                        <input
-                          type="checkbox"
-                          class="btn-check"
-                          id="tag-friendly"
-                          autocomplete="off"
-                          checked
-                        /><label class="btn btn-outline-dark" for="tag-friendly"
-                          >Friendly</label
-                        >
-                      </div>
+                      <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="tag-cuddly"
+                        autocomplete="off"
+                        checked
+                      />
+                      <label class="profile-tag" for="tag-cuddly">Cuddly</label>
+                      <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="tag-loyal"
+                        autocomplete="off"
+                      />
+                      <label class="profile-tag" for="tag-loyal">Loyal</label>
+                      <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="tag-energetic"
+                        autocomplete="off"
+                      />
+                      <label class="profile-tag" for="tag-energetic"
+                        >Energetic</label
+                      >
+                      <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="tag-friendly"
+                        autocomplete="off"
+                        checked
+                      />
+                      <label class="profile-tag" for="tag-friendly"
+                        >Friendly</label
+                      >
                     </div>
                   </div>
-
-                  <div class="tab-pane fade" id="owner-info">
+                </div>
+              </div>
+              <div class="tab-pane fade" id="owner-info">
+                <div class="card settings-card">
+                  <div class="card-body p-4">
                     <div class="row">
-                      <div class="col-lg-4">
+                      <div class="col-lg-4 text-center">
+                        <h5 class="form-section-title">Your Photo</h5>
                         <label
                           for="ownerPhoto"
-                          class="photo-upload-container text-center"
+                          class="photo-upload-container mt-3"
                         >
                           <img
                             src="./assets/images/anthony.jpg"
                             alt="Owner's Avatar"
-                            class="photo-upload-preview mb-3"
+                            class="photo-upload-preview mb-2"
                             id="owner-photo-preview"
                           />
                           <div class="photo-upload-prompt">
@@ -237,6 +243,7 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                         </label>
                       </div>
                       <div class="col-lg-8">
+                        <h5 class="form-section-title">Your Details</h5>
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <label for="ownerFirstName" class="form-label"
@@ -263,10 +270,10 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                             />
                           </div>
                         </div>
-                        <div class="mb-3">
-                          <label for="ownerBio" class="form-label"
-                            >About Me</label
-                          >
+                        <hr class="my-4" />
+                        <h5 class="form-section-title">About You</h5>
+                        <div>
+                          <label for="ownerBio" class="form-label">Bio</label>
                           <textarea class="form-control" id="ownerBio" rows="3">
 Guides our technical direction and translates creative concepts into functional, polished applications.</textarea
                           >
@@ -275,14 +282,6 @@ Guides our technical direction and translates creative concepts into functional,
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-footer edit-profile-actions">
-                <a href="./app-profile.html" class="btn btn-secondary"
-                  >Cancel</a
-                >
-                <button type="submit" class="btn btn-tindog-primary">
-                  Save Changes
-                </button>
               </div>
             </div>
           </form>
