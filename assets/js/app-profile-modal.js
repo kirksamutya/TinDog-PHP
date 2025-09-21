@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
       images: ["./assets/images/dog-img.jpg"],
     },
     Dumbledoor: {
-      name: "Dumbledoor, 17",
+      name: "Rocky, 4",
       meta: `<div class="meta-item"><i class="bi bi-person-badge"></i><span>Shih Tzu</span></div><div class="meta-item"><i class="bi bi-geo-alt"></i><span>Lapu-Lapu City, PH</span></div>`,
       bio: "A gentle giant who loves long naps and considers himself a wizard. He enjoys quiet afternoons and thoughtful conversation.",
       tags: ["Wise", "Calm", "Cuddly", "Magical"],
-      images: ["./assets/images/frances.jpg"],
+      images: ["https://placedog.net/400/400?id=45"],
     },
   };
 
