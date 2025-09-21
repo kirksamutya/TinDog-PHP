@@ -592,17 +592,19 @@ body {
 .page-messages.main-content {
   display: flex;
   flex-direction: column;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
+  height: calc(100vh - 57px); /* Full viewport height minus header */
 }
 
 .chat-container-wrapper {
   flex-grow: 1;
   min-height: 0;
   display: flex;
-  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: var(--border-radius-medium);
+  border: 1px solid var(--border-color);
+  margin: 1.5rem;
+  overflow: hidden;
 }
 
 .conversation-list {
@@ -612,8 +614,6 @@ body {
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  border-radius: var(--border-radius-medium) 0 0 var(--border-radius-medium);
 }
 
 .conv-list-header {
@@ -689,15 +689,9 @@ body {
 }
 
 .chat-window {
-  display: none;
+  display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: #fff;
-  border-radius: 0 var(--border-radius-medium) var(--border-radius-medium) 0;
-}
-
-.chat-window.active {
-  display: flex;
 }
 
 .chat-header {
@@ -716,14 +710,6 @@ body {
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-}
-
-.online-indicator {
-  width: 10px;
-  height: 10px;
-  background-color: #28a745;
-  border-radius: 50%;
-  border: 2px solid #fff;
 }
 
 .chat-body {
@@ -820,8 +806,36 @@ body {
   flex-shrink: 0;
 }
 
-@media (min-width: 768px) {
-  .chat-window {
+@media (max-width: 767.98px) {
+  .page-messages.main-content {
+    height: auto;
+  }
+  .page-messages .chat-container-wrapper {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+  .page-messages .conversation-list {
+    width: 100%;
+    max-width: none;
+    border-right: none;
+  }
+  .page-messages .chat-window {
+    display: none;
+    position: absolute;
+    top: 57px; /* Header height */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100vh - 57px);
+    width: 100%;
+    z-index: 102;
+    background-color: #fff;
+  }
+  .page-messages .chat-container-wrapper.chat-active .conversation-list {
+    display: none;
+  }
+  .page-messages .chat-container-wrapper.chat-active .chat-window {
     display: flex;
   }
 }
