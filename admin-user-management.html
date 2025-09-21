@@ -29,30 +29,38 @@
       <div class="row">
         <div
           data-component="./admin-sidebar.html"
-          class="col-md-3 col-lg-2"
+          class="col-md-3 col-lg-2 d-none d-md-block p-0"
         ></div>
-        <main
-          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content position-relative overflow-hidden"
-        >
-          <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-          >
+        <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+          <div class="page-header gradient-background">
             <h1 class="h2">User Management</h1>
-            <button class="btn btn-sm btn-tindog-primary">
-              <i class="bi bi-plus-circle me-2"></i>Add New User
-            </button>
+            <p class="mb-0">
+              Create, view, or manage user and administrator accounts.
+            </p>
           </div>
-          <div class="card shadow-sm">
+
+          <div class="card kpi-card">
+            <div
+              class="card-header bg-white d-flex justify-content-between align-items-center"
+            >
+              <h5 class="mb-0">All Users</h5>
+              <a
+                href="./admin-user-create.html"
+                class="btn btn-sm btn-tindog-primary"
+              >
+                <i class="bi bi-plus-circle me-1"></i> Add New User
+              </a>
+            </div>
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-hover align-middle">
-                  <thead class="table-dark">
+                  <thead>
                     <tr>
-                      <th scope="col" class="ps-3">User</th>
+                      <th scope="col">User</th>
                       <th scope="col">Email</th>
                       <th scope="col">Subscription</th>
                       <th scope="col">Status</th>
-                      <th scope="col" class="text-end pe-3">Actions</th>
+                      <th scope="col" class="text-end">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -68,7 +76,7 @@
                       </td>
                       <td>eugene.stepnov@example.com</td>
                       <td>
-                        <span class="badge text-bg-secondary">Mastiff</span>
+                        <span class="badge text-bg-dark">Mastiff</span>
                       </td>
                       <td><span class="badge text-bg-success">Active</span></td>
                       <td class="text-end">

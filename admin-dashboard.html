@@ -29,63 +29,120 @@
       <div class="row">
         <div
           data-component="./admin-sidebar.html"
-          class="col-md-3 col-lg-2"
+          class="col-md-3 col-lg-2 d-none d-md-block p-0"
         ></div>
-        <main
-          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content position-relative overflow-hidden"
-        >
-          <div class="dashboard-welcome-header gradient-background">
-            <h2>Welcome Back, Admin!</h2>
-            <p class="lead mb-0">Here’s the latest system overview.</p>
+        <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+          <div class="page-header gradient-background">
+            <h1 class="h2">Dashboard</h1>
+            <p class="mb-0">Welcome back, here is your performance overview.</p>
           </div>
+
           <div class="row g-4 mb-4">
-            <div class="col-md-6 col-lg-3">
-              <div class="kpi-card matches h-100">
-                <div class="kpi-icon icon-matches">
-                  <i class="bi bi-people-fill"></i>
-                </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">Total Users</h6>
-                  <div class="kpi-value">1,248</div>
-                  <div class="kpi-caption">+32 this week</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="kpi-card messages h-100">
-                <div class="kpi-icon icon-messages">
-                  <i class="bi bi-flag-fill text-danger"></i>
-                </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">Reports</h6>
-                  <div class="kpi-value">5</div>
-                  <div class="kpi-caption">pending review</div>
+            <div class="col-xl-3 col-md-6">
+              <div class="kpi-card">
+                <div class="d-flex align-items-center">
+                  <div class="kpi-icon icon-bg-primary me-3">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                  <div>
+                    <h5 class="card-title">Total Users</h5>
+                    <div class="d-flex align-items-baseline">
+                      <h4 class="kpi-value mb-0">1,248</h4>
+                      <span class="kpi-trend text-success ms-2">+3.2%</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="kpi-card views h-100">
-                <div class="kpi-icon icon-views">
-                  <i class="bi bi-bar-chart-fill"></i>
-                </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">Revenue</h6>
-                  <div class="kpi-value">$4,230</div>
-                  <div class="kpi-caption">this month</div>
+            <div class="col-xl-3 col-md-6">
+              <div class="kpi-card">
+                <div class="d-flex align-items-center">
+                  <div class="kpi-icon icon-bg-secondary me-3">
+                    <i class="bi bi-cash-stack"></i>
+                  </div>
+                  <div>
+                    <h5 class="card-title">Monthly Revenue</h5>
+                    <div class="d-flex align-items-baseline">
+                      <h4 class="kpi-value mb-0">₱24,500</h4>
+                      <span class="kpi-trend text-success ms-2">+8.1%</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="kpi-card plan h-100">
-                <div class="kpi-icon icon-plan">
-                  <i class="bi bi-shield-lock-fill"></i>
+            <div class="col-xl-3 col-md-6">
+              <div class="kpi-card">
+                <div class="d-flex align-items-center">
+                  <div class="kpi-icon icon-bg-accent me-3">
+                    <i class="bi bi-flag-fill"></i>
+                  </div>
+                  <div>
+                    <h5 class="card-title">Open Reports</h5>
+                    <div class="d-flex align-items-baseline">
+                      <h4 class="kpi-value mb-0">5</h4>
+                      <span class="kpi-trend text-muted ms-2">_</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="kpi-content">
-                  <h6 class="kpi-title">System Status</h6>
-                  <div class="kpi-value text-success">Online</div>
-                  <a href="./admin-system-settings.html" class="kpi-link"
-                    >Manage →</a
-                  >
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="kpi-card">
+                <div class="d-flex align-items-center">
+                  <div class="kpi-icon icon-bg-success me-3">
+                    <i class="bi bi-shield-check"></i>
+                  </div>
+                  <div>
+                    <h5 class="card-title">System Status</h5>
+                    <div class="d-flex align-items-baseline">
+                      <h4 class="kpi-value text-success mb-0">Online</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="chart-container h-100">
+                <h5 class="mb-3">User Growth</h5>
+                <p class="text-muted text-center py-5">
+                  Chart Area Placeholder
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="activity-feed h-100">
+                <h5 class="mb-3">Recent Activity</h5>
+                <div class="activity-item d-flex">
+                  <div class="activity-icon icon-bg-primary">
+                    <i class="bi bi-person-plus-fill"></i>
+                  </div>
+                  <div>
+                    <strong>New User:</strong> Maria S. registered.
+                    <div class="text-muted small">15 minutes ago</div>
+                  </div>
+                </div>
+                <div class="activity-item d-flex">
+                  <div class="activity-icon icon-bg-accent">
+                    <i class="bi bi-flag-fill"></i>
+                  </div>
+                  <div>
+                    <strong>New Report:</strong> Profile "Rocky123" was
+                    reported.
+                    <div class="text-muted small">1 hour ago</div>
+                  </div>
+                </div>
+                <div class="activity-item d-flex">
+                  <div class="activity-icon icon-bg-secondary">
+                    <i class="bi bi-gem"></i>
+                  </div>
+                  <div>
+                    <strong>New Subscriber:</strong> John D. upgraded to
+                    Mastiff.
+                    <div class="text-muted small">3 hours ago</div>
+                  </div>
                 </div>
               </div>
             </div>

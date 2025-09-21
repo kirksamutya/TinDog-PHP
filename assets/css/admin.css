@@ -1,27 +1,27 @@
 /*
-* TinDog Admin Panel Styles
+* TinDog Admin Panel Styles (v4 - Final Branded Theme)
 * ---------------------------
-* Contains all styles for the admin-facing pages.
+* A vibrant, branded theme that matches the public-facing site.
 */
 
 :root {
   --brand-primary: #ff4c68;
   --brand-secondary: #00bfff;
   --brand-accent: #ef8172;
+  --admin-bg: #f8f9fa;
+  --admin-card-bg: #ffffff;
   --text-dark: #343a40;
-  --text-light: #ffffff;
-  --background-light: #f8f9fa;
+  --text-muted: #6c757d;
   --border-color: #dee2e6;
   --font-primary: "Poppins", sans-serif;
-  --border-radius-medium: 15px;
-  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
-  --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --border-radius: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.07);
 }
 
 body {
   font-family: var(--font-primary);
   font-size: 0.875rem;
-  background-color: var(--background-light);
+  background-color: var(--admin-bg);
 }
 
 h1,
@@ -37,17 +37,13 @@ h6 {
 .btn-tindog-primary {
   background-color: var(--brand-primary);
   border-color: var(--brand-primary);
-  color: var(--text-light);
-  transition: all 0.3s ease;
+  color: #fff;
 }
 
 .btn-tindog-primary:hover {
-  background-color: var(--brand-primary);
-  border-color: var(--brand-primary);
-  color: var(--text-light);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(255, 76, 104, 0.3);
-  opacity: 0.9;
+  background-color: #e0425a;
+  border-color: #e0425a;
+  color: #fff;
 }
 
 .gradient-background {
@@ -73,116 +69,121 @@ h6 {
   }
 }
 
-/* Core Admin Layout */
+/* Layout */
 .dashboard-header {
-  z-index: 101;
+  background-color: var(--admin-card-bg);
+  border-bottom: 3px solid var(--brand-primary);
 }
 
 .dashboard-header .navbar-brand {
   color: var(--brand-primary);
   font-weight: 700;
-  font-size: 1.5rem;
-  padding: 0;
 }
 
 .main-content {
-  padding-top: 1.5rem;
-  padding-bottom: 3rem;
+  padding: 1.5rem;
 }
 
+/* Sidebar */
 .sidebar-nav {
-  background-color: #fff;
-  border-right: 1px solid var(--border-color);
+  background-color: var(--admin-card-bg);
   height: 100vh;
   position: sticky;
   top: 0;
+  border-right: 1px solid var(--border-color);
 }
 
 .sidebar-nav .nav-link {
   font-weight: 500;
-  color: #555;
+  color: var(--text-muted);
   border-radius: 8px;
-  margin: 0.15rem 0.5rem;
+  margin: 0.15rem 0.75rem;
+  padding: 0.6rem 1rem;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.sidebar-nav .nav-link .bi {
+  margin-right: 0.75rem;
+  font-size: 1rem;
+}
+
 .sidebar-nav .nav-link:hover {
-  background-color: #e9ecef;
+  background-color: #f8f9fa;
   color: var(--brand-primary);
 }
 
 .sidebar-nav .nav-link.active {
-  background-color: var(--brand-primary);
-  color: var(--text-light);
+  color: #fff;
   font-weight: 700;
+  background: linear-gradient(90deg, var(--brand-accent), var(--brand-primary));
 }
 
-/* Admin Components */
-.dashboard-welcome-header {
-  padding: 2rem;
-  border-radius: var(--border-radius-medium);
-  margin-bottom: 2rem;
-  color: var(--text-light);
+/* Components */
+.page-header {
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1,
+.page-header p {
+  color: #fff;
 }
 
 .kpi-card {
-  background-color: #fff;
-  border-radius: var(--border-radius-medium);
+  background-color: var(--admin-card-bg);
+  border-radius: var(--border-radius);
   padding: 1.5rem;
-  display: flex;
-  align-items: center;
   border: 1px solid var(--border-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--box-shadow-light);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .kpi-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--box-shadow-light);
+  border-color: var(--brand-primary);
 }
 
-.kpi-icon {
+.kpi-card .card-title {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.kpi-card .kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kpi-card .kpi-trend {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.kpi-card .kpi-icon {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  border-radius: 50%;
   font-size: 1.5rem;
-  margin-right: 1rem;
-  flex-shrink: 0;
+  color: #fff;
 }
 
-.kpi-icon.icon-matches {
-  background-color: #ffc107;
+.icon-bg-primary {
+  background-color: var(--brand-primary);
 }
-.kpi-icon.icon-messages {
-  background-color: #dc3545;
+.icon-bg-secondary {
+  background-color: var(--brand-secondary);
 }
-.kpi-icon.icon-views {
+.icon-bg-accent {
+  background-color: var(--brand-accent);
+}
+.icon-bg-success {
   background-color: #198754;
-}
-.kpi-icon.icon-plan {
-  background-color: #6f42c1;
-}
-
-.kpi-content .kpi-title {
-  font-size: 0.875rem;
-  color: #6c757d;
-  margin-bottom: 0.25rem;
-}
-
-.kpi-content .kpi-value {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.kpi-content .kpi-caption,
-.kpi-link {
-  font-size: 0.75rem;
-  color: #6c757d;
-  text-decoration: none;
 }
 
 .user-avatar-initials {
@@ -195,4 +196,15 @@ h6 {
   align-items: center;
   justify-content: center;
   font-weight: 700;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary) !important;
+}
+.nav-tabs .nav-link {
+  color: var(--text-muted);
+}
+.nav-tabs .nav-link:hover {
+  border-color: var(--border-color);
 }
