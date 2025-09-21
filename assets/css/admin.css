@@ -1,0 +1,198 @@
+/*
+* TinDog Admin Panel Styles
+* ---------------------------
+* Contains all styles for the admin-facing pages.
+*/
+
+:root {
+  --brand-primary: #ff4c68;
+  --brand-secondary: #00bfff;
+  --brand-accent: #ef8172;
+  --text-dark: #343a40;
+  --text-light: #ffffff;
+  --background-light: #f8f9fa;
+  --border-color: #dee2e6;
+  --font-primary: "Poppins", sans-serif;
+  --border-radius-medium: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  background-color: var(--background-light);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+.btn-tindog-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.btn-tindog-primary:hover {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 76, 104, 0.3);
+  opacity: 0.9;
+}
+
+.gradient-background {
+  background: linear-gradient(
+    300deg,
+    var(--brand-secondary),
+    var(--brand-primary),
+    var(--brand-accent)
+  );
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Core Admin Layout */
+.dashboard-header {
+  z-index: 101;
+}
+
+.dashboard-header .navbar-brand {
+  color: var(--brand-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 0;
+}
+
+.main-content {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.sidebar-nav {
+  background-color: #fff;
+  border-right: 1px solid var(--border-color);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-nav .nav-link {
+  font-weight: 500;
+  color: #555;
+  border-radius: 8px;
+  margin: 0.15rem 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: #e9ecef;
+  color: var(--brand-primary);
+}
+
+.sidebar-nav .nav-link.active {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+  font-weight: 700;
+}
+
+/* Admin Components */
+.dashboard-welcome-header {
+  padding: 2rem;
+  border-radius: var(--border-radius-medium);
+  margin-bottom: 2rem;
+  color: var(--text-light);
+}
+
+.kpi-card {
+  background-color: #fff;
+  border-radius: var(--border-radius-medium);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-light);
+}
+
+.kpi-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.kpi-icon.icon-matches {
+  background-color: #ffc107;
+}
+.kpi-icon.icon-messages {
+  background-color: #dc3545;
+}
+.kpi-icon.icon-views {
+  background-color: #198754;
+}
+.kpi-icon.icon-plan {
+  background-color: #6f42c1;
+}
+
+.kpi-content .kpi-title {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.kpi-content .kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.kpi-content .kpi-caption,
+.kpi-link {
+  font-size: 0.75rem;
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.user-avatar-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}

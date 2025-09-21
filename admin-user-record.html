@@ -17,17 +17,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/admin.css" />
   </head>
-  <body class="bg-light app-body">
-    <div data-component="./app-header.html"></div>
+  <body class="bg-light">
+    <div data-component="./admin-header.html"></div>
     <div class="container-fluid">
       <div class="row">
-        <nav
-          data-component="./sidebar-nav-content.html"
-          id="sidebar-nav-container"
-          class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
-        ></nav>
+        <div
+          data-component="./admin-sidebar.html"
+          class="col-md-3 col-lg-2"
+        ></div>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
@@ -36,7 +35,7 @@
           </div>
           <div class="card shadow-sm">
             <div class="card-header bg-white border-0">
-              <ul class="nav nav-tabs profile-tabs card-header-tabs">
+              <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
                   <a
                     class="nav-link active"
@@ -100,7 +99,7 @@
                   <h5 class="fw-bold mb-3">Billing Information</h5>
                   <dl class="row">
                     <dt class="col-sm-3">Plan</dt>
-                    <dd class="col-sm-9">Mastiff (₱299/mo)</dd>
+                    <dd class="col-sm-9">Mastiff (₱99/mo)</dd>
                     <dt class="col-sm-3">Next Payment</dt>
                     <dd class="col-sm-9">Oct 12, 2025</dd>
                     <dt class="col-sm-3">Payment Method</dt>

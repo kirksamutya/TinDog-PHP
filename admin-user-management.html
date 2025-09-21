@@ -21,18 +21,19 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/admin.css" />
   </head>
-  <body class="bg-light app-body">
-    <div data-component="./app-header.html"></div>
+  <body>
+    <div data-component="./admin-header.html"></div>
     <div class="container-fluid">
       <div class="row">
-        <nav
-          data-component="./sidebar-nav-content.html"
-          id="sidebar-nav-container"
-          class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
-        ></nav>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <div
+          data-component="./admin-sidebar.html"
+          class="col-md-3 col-lg-2"
+        ></div>
+        <main
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content position-relative overflow-hidden"
+        >
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
