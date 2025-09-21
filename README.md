@@ -1,36 +1,29 @@
-<img width="1903" height="903" alt="image" src="https://github.com/user-attachments/assets/cdc0a806-860e-4289-a27a-01e50ecb4680" /># TinDog: Tinder for Dogs
+# TinDog: Tinder for Dogs
 
 ## 📖 About The Project
 
 Lack of socialization is a known cause of behavioral issues in dogs, such as anxiety and aggression. This is a common problem for owners in urban areas and for dogs acquired during the pandemic. TinDog provides a fun, polished, and easy way for owners to find suitable playmates for their pets in a controlled environment.
 
-This project is a feature-rich, front-end application built with modern UI/UX principles. It includes a complete user authentication flow, a dynamic and interactive dashboard, and a fully functional swipe-based matching system.
+This project is a feature-rich, front-end application built with modern UI/UX principles. It includes a complete user authentication flow, a dynamic and interactive dashboard, a fully functional swipe-based matching system, and a comprehensive, branded admin panel for site management.
 
 **Live Demo:** [https://itsanthonysaavedra.github.io/TinDog-PHP/](https://itsanthonysaavedra.github.io/TinDog-PHP/)
 
 ### ✨ Key Features
 
-* **Interactive Swiping:** A fully implemented, touch-and-drag compatible swiping interface on the "Find Matches" page, complete with dynamic "Like" & "Nope" stamps for visual feedback.
-* **Dynamic Dashboard:** A completely overhauled dashboard featuring animated KPI cards, a live activity feed, and a dynamic "Tip of the Day" powered by JavaScript.
-* **Polished User Profiles:** A redesigned, modern profile page with interactive hover effects and a clean, scannable layout for key details.
-* **Enhanced App Pages:** Significant UI/UX improvements to the Notifications, Settings, My Matches, and Messages pages, including interactive filters, dynamic content, and a fully responsive mobile design.
-* **Component-Based Architecture:** The front-end is built with a modular approach, using a JavaScript component loader to dynamically build pages, keeping the code clean and maintainable.
-
-### 🖼️ Screenshots
-<img width="1904" height="813" alt="image" src="https://github.com/user-attachments/assets/986931f4-01d2-4c28-b454-c2432479b7e0" />
-<img width="1903" height="903" alt="image" src="https://github.com/user-attachments/assets/bdcba5ac-285f-476d-b778-a6c703ad4092" />
-<img width="1903" height="827" alt="image" src="https://github.com/user-attachments/assets/94c37b2e-21f8-48cd-8173-e60a4277cdaf" />
-
-
+- **Polished User Experience:** A consistent, vibrant, and responsive design language across all user-facing pages, including a dynamic dashboard, profiles, messaging, and a swipe-based matching interface.
+- **Comprehensive Admin Panel:** A secure, visually consistent admin dashboard for site management. Features include user management (view, create, edit), detailed user record pages, and a foundation for future analytics and reporting modules.
+- **Dynamic UI Elements:** The application is enhanced with JavaScript for a dynamic experience, including time-based greetings, a "Tip of the Day," interactive filters, and responsive mobile navigation.
+- **Component-Based Architecture:** The front-end is built with a modular approach, using a JavaScript component loader to dynamically build pages from reusable HTML parts (headers, sidebars), ensuring the code is clean, D.R.Y., and maintainable.
+- **Secure Authentication Flows:** Separate, secure login portals for both standard users and administrators, complete with password reset pages and a secure internal process for creating new admin accounts.
 
 ### 🛠️ Built With
 
 This project was built using the following technologies:
 
-* [Bootstrap](https://getbootstrap.com/)
-* [HTML5](https://en.wikipedia.org/wiki/HTML5)
-* [CSS3](https://en.wikipedia.org/wiki/CSS)
-* [JavaScript](https://www.javascript.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [HTML5](https://en.wikipedia.org/wiki/HTML5)
+- [CSS3](https://en.wikipedia.org/wiki/CSS)
+- [JavaScript](https://www.javascript.com/)
 
 ## 🚀 Getting Started
 
@@ -38,7 +31,8 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-* A modern web browser (e.g., Chrome, Firefox, Safari).
+- A modern web browser (e.g., Chrome, Firefox, Safari).
+- A local development server (like VS Code's Live Server) is recommended for the best experience.
 
 ### Installation
 
@@ -46,7 +40,7 @@ To get a local copy up and running, follow these simple steps.
     ```sh
     git clone [https://github.com/itsAnthonySaavedra/TinDog-PHP.git](https://github.com/itsAnthonySaavedra/TinDog-PHP.git)
     ```
-2.  Open `index.html` in your browser.
+2.  Open `index.html` in your browser or with your local server.
 
 ## 🤝 Contributing
 

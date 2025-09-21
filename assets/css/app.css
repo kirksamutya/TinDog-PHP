@@ -1166,17 +1166,14 @@ body {
   color: #fff;
 }
 
-.activity-match .icon-wrapper,
 .icon-wrapper.activity-match {
   background-color: var(--brand-primary);
 }
 
-.activity-message .icon-wrapper,
 .icon-wrapper.activity-message {
   background-color: var(--brand-secondary);
 }
 
-.activity-profile .icon-wrapper,
 .icon-wrapper.activity-profile {
   background-color: var(--brand-accent);
 }
