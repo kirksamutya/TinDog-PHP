@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const chatContainerWrapper = document.querySelector(
+    ".chat-container-wrapper"
+  );
+  if (!chatContainerWrapper) return;
+
   const conversationItems = document.querySelectorAll(".conversation-item");
   const chatWindow = document.querySelector(".chat-window");
   const chatHeaderName = document.getElementById("chat-header-name");
@@ -6,8 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageForm = document.getElementById("message-form");
   const messageInput = document.getElementById("message-input");
   const chatBody = document.querySelector(".chat-body");
-  const conversationPane = document.querySelector(".conversation-list");
   const backButton = document.querySelector(".back-button");
+  const searchInput = document.getElementById("conversation-search");
 
   const conversations = {
     bruce: {
@@ -73,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     chatHeaderName.textContent = conversation.name;
     chatHeaderAvatar.src = conversation.avatar;
-
     chatBody.innerHTML =
       conversation.messages.map(createMessageHTML).join("") +
       getTypingIndicatorHTML();
@@ -131,42 +135,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   };
 
-  const setupEventListeners = () => {
+  const handleSearch = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
     conversationItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        conversationItems.forEach((i) => i.classList.remove("active"));
-        item.classList.add("active");
-
-        loadConversation(item.dataset.dog);
-
-        if (window.innerWidth < 768) {
-          conversationPane.classList.remove("d-flex");
-          conversationPane.classList.add("d-none");
-          chatWindow.classList.remove("d-none");
-          chatWindow.classList.add("d-flex");
-        }
-      });
+      const name = item.querySelector(".conv-name").textContent.toLowerCase();
+      item.style.display = name.includes(searchTerm) ? "flex" : "none";
     });
-
-    if (backButton) {
-      backButton.addEventListener("click", () => {
-        if (window.innerWidth < 768) {
-          chatWindow.classList.remove("d-flex");
-          chatWindow.classList.add("d-none");
-          conversationPane.classList.remove("d-none");
-          conversationPane.classList.add("d-flex");
-          conversationItems.forEach((i) => i.classList.remove("active"));
-        }
-      });
-    }
-
-    if (messageForm) {
-      messageForm.addEventListener("submit", handleSendMessage);
-    }
   };
 
-  setupEventListeners();
+  conversationItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      conversationItems.forEach((i) => i.classList.remove("active"));
+      item.classList.add("active");
+      loadConversation(item.dataset.dog);
+      if (window.innerWidth < 768) {
+        chatContainerWrapper.classList.add("chat-active");
+      }
+    });
+  });
 
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      chatContainerWrapper.classList.remove("chat-active");
+      conversationItems.forEach((i) => i.classList.remove("active"));
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+      chatContainerWrapper.classList.remove("chat-active");
+    }
+  });
+
+  if (messageForm) {
+    messageForm.addEventListener("submit", handleSendMessage);
+  }
+  if (searchInput) {
+    searchInput.addEventListener("input", handleSearch);
+  }
+
+  // Load the first conversation on desktop by default
   if (window.innerWidth >= 768 && conversationItems.length > 0) {
     conversationItems[0].click();
   }

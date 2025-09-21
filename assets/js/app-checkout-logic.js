@@ -3,17 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     labrador: {
       name: "Labrador Plan",
       monthly: {
-        price: "₱149.00",
-        subtotal: "₱149.00",
-        tax: "₱17.88",
-        billed: "₱166.88",
+        price: "₱49.00",
+        billed: "₱49.00",
         cycleText: "/mo",
       },
       annual: {
-        price: "₱1,490.00",
-        subtotal: "₱1,490.00",
-        tax: "₱178.80",
-        billed: "₱1,668.80",
+        price: "₱490.00",
+        billed: "₱490.00",
         cycleText: "/yr",
       },
       features: ["Unlimited Matches", "Unlimited Messages", "Advanced Filters"],
@@ -21,17 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
     mastiff: {
       name: "Mastiff Plan",
       monthly: {
-        price: "₱299.00",
-        subtotal: "₱299.00",
-        tax: "₱35.88",
-        billed: "₱334.88",
+        price: "₱99.00",
+        billed: "₱99.00",
         cycleText: "/mo",
       },
       annual: {
-        price: "₱2,990.00",
-        subtotal: "₱2,990.00",
-        tax: "₱358.80",
-        billed: "₱3,348.80",
+        price: "₱990.00",
+        billed: "₱990.00",
         cycleText: "/yr",
       },
       features: [
@@ -77,8 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateTextContent("plan-name", currentPlan.name);
       updateTextContent("plan-price", planData.price);
       updateTextContent("price-cycle", planData.cycleText);
-      updateTextContent("subtotal-amount", planData.subtotal);
-      updateTextContent("tax-amount", planData.tax);
       updateTextContent("billed-now", planData.billed);
       updateFeaturesList(currentPlan.features);
     }

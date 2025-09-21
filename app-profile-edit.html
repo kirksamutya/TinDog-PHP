@@ -27,23 +27,22 @@
     <div data-component="./app-header.html"></div>
     <div class="container-fluid">
       <div class="row">
-        <nav
+        <div
           data-component="./sidebar-nav-content.html"
-          id="sidebar-nav-container"
-          class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
-        ></nav>
+          class="col-md-3 col-lg-2 d-none d-md-block p-0"
+        ></div>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
           <form id="edit-profile-form" novalidate>
             <div
-              class="page-header d-flex justify-content-between align-items-center"
+              class="page-header gradient-background d-flex justify-content-between align-items-center"
             >
               <h1 class="h2">Edit Profile</h1>
               <div>
                 <a href="./app-profile.html" class="btn btn-secondary"
                   >Cancel</a
                 >
-                <button type="submit" class="btn btn-tindog-primary">
-                  Save Changes
+                <button type="submit" class="btn btn-light">
+                  <i class="bi bi-check-lg me-1"></i> Save Changes
                 </button>
               </div>
             </div>
@@ -169,34 +168,37 @@
                                 </select>
                               </div>
                             </div>
+                            <div class="row">
+                              <div class="col-md-12 mb-3">
+                                <label for="dogSize" class="form-label"
+                                  >Size</label
+                                >
+                                <select
+                                  class="form-select"
+                                  id="dogSize"
+                                  required
+                                >
+                                  <option value="small" selected>
+                                    Small (0-10kg)
+                                  </option>
+                                  <option value="medium">
+                                    Medium (11-25kg)
+                                  </option>
+                                  <option value="large">Large (26kg+)</option>
+                                </select>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <hr class="my-4" />
-                        <h5 class="form-section-title">Location & Bio</h5>
-                        <div class="mb-3">
-                          <label for="dogLocation" class="form-label"
-                            >Location</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="dogLocation"
-                            value="Consolacion, PH"
-                            required
-                          />
-                        </div>
+                        <h5 class="form-section-title">Bio & Personality</h5>
                         <div>
                           <label for="dogBio" class="form-label">Bio</label>
                           <textarea class="form-control" id="dogBio" rows="3">
 Energetic and playful, loves chasing balls and long walks. Looking for a companion to explore with!</textarea
                           >
                         </div>
-                        <hr class="my-4" />
-                        <h5 class="form-section-title">Personality</h5>
-                        <p class="text-muted">
-                          Select up to 4 tags that best describe your dog.
-                        </p>
-                        <div class="d-flex flex-wrap gap-2 tag-selector mt-2">
+                        <div class="d-flex flex-wrap gap-2 tag-selector mt-4">
                           <input
                             type="checkbox"
                             class="btn-check"
@@ -305,6 +307,18 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                                   required
                                 />
                               </div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="ownerLocation" class="form-label"
+                                >Location</label
+                              >
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="ownerLocation"
+                                value="Consolacion, PH"
+                                required
+                              />
                             </div>
                             <hr class="my-4" />
                             <h5 class="form-section-title">About You</h5>

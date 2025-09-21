@@ -1,0 +1,247 @@
+/*
+* TinDog Admin Panel Styles (v4 - Final Branded Theme)
+* ---------------------------
+* A vibrant, branded theme that matches the public-facing site.
+*/
+
+:root {
+  --brand-primary: #ff4c68;
+  --brand-secondary: #00bfff;
+  --brand-accent: #ef8172;
+  --admin-bg: #f8f9fa;
+  --admin-card-bg: #ffffff;
+  --text-dark: #343a40;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --font-primary: "Poppins", sans-serif;
+  --border-radius: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  background-color: var(--admin-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+.btn-tindog-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+}
+
+.btn-tindog-primary:hover {
+  background-color: #e0425a;
+  border-color: #e0425a;
+  color: #fff;
+}
+
+.gradient-background {
+  background: linear-gradient(
+    300deg,
+    var(--brand-secondary),
+    var(--brand-primary),
+    var(--brand-accent)
+  );
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Layout */
+.dashboard-header {
+  background-color: var(--admin-card-bg);
+  border-bottom: 3px solid var(--brand-primary);
+}
+
+.dashboard-header .navbar-brand {
+  color: var(--brand-primary);
+  font-weight: 700;
+}
+
+.main-content {
+  padding: 1.5rem;
+}
+
+/* Sidebar */
+.sidebar-nav {
+  background-color: var(--admin-card-bg);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar-nav .nav-link {
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 8px;
+  margin: 0.15rem 0.75rem;
+  padding: 0.6rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav .nav-link .bi {
+  margin-right: 0.75rem;
+  font-size: 1rem;
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: #f8f9fa;
+  color: var(--brand-primary);
+}
+
+.sidebar-nav .nav-link.active {
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--brand-accent), var(--brand-primary));
+}
+
+/* Components */
+.page-header {
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1,
+.page-header p {
+  color: #fff;
+}
+
+.kpi-card {
+  background-color: var(--admin-card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow-light);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--brand-primary);
+}
+
+.kpi-card .card-title {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.kpi-card .kpi-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.kpi-card .kpi-trend {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.kpi-card .kpi-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.icon-bg-primary {
+  background-color: var(--brand-primary);
+}
+.icon-bg-secondary {
+  background-color: var(--brand-secondary);
+}
+.icon-bg-accent {
+  background-color: var(--brand-accent);
+}
+.icon-bg-success {
+  background-color: #198754;
+}
+
+.user-avatar-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--brand-primary);
+  border-color: var(--border-color) var(--border-color) var(--admin-card-bg) !important;
+  border-bottom: 2px solid var(--admin-card-bg);
+}
+.nav-tabs .nav-link {
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+}
+.nav-tabs .nav-link:hover {
+  border-color: var(--border-color);
+}
+.nav-tabs {
+  border-bottom-color: var(--border-color);
+}
+
+.chart-container,
+.activity-feed {
+  background-color: var(--admin-card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow-light);
+}
+
+.activity-feed .activity-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.activity-feed .activity-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.activity-feed .activity-item:first-child {
+  padding-top: 0;
+}
+.activity-feed .activity-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  margin-right: 1rem;
+}

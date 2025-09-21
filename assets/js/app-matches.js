@@ -31,4 +31,26 @@ document.addEventListener("DOMContentLoaded", () => {
       filterMatches(filterValue);
     });
   });
+
+  const animateMatchCards = () => {
+    const matchCards = document.querySelectorAll(".match-card-container");
+    matchCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add("visible");
+      }, index * 100);
+    });
+  };
+
+  const observer = new MutationObserver((mutations, obs) => {
+    const grid = document.getElementById("matches-grid");
+    if (grid && grid.children.length > 0) {
+      animateMatchCards();
+      obs.disconnect();
+    }
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 });
