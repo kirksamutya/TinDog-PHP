@@ -200,11 +200,48 @@ h6 {
 
 .nav-tabs .nav-link.active {
   color: var(--brand-primary);
-  border-color: var(--brand-primary) !important;
+  border-color: var(--border-color) var(--border-color) var(--admin-card-bg) !important;
+  border-bottom: 2px solid var(--admin-card-bg);
 }
 .nav-tabs .nav-link {
   color: var(--text-muted);
+  border-bottom: 2px solid transparent;
 }
 .nav-tabs .nav-link:hover {
   border-color: var(--border-color);
+}
+.nav-tabs {
+  border-bottom-color: var(--border-color);
+}
+
+.chart-container,
+.activity-feed {
+  background-color: var(--admin-card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow-light);
+}
+
+.activity-feed .activity-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.activity-feed .activity-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.activity-feed .activity-item:first-child {
+  padding-top: 0;
+}
+.activity-feed .activity-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  margin-right: 1rem;
 }

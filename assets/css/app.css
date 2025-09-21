@@ -9,6 +9,17 @@ body {
   font-size: 0.875rem;
 }
 
+.btn-ghost-light {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.75);
+  background-color: transparent;
+}
+.btn-ghost-light:hover {
+  color: #fff;
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 /* Core Application Flexbox Layout */
 .app-body {
   display: flex;
@@ -33,6 +44,7 @@ body {
   flex-shrink: 0;
   position: relative;
   z-index: 101;
+  border-bottom: 3px solid var(--brand-primary);
 }
 
 .app-body .container-fluid {
@@ -201,6 +213,12 @@ body {
   margin-bottom: 2rem;
   margin-top: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.page-header.gradient-background h1,
+.page-header.gradient-background p,
+.page-header.gradient-background .btn-ghost-light {
+  color: #fff;
 }
 
 .page-header h1 {
@@ -593,7 +611,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0;
-  height: calc(100vh - 57px); /* Full viewport height minus header */
+  height: calc(100vh - 60px); /* Full viewport height minus header */
 }
 
 .chat-container-wrapper {
@@ -823,11 +841,11 @@ body {
   .page-messages .chat-window {
     display: none;
     position: absolute;
-    top: 57px; /* Header height */
+    top: 60px; /* Header height */
     left: 0;
     right: 0;
     bottom: 0;
-    height: calc(100vh - 57px);
+    height: calc(100vh - 60px);
     width: 100%;
     z-index: 102;
     background-color: #fff;
@@ -1132,28 +1150,35 @@ body {
 }
 
 /* Notifications / Activity Feed Styles */
-.activity-feed-container .icon-wrapper {
+.activity-feed-container .icon-wrapper,
+.notification-card .icon-wrapper {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
   font-size: 1.2rem;
   flex-shrink: 0;
 }
 
-.activity-match .icon-wrapper {
+.notification-card .icon-wrapper i {
+  color: #fff;
+}
+
+.activity-match .icon-wrapper,
+.icon-wrapper.activity-match {
   background-color: var(--brand-primary);
 }
 
-.activity-message .icon-wrapper {
+.activity-message .icon-wrapper,
+.icon-wrapper.activity-message {
   background-color: var(--brand-secondary);
 }
 
-.activity-profile .icon-wrapper {
-  background-color: #6c757d;
+.activity-profile .icon-wrapper,
+.icon-wrapper.activity-profile {
+  background-color: var(--brand-accent);
 }
 
 .notification-group {

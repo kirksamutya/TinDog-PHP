@@ -29,25 +29,29 @@
       <div class="row">
         <div
           data-component="./admin-sidebar.html"
-          class="col-md-3 col-lg-2"
+          class="col-md-3 col-lg-2 d-none d-md-block p-0"
         ></div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-          <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-          >
+        <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+          <div class="page-header gradient-background">
             <h1 class="h2">Create New User</h1>
+            <p class="mb-0">
+              Manually provision a new Standard User or Administrator account.
+            </p>
           </div>
-          <div class="card shadow-sm">
+          <div class="card kpi-card">
             <div class="card-body">
               <form>
-                <div class="mb-3">
-                  <label for="userRole" class="form-label">User Role</label>
+                <div class="mb-4">
+                  <label for="userRole" class="form-label fw-bold"
+                    >User Role</label
+                  >
                   <select class="form-select" id="userRole" required>
                     <option value="user" selected>Standard User</option>
                     <option value="admin">Administrator</option>
                   </select>
                 </div>
                 <hr />
+                <h5 class="fw-bold mb-3">Account Details</h5>
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="firstName" class="form-label">First Name</label>
@@ -90,8 +94,8 @@
                 </div>
 
                 <div id="standard-user-fields">
-                  <hr />
-                  <h5 class="mb-3">Dog's Profile</h5>
+                  <hr class="my-4" />
+                  <h5 class="fw-bold mb-3">Dog's Profile</h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="dogName" class="form-label">Dog's Name</label>
@@ -116,16 +120,17 @@
                   </div>
                 </div>
 
-                <hr class="my-4" />
-                <button type="submit" class="btn btn-tindog-primary">
-                  Create User
-                </button>
-                <a
-                  href="./admin-user-management.html"
-                  class="btn btn-secondary"
-                >
-                  Cancel
-                </a>
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-tindog-primary">
+                    Create User
+                  </button>
+                  <a
+                    href="./admin-user-management.html"
+                    class="btn btn-secondary"
+                  >
+                    Cancel
+                  </a>
+                </div>
               </form>
             </div>
           </div>
