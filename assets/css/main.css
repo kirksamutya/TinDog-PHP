@@ -5,6 +5,8 @@
 * Every HTML page should only link to this one file.
 */
 
+@import url("common.css");
 @import url("public.css");
 @import url("auth.css");
 @import url("app.css");
+@import url("admin.css");

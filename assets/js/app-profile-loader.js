@@ -18,32 +18,46 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    document.getElementById("dog-name").textContent = userData.dogName;
-    document.getElementById("dog-breed").textContent = userData.dogBreed;
-    document.getElementById("dog-sex").textContent =
-      userData.dogSex.charAt(0).toUpperCase() + userData.dogSex.slice(1);
-    document.getElementById("dog-size").textContent =
-      userData.dogSize.charAt(0).toUpperCase() + userData.dogSize.slice(1);
-    document.getElementById("dog-age").textContent = `${
-      userData.age || 2
-    } years old`;
-    document.getElementById("dog-bio").textContent = userData.bio || "";
+    const setText = (id, text) => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = text || "N/A";
+      }
+    };
 
-    document.getElementById(
-      "owner-name"
-    ).textContent = `${userData.firstName} ${userData.lastName}`;
-    document.getElementById("owner-location").textContent = userData.location;
-    document.getElementById("owner-bio").textContent = userData.ownerBio || "";
+    setText("dog-name", userData.dogName);
+    setText("dog-breed", userData.dogBreed);
+    setText(
+      "dog-sex",
+      userData.dogSex
+        ? userData.dogSex.charAt(0).toUpperCase() + userData.dogSex.slice(1)
+        : "N/A"
+    );
+    setText(
+      "dog-size",
+      userData.dogSize
+        ? userData.dogSize.charAt(0).toUpperCase() + userData.dogSize.slice(1)
+        : "N/A"
+    );
+    setText("dog-age", userData.age ? `${userData.age} years old` : "N/A");
+    setText("dog-bio", userData.bio || "No bio yet.");
+
+    setText("owner-name", `${userData.firstName} ${userData.lastName}`);
+    setText("owner-location", userData.location);
+    setText("owner-bio", userData.ownerBio || "No bio yet.");
 
     const sidebarName = document.querySelector(".sidebar-profile-card h6");
-    if (sidebarName)
+    if (sidebarName) {
       sidebarName.textContent = `${userData.firstName} ${userData.lastName}`;
+    }
 
     const sidebarPlan = document.querySelector(".sidebar-profile-card small");
-    if (sidebarPlan)
+    if (sidebarPlan) {
+      const plan = userData.plan || "N/A";
       sidebarPlan.textContent = `${
-        userData.plan.charAt(0).toUpperCase() + userData.plan.slice(1)
+        plan.charAt(0).toUpperCase() + plan.slice(1)
       } Plan`;
+    }
   };
 
   if (document.querySelector(".page-profile")) {

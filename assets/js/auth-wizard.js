@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const wizardFormContainer = document.querySelector(".wizard-form-container");
-  if (!wizardFormContainer) return;
-
   const form = document.getElementById("create-profile-form");
+  if (!form) return;
+
   const nextButtons = document.querySelectorAll(".btn-next");
   const backButtons = document.querySelectorAll(".btn-back");
   const progressBar = document.querySelector(".progress-bar");
@@ -40,9 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         form.classList.add("was-validated");
         return;
       }
-
       form.classList.remove("was-validated");
-
       if (currentStepIndex < formSteps.length - 1) {
         currentStepIndex++;
         updateWizardState();
@@ -68,17 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
-    const firstName = document.getElementById("ownerFirstName").value;
-    const lastName = document.getElementById("ownerLastName").value;
-    const newUserId = (firstName + "_" + lastName)
-      .toLowerCase()
-      .replace(/\s/g, "_");
-
-    allUsers[newUserId] = {
-      firstName: firstName,
-      lastName: lastName,
-      email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
+    const newUser = {
+      firstName: document.getElementById("ownerFirstName").value,
+      lastName: document.getElementById("ownerLastName").value,
+      email: `${document
+        .getElementById("ownerFirstName")
+        .value.toLowerCase()}.${document
+        .getElementById("ownerLastName")
+        .value.toLowerCase()}@example.com`,
       location: document.getElementById("location").value,
       dogName: document.getElementById("dogName").value,
       dogBreed: document.getElementById("dogBreed").value,
@@ -86,18 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
       dogSize: document.getElementById("dogSize").value,
       age: document.getElementById("dogAge").value,
       bio: document.getElementById("dogBio").value,
-      plan: "chihuahua",
-      status: "active",
-      role: "user",
-      signUpDate: new Date().toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      }),
-      lastSeen: "Just now",
     };
 
-    localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+    const newUserId = createUser(newUser);
     sessionStorage.setItem("loggedInUserId", newUserId);
     window.location.href = "./app-dashboard.html";
   });

@@ -1,0 +1,108 @@
+/*
+* TinDog Common Styles
+* --------------------
+* Contains shared variables, utilities, and component styles
+* used across the entire application (public, app, and admin).
+*/
+
+:root {
+  --brand-primary: #ff4c68;
+  --brand-secondary: #00bfff;
+  --brand-accent: #ef8172;
+  --text-dark: #343a40;
+  --text-light: #ffffff;
+  --text-muted: #6c757d;
+  --background-light: #f8f9fa;
+  --border-color: #dee2e6;
+  --font-primary: "Poppins", sans-serif;
+  --border-radius-medium: 15px;
+  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.07);
+  --box-shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+}
+
+/* Common Utility Classes */
+.gradient-background {
+  background: linear-gradient(
+    300deg,
+    var(--brand-secondary),
+    var(--brand-primary),
+    var(--brand-accent)
+  );
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Common Button Styles */
+.btn-tindog-primary {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: var(--text-light);
+  transition: all 0.3s ease;
+}
+
+.btn-tindog-primary:hover {
+  background-color: #e0425a;
+  border-color: #e0425a;
+  color: var(--text-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 76, 104, 0.3);
+  opacity: 0.9;
+}
+
+.btn-tindog-outline {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.btn-tindog-outline:hover {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+}
+
+/* Common Card Styles */
+.kpi-card {
+  background-color: #fff;
+  border-radius: var(--border-radius-medium);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-light);
+}
+
+.page-header {
+  padding: 1.5rem;
+  border-radius: var(--border-radius-medium);
+  margin-bottom: 2rem;
+}
