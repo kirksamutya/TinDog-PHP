@@ -1,14 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   const initReportModal = () => {
     const reportModalElement = document.getElementById("reportDetailsModal");
-    if (!reportModalElement) {
-      return;
-    }
+    if (!reportModalElement) return;
 
     const reportModal = new bootstrap.Modal(reportModalElement);
-    const viewDetailsButtons = document.querySelectorAll(
-      ".btn-group .btn-outline-secondary"
-    );
+    const reportTableBody = document.querySelector("table tbody");
 
     const modalTitle = document.getElementById("modalTitle");
     const detailsView = document.getElementById("report-details-view");
@@ -23,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       'input[name="report-action"]'
     );
 
-    let activeRow = null;
+    let activeReportId = null;
 
     const switchToDetailsView = () => {
       modalTitle.textContent = "Report Details";
@@ -43,25 +39,32 @@ document.addEventListener("DOMContentLoaded", () => {
       actionsFooter.style.display = "flex";
     };
 
-    viewDetailsButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        activeRow = this.closest("tr");
-        const reportedUser = activeRow.cells[0].textContent.trim();
-        const reportedBy = activeRow.cells[1].textContent.trim();
-        const reason = activeRow.cells[2].textContent.trim();
-        const date = activeRow.cells[3].textContent.trim();
-        const status = activeRow.querySelector(".badge").textContent.trim();
+    reportTableBody.addEventListener("click", function (event) {
+      if (event.target.classList.contains("btn-outline-secondary")) {
+        activeReportId = event.target.dataset.reportId;
+        const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+        const allReports = JSON.parse(localStorage.getItem("tindogReports"));
+        const report = allReports.find((r) => r.id == activeReportId);
 
-        document.getElementById("modalReportedUser").textContent = reportedUser;
-        document.getElementById("modalReportedBy").textContent = reportedBy;
-        document.getElementById("modalReason").textContent = reason;
-        document.getElementById("modalDate").textContent = date;
-        document.getElementById("modalStatus").textContent = status;
-        document.getElementById("actionUserName").textContent = reportedUser;
+        const reportedUser = allUsers[report.reportedUserId];
+        const reportingUser = allUsers[report.reportedByUserId];
+
+        document.getElementById(
+          "modalReportedUser"
+        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
+        document.getElementById(
+          "modalReportedBy"
+        ).textContent = `${reportingUser.firstName} ${reportingUser.lastName}`;
+        document.getElementById("modalReason").textContent = report.reason;
+        document.getElementById("modalDate").textContent = report.date;
+        document.getElementById("modalStatus").textContent = report.status;
+        document.getElementById(
+          "actionUserName"
+        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
 
         const modalStatusBadge = document.getElementById("modalStatus");
         modalStatusBadge.className = "badge";
-        if (status.toLowerCase() === "open") {
+        if (report.status === "open") {
           modalStatusBadge.classList.add("bg-danger");
           takeActionButton.style.display = "block";
         } else {
@@ -71,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         switchToDetailsView();
         reportModal.show();
-      });
+      }
     });
 
     takeActionButton.addEventListener("click", switchToActionsView);
@@ -84,48 +87,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     confirmActionButton.addEventListener("click", () => {
-      if (!activeRow) return;
+      if (!activeReportId) return;
 
       const selectedAction = document.querySelector(
         'input[name="report-action"]:checked'
       );
       if (!selectedAction) return;
 
-      const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
-      const reportedUserName = activeRow.cells[0].textContent.trim();
+      const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+      const allReports = JSON.parse(localStorage.getItem("tindogReports"));
+      const reportIndex = allReports.findIndex((r) => r.id == activeReportId);
+      const report = allReports[reportIndex];
 
-      const userId = Object.keys(allUsers).find(
-        (key) =>
-          (allUsers[key].firstName + " " + allUsers[key].lastName).trim() ===
-          reportedUserName
-      );
+      const newStatus = selectedAction.value.toLowerCase();
 
-      let newStatus = "active";
-      if (selectedAction.id === "action-suspend") newStatus = "suspended";
-      if (selectedAction.id === "action-ban") newStatus = "banned";
-
-      if (userId && selectedAction.id !== "action-dismiss") {
-        allUsers[userId].status = newStatus;
+      if (newStatus === "suspended" || newStatus === "banned") {
+        const user = allUsers[report.reportedUserId];
+        user.status = newStatus;
         localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
       }
 
-      const selectedActionLabel = document.querySelector(
-        `label[for="${selectedAction.id}"]`
-      );
-      const newStatusText = selectedActionLabel.textContent.split(" ")[0];
-
-      const statusBadge = activeRow.querySelector(".badge");
-      statusBadge.classList.remove("bg-danger");
-      statusBadge.classList.add("bg-success");
-      statusBadge.textContent = newStatusText;
-
-      const resolveButton = activeRow.querySelector(".btn-outline-success");
-      if (resolveButton) {
-        resolveButton.remove();
-      }
+      allReports[reportIndex].status = newStatus;
+      localStorage.setItem("tindogReports", JSON.stringify(allReports));
 
       reportModal.hide();
-      document.querySelector(".filter-bar .btn-filter.active").click();
+      window.location.reload();
     });
 
     reportModalElement.addEventListener("hidden.bs.modal", switchToDetailsView);

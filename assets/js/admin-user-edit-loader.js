@@ -1,40 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
   const sampleUsers = {
-    eugene_stepnov: {
-      firstName: "Eugene",
-      lastName: "Stepnov",
-      email: "eugene.stepnov@example.com",
-      location: "Consolacion, PH",
-      dogName: "Jorjee",
+    cruz_juan: {
+      firstName: "Juan",
+      lastName: "Cruz",
+      email: "juan.cruz@example.com",
+      plan: "mastiff",
+      status: "active",
+      role: "admin",
+      location: "Cebu City, Cebu",
+      dogName: "Bantay",
+      dogBreed: "Aspin",
+      dogSex: "male",
+      dogSize: "medium",
+    },
+    santos_maria: {
+      firstName: "Maria",
+      lastName: "Santos",
+      email: "maria.santos@example.com",
+      plan: "labrador",
+      status: "active",
+      role: "user",
+      location: "Mandaue City, Cebu",
+      dogName: "Kisses",
       dogBreed: "Shih Tzu",
       dogSex: "female",
       dogSize: "small",
-      plan: "mastiff",
-      status: "active",
-    },
-    maria_s: {
-      firstName: "Maria",
-      lastName: "S.",
-      email: "maria.s@example.com",
-      location: "Mandaue, PH",
-      dogName: "Max",
-      dogBreed: "Golden Retriever",
-      dogSex: "male",
-      dogSize: "large",
-      plan: "labrador",
-      status: "active",
-    },
-    john_d: {
-      firstName: "John",
-      lastName: "D.",
-      email: "john.d@example.com",
-      location: "Cebu City, PH",
-      dogName: "Luna",
-      dogBreed: "Poodle",
-      dogSex: "female",
-      dogSize: "small",
-      plan: "chihuahua",
-      status: "suspended",
     },
   };
 
@@ -43,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const allUsers =
     JSON.parse(localStorage.getItem("tindogUsers")) || sampleUsers;
-  const userData = allUsers[userId] || sampleUsers.eugene_stepnov;
+  const userData = allUsers[userId] || sampleUsers.cruz_juan;
 
   document.getElementById(
     "pageTitle"
@@ -64,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     const updatedData = {
+      ...userData, // Preserve existing data like role, etc.
       firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
       email: document.getElementById("email").value,

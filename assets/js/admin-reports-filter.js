@@ -1,36 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
   const initAdminReportsFilter = () => {
     const filterButtons = document.querySelectorAll(".filter-bar .btn-filter");
-    const reportRows = document.querySelectorAll("tbody tr");
-    const resolveButtons = document.querySelectorAll(".btn-outline-success");
+    const reportTableBody = document.querySelector("table tbody");
 
-    if (!filterButtons.length) {
-      return;
-    }
+    const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
+    let allReports = JSON.parse(localStorage.getItem("tindogReports")) || [];
+
+    const renderTable = () => {
+      reportTableBody.innerHTML = "";
+      allReports.forEach((report) => {
+        const reportedUser = allUsers[report.reportedUserId];
+        const reportingUser = allUsers[report.reportedByUserId];
+
+        if (!reportedUser || !reportingUser) return;
+
+        const reportedUserName = `${reportedUser.firstName} ${reportedUser.lastName}`;
+        const reportingUserName = `${reportingUser.firstName} ${reportingUser.lastName}`;
+
+        let statusBadge;
+        if (report.status === "open") {
+          statusBadge = `<span class="badge bg-danger">Open</span>`;
+        } else {
+          const statusText =
+            report.status.charAt(0).toUpperCase() + report.status.slice(1);
+          statusBadge = `<span class="badge bg-success">${statusText}</span>`;
+        }
+
+        const actions =
+          report.status === "open"
+            ? `
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-report-id="${report.id}">View Details</button>
+                    <button type="button" class="btn btn-sm btn-outline-success" data-report-id="${report.id}">Resolve</button>
+                </div>`
+            : `
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-report-id="${report.id}">View Details</button>
+                </div>`;
+
+        const row = document.createElement("tr");
+        row.dataset.reportId = report.id;
+        row.innerHTML = `
+                <td><strong>${reportedUserName}</strong></td>
+                <td>${reportingUserName}</td>
+                <td>${report.reason}</td>
+                <td>${report.date}</td>
+                <td>${statusBadge}</td>
+                <td class="text-end">${actions}</td>
+            `;
+        reportTableBody.appendChild(row);
+      });
+      applyCurrentFilter();
+    };
 
     const applyCurrentFilter = () => {
       const activeButton = document.querySelector(
         ".filter-bar .btn-filter.active"
       );
-      if (activeButton) {
-        const filterValue = activeButton.textContent.trim().toLowerCase();
-        filterReports(filterValue);
-      }
-    };
+      const filterStatus = activeButton.textContent.trim().toLowerCase();
+      const rows = reportTableBody.querySelectorAll("tr");
 
-    const filterReports = (filterStatus) => {
-      reportRows.forEach((row) => {
-        const rowStatus = row
-          .querySelector(".badge")
-          .textContent.trim()
-          .toLowerCase();
-        const isOpen = rowStatus === "open";
+      rows.forEach((row) => {
+        const report = allReports.find((r) => r.id == row.dataset.reportId);
+        const isOpen = report.status === "open";
 
-        if (filterStatus === "all") {
-          row.style.display = "";
-        } else if (filterStatus === "open" && isOpen) {
-          row.style.display = "";
-        } else if (filterStatus === "resolved" && !isOpen) {
+        if (
+          filterStatus === "all" ||
+          (filterStatus === "open" && isOpen) ||
+          (filterStatus === "resolved" && !isOpen)
+        ) {
           row.style.display = "";
         } else {
           row.style.display = "none";
@@ -46,22 +84,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    resolveButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        const row = this.closest("tr");
-        const statusBadge = row.querySelector(".badge");
-
-        statusBadge.classList.remove("bg-danger");
-        statusBadge.classList.add("bg-success");
-        statusBadge.textContent = "Dismissed";
-
-        this.remove();
-
-        applyCurrentFilter();
-      });
+    reportTableBody.addEventListener("click", function (event) {
+      if (event.target.classList.contains("btn-outline-success")) {
+        const reportId = event.target.dataset.reportId;
+        const reportIndex = allReports.findIndex((r) => r.id == reportId);
+        if (reportIndex !== -1) {
+          allReports[reportIndex].status = "dismissed";
+          localStorage.setItem("tindogReports", JSON.stringify(allReports));
+          renderTable();
+        }
+      }
     });
 
-    applyCurrentFilter();
+    renderTable();
   };
 
   if (document.querySelector(".filter-bar")) {

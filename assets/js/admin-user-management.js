@@ -1,35 +1,125 @@
 document.addEventListener("DOMContentLoaded", () => {
   const initUserManagement = () => {
     const sampleUsers = {
-      eugene_stepnov: {
-        firstName: "Eugene",
-        lastName: "Stepnov",
-        email: "eugene.stepnov@example.com",
+      cruz_juan: {
+        firstName: "Juan",
+        lastName: "Cruz",
+        email: "juan.cruz@example.com",
         plan: "mastiff",
         status: "active",
         role: "admin",
+        location: "Cebu City, Cebu",
+        dogName: "Bantay",
+        dogBreed: "Aspin",
+        dogSex: "male",
+        dogSize: "medium",
+        signUpDate: "Sep 22, 2023",
+        lastSeen: "2 hours ago",
       },
-      maria_s: {
+      santos_maria: {
         firstName: "Maria",
-        lastName: "S.",
-        email: "maria.s@example.com",
+        lastName: "Santos",
+        email: "maria.santos@example.com",
         plan: "labrador",
         status: "active",
         role: "user",
+        location: "Mandaue City, Cebu",
+        dogName: "Kisses",
+        dogBreed: "Shih Tzu",
+        dogSex: "female",
+        dogSize: "small",
+        signUpDate: "Jan 15, 2024",
+        lastSeen: "Yesterday",
       },
-      john_d: {
-        firstName: "John",
-        lastName: "D.",
-        email: "john.d@example.com",
+      gonzales_pedro: {
+        firstName: "Pedro",
+        lastName: "Gonzales",
+        email: "pedro.g@example.com",
         plan: "chihuahua",
         status: "suspended",
         role: "user",
+        location: "Lapu-Lapu City, Cebu",
+        dogName: "Max",
+        dogBreed: "Pomeranian",
+        dogSex: "male",
+        dogSize: "small",
+        signUpDate: "Mar 01, 2024",
+        lastSeen: "1 week ago",
+      },
+      reyes_sofia: {
+        firstName: "Sofia",
+        lastName: "Reyes",
+        email: "sofia.reyes@example.com",
+        plan: "labrador",
+        status: "active",
+        role: "user",
+        location: "Talisay City, Cebu",
+        dogName: "Bella",
+        dogBreed: "Golden Retriever",
+        dogSex: "female",
+        dogSize: "large",
+        signUpDate: "Jun 10, 2024",
+        lastSeen: "3 days ago",
+      },
+      tan_andres: {
+        firstName: "Andres",
+        lastName: "Tan",
+        email: "andres.tan@example.com",
+        plan: "chihuahua",
+        status: "banned",
+        role: "user",
+        location: "Consolacion, Cebu",
+        dogName: "Rocky",
+        dogBreed: "Bulldog",
+        dogSex: "male",
+        dogSize: "medium",
+        signUpDate: "Jul 04, 2024",
+        lastSeen: "1 month ago",
       },
     };
+
+    const sampleReports = [
+      {
+        id: 1,
+        reportedUserId: "tan_andres",
+        reportedByUserId: "santos_maria",
+        reason: "Inappropriate Photo",
+        date: "Sep 22, 2025",
+        status: "banned",
+      },
+      {
+        id: 2,
+        reportedUserId: "gonzales_pedro",
+        reportedByUserId: "cruz_juan",
+        reason: "Spam / Bot",
+        date: "Sep 21, 2025",
+        status: "suspended",
+      },
+      {
+        id: 3,
+        reportedUserId: "santos_maria",
+        reportedByUserId: "gonzales_pedro",
+        reason: "Harassment",
+        date: "Sep 20, 2025",
+        status: "dismissed",
+      },
+      {
+        id: 4,
+        reportedUserId: "reyes_sofia",
+        reportedByUserId: "tan_andres",
+        reason: "Fake Profile",
+        date: "Sep 22, 2025",
+        status: "open",
+      },
+    ];
 
     const allUsers =
       JSON.parse(localStorage.getItem("tindogUsers")) || sampleUsers;
     localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+
+    if (!localStorage.getItem("tindogReports")) {
+      localStorage.setItem("tindogReports", JSON.stringify(sampleReports));
+    }
 
     const userTableBody = document.querySelector("table tbody");
     userTableBody.innerHTML = "";
