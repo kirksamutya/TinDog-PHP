@@ -1,43 +1,75 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const adminLoginForm = document.getElementById("auth-admin-form");
-  const errorAlert = document.getElementById("login-error-alert");
+  const initReportModal = () => {
+    const reportModalElement = document.getElementById("reportDetailsModal");
+    if (!reportModalElement) return;
 
-  if (!adminLoginForm) {
-    return;
-  }
+    const reportModal = new bootstrap.Modal(reportModalElement);
+    const reportTableBody = document.querySelector("table tbody");
 
-  const handleAdminFormSubmission = (event) => {
-    event.preventDefault();
-    errorAlert.style.display = "none";
+    const modalTitle = document.getElementById("modalTitle");
+    const takeActionButton = document.getElementById("take-action-btn");
+    const confirmActionButton = document.getElementById("confirm-action-btn");
 
-    if (!adminLoginForm.checkValidity()) {
-      event.stopPropagation();
-      adminLoginForm.classList.add("was-validated");
-      return;
-    }
+    let activeReportId = null;
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+    reportTableBody.addEventListener("click", function (event) {
+      if (event.target.classList.contains("btn-outline-secondary")) {
+        activeReportId = event.target.dataset.reportId;
+        const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+        const allReports = JSON.parse(localStorage.getItem("tindogReports"));
+        const report = allReports.find((r) => r.id == activeReportId);
 
-    let isValid = false;
-    if (allUsers) {
-      const user = Object.values(allUsers).find(
-        (u) =>
-          u.email === email && u.password === password && u.role === "admin"
-      );
-      if (user) {
-        isValid = true;
+        const reportedUser = allUsers[report.reportedUserId];
+        const reportingUser = allUsers[report.reportedByUserId];
+
+        document.getElementById(
+          "modalReportedUser"
+        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
+        document.getElementById(
+          "modalReportedBy"
+        ).textContent = `${reportingUser.firstName} ${reportingUser.lastName}`;
+        document.getElementById("modalReason").textContent = report.reason;
+
+        const modalStatusBadge = document.getElementById("modalStatus");
+        modalStatusBadge.textContent = report.status;
+
+        takeActionButton.style.display =
+          report.status === "open" ? "block" : "none";
+
+        reportModal.show();
       }
-    }
+    });
 
-    if (isValid) {
-      window.location.href = "./admin-dashboard.html";
-    } else {
-      errorAlert.textContent = "Invalid admin credentials. Please try again.";
-      errorAlert.style.display = "block";
-    }
+    confirmActionButton.addEventListener("click", () => {
+      if (!activeReportId) return;
+
+      const selectedAction = document.querySelector(
+        'input[name="report-action"]:checked'
+      );
+      if (!selectedAction) return;
+
+      const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+      const allReports = JSON.parse(localStorage.getItem("tindogReports"));
+      const reportIndex = allReports.findIndex((r) => r.id == activeReportId);
+      const report = allReports[reportIndex];
+
+      const newStatus = selectedAction.value.toLowerCase();
+
+      if (newStatus === "suspended" || newStatus === "banned") {
+        const user = allUsers[report.reportedUserId];
+        user.status = newStatus;
+        localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+      }
+
+      allReports[reportIndex].status = "resolved";
+      localStorage.setItem("tindogReports", JSON.stringify(allReports));
+
+      reportModal.hide();
+      window.location.reload();
+    });
   };
 
-  adminLoginForm.addEventListener("submit", handleAdminFormSubmission);
+  if (document.querySelector(".table")) {
+    document.addEventListener("componentsLoaded", initReportModal);
+  }
 });

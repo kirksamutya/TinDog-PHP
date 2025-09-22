@@ -1,75 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sampleUsers = {
-    cruz_juan: {
-      firstName: "Juan",
-      lastName: "Cruz",
-      email: "juan.cruz@example.com",
-      plan: "mastiff",
-      status: "active",
-      role: "admin",
-      location: "Cebu City, Cebu",
-      dogName: "Bantay",
-      dogBreed: "Aspin",
-      dogSex: "male",
-      dogSize: "medium",
-    },
-    santos_maria: {
-      firstName: "Maria",
-      lastName: "Santos",
-      email: "maria.santos@example.com",
-      plan: "labrador",
-      status: "active",
-      role: "user",
-      location: "Mandaue City, Cebu",
-      dogName: "Kisses",
-      dogBreed: "Shih Tzu",
-      dogSex: "female",
-      dogSize: "small",
-    },
-  };
+  const editForm = document.getElementById("edit-user-form");
+  if (!editForm) return;
 
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("user");
+  const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
+  const userData = allUsers[userId];
 
-  const allUsers =
-    JSON.parse(localStorage.getItem("tindogUsers")) || sampleUsers;
-  const userData = allUsers[userId] || sampleUsers.cruz_juan;
+  const pageTitle = document.getElementById("pageTitle");
+  const pageSubtitle = document.getElementById("pageSubtitle");
+  const standardUserFields = document.getElementById("standard-user-fields");
+  const adminUserFields = document.getElementById("admin-user-fields");
 
-  document.getElementById(
-    "pageTitle"
-  ).textContent = `Edit User: ${userData.firstName} ${userData.lastName}`;
-  document.getElementById("firstName").value = userData.firstName;
-  document.getElementById("lastName").value = userData.lastName;
-  document.getElementById("email").value = userData.email;
-  document.getElementById("ownerLocation").value = userData.location;
-  document.getElementById("dogName").value = userData.dogName;
-  document.getElementById("dogBreed").value = userData.dogBreed;
-  document.getElementById("dogSex").value = userData.dogSex;
-  document.getElementById("dogSize").value = userData.dogSize;
-  document.getElementById("subscriptionPlan").value = userData.plan;
-  document.getElementById("accountStatus").value = userData.status;
+  const loadUserData = () => {
+    if (!userData) return;
 
-  const editForm = document.getElementById("edit-user-form");
+    pageTitle.textContent = `Edit User: ${userData.firstName} ${userData.lastName}`;
+
+    document.getElementById("firstName").value = userData.firstName;
+    document.getElementById("lastName").value = userData.lastName;
+    document.getElementById("email").value = userData.email;
+    document.getElementById("accountStatus").value = userData.status;
+
+    if (userData.role === "admin") {
+      pageSubtitle.textContent =
+        "Modify the account details for an Administrator.";
+      standardUserFields.style.display = "none";
+      adminUserFields.style.display = "block";
+      document.getElementById("displayName").value = userData.displayName || "";
+    } else {
+      pageSubtitle.textContent =
+        "Modify the account details for a Standard User.";
+      standardUserFields.style.display = "block";
+      adminUserFields.style.display = "none";
+      document.getElementById("ownerLocation").value = userData.location || "";
+      document.getElementById("dogName").value = userData.dogName || "";
+      document.getElementById("dogBreed").value = userData.dogBreed || "";
+      document.getElementById("dogSex").value = userData.dogSex || "male";
+      document.getElementById("dogSize").value = userData.dogSize || "small";
+      document.getElementById("subscriptionPlan").value =
+        userData.plan || "free";
+    }
+  };
+
   editForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const updatedData = {
-      ...userData, // Preserve existing data like role, etc.
+    let updatedData = {
+      ...userData,
       firstName: document.getElementById("firstName").value,
       lastName: document.getElementById("lastName").value,
       email: document.getElementById("email").value,
-      location: document.getElementById("ownerLocation").value,
-      dogName: document.getElementById("dogName").value,
-      dogBreed: document.getElementById("dogBreed").value,
-      dogSex: document.getElementById("dogSex").value,
-      dogSize: document.getElementById("dogSize").value,
-      plan: document.getElementById("subscriptionPlan").value,
       status: document.getElementById("accountStatus").value,
     };
 
+    if (userData.role === "admin") {
+      updatedData.displayName = document.getElementById("displayName").value;
+    } else {
+      updatedData.location = document.getElementById("ownerLocation").value;
+      updatedData.dogName = document.getElementById("dogName").value;
+      updatedData.dogBreed = document.getElementById("dogBreed").value;
+      updatedData.dogSex = document.getElementById("dogSex").value;
+      updatedData.dogSize = document.getElementById("dogSize").value;
+      updatedData.plan = document.getElementById("subscriptionPlan").value;
+    }
+
     allUsers[userId] = updatedData;
     localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-
     window.location.href = "./admin-user-management.html";
   });
+
+  loadUserData();
 });
