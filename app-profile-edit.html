@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TinDog - Edit Profile</title>
+    <title>TinDog - My Profile</title>
     <link
       rel="icon"
       type="image/png"
@@ -32,316 +32,164 @@
           id="sidebar-nav-container"
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-          <form id="edit-profile-form" novalidate>
-            <div
-              class="page-header gradient-background d-flex justify-content-between align-items-center"
-            >
-              <h1 class="h2">Edit Profile</h1>
-              <div>
-                <a href="./app-profile.html" class="btn btn-secondary"
-                  >Cancel</a
-                >
-                <button type="submit" class="btn btn-light">
-                  <i class="bi bi-check-lg me-1"></i> Save Changes
-                </button>
-              </div>
+        <main
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content page-profile"
+        >
+          <div class="profile-container">
+            <div class="profile-cover-photo position-relative">
+              <img src="./assets/images/jorjee-three.jpg" alt="Cover Photo" />
+              <a href="#" class="edit-cover-btn btn btn-light btn-sm">
+                <i class="bi bi-camera-fill me-1"></i> Edit Cover
+              </a>
             </div>
-            <div class="card settings-card">
-              <div class="row g-0">
-                <div class="col-md-4 col-lg-3">
-                  <div class="settings-nav">
+            <div class="profile-card">
+              <div class="profile-avatar-wrapper">
+                <img
+                  src="./assets/images/jorjee-one.jpg"
+                  class="profile-avatar"
+                  alt="Profile Avatar"
+                />
+                <a href="#" class="edit-avatar-btn btn btn-light btn-sm">
+                  <i class="bi bi-camera-fill"></i>
+                </a>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="tab"
+                    href="#dog-profile"
+                    data-avatar-src="./assets/images/jorjee-one.jpg"
+                    >Dog's Profile</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    data-bs-toggle="tab"
+                    href="#owner-profile"
+                    data-avatar-src="./assets/images/anthony.jpg"
+                    >Owner's Profile</a
+                  >
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="dog-profile">
+                  <div class="profile-info text-center pt-3">
+                    <h2 class="h3 mb-1" id="dog-name"></h2>
                     <div
-                      class="nav flex-column nav-pills"
-                      role="tablist"
-                      id="edit-profile-tabs"
+                      class="profile-meta-info my-3 flex-wrap justify-content-center"
                     >
-                      <button
-                        class="nav-link active"
-                        data-bs-toggle="pill"
-                        data-bs-target="#dog-info-tab"
-                        type="button"
-                        role="tab"
-                      >
-                        <i class="bi bi-person-badge"></i> Dog's Information
-                      </button>
-                      <button
-                        class="nav-link"
-                        data-bs-toggle="pill"
-                        data-bs-target="#owner-info-tab"
-                        type="button"
-                        role="tab"
-                      >
-                        <i class="bi bi-person-circle"></i> Owner's Information
-                      </button>
+                      <div class="meta-item">
+                        <i class="bi bi-person-badge"></i>
+                        <span id="dog-breed"></span>
+                      </div>
+                      <div class="meta-item">
+                        <i class="bi bi-gender-female"></i>
+                        <span id="dog-sex"></span>
+                      </div>
+                      <div class="meta-item">
+                        <i class="bi bi-rulers"></i>
+                        <span id="dog-size"></span>
+                      </div>
+                      <div class="meta-item">
+                        <i class="bi bi-calendar-heart"></i>
+                        <span id="dog-age"></span>
+                      </div>
+                    </div>
+                    <a
+                      href="./app-profile-edit.html?tab=dog"
+                      class="btn btn-sm btn-tindog-primary"
+                      ><i class="bi bi-pencil me-1"></i> Edit Dog's Profile</a
+                    >
+                  </div>
+                  <hr />
+                  <div class="profile-details p-3">
+                    <h5 class="mb-2">About</h5>
+                    <p class="text-muted" id="dog-bio"></p>
+                    <h5 class="mt-4 mb-3">Personality</h5>
+                    <div class="mt-2">
+                      <span class="profile-tag">Playful</span>
+                      <span class="profile-tag">Cuddly</span>
+                      <span class="profile-tag">Loves Treats</span>
+                      <span class="profile-tag">Friendly</span>
+                    </div>
+                    <h5 class="mt-4 mb-3">Photo Gallery</h5>
+                    <div class="photo-gallery-grid">
+                      <a
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#galleryModal"
+                        data-bs-image-src="./assets/images/jorjee-one.jpg"
+                        class="gallery-item"
+                        ><img
+                          src="./assets/images/jorjee-one.jpg"
+                          alt="Jorjee photo 1"
+                      /></a>
+                      <a
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#galleryModal"
+                        data-bs-image-src="./assets/images/jorjee-two.jpg"
+                        class="gallery-item"
+                        ><img
+                          src="./assets/images/jorjee-two.jpg"
+                          alt="Jorjee photo 2"
+                      /></a>
+                      <a
+                        href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#galleryModal"
+                        data-bs-image-src="./assets/images/jorjee-three.jpg"
+                        class="gallery-item"
+                        ><img
+                          src="./assets/images/jorjee-three.jpg"
+                          alt="Jorjee photo 3"
+                      /></a>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-8 col-lg-9">
-                  <div class="settings-content">
-                    <div class="tab-content">
-                      <div
-                        class="tab-pane fade show active"
-                        id="dog-info-tab"
-                        role="tabpanel"
-                      >
-                        <h4 class="settings-pane-title">Dog's Information</h4>
-                        <div class="row g-4">
-                          <div class="col-lg-4 text-center">
-                            <h5 class="form-section-title">Profile Picture</h5>
-                            <label
-                              for="dogPhoto"
-                              class="photo-upload-container mt-3 d-inline-block"
-                            >
-                              <img
-                                src="./assets/images/jorjee-one.jpg"
-                                alt="Dog's Avatar"
-                                class="photo-upload-preview mb-2"
-                                id="dog-photo-preview"
-                              />
-                              <div class="photo-upload-prompt">
-                                <i class="bi bi-camera-fill"></i>
-                              </div>
-                              <input
-                                type="file"
-                                id="dogPhoto"
-                                class="d-none"
-                                accept="image/*"
-                                data-preview-target="dog-photo-preview"
-                              />
-                            </label>
-                          </div>
-                          <div class="col-lg-8">
-                            <h5 class="form-section-title">Basic Info</h5>
-                            <div class="row">
-                              <div class="col-md-6 mb-3">
-                                <label for="dogName" class="form-label"
-                                  >Dog's Name</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="dogName"
-                                  required
-                                />
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label for="dogBreed" class="form-label"
-                                  >Breed</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="dogBreed"
-                                  required
-                                />
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-6 mb-3">
-                                <label for="dogAge" class="form-label"
-                                  >Age</label
-                                >
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  id="dogAge"
-                                  min="0"
-                                  required
-                                />
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label for="dogSex" class="form-label"
-                                  >Sex</label
-                                >
-                                <select
-                                  class="form-select"
-                                  id="dogSex"
-                                  required
-                                >
-                                  <option value="male">Male</option>
-                                  <option value="female">Female</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12 mb-3">
-                                <label for="dogSize" class="form-label"
-                                  >Size</label
-                                >
-                                <select
-                                  class="form-select"
-                                  id="dogSize"
-                                  required
-                                >
-                                  <option value="small">Small (0-10kg)</option>
-                                  <option value="medium">
-                                    Medium (11-25kg)
-                                  </option>
-                                  <option value="large">Large (26kg+)</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <hr class="my-4" />
-                        <h5 class="form-section-title">Bio & Personality</h5>
-                        <div>
-                          <label for="dogBio" class="form-label">Bio</label>
-                          <textarea
-                            class="form-control"
-                            id="dogBio"
-                            rows="3"
-                          ></textarea>
-                        </div>
-                        <div class="d-flex flex-wrap gap-2 tag-selector mt-4">
-                          <input
-                            type="checkbox"
-                            class="btn-check"
-                            id="tag-playful"
-                            autocomplete="off"
-                            checked
-                          />
-                          <label class="profile-tag" for="tag-playful"
-                            >Playful</label
-                          >
-                          <input
-                            type="checkbox"
-                            class="btn-check"
-                            id="tag-cuddly"
-                            autocomplete="off"
-                            checked
-                          />
-                          <label class="profile-tag" for="tag-cuddly"
-                            >Cuddly</label
-                          >
-                          <input
-                            type="checkbox"
-                            class="btn-check"
-                            id="tag-loyal"
-                            autocomplete="off"
-                          />
-                          <label class="profile-tag" for="tag-loyal"
-                            >Loyal</label
-                          >
-                          <input
-                            type="checkbox"
-                            class="btn-check"
-                            id="tag-energetic"
-                            autocomplete="off"
-                          />
-                          <label class="profile-tag" for="tag-energetic"
-                            >Energetic</label
-                          >
-                          <input
-                            type="checkbox"
-                            class="btn-check"
-                            id="tag-friendly"
-                            autocomplete="off"
-                            checked
-                          />
-                          <label class="profile-tag" for="tag-friendly"
-                            >Friendly</label
-                          >
-                        </div>
-                      </div>
-                      <div
-                        class="tab-pane fade"
-                        id="owner-info-tab"
-                        role="tabpanel"
-                      >
-                        <h4 class="settings-pane-title">Owner's Information</h4>
-                        <div class="row g-4">
-                          <div class="col-lg-4 text-center">
-                            <h5 class="form-section-title">Your Photo</h5>
-                            <label
-                              for="ownerPhoto"
-                              class="photo-upload-container mt-3 d-inline-block"
-                            >
-                              <img
-                                src="./assets/images/anthony.jpg"
-                                alt="Owner's Avatar"
-                                class="photo-upload-preview mb-2"
-                                id="owner-photo-preview"
-                              />
-                              <div class="photo-upload-prompt">
-                                <i class="bi bi-camera-fill"></i>
-                              </div>
-                              <input
-                                type="file"
-                                id="ownerPhoto"
-                                class="d-none"
-                                accept="image/*"
-                                data-preview-target="owner-photo-preview"
-                              />
-                            </label>
-                          </div>
-                          <div class="col-lg-8">
-                            <h5 class="form-section-title">Your Details</h5>
-                            <div class="row">
-                              <div class="col-md-6 mb-3">
-                                <label for="ownerFirstName" class="form-label"
-                                  >First Name</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="ownerFirstName"
-                                  required
-                                />
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                <label for="ownerLastName" class="form-label"
-                                  >Last Name</label
-                                >
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="ownerLastName"
-                                  required
-                                />
-                              </div>
-                            </div>
-                            <div class="mb-3">
-                              <label for="ownerLocation" class="form-label"
-                                >Location</label
-                              >
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="ownerLocation"
-                                required
-                              />
-                            </div>
-                            <hr class="my-4" />
-                            <h5 class="form-section-title">About You</h5>
-                            <div>
-                              <label for="ownerBio" class="form-label"
-                                >Bio</label
-                              >
-                              <textarea
-                                class="form-control"
-                                id="ownerBio"
-                                rows="3"
-                              ></textarea>
-                            </div>
-                          </div>
-                        </div>
+                <div class="tab-pane fade" id="owner-profile">
+                  <div class="profile-info text-center pt-3">
+                    <h2 class="h3 mb-1" id="owner-name"></h2>
+                    <p class="text-muted">Dog's Human</p>
+                    <div class="profile-meta-info my-3">
+                      <div class="meta-item">
+                        <i class="bi bi-geo-alt"></i>
+                        <span id="owner-location"></span>
                       </div>
                     </div>
+                    <a
+                      href="./app-profile-edit.html?tab=owner"
+                      class="btn btn-sm btn-tindog-primary"
+                      ><i class="bi bi-pencil me-1"></i> Edit Owner's Profile</a
+                    >
+                  </div>
+                  <hr />
+                  <div class="profile-details p-3">
+                    <h5 class="mb-2">About Me</h5>
+                    <p class="text-muted" id="owner-bio"></p>
                   </div>
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </main>
+      </div>
+    </div>
+    <div class="modal fade" id="galleryModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <img src="" class="img-fluid" alt="Gallery Image" />
+          </div>
+        </div>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
-    <script src="./assets/js/app-photo-preview.js"></script>
     <script src="./assets/js/app-profile-handler.js"></script>
-    <script src="./assets/js/app-profile-edit-loader.js"></script>
-    <script src="./assets/js/app-profile-edit-handler.js"></script>
+    <script src="./assets/js/app-gallery-modal.js"></script>
+    <script src="./assets/js/app-profile-loader.js"></script>
   </body>
 </html>

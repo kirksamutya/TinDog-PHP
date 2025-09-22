@@ -1,70 +1,16 @@
-:root {
-  --brand-primary: #ff4c68;
-  --brand-secondary: #00bfff;
-  --brand-accent: #ef8172;
-  --admin-bg: #f8f9fa;
-  --admin-card-bg: #ffffff;
-  --text-dark: #343a40;
-  --text-muted: #6c757d;
-  --border-color: #dee2e6;
-  --font-primary: "Poppins", sans-serif;
-  --border-radius: 15px;
-  --box-shadow-light: 0 4px 15px rgba(0, 0, 0, 0.07);
-}
+/*
+* TinDog Admin Panel Styles
+* -------------------------
+* Contains all styles specific to the admin dashboard.
+*/
 
 body {
-  font-family: var(--font-primary);
   font-size: 0.875rem;
-  background-color: var(--admin-bg);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-primary);
-  font-weight: 700;
-}
-
-.btn-tindog-primary {
-  background-color: var(--brand-primary);
-  border-color: var(--brand-primary);
-  color: #fff;
-}
-
-.btn-tindog-primary:hover {
-  background-color: #e0425a;
-  border-color: #e0425a;
-  color: #fff;
-}
-
-.gradient-background {
-  background: linear-gradient(
-    300deg,
-    var(--brand-secondary),
-    var(--brand-primary),
-    var(--brand-accent)
-  );
-  background-size: 180% 180%;
-  animation: gradient-animation 18s ease infinite;
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  background-color: var(--background-light);
 }
 
 .dashboard-header {
-  background-color: var(--admin-card-bg);
+  background-color: #fff;
   border-bottom: 3px solid var(--brand-primary);
 }
 
@@ -78,7 +24,7 @@ h6 {
 }
 
 .sidebar-nav {
-  background-color: var(--admin-card-bg);
+  background-color: #fff;
   height: 100vh;
   position: sticky;
   top: 0;
@@ -111,13 +57,11 @@ h6 {
 }
 
 .page-header {
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
-.page-header h1,
-.page-header p {
+.page-header.gradient-background h1,
+.page-header.gradient-background p {
   color: #fff;
 }
 
@@ -149,16 +93,10 @@ h6 {
 }
 
 .kpi-card {
-  background-color: var(--admin-card-bg);
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
   box-shadow: var(--box-shadow-light);
-  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .kpi-card:hover {
-  transform: translateY(-5px);
   border-color: var(--brand-primary);
 }
 
@@ -213,9 +151,9 @@ h6 {
 }
 
 .activity-feed {
-  background-color: var(--admin-card-bg);
+  background-color: #fff;
   padding: 1.5rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-medium);
   border: 1px solid var(--border-color);
   box-shadow: var(--box-shadow-light);
 }
@@ -244,9 +182,9 @@ h6 {
 }
 
 .chart-container {
-  background-color: var(--admin-card-bg);
+  background-color: #fff;
   padding: 1.5rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-medium);
   border: 1px solid var(--border-color);
   box-shadow: var(--box-shadow-light);
 }
@@ -254,4 +192,14 @@ h6 {
 .chart-wrapper {
   position: relative;
   height: 300px;
+}
+
+/* Fix for Admin Page Nav Tabs */
+.nav-tabs .nav-link.active {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary) !important;
+  border-bottom-width: 3px;
+}
+.nav-tabs .nav-link {
+  color: var(--text-muted);
 }

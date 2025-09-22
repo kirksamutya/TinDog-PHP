@@ -33,32 +33,16 @@
   overflow: hidden;
 }
 
-.wizard-form-wrapper {
-  overflow: hidden;
-}
-
-.wizard-form-container {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-  width: 400%;
-}
-
 .wizard-form-step {
-  width: calc(100% / 4);
   padding: 2.5rem;
   flex-shrink: 0;
-  display: flex;
+  display: none; /* Changed for step-by-step display */
   flex-direction: column;
   min-height: 450px;
 }
 
 .wizard-form-content {
   flex-grow: 1;
-}
-
-.wizard-decorative-image {
-  max-height: 150px;
-  opacity: 0.5;
 }
 
 .progress-bar {

@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const handleRegistration = (form) => {
+    window.location.href = "./auth-create-profile.html";
+  };
+
   const termsCheckbox = document.getElementById("terms");
   const registerButton = document.getElementById("register-button");
   const termsModal = document.getElementById("termsModal");
@@ -45,5 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (termsModal) {
     termsModal.addEventListener("show.bs.modal", fetchTermsContent);
+  }
+
+  if (window.initializeFormValidation) {
+    window.initializeFormValidation("register-form", handleRegistration);
   }
 });
