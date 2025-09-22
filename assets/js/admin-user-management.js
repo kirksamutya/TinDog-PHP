@@ -1,10 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
   const initUserManagement = () => {
     const sampleUsers = {
+      master_admin: {
+        firstName: "Master",
+        lastName: "Admin",
+        email: "admin@test.com",
+        password: "Admin123",
+        plan: "mastiff",
+        status: "active",
+        role: "admin",
+        masterAdmin: true,
+      },
+      saavedra_roel: {
+        firstName: "Roel Anthony",
+        lastName: "Saavedra",
+        email: "roel.saavedra@example.com",
+        password: "Test123",
+        plan: "labrador",
+        status: "active",
+        role: "user",
+        location: "Consolacion, Cebu",
+        dogName: "Jorjee",
+        dogBreed: "Shih Tzu",
+        dogSex: "female",
+        dogSize: "small",
+        age: 3,
+        bio: "Energetic and playful, loves chasing balls and long walks. Looking for a companion to explore with!",
+        ownerBio:
+          "Guides our technical direction and translates creative concepts into functional, polished applications.",
+        signUpDate: "Jul 01, 2024",
+        lastSeen: "5 minutes ago",
+      },
       cruz_juan: {
         firstName: "Juan",
         lastName: "Cruz",
         email: "juan.cruz@example.com",
+        password: "Password123",
         plan: "mastiff",
         status: "active",
         role: "admin",
@@ -20,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstName: "Maria",
         lastName: "Santos",
         email: "maria.santos@example.com",
+        password: "Password123",
         plan: "labrador",
         status: "active",
         role: "user",
@@ -35,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstName: "Pedro",
         lastName: "Gonzales",
         email: "pedro.g@example.com",
+        password: "Password123",
         plan: "chihuahua",
         status: "suspended",
         role: "user",
@@ -50,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstName: "Sofia",
         lastName: "Reyes",
         email: "sofia.reyes@example.com",
+        password: "Password123",
         plan: "labrador",
         status: "active",
         role: "user",
@@ -65,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstName: "Andres",
         lastName: "Tan",
         email: "andres.tan@example.com",
+        password: "Password123",
         plan: "chihuahua",
         status: "banned",
         role: "user",
@@ -146,6 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const roleText =
         user.role === "admin" ? "Administrator" : "Standard User";
 
+      const actionsDisabled = user.masterAdmin ? "disabled" : "";
+
       const row = `
                 <tr>
                     <td>
@@ -165,8 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td class="text-end">
                         <div class="btn-group" role="group">
                             <a href="./admin-user-record.html?user=${userId}" class="btn btn-sm btn-outline-secondary">View</a>
-                            <a href="./admin-user-edit.html?user=${userId}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-user-id="${userId}">Delete</button>
+                            <a href="./admin-user-edit.html?user=${userId}" class="btn btn-sm btn-outline-secondary ${actionsDisabled}">Edit</a>
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-user-id="${userId}" ${actionsDisabled}>Delete</button>
                         </div>
                     </td>
                 </tr>

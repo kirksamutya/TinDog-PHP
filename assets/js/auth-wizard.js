@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const wizardFormContainer = document.querySelector(".wizard-form-container");
   if (!wizardFormContainer) return;
 
+  const form = document.getElementById("create-profile-form");
   const nextButtons = document.querySelectorAll(".btn-next");
   const backButtons = document.querySelectorAll(".btn-back");
-  const finishButton = document.querySelector(".btn-finish");
   const progressBar = document.querySelector(".progress-bar");
   const formSteps = document.querySelectorAll(".wizard-form-step");
   let currentStepIndex = 0;
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   nextButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const currentStep = formSteps[currentStepIndex];
-      const form = currentStep.closest("form");
       const inputs = currentStep.querySelectorAll(
         "input[required], select[required], textarea[required]"
       );
@@ -56,18 +55,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  if (finishButton) {
-    finishButton.addEventListener("click", () => {
-      const form = finishButton.closest("form");
-      if (form.checkValidity()) {
-        window.location.href = "./app-dashboard.html";
-      } else {
-        form.classList.add("was-validated");
-      }
-    });
-  }
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
+    const firstName = document.getElementById("ownerFirstName").value;
+    const lastName = document.getElementById("ownerLastName").value;
+    const newUserId = (firstName + "_" + lastName)
+      .toLowerCase()
+      .replace(/\s/g, "_");
+
+    allUsers[newUserId] = {
+      firstName: firstName,
+      lastName: lastName,
+      email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`,
+      location: document.getElementById("location").value,
+      dogName: document.getElementById("dogName").value,
+      dogBreed: document.getElementById("dogBreed").value,
+      dogSex: document.getElementById("dogSex").value,
+      dogSize: document.getElementById("dogSize").value,
+      age: document.getElementById("dogAge").value,
+      bio: document.getElementById("dogBio").value,
+      plan: "chihuahua",
+      status: "active",
+      role: "user",
+      signUpDate: new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+      lastSeen: "Just now",
+    };
+
+    localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+    window.location.href = "./app-dashboard.html";
+  });
 
   window.addEventListener("resize", updateWizardState);
-
   updateWizardState();
 });
