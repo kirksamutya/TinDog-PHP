@@ -143,6 +143,33 @@ h6 {
   color: #fff;
 }
 
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.btn-filter {
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 50rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-dark);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-filter:hover {
+  background-color: #f8f9fa;
+}
+
+.btn-filter.active {
+  background-color: var(--brand-primary);
+  color: var(--text-light);
+  border-color: var(--brand-primary);
+  font-weight: 600;
+}
+
 .kpi-card {
   background-color: var(--admin-card-bg);
   border-radius: var(--border-radius);
@@ -209,6 +236,7 @@ h6 {
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .nav-tabs .nav-link.active {
@@ -257,4 +285,25 @@ h6 {
   border-radius: 50%;
   color: #fff;
   margin-right: 1rem;
+}
+
+.badge.bg-warning {
+  color: #000 !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+  .main-content {
+    padding: 1rem;
+  }
+
+  .page-header .d-flex {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+
+  .filter-bar {
+    flex-wrap: wrap;
+  }
 }

@@ -76,25 +76,25 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="dog-profile">
                   <div class="profile-info text-center pt-3">
-                    <h2 class="h3 mb-1">Jorjee</h2>
+                    <h2 class="h3 mb-1" id="dog-name"></h2>
                     <div
                       class="profile-meta-info my-3 flex-wrap justify-content-center"
                     >
                       <div class="meta-item">
                         <i class="bi bi-person-badge"></i>
-                        <span>Shih Tzu</span>
+                        <span id="dog-breed"></span>
                       </div>
                       <div class="meta-item">
                         <i class="bi bi-gender-female"></i>
-                        <span>Female</span>
+                        <span id="dog-sex"></span>
                       </div>
                       <div class="meta-item">
                         <i class="bi bi-rulers"></i>
-                        <span>Small</span>
+                        <span id="dog-size"></span>
                       </div>
                       <div class="meta-item">
                         <i class="bi bi-calendar-heart"></i>
-                        <span>3 years old</span>
+                        <span id="dog-age"></span>
                       </div>
                     </div>
                     <a
@@ -105,11 +105,8 @@
                   </div>
                   <hr />
                   <div class="profile-details p-3">
-                    <h5 class="mb-2">About Jorjee</h5>
-                    <p class="text-muted">
-                      Energetic and playful, loves chasing balls and long walks.
-                      Looking for a companion to explore with!
-                    </p>
+                    <h5 class="mb-2">About</h5>
+                    <p class="text-muted" id="dog-bio"></p>
                     <h5 class="mt-4 mb-3">Personality</h5>
                     <div class="mt-2">
                       <span class="profile-tag">Playful</span>
@@ -154,12 +151,12 @@
                 </div>
                 <div class="tab-pane fade" id="owner-profile">
                   <div class="profile-info text-center pt-3">
-                    <h2 class="h3 mb-1">Roel Anthony Saavedra</h2>
-                    <p class="text-muted">Jorjee's Human</p>
+                    <h2 class="h3 mb-1" id="owner-name"></h2>
+                    <p class="text-muted">Dog's Human</p>
                     <div class="profile-meta-info my-3">
                       <div class="meta-item">
                         <i class="bi bi-geo-alt"></i>
-                        <span>Consolacion, PH</span>
+                        <span id="owner-location"></span>
                       </div>
                     </div>
                     <a
@@ -171,10 +168,7 @@
                   <hr />
                   <div class="profile-details p-3">
                     <h5 class="mb-2">About Me</h5>
-                    <p class="text-muted">
-                      Guides our technical direction and translates creative
-                      concepts into functional, polished applications.
-                    </p>
+                    <p class="text-muted" id="owner-bio"></p>
                   </div>
                 </div>
               </div>
@@ -196,5 +190,6 @@
     <script src="./assets/js/component-loader.js"></script>
     <script src="./assets/js/app-profile-handler.js"></script>
     <script src="./assets/js/app-gallery-modal.js"></script>
+    <script src="./assets/js/app-profile-loader.js"></script>
   </body>
 </html>

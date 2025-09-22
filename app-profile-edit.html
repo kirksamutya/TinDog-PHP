@@ -122,7 +122,6 @@
                                   type="text"
                                   class="form-control"
                                   id="dogName"
-                                  value="Jorjee"
                                   required
                                 />
                               </div>
@@ -134,7 +133,6 @@
                                   type="text"
                                   class="form-control"
                                   id="dogBreed"
-                                  value="Shih Tzu"
                                   required
                                 />
                               </div>
@@ -148,7 +146,6 @@
                                   type="number"
                                   class="form-control"
                                   id="dogAge"
-                                  value="3"
                                   min="0"
                                   required
                                 />
@@ -163,9 +160,7 @@
                                   required
                                 >
                                   <option value="male">Male</option>
-                                  <option value="female" selected>
-                                    Female
-                                  </option>
+                                  <option value="female">Female</option>
                                 </select>
                               </div>
                             </div>
@@ -179,9 +174,7 @@
                                   id="dogSize"
                                   required
                                 >
-                                  <option value="small" selected>
-                                    Small (0-10kg)
-                                  </option>
+                                  <option value="small">Small (0-10kg)</option>
                                   <option value="medium">
                                     Medium (11-25kg)
                                   </option>
@@ -195,9 +188,11 @@
                         <h5 class="form-section-title">Bio & Personality</h5>
                         <div>
                           <label for="dogBio" class="form-label">Bio</label>
-                          <textarea class="form-control" id="dogBio" rows="3">
-Energetic and playful, loves chasing balls and long walks. Looking for a companion to explore with!</textarea
-                          >
+                          <textarea
+                            class="form-control"
+                            id="dogBio"
+                            rows="3"
+                          ></textarea>
                         </div>
                         <div class="d-flex flex-wrap gap-2 tag-selector mt-4">
                           <input
@@ -292,7 +287,6 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                                   type="text"
                                   class="form-control"
                                   id="ownerFirstName"
-                                  value="Roel Anthony"
                                   required
                                 />
                               </div>
@@ -304,7 +298,6 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                                   type="text"
                                   class="form-control"
                                   id="ownerLastName"
-                                  value="Saavedra"
                                   required
                                 />
                               </div>
@@ -317,7 +310,6 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                                 type="text"
                                 class="form-control"
                                 id="ownerLocation"
-                                value="Consolacion, PH"
                                 required
                               />
                             </div>
@@ -331,9 +323,7 @@ Energetic and playful, loves chasing balls and long walks. Looking for a compani
                                 class="form-control"
                                 id="ownerBio"
                                 rows="3"
-                              >
-Guides our technical direction and translates creative concepts into functional, polished applications.</textarea
-                              >
+                              ></textarea>
                             </div>
                           </div>
                         </div>
@@ -349,8 +339,9 @@ Guides our technical direction and translates creative concepts into functional,
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
-    <script src="./assets/js/auth-form-validator.js"></script>
     <script src="./assets/js/app-photo-preview.js"></script>
     <script src="./assets/js/app-profile-handler.js"></script>
+    <script src="./assets/js/app-profile-edit-loader.js"></script>
+    <script src="./assets/js/app-profile-edit-handler.js"></script>
   </body>
 </html>

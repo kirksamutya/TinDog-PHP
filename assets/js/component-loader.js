@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ).map(fetchAndInjectComponent);
 
   Promise.all(componentPromises).then(() => {
+    document.dispatchEvent(new Event("componentsLoaded"));
     if (document.body.querySelector(".page-find-matches, .kpi-card")) {
       animateDashboardComponents();
     }
