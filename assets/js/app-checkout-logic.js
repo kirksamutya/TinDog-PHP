@@ -74,5 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const handleCheckout = () => {
+    window.location.href = "./auth-create-profile.html";
+  };
+
   initializeCheckoutPage();
+
+  if (window.initializeFormValidation) {
+    window.initializeFormValidation("checkout-form", handleCheckout);
+  }
 });

@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const loggedInUserId =
-      sessionStorage.getItem("loggedInUserId") || "saavedra_roel";
+    const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    if (!loggedInUserId) {
+      console.error("No user is logged in.");
+      return;
+    }
     const userData = allUsers[loggedInUserId];
 
     if (!userData) {
