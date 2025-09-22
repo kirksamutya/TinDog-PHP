@@ -24,8 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
           .querySelector(".badge")
           .textContent.trim()
           .toLowerCase();
+        const isOpen = rowStatus === "open";
 
-        if (filterStatus === "all" || rowStatus === filterStatus) {
+        if (filterStatus === "all") {
+          row.style.display = "";
+        } else if (filterStatus === "open" && isOpen) {
+          row.style.display = "";
+        } else if (filterStatus === "resolved" && !isOpen) {
           row.style.display = "";
         } else {
           row.style.display = "none";
@@ -48,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         statusBadge.classList.remove("bg-danger");
         statusBadge.classList.add("bg-success");
-        statusBadge.textContent = "Resolved";
+        statusBadge.textContent = "Dismissed";
 
         this.remove();
 

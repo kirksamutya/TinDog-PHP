@@ -137,7 +137,7 @@
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Report Details</h5>
+                  <h5 class="modal-title" id="modalTitle">Report Details</h5>
                   <button
                     type="button"
                     class="btn-close"
@@ -145,26 +145,74 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                  <dl class="row">
-                    <dt class="col-sm-4">Reported User</dt>
-                    <dd class="col-sm-8" id="modalReportedUser"></dd>
+                  <div id="report-details-view">
+                    <dl class="row">
+                      <dt class="col-sm-4">Reported User</dt>
+                      <dd class="col-sm-8" id="modalReportedUser"></dd>
+                      <dt class="col-sm-4">Reported By</dt>
+                      <dd class="col-sm-8" id="modalReportedBy"></dd>
+                      <dt class="col-sm-4">Reason</dt>
+                      <dd class="col-sm-8" id="modalReason"></dd>
+                      <dt class="col-sm-4">Date</dt>
+                      <dd class="col-sm-8" id="modalDate"></dd>
+                      <dt class="col-sm-4">Status</dt>
+                      <dd class="col-sm-8">
+                        <span class="badge" id="modalStatus"></span>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div id="report-actions-view" style="display: none">
+                    <h6>
+                      Select an action for user
+                      <strong id="actionUserName"></strong>:
+                    </h6>
+                    <div
+                      class="d-grid gap-2 mt-3 btn-group-vertical"
+                      role="group"
+                    >
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="report-action"
+                        id="action-suspend"
+                        autocomplete="off"
+                        value="Suspended for 7 days"
+                      />
+                      <label
+                        class="btn btn-outline-warning"
+                        for="action-suspend"
+                        >Suspend User (7 Days)</label
+                      >
 
-                    <dt class="col-sm-4">Reported By</dt>
-                    <dd class="col-sm-8" id="modalReportedBy"></dd>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="report-action"
+                        id="action-ban"
+                        autocomplete="off"
+                        value="Permanently Banned"
+                      />
+                      <label class="btn btn-outline-danger" for="action-ban"
+                        >Permanently Ban User</label
+                      >
 
-                    <dt class="col-sm-4">Reason</dt>
-                    <dd class="col-sm-8" id="modalReason"></dd>
-
-                    <dt class="col-sm-4">Date</dt>
-                    <dd class="col-sm-8" id="modalDate"></dd>
-
-                    <dt class="col-sm-4">Status</dt>
-                    <dd class="col-sm-8">
-                      <span class="badge" id="modalStatus"></span>
-                    </dd>
-                  </dl>
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        name="report-action"
+                        id="action-dismiss"
+                        autocomplete="off"
+                        value="Dismissed"
+                      />
+                      <label
+                        class="btn btn-outline-secondary"
+                        for="action-dismiss"
+                        >Dismiss Report</label
+                      >
+                    </div>
+                  </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="details-footer">
                   <button
                     type="button"
                     class="btn btn-secondary"
@@ -172,8 +220,33 @@
                   >
                     Close
                   </button>
-                  <button type="button" class="btn btn-tindog-primary">
+                  <button
+                    type="button"
+                    class="btn btn-tindog-primary"
+                    id="take-action-btn"
+                  >
                     Take Action
+                  </button>
+                </div>
+                <div
+                  class="modal-footer"
+                  id="actions-footer"
+                  style="display: none"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancel-action-btn"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    id="confirm-action-btn"
+                    disabled
+                  >
+                    Confirm Action
                   </button>
                 </div>
               </div>
