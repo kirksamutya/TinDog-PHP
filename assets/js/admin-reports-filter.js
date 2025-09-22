@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
           case "banned":
             statusBadge = `<span class="badge bg-danger">${statusText}</span>`;
             break;
-          default: // dismissed, etc.
+          default:
             statusBadge = `<span class="badge bg-success">${statusText}</span>`;
             break;
         }
@@ -101,6 +101,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     };
+
+    reportTableBody.addEventListener("click", function (event) {
+      if (event.target.classList.contains("btn-outline-success")) {
+        const reportId = event.target.dataset.reportId;
+        const reportIndex = allReports.findIndex((r) => r.id == reportId);
+        if (reportIndex !== -1) {
+          allReports[reportIndex].status = "dismissed";
+          localStorage.setItem("tindogReports", JSON.stringify(allReports));
+          renderTable();
+        }
+      }
+    });
 
     filterButtons.forEach((button) => {
       button.addEventListener("click", function () {
