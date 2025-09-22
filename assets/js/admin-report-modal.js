@@ -91,14 +91,28 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       if (!selectedAction) return;
 
+      const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
+      const reportedUserName = activeRow.cells[0].textContent.trim();
+
+      const userId = Object.keys(allUsers).find(
+        (key) =>
+          (allUsers[key].firstName + " " + allUsers[key].lastName).trim() ===
+          reportedUserName
+      );
+
+      let newStatus = "active";
+      if (selectedAction.id === "action-suspend") newStatus = "suspended";
+      if (selectedAction.id === "action-ban") newStatus = "banned";
+
+      if (userId && selectedAction.id !== "action-dismiss") {
+        allUsers[userId].status = newStatus;
+        localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+      }
+
       const selectedActionLabel = document.querySelector(
         `label[for="${selectedAction.id}"]`
       );
       const newStatusText = selectedActionLabel.textContent.split(" ")[0];
-
-      const user = activeRow.cells[0].textContent.trim();
-
-      alert(`Action Confirmed: User ${user} action set to '${newStatusText}'.`);
 
       const statusBadge = activeRow.querySelector(".badge");
       statusBadge.classList.remove("bg-danger");
@@ -111,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       reportModal.hide();
-
       document.querySelector(".filter-bar .btn-filter.active").click();
     });
 

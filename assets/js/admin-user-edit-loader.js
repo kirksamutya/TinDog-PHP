@@ -41,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("user");
 
-  // Load from localStorage or fall back to sample data
   const allUsers =
     JSON.parse(localStorage.getItem("tindogUsers")) || sampleUsers;
   const userData = allUsers[userId] || sampleUsers.eugene_stepnov;
