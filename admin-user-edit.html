@@ -34,7 +34,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
           <div class="page-header gradient-background">
             <h1 class="h2" id="pageTitle">Edit User</h1>
-            <p class="mb-0">Modify the account details for a Standard User.</p>
+            <p class="mb-0" id="pageSubtitle"></p>
           </div>
           <div class="card kpi-card">
             <div class="card-body">
@@ -46,10 +46,19 @@
                   <select class="form-select" id="accountStatus" required>
                     <option value="active">Active</option>
                     <option value="suspended">Suspended</option>
+                    <option value="banned">Banned</option>
                   </select>
                 </div>
                 <hr />
-                <h5 class="fw-bold mb-3">Owner's Details</h5>
+                <h5 class="fw-bold mb-3">Account Details</h5>
+                <div id="admin-user-fields">
+                  <div class="mb-3">
+                    <label for="displayName" class="form-label"
+                      >Display Name</label
+                    >
+                    <input type="text" class="form-control" id="displayName" />
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="firstName" class="form-label">First Name</label>
@@ -79,13 +88,17 @@
                     required
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="ownerLocation" class="form-label"
-                    >Location (City/Town)</label
-                  >
-                  <input type="text" class="form-control" id="ownerLocation" />
-                </div>
                 <div id="standard-user-fields">
+                  <div class="mb-3">
+                    <label for="ownerLocation" class="form-label"
+                      >Location (City/Town)</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ownerLocation"
+                    />
+                  </div>
                   <hr class="my-4" />
                   <h5 class="fw-bold mb-3">Dog's Profile</h5>
                   <div class="row">
@@ -128,7 +141,6 @@
                     </select>
                   </div>
                 </div>
-
                 <div class="mt-4">
                   <button type="submit" class="btn btn-tindog-primary">
                     Save Changes
@@ -148,8 +160,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
-    <script src="./assets/js/admin-user-create.js"></script>
     <script src="./assets/js/admin-user-edit-loader.js"></script>
-    <script src="./assets/js/auth-form-validator.js"></script>
   </body>
 </html>

@@ -2,11 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const initUserManagement = () => {
     const sampleUsers = {
       master_admin: {
-        firstName: "Master",
-        lastName: "Admin",
+        firstName: "Roel Anthony",
+        lastName: "Saavedra",
+        displayName: "Master Admin",
         email: "admin@test.com",
         password: "Admin123",
-        plan: "mastiff",
+        plan: "N/A",
         status: "active",
         role: "admin",
         masterAdmin: true,
@@ -34,18 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
       cruz_juan: {
         firstName: "Juan",
         lastName: "Cruz",
+        displayName: "Juan C.",
         email: "juan.cruz@example.com",
         password: "Password123",
-        plan: "mastiff",
+        plan: "N/A",
         status: "active",
         role: "admin",
-        location: "Cebu City, Cebu",
-        dogName: "Bantay",
-        dogBreed: "Aspin",
-        dogSex: "male",
-        dogSize: "medium",
-        signUpDate: "Sep 22, 2023",
-        lastSeen: "2 hours ago",
       },
       santos_maria: {
         firstName: "Maria",
@@ -178,8 +173,12 @@ document.addEventListener("DOMContentLoaded", () => {
           statusBadge = `<span class="badge bg-secondary">Unknown</span>`;
       }
 
-      const roleText =
-        user.role === "admin" ? "Administrator" : "Standard User";
+      let roleText = "Standard User";
+      if (user.role === "admin" && user.masterAdmin) {
+        roleText = "Master Admin";
+      } else if (user.role === "admin") {
+        roleText = "Administrator";
+      }
 
       const actionsDisabled = user.masterAdmin ? "disabled" : "";
 
@@ -218,7 +217,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let userToDelete = null;
 
     userTableBody.addEventListener("click", function (event) {
-      if (event.target.classList.contains("btn-outline-danger")) {
+      if (
+        event.target.classList.contains("btn-outline-danger") &&
+        !event.target.hasAttribute("disabled")
+      ) {
         userToDelete = event.target.dataset.userId;
         const userFullName =
           allUsers[userToDelete].firstName +
@@ -233,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userToDelete) {
         delete allUsers[userToDelete];
         localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-        initUserManagement();
+        window.location.reload();
       }
       deleteModal.hide();
     });

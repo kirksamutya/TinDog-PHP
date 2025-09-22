@@ -14,16 +14,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!reportedUser || !reportingUser) return;
 
-        const reportedUserName = `${reportedUser.firstName} ${reportedUser.lastName}`;
-        const reportingUserName = `${reportingUser.firstName} ${reportingUser.lastName}`;
+        const reportedUserCell = `
+          <div class="d-flex align-items-center">
+              <div class="user-avatar-initials me-3">${reportedUser.firstName.charAt(
+                0
+              )}${reportedUser.lastName.charAt(0)}</div>
+              <div><strong>${reportedUser.firstName} ${
+          reportedUser.lastName
+        }</strong></div>
+          </div>`;
+
+        const reportingUserCell = `
+          <div class="d-flex align-items-center">
+              <div class="user-avatar-initials me-3">${reportingUser.firstName.charAt(
+                0
+              )}${reportingUser.lastName.charAt(0)}</div>
+              <div>${reportingUser.firstName} ${reportingUser.lastName}</div>
+          </div>`;
 
         let statusBadge;
-        if (report.status === "open") {
-          statusBadge = `<span class="badge bg-danger">Open</span>`;
-        } else {
-          const statusText =
-            report.status.charAt(0).toUpperCase() + report.status.slice(1);
-          statusBadge = `<span class="badge bg-success">${statusText}</span>`;
+        const statusText =
+          report.status.charAt(0).toUpperCase() + report.status.slice(1);
+        switch (report.status) {
+          case "open":
+            statusBadge = `<span class="badge bg-danger">${statusText}</span>`;
+            break;
+          case "suspended":
+            statusBadge = `<span class="badge bg-warning text-dark">${statusText}</span>`;
+            break;
+          case "banned":
+            statusBadge = `<span class="badge bg-danger">${statusText}</span>`;
+            break;
+          default:
+            statusBadge = `<span class="badge bg-success">${statusText}</span>`;
+            break;
         }
 
         const actions =
@@ -41,8 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const row = document.createElement("tr");
         row.dataset.reportId = report.id;
         row.innerHTML = `
-                <td><strong>${reportedUserName}</strong></td>
-                <td>${reportingUserName}</td>
+                <td>${reportedUserCell}</td>
+                <td>${reportingUserCell}</td>
                 <td>${report.reason}</td>
                 <td>${report.date}</td>
                 <td>${statusBadge}</td>
@@ -62,12 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       rows.forEach((row) => {
         const report = allReports.find((r) => r.id == row.dataset.reportId);
-        const isOpen = report.status === "open";
+        if (!report) return;
+
+        const isResolved = report.status !== "open";
 
         if (
           filterStatus === "all" ||
-          (filterStatus === "open" && isOpen) ||
-          (filterStatus === "resolved" && !isOpen)
+          (filterStatus === "open" && !isResolved) ||
+          (filterStatus === "resolved" && isResolved)
         ) {
           row.style.display = "";
         } else {
@@ -75,14 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     };
-
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", function () {
-        filterButtons.forEach((btn) => btn.classList.remove("active"));
-        this.classList.add("active");
-        applyCurrentFilter();
-      });
-    });
 
     reportTableBody.addEventListener("click", function (event) {
       if (event.target.classList.contains("btn-outline-success")) {
@@ -94,6 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
           renderTable();
         }
       }
+    });
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        this.classList.add("active");
+        applyCurrentFilter();
+      });
     });
 
     renderTable();
