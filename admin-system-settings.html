@@ -37,6 +37,59 @@
           >
             <h1 class="h2">System Settings</h1>
           </div>
+
+          <div class="container d-flex justify-content-between py-3 mb-4 border-bottom">
+              <div class="col-md-3 mb-2 mb-md-0">
+                <h5>Add new roles</h5>
+                <small>Add new members</small>
+              </div>
+              <div class="text-end">
+                <button type="button" class="btn btn-outline-secondary me-2">Discard</button>
+                <button type="button" class="btn btn-dark">Save Changes</button>
+              </div>
+          </div>
+
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Details</h5>
+              <small class="text-muted">Authors can manage and publish the content they created</small>
+              <div class="row mt-3">
+                <div class="col-md-6 mb-3">
+                  <label for="roleName" class="form-label">Role Name</label>
+                  <input type="text" class="form-control" id="roleName" placeholder="Enter role name">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="roleDesc" class="form-label">Description</label>
+                  <input type="text" class="form-control" id="roleDesc" placeholder="Enter description">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h5>Notifications</h5>
+              <div>
+                <label class="form-check-label me-2">Select all</label>
+                <input class="form-check-input" type="checkbox">
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked>
+                <label class="form-check-label">View</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked>
+                <label class="form-check-label">Quotes Approval</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" checked>
+                <label class="form-check-label">Inquiry Quotes</label>
+              </div>
+            </div>
+          </div>
+          
         </main>
       </div>
     </div>
