@@ -47,7 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     navLinks.forEach((link) => {
       const linkPath = new URL(link.href).pathname;
-      if (currentPagePath === linkPath) {
+      if (
+        currentPagePath.endsWith(linkPath.substring(linkPath.lastIndexOf("/")))
+      ) {
         link.classList.add("active");
       } else {
         link.classList.remove("active");
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ).map(fetchAndInjectComponent);
 
   Promise.all(componentPromises).then(() => {
+    document.dispatchEvent(new Event("componentsLoaded"));
     if (document.body.querySelector(".page-find-matches, .kpi-card")) {
       animateDashboardComponents();
     }

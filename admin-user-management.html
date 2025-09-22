@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TinDog - Admin Dashboard</title>
+    <title>TinDog - User Management</title>
     <link
       rel="icon"
       type="image/png"
@@ -33,117 +33,147 @@
         ></div>
         <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
           <div class="page-header gradient-background">
-            <h1 class="h2">Dashboard</h1>
-            <p class="mb-0">Welcome back, here is your performance overview.</p>
-          </div>
-
-          <div class="row g-4 mb-4">
-            <div class="col-xl-3 col-md-6">
-              <div class="kpi-card">
-                <div class="d-flex align-items-center">
-                  <div class="kpi-icon icon-bg-primary me-3">
-                    <i class="bi bi-people-fill"></i>
-                  </div>
-                  <div>
-                    <h5 class="card-title">Total Users</h5>
-                    <div class="d-flex align-items-baseline">
-                      <h4 class="kpi-value mb-0">1,248</h4>
-                      <span class="kpi-trend text-success ms-2">+3.2%</span>
-                    </div>
-                  </div>
-                </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h1 class="h2">User Management</h1>
+                <p class="mb-0">View, create, and manage user accounts.</p>
               </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="kpi-card">
-                <div class="d-flex align-items-center">
-                  <div class="kpi-icon icon-bg-secondary me-3">
-                    <i class="bi bi-cash-stack"></i>
-                  </div>
-                  <div>
-                    <h5 class="card-title">Monthly Revenue</h5>
-                    <div class="d-flex align-items-baseline">
-                      <h4 class="kpi-value mb-0">₱24,500</h4>
-                      <span class="kpi-trend text-success ms-2">+8.1%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="kpi-card">
-                <div class="d-flex align-items-center">
-                  <div class="kpi-icon icon-bg-accent me-3">
-                    <i class="bi bi-flag-fill"></i>
-                  </div>
-                  <div>
-                    <h5 class="card-title">Open Reports</h5>
-                    <div class="d-flex align-items-baseline">
-                      <h4 class="kpi-value mb-0">5</h4>
-                      <span class="kpi-trend text-muted ms-2">_</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="kpi-card">
-                <div class="d-flex align-items-center">
-                  <div class="kpi-icon icon-bg-success me-3">
-                    <i class="bi bi-shield-check"></i>
-                  </div>
-                  <div>
-                    <h5 class="card-title">System Status</h5>
-                    <div class="d-flex align-items-baseline">
-                      <h4 class="kpi-value text-success mb-0">Online</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <a href="./admin-user-create.html" class="btn btn-light">
+                <i class="bi bi-plus-circle me-2"></i>Create User
+              </a>
             </div>
           </div>
 
-          <div class="row g-4">
-            <div class="col-lg-8">
-              <div class="chart-container h-100">
-                <h5 class="mb-3">User Growth</h5>
-                <p class="text-muted text-center py-5">
-                  Chart Area Placeholder
-                </p>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="activity-feed h-100">
-                <h5 class="mb-3">Recent Activity</h5>
-                <div class="activity-item d-flex">
-                  <div class="activity-icon icon-bg-primary">
-                    <i class="bi bi-person-plus-fill"></i>
-                  </div>
-                  <div>
-                    <strong>New User:</strong> Maria S. registered.
-                    <div class="text-muted small">15 minutes ago</div>
-                  </div>
-                </div>
-                <div class="activity-item d-flex">
-                  <div class="activity-icon icon-bg-accent">
-                    <i class="bi bi-flag-fill"></i>
-                  </div>
-                  <div>
-                    <strong>New Report:</strong> Profile "Rocky123" was
-                    reported.
-                    <div class="text-muted small">1 hour ago</div>
-                  </div>
-                </div>
-                <div class="activity-item d-flex">
-                  <div class="activity-icon icon-bg-secondary">
-                    <i class="bi bi-gem"></i>
-                  </div>
-                  <div>
-                    <strong>New Subscriber:</strong> John D. upgraded to
-                    Mastiff.
-                    <div class="text-muted small">3 hours ago</div>
-                  </div>
-                </div>
+          <div class="card kpi-card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Plan</th>
+                      <th>Status</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="user-avatar-initials me-3">ES</div>
+                          <div>
+                            <strong>Eugene Stepnov</strong>
+                          </div>
+                        </div>
+                      </td>
+                      <td>eugene.stepnov@example.com</td>
+                      <td>Mastiff</td>
+                      <td>
+                        <span class="badge bg-success">Active</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="btn-group" role="group">
+                          <a
+                            href="./admin-user-record.html"
+                            class="btn btn-sm btn-outline-secondary"
+                            >View</a
+                          >
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-danger"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="user-avatar-initials me-3"
+                            style="background-color: var(--brand-secondary)"
+                          >
+                            MS
+                          </div>
+                          <div>
+                            <strong>Maria S.</strong>
+                          </div>
+                        </div>
+                      </td>
+                      <td>maria.s@example.com</td>
+                      <td>Labrador</td>
+                      <td>
+                        <span class="badge bg-success">Active</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="btn-group" role="group">
+                          <a href="#" class="btn btn-sm btn-outline-secondary"
+                            >View</a
+                          >
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-danger"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div
+                            class="user-avatar-initials me-3"
+                            style="background-color: var(--brand-accent)"
+                          >
+                            JD
+                          </div>
+                          <div>
+                            <strong>John D.</strong>
+                          </div>
+                        </div>
+                      </td>
+                      <td>john.d@example.com</td>
+                      <td>Chihuahua</td>
+                      <td>
+                        <span class="badge bg-danger">Suspended</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="btn-group" role="group">
+                          <a href="#" class="btn btn-sm btn-outline-secondary"
+                            >View</a
+                          >
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-danger"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

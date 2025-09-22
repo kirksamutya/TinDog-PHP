@@ -29,18 +29,162 @@
       <div class="row">
         <div
           data-component="./admin-sidebar.html"
-          class="col-md-3 col-lg-2"
+          class="col-md-3 col-lg-2 d-md-block p-0"
         ></div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-          <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-          >
-            <h1 class="h2">Reports</h1>
+        <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+          <div class="page-header gradient-background">
+            <h1 class="h2">User Reports</h1>
+            <p class="mb-0">Review and resolve user-submitted reports.</p>
+          </div>
+
+          <div class="filter-bar">
+            <button type="button" class="btn btn-filter active">Open</button>
+            <button type="button" class="btn btn-filter">Resolved</button>
+            <button type="button" class="btn btn-filter">All</button>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead>
+                    <tr>
+                      <th>Reported User</th>
+                      <th>Reported By</th>
+                      <th>Reason</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th class="text-end">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Rocky123</strong></td>
+                      <td>Maria S.</td>
+                      <td>Inappropriate Photo</td>
+                      <td>Sep 22, 2025</td>
+                      <td>
+                        <span class="badge bg-danger">Open</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="btn-group" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                          >
+                            View Details
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-success"
+                          >
+                            Resolve
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>MaxPower</strong></td>
+                      <td>John D.</td>
+                      <td>Spam / Bot</td>
+                      <td>Sep 21, 2025</td>
+                      <td>
+                        <span class="badge bg-danger">Open</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="btn-group" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                          >
+                            View Details
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-success"
+                          >
+                            Resolve
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>LunaLove</strong></td>
+                      <td>Eugene Stepnov</td>
+                      <td>Harassment</td>
+                      <td>Sep 20, 2025</td>
+                      <td>
+                        <span class="badge bg-success">Resolved</span>
+                      </td>
+                      <td class="text-end">
+                        <div class="btn-group" role="group">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-outline-secondary"
+                          >
+                            View Details
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="reportDetailsModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Report Details</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <dl class="row">
+                    <dt class="col-sm-4">Reported User</dt>
+                    <dd class="col-sm-8" id="modalReportedUser"></dd>
+
+                    <dt class="col-sm-4">Reported By</dt>
+                    <dd class="col-sm-8" id="modalReportedBy"></dd>
+
+                    <dt class="col-sm-4">Reason</dt>
+                    <dd class="col-sm-8" id="modalReason"></dd>
+
+                    <dt class="col-sm-4">Date</dt>
+                    <dd class="col-sm-8" id="modalDate"></dd>
+
+                    <dt class="col-sm-4">Status</dt>
+                    <dd class="col-sm-8">
+                      <span class="badge" id="modalStatus"></span>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-tindog-primary">
+                    Take Action
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </main>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/admin-reports-filter.js"></script>
+    <script src="./assets/js/admin-report-modal.js"></script>
   </body>
 </html>
