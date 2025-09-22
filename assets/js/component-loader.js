@@ -47,9 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     navLinks.forEach((link) => {
       const linkPath = new URL(link.href).pathname;
-      if (
-        currentPagePath.endsWith(linkPath.substring(linkPath.lastIndexOf("/")))
-      ) {
+      if (currentPagePath === linkPath) {
         link.classList.add("active");
       } else {
         link.classList.remove("active");

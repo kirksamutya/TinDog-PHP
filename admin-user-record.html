@@ -33,7 +33,7 @@
         ></div>
         <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
           <div class="page-header gradient-background">
-            <h1 class="h2">User Record: Eugene Stepnov</h1>
+            <h1 class="h2" id="pageTitle">User Record</h1>
           </div>
           <div class="card kpi-card">
             <div class="card-header bg-white border-0 pt-3 px-4">
@@ -64,36 +64,31 @@
                   <h5 class="fw-bold mb-3">Owner Details</h5>
                   <dl class="row">
                     <dt class="col-sm-3">Full Name</dt>
-                    <dd class="col-sm-9">Eugene Stepnov</dd>
+                    <dd class="col-sm-9" id="fullName"></dd>
                     <dt class="col-sm-3">Email</dt>
-                    <dd class="col-sm-9">eugene.stepnov@example.com</dd>
+                    <dd class="col-sm-9" id="email"></dd>
                     <dt class="col-sm-3">Signed Up</dt>
-                    <dd class="col-sm-9">6 years ago</dd>
+                    <dd class="col-sm-9" id="signUpDate"></dd>
                     <dt class="col-sm-3">Last Seen</dt>
-                    <dd class="col-sm-9">Yesterday</dd>
+                    <dd class="col-sm-9" id="lastSeen"></dd>
                   </dl>
                   <hr class="my-4" />
                   <h5 class="fw-bold mb-3">Dog's Profile</h5>
                   <dl class="row">
                     <dt class="col-sm-3">Dog's Name</dt>
-                    <dd class="col-sm-9">Jorjee</dd>
+                    <dd class="col-sm-9" id="dogName"></dd>
                     <dt class="col-sm-3">Breed</dt>
-                    <dd class="col-sm-9">Shih Tzu</dd>
+                    <dd class="col-sm-9" id="dogBreed"></dd>
                     <dt class="col-sm-3">Age</dt>
-                    <dd class="col-sm-9">3 years old</dd>
+                    <dd class="col-sm-9" id="dogAge"></dd>
+                    <dt class="col-sm-3">Sex</dt>
+                    <dd class="col-sm-9" id="dogSex"></dd>
+                    <dt class="col-sm-3">Size</dt>
+                    <dd class="col-sm-9" id="dogSize"></dd>
                     <dt class="col-sm-3">Location</dt>
-                    <dd class="col-sm-9">Consolacion, PH</dd>
+                    <dd class="col-sm-9" id="dogLocation"></dd>
                     <dt class="col-sm-3">Bio</dt>
-                    <dd class="col-sm-9">
-                      Energetic and playful, loves chasing balls and long walks.
-                      Looking for a companion to explore with!
-                    </dd>
-                    <dt class="col-sm-3">Personality</dt>
-                    <dd class="col-sm-9">
-                      <span class="badge bg-secondary">Playful</span>
-                      <span class="badge bg-secondary">Cuddly</span>
-                      <span class="badge bg-secondary">Friendly</span>
-                    </dd>
+                    <dd class="col-sm-9" id="dogBio"></dd>
                   </dl>
                 </div>
                 <div class="tab-pane fade" id="activity">
@@ -112,14 +107,11 @@
                   <h5 class="fw-bold mb-3">Billing Information</h5>
                   <dl class="row">
                     <dt class="col-sm-3">Plan</dt>
-                    <dd class="col-sm-9">Mastiff (₱99/mo)</dd>
+                    <dd class="col-sm-9" id="billingPlan"></dd>
                     <dt class="col-sm-3">Next Payment</dt>
-                    <dd class="col-sm-9">Oct 12, 2025</dd>
+                    <dd class="col-sm-9" id="billingNextPayment"></dd>
                     <dt class="col-sm-3">Payment Method</dt>
-                    <dd class="col-sm-9">
-                      <i class="bi bi-credit-card-2-front-fill me-2"></i> Visa
-                      **** 4242
-                    </dd>
+                    <dd class="col-sm-9" id="billingPaymentMethod"></dd>
                   </dl>
                 </div>
               </div>
@@ -130,5 +122,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/admin-user-record-loader.js"></script>
   </body>
 </html>
