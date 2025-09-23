@@ -1221,6 +1221,13 @@ body {
   transform: scale(1.1);
 }
 
+.liked-by-img-unblurred {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 .liked-by-overlay {
   position: absolute;
   top: 0;
