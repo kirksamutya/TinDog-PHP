@@ -1,29 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const initializeFormValidation = (formId, redirectUrl) => {
+  const initializeFormValidation = (formId, successCallback) => {
     const formToValidate = document.getElementById(formId);
-
     if (!formToValidate) {
       return;
     }
 
-    const handleFormSubmission = (event) => {
+    formToValidate.addEventListener("submit", (event) => {
       event.preventDefault();
-      const isFormValid = formToValidate.checkValidity();
+      event.stopPropagation();
 
-      if (!isFormValid) {
-        event.stopPropagation();
-      } else {
-        window.location.href = redirectUrl;
+      if (formToValidate.checkValidity()) {
+        if (typeof successCallback === "function") {
+          successCallback(formToValidate);
+        }
       }
-      formToValidate.classList.add("was-validated");
-    };
 
-    formToValidate.addEventListener("submit", handleFormSubmission);
+      formToValidate.classList.add("was-validated");
+    });
   };
 
-  initializeFormValidation("register-form", "./auth-create-profile.html");
-  initializeFormValidation("login-form", "./app-dashboard.html");
-  initializeFormValidation("checkout-form", "./auth-create-profile.html");
-  initializeFormValidation("edit-profile-form", "./app-profile.html");
-  initializeFormValidation("edit-user-form", "./admin-user-management.html");
+  window.initializeFormValidation = initializeFormValidation;
 });

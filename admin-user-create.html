@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/admin.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
   <body>
     <div data-component="./admin-header.html"></div>
@@ -38,7 +38,7 @@
               Manually provision a new Standard User or Administrator account.
             </p>
           </div>
-          <div class="card kpi-card">
+          <div class="card shadow-sm">
             <div class="card-body">
               <form id="create-user-form">
                 <div class="mb-4">
@@ -51,7 +51,7 @@
                   </select>
                 </div>
                 <hr />
-                <h5 class="fw-bold mb-3">Owner's Details</h5>
+                <h5 class="fw-bold mb-3">Account Details</h5>
                 <div class="row">
                   <div class="col-md-6 mb-3">
                     <label for="firstName" class="form-label">First Name</label>
@@ -92,19 +92,20 @@
                     required
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="ownerLocation" class="form-label"
-                    >Location (City/Town)</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="ownerLocation"
-                    placeholder="e.g. Consolacion, Cebu"
-                  />
-                </div>
                 <div id="standard-user-fields">
                   <hr class="my-4" />
+                  <h5 class="fw-bold mb-3">User's Profile</h5>
+                  <div class="mb-3">
+                    <label for="ownerLocation" class="form-label"
+                      >Location (City/Town)</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="ownerLocation"
+                      placeholder="e.g. Consolacion, Cebu"
+                    />
+                  </div>
                   <h5 class="fw-bold mb-3">Dog's Profile</h5>
                   <div class="row">
                     <div class="col-md-6 mb-3">
@@ -165,6 +166,8 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/database.js"></script>
+    <script src="./assets/js/user-service.js"></script>
     <script src="./assets/js/admin-user-create.js"></script>
     <script src="./assets/js/admin-user-create-handler.js"></script>
   </body>

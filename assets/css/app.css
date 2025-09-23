@@ -208,9 +208,6 @@ body {
 .page-header {
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
   margin-top: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -244,13 +241,9 @@ body {
 }
 
 .kpi-card {
-  background-color: #fff;
-  border-radius: var(--border-radius-medium);
-  padding: 1.5rem;
   display: flex;
   align-items: center;
-  border: 1px solid var(--border-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -258,11 +251,6 @@ body {
 .kpi-card.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-.kpi-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--box-shadow-light);
 }
 
 .kpi-icon {
@@ -312,8 +300,6 @@ body {
 }
 
 .tip-card {
-  background-color: #fff;
-  border-radius: var(--border-radius-medium);
   border: 1px solid var(--border-color);
   opacity: 0;
   transform: translateY(20px);
@@ -331,8 +317,6 @@ body {
 }
 
 .pups-nearby-card {
-  background-color: #fff;
-  border-radius: var(--border-radius-medium);
   border: 1px solid var(--border-color);
   opacity: 0;
   transform: translateY(20px);

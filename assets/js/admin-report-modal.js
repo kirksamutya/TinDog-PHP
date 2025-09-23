@@ -40,41 +40,46 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     reportTableBody.addEventListener("click", function (event) {
-      if (event.target.classList.contains("btn-outline-secondary")) {
-        activeReportId = event.target.dataset.reportId;
-        const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
-        const allReports = JSON.parse(localStorage.getItem("tindogReports"));
-        const report = allReports.find((r) => r.id == activeReportId);
+      const button = event.target.closest("button");
+      if (!button) return;
 
-        const reportedUser = allUsers[report.reportedUserId];
-        const reportingUser = allUsers[report.reportedByUserId];
+      const reportId = button.dataset.reportId;
+      if (!reportId) return;
 
-        document.getElementById(
-          "modalReportedUser"
-        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
-        document.getElementById(
-          "modalReportedBy"
-        ).textContent = `${reportingUser.firstName} ${reportingUser.lastName}`;
-        document.getElementById("modalReason").textContent = report.reason;
-        document.getElementById("modalDate").textContent = report.date;
-        document.getElementById("modalStatus").textContent = report.status;
-        document.getElementById(
-          "actionUserName"
-        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
+      activeReportId = reportId;
+      const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+      const allReports = JSON.parse(localStorage.getItem("tindogReports"));
+      const report = allReports.find((r) => r.id == activeReportId);
 
-        const modalStatusBadge = document.getElementById("modalStatus");
-        modalStatusBadge.className = "badge";
-        if (report.status === "open") {
-          modalStatusBadge.classList.add("bg-danger");
-          takeActionButton.style.display = "block";
-        } else {
-          modalStatusBadge.classList.add("bg-success");
-          takeActionButton.style.display = "none";
-        }
+      const reportedUser = allUsers[report.reportedUserId];
+      const reportingUser = allUsers[report.reportedByUserId];
 
-        switchToDetailsView();
-        reportModal.show();
+      document.getElementById(
+        "modalReportedUser"
+      ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
+      document.getElementById(
+        "modalReportedBy"
+      ).textContent = `${reportingUser.firstName} ${reportingUser.lastName}`;
+      document.getElementById("modalReason").textContent = report.reason;
+      document.getElementById("modalDate").textContent = report.date;
+      document.getElementById(
+        "actionUserName"
+      ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
+
+      const modalStatusBadge = document.getElementById("modalStatus");
+      modalStatusBadge.className = "badge";
+      modalStatusBadge.textContent = report.status;
+
+      if (report.status === "open") {
+        modalStatusBadge.classList.add("bg-danger");
+        takeActionButton.style.display = "block";
+      } else {
+        modalStatusBadge.classList.add("bg-success");
+        takeActionButton.style.display = "none";
       }
+
+      switchToDetailsView();
+      reportModal.show();
     });
 
     takeActionButton.addEventListener("click", switchToActionsView);
@@ -103,11 +108,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (newStatus === "suspended" || newStatus === "banned") {
         const user = allUsers[report.reportedUserId];
-        user.status = newStatus;
-        localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+        if (user) {
+          user.status = newStatus;
+          localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+        }
       }
 
-      allReports[reportIndex].status = newStatus;
+      allReports[reportIndex].status = "resolved";
       localStorage.setItem("tindogReports", JSON.stringify(allReports));
 
       reportModal.hide();

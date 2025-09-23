@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/admin.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
   <body>
     <div data-component="./admin-header.html"></div>
@@ -29,71 +29,100 @@
       <div class="row">
         <div
           data-component="./admin-sidebar.html"
-          class="col-md-3 col-lg-2"
+          class="col-md-3 col-lg-2 d-md-block p-0"
         ></div>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
-          <div
-            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-          >
+        <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+          <div class="page-header gradient-background">
             <h1 class="h2">System Settings</h1>
+            <p class="mb-0">Configure global application settings.</p>
           </div>
 
-          <div class="container d-flex justify-content-between py-3 mb-4 border-bottom">
-              <div class="col-md-3 mb-2 mb-md-0">
-                <h5>Add new roles</h5>
-                <small>Add new members</small>
-              </div>
-              <div class="text-end">
-                <button type="button" class="btn btn-outline-secondary me-2">Discard</button>
-                <button type="button" class="btn btn-dark">Save Changes</button>
-              </div>
-          </div>
-
-          <div class="card mb-4">
+          <div class="card kpi-card">
             <div class="card-body">
-              <h5 class="card-title">Details</h5>
-              <small class="text-muted">Authors can manage and publish the content they created</small>
-              <div class="row mt-3">
-                <div class="col-md-6 mb-3">
-                  <label for="roleName" class="form-label">Role Name</label>
-                  <input type="text" class="form-control" id="roleName" placeholder="Enter role name">
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="roleDesc" class="form-label">Description</label>
-                  <input type="text" class="form-control" id="roleDesc" placeholder="Enter description">
+              <h5 class="fw-bold mb-3 border-bottom pb-2">
+                Content & Moderation
+              </h5>
+              <div class="form-check form-switch mb-3">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="auto-flag-images"
+                  data-setting="autoFlagImages"
+                />
+                <label class="form-check-label" for="auto-flag-images"
+                  >Automatically flag inappropriate images</label
+                >
+              </div>
+              <div class="mb-3">
+                <label for="report-threshold" class="form-label"
+                  >Auto-Suspend Report Threshold</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="report-threshold"
+                  style="max-width: 150px"
+                  data-setting="reportThreshold"
+                />
+                <div class="form-text">
+                  Automatically suspend a user after this many reports.
                 </div>
               </div>
-            </div>
-          </div>
+              <hr />
 
-          <div class="card mb-3">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5>Notifications</h5>
-              <div>
-                <label class="form-check-label me-2">Select all</label>
-                <input class="form-check-input" type="checkbox">
+              <h5 class="fw-bold my-3 border-bottom pb-2">
+                Matching Configuration
+              </h5>
+              <div class="mb-3">
+                <label for="location-weight" class="form-label"
+                  >Location Proximity Weighting</label
+                >
+                <input
+                  type="range"
+                  class="form-range"
+                  id="location-weight"
+                  min="0"
+                  max="100"
+                  data-setting="locationWeight"
+                />
+                <div class="form-text">
+                  Increase to more strongly prioritize closer matches.
+                </div>
               </div>
-            </div>
-            <div class="card-body">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" checked>
-                <label class="form-check-label">View</label>
+              <hr />
+
+              <h5 class="fw-bold my-3 border-bottom pb-2">Feature Flags</h5>
+              <div class="form-check form-switch mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="enable-super-likes"
+                  data-setting="enableSuperLikes"
+                />
+                <label class="form-check-label" for="enable-super-likes"
+                  >Enable "Super Likes" Feature</label
+                >
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" checked>
-                <label class="form-check-label">Quotes Approval</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" checked>
-                <label class="form-check-label">Inquiry Quotes</label>
+              <hr />
+              <h5 class="fw-bold my-3 border-bottom pb-2">Maintenance Mode</h5>
+              <div class="form-check form-switch mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="maintenance-mode"
+                  data-setting="maintenanceMode"
+                />
+                <label class="form-check-label" for="maintenance-mode"
+                  >Enable Maintenance Mode</label
+                >
               </div>
             </div>
           </div>
-          
         </main>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/admin-system-settings-handler.js"></script>
   </body>
 </html>

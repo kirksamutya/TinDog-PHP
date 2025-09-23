@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/admin.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
   <body>
     <div data-component="./admin-header.html"></div>
@@ -29,7 +29,7 @@
       <div class="row">
         <div
           data-component="./admin-sidebar.html"
-          class="col-md-3 col-lg-2 d-none d-md-block p-0"
+          class="col-md-3 col-lg-2 d-md-block p-0"
         ></div>
         <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
           <div class="page-header gradient-background">
@@ -49,9 +49,9 @@
               </div>
             </div>
           </div>
-          <div class="card kpi-card">
+          <div class="card shadow-sm">
             <div class="card-header bg-white border-0 pt-3 px-4">
-              <ul class="nav nav-tabs">
+              <ul class="nav nav-tabs" id="record-tabs">
                 <li class="nav-item">
                   <a
                     class="nav-link active"
@@ -65,7 +65,7 @@
                     >Activity</a
                   >
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="billing-tab">
                   <a class="nav-link" data-bs-toggle="tab" href="#billing"
                     >Billing</a
                   >
@@ -75,7 +75,7 @@
             <div class="card-body p-4">
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="overview">
-                  <h5 class="fw-bold mb-3">Owner Details</h5>
+                  <h5 class="fw-bold mb-3" id="details-title">Owner Details</h5>
                   <dl class="row">
                     <dt class="col-sm-3">Full Name</dt>
                     <dd class="col-sm-9" id="fullName"></dd>
@@ -86,24 +86,26 @@
                     <dt class="col-sm-3">Last Seen</dt>
                     <dd class="col-sm-9" id="lastSeen"></dd>
                   </dl>
-                  <hr class="my-4" />
-                  <h5 class="fw-bold mb-3">Dog's Profile</h5>
-                  <dl class="row">
-                    <dt class="col-sm-3">Dog's Name</dt>
-                    <dd class="col-sm-9" id="dogName"></dd>
-                    <dt class="col-sm-3">Breed</dt>
-                    <dd class="col-sm-9" id="dogBreed"></dd>
-                    <dt class="col-sm-3">Age</dt>
-                    <dd class="col-sm-9" id="dogAge"></dd>
-                    <dt class="col-sm-3">Sex</dt>
-                    <dd class="col-sm-9" id="dogSex"></dd>
-                    <dt class="col-sm-3">Size</dt>
-                    <dd class="col-sm-9" id="dogSize"></dd>
-                    <dt class="col-sm-3">Location</dt>
-                    <dd class="col-sm-9" id="dogLocation"></dd>
-                    <dt class="col-sm-3">Bio</dt>
-                    <dd class="col-sm-9" id="dogBio"></dd>
-                  </dl>
+                  <div id="dog-profile-section">
+                    <hr class="my-4" />
+                    <h5 class="fw-bold mb-3">Dog's Profile</h5>
+                    <dl class="row">
+                      <dt class="col-sm-3">Dog's Name</dt>
+                      <dd class="col-sm-9" id="dogName"></dd>
+                      <dt class="col-sm-3">Breed</dt>
+                      <dd class="col-sm-9" id="dogBreed"></dd>
+                      <dt class="col-sm-3">Age</dt>
+                      <dd class="col-sm-9" id="dogAge"></dd>
+                      <dt class="col-sm-3">Sex</dt>
+                      <dd class="col-sm-9" id="dogSex"></dd>
+                      <dt class="col-sm-3">Size</dt>
+                      <dd class="col-sm-9" id="dogSize"></dd>
+                      <dt class="col-sm-3">Location</dt>
+                      <dd class="col-sm-9" id="dogLocation"></dd>
+                      <dt class="col-sm-3">Bio</dt>
+                      <dd class="col-sm-9" id="dogBio"></dd>
+                    </dl>
+                  </div>
                 </div>
                 <div class="tab-pane fade" id="activity">
                   <h5 class="fw-bold mb-3">Recent Activity</h5>
@@ -172,7 +174,7 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/admin-user-record-loader.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/admin-user-record-loader.js"></script>
   </body>
 </html>
