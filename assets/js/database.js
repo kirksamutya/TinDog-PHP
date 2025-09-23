@@ -56,6 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
           dogBreed: "Shih Tzu",
           dogSex: "female",
           dogSize: "small",
+          age: 5,
+          bio: "A gentle soul who loves cuddles more than anything. My favorite activity is napping in a sunbeam.",
           signUpDate: "Jan 15, 2024",
           lastSeen: "Yesterday",
         },
@@ -72,6 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
           dogBreed: "Pomeranian",
           dogSex: "male",
           dogSize: "small",
+          age: 2,
+          bio: "Small but mighty! I've got a big personality and love to be the center of attention. Let's go on an adventure!",
           signUpDate: "Mar 01, 2024",
           lastSeen: "1 week ago",
         },
@@ -88,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
           dogBreed: "Golden Retriever",
           dogSex: "female",
           dogSize: "large",
+          age: 4,
+          bio: "I love swimming, fetching, and making new friends. I'm a happy-go-lucky girl looking for a playmate.",
           signUpDate: "Jun 10, 2024",
           lastSeen: "3 days ago",
         },
@@ -104,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
           dogBreed: "Bulldog",
           dogSex: "male",
           dogSize: "medium",
+          age: 6,
+          bio: "A bit of a couch potato, but I'm very loyal. I enjoy short walks and long naps.",
           signUpDate: "Jul 04, 2024",
           lastSeen: "1 month ago",
         },
@@ -147,6 +155,16 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       ];
       localStorage.setItem("tindogReports", JSON.stringify(sampleReports));
+    }
+
+    if (!localStorage.getItem("tindogLikes")) {
+      const sampleLikes = {
+        saavedra_roel: ["santos_maria", "reyes_sofia"],
+        santos_maria: ["saavedra_roel"],
+        reyes_sofia: ["saavedra_roel"],
+        gonzales_pedro: ["tan_andres"],
+      };
+      localStorage.setItem("tindogLikes", JSON.stringify(sampleLikes));
     }
   };
 

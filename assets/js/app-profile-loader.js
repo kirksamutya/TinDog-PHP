@@ -9,12 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
     if (!loggedInUserId) {
       console.error("No user is logged in.");
+      window.location.href = "./auth-login.html";
       return;
     }
     const userData = allUsers[loggedInUserId];
 
     if (!userData) {
       console.error("Logged-in user data not found.");
+      window.location.href = "./auth-login.html";
       return;
     }
 

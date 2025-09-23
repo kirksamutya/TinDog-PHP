@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const filterButtons = document.querySelectorAll(".btn-filter");
-  const matchCardContainers = document.querySelectorAll(
-    ".match-card-container"
-  );
   const noMatchesMessage = document.getElementById("no-matches-found");
 
   const filterMatches = (filter) => {
+    const matchCardContainers = document.querySelectorAll(
+      ".match-card-container"
+    );
     let matchesFound = false;
+
     matchCardContainers.forEach((cardContainer) => {
       const status = cardContainer.dataset.status;
       const shouldBeVisible = filter === "all" || status === filter;
@@ -41,16 +42,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  const observer = new MutationObserver((mutations, obs) => {
-    const grid = document.getElementById("matches-grid");
-    if (grid && grid.children.length > 0) {
-      animateMatchCards();
-      obs.disconnect();
-    }
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true,
-  });
+  document.addEventListener("matchesLoaded", animateMatchCards);
 });
