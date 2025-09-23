@@ -42,6 +42,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const updateDashboardStats = () => {
+    const stats = DataService.getDashboardStats();
+
+    document.querySelector(".kpi-card.matches .kpi-value").textContent =
+      stats.newMatches;
+    document.querySelector(".kpi-card.messages .kpi-value").textContent =
+      stats.unreadMessages;
+    document.querySelector(
+      ".kpi-card.messages .kpi-caption"
+    ).textContent = `from ${stats.unreadConversations} conversations`;
+    document.querySelector(".kpi-card.views .kpi-value").textContent =
+      stats.profileViews;
+  };
+
   setDynamicGreeting();
   setDynamicDogTip();
+  updateDashboardStats();
 });

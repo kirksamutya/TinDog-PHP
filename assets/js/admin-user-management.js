@@ -85,8 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     confirmDeleteBtn.addEventListener("click", function () {
       if (userToDelete) {
-        delete allUsers[userToDelete];
-        localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+        DataService.deleteUser(userToDelete);
         window.location.reload();
       }
       deleteModal.hide();

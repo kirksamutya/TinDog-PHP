@@ -41,12 +41,17 @@
               <div class="card settings-card h-100">
                 <div class="card-header">Current Plan</div>
                 <div class="card-body">
-                  <h3 class="fw-bold display-6">Labrador Plan</h3>
+                  <h3 class="fw-bold display-6" id="billing-plan-name">
+                    Labrador Plan
+                  </h3>
                   <h2 class="card-title pricing-card-title">
-                    ₱149<small class="text-muted fw-light">/mo</small>
+                    <span id="billing-plan-price">₱149</span
+                    ><small class="text-muted fw-light" id="billing-plan-cycle"
+                      >/mo</small
+                    >
                   </h2>
-                  <p class="text-muted">
-                    Your plan renews on October 12, 2025.
+                  <p class="text-muted" id="billing-renewal-date">
+                    Your plan renews on October 23, 2025.
                   </p>
                   <a href="./page-pricing.html" class="btn btn-tindog-primary"
                     >Change Plan</a
@@ -138,6 +143,8 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/data-service.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/app-billing-loader.js"></script>
   </body>
 </html>
