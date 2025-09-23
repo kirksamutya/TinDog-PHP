@@ -32,10 +32,13 @@
           id="sidebar-nav-container"
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <main
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content"
+          id="likes-page"
+        >
           <div class="page-header text-center">
             <h1 class="h2 mb-1">Likes</h1>
-            <p class="lead text-muted">
+            <p class="lead text-muted" id="upgrade-message">
               Upgrade to a premium plan to see who's interested in your pup!
             </p>
           </div>
@@ -45,7 +48,7 @@
                 <img
                   src="./assets/images/dog-img.jpg"
                   alt="A dog that liked you"
-                  class="liked-by-img"
+                  class="liked-by-img liked-by-img-unblurred"
                 />
                 <div class="liked-by-overlay">
                   <i class="bi bi-heart-fill"></i>
@@ -57,7 +60,7 @@
                 <img
                   src="https://placedog.net/400/400?id=45"
                   alt="A dog that liked you"
-                  class="liked-by-img"
+                  class="liked-by-img liked-by-img-unblurred"
                 />
                 <div class="liked-by-overlay">
                   <i class="bi bi-heart-fill"></i>
@@ -69,7 +72,7 @@
                 <img
                   src="https://placedog.net/400/400?id=23"
                   alt="A dog that liked you"
-                  class="liked-by-img"
+                  class="liked-by-img liked-by-img-unblurred"
                 />
                 <div class="liked-by-overlay">
                   <i class="bi bi-heart-fill"></i>
@@ -81,7 +84,7 @@
                 <img
                   src="https://placedog.net/400/400?id=15"
                   alt="A dog that liked you"
-                  class="liked-by-img"
+                  class="liked-by-img liked-by-img-unblurred"
                 />
                 <div class="liked-by-overlay">
                   <i class="bi bi-heart-fill"></i>
@@ -90,14 +93,19 @@
             </div>
           </div>
           <div class="text-center mt-5">
-            <a href="./page-pricing.html" class="btn btn-lg btn-tindog-primary"
-              ><i class="bi bi-gem me-2"></i>Upgrade to See More</a
+            <a
+              href="./page-pricing.html"
+              class="btn btn-lg btn-tindog-primary"
+              id="upgrade-button"
             >
+              <i class="bi bi-gem me-2"></i>Upgrade to See More
+            </a>
           </div>
         </main>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/app-likes.js"></script>
   </body>
 </html>
