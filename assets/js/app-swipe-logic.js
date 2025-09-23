@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const swipeDeck = document.querySelector(".swipe-deck");
   if (!swipeDeck) return;
 
+  const swipeActions = document.querySelector(".swipe-actions");
+  const noMoreMatchesMessage = document.getElementById("no-more-matches");
   const dislikeButton = document.querySelector(".btn-swipe.dislike");
   const likeButton = document.querySelector(".btn-swipe.like");
 
@@ -10,6 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const initializeCards = () => {
     const allCards = swipeDeck.querySelectorAll(".match-card:not(.removed)");
+
+    if (allCards.length === 0) {
+      if (noMoreMatchesMessage) noMoreMatchesMessage.style.display = "block";
+      if (swipeActions) swipeActions.style.display = "none";
+      activeCard = null;
+      return;
+    }
+
     allCards.forEach((card, index) => {
       card.style.zIndex = allCards.length - index;
       card.style.transform = `scale(${1 - 0.05 * index}) translateY(${

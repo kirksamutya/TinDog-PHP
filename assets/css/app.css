@@ -590,6 +590,17 @@ body {
   color: var(--brand-primary);
 }
 
+.empty-deck-state {
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem;
+}
+
+.empty-deck-state .bi {
+  font-size: 4rem;
+  color: var(--brand-primary);
+}
+
 /* Messages Specific Styles */
 .page-messages.main-content {
   display: flex;
