@@ -40,88 +40,13 @@
             <a href="#" class="btn btn-sm btn-ghost-light">Mark all as read</a>
           </div>
 
-          <div class="notification-group">
-            <h5 class="notification-group-title">Today</h5>
-            <div class="card notification-card unread">
-              <div class="card-body d-flex align-items-center">
-                <div class="icon-wrapper activity-match me-3">
-                  <i class="bi bi-heart-fill"></i>
-                </div>
-                <div class="activity-text flex-grow-1">
-                  You have a new match with <strong>Bruce</strong>!
-                </div>
-                <a
-                  href="./app-profile.html"
-                  class="btn btn-sm btn-outline-secondary ms-3"
-                  >View Profile</a
-                >
-                <small
-                  class="text-muted ms-3 text-nowrap"
-                  style="min-width: 60px; text-align: right"
-                  >12m ago</small
-                >
-              </div>
-            </div>
-            <div class="card notification-card unread">
-              <div class="card-body d-flex align-items-center">
-                <div class="icon-wrapper activity-message me-3">
-                  <i class="bi bi-chat-dots-fill"></i>
-                </div>
-                <div class="activity-text flex-grow-1">
-                  <strong>Pebbles</strong> sent you a new message.
-                </div>
-                <a
-                  href="./app-messages.html"
-                  class="btn btn-sm btn-tindog-primary ms-3"
-                  >Reply</a
-                >
-                <small
-                  class="text-muted ms-3 text-nowrap"
-                  style="min-width: 60px; text-align: right"
-                  >2h ago</small
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="notification-group">
-            <h5 class="notification-group-title">This Week</h5>
-            <div class="card notification-card">
-              <div class="card-body d-flex align-items-center">
-                <div class="icon-wrapper activity-profile me-3">
-                  <i class="bi bi-person-fill"></i>
-                </div>
-                <div class="activity-text flex-grow-1">
-                  You updated your dog's profile.
-                </div>
-                <small class="ms-auto text-muted">1d ago</small>
-              </div>
-            </div>
-            <div class="card notification-card">
-              <div class="card-body d-flex align-items-center">
-                <div class="icon-wrapper activity-match me-3">
-                  <i class="bi bi-heart-fill"></i>
-                </div>
-                <div class="activity-text flex-grow-1">
-                  <strong>Dumbledoor</strong> liked your profile!
-                </div>
-                <a
-                  href="./app-profile.html"
-                  class="btn btn-sm btn-outline-secondary ms-3"
-                  >View Profile</a
-                >
-                <small
-                  class="text-muted ms-3 text-nowrap"
-                  style="min-width: 60px; text-align: right"
-                  >2d ago</small
-                >
-              </div>
-            </div>
-          </div>
+          <div id="notification-list"></div>
         </main>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/data-service.js"></script>
     <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/app-notifications-handler.js"></script>
   </body>
 </html>

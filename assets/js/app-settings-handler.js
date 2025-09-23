@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (ageRange && ageValue) {
       ageRange.addEventListener("input", (event) => {
-        // Find the correct max value from the element itself
-        const maxAge = event.target.max;
         ageValue.textContent = `1 - ${event.target.value} years`;
       });
     }
@@ -50,7 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const handleDeleteAccount = () => {
+    const confirmButton = document.getElementById("confirmDeleteAccountBtn");
+    if (!confirmButton) return;
+
+    confirmButton.addEventListener("click", () => {
+      const loggedInUserId = DataService.getLoggedInUserId();
+      const isDeleted = DataService.deleteUser(loggedInUserId);
+
+      if (isDeleted) {
+        sessionStorage.clear();
+        window.location.href = "./index.html";
+      }
+    });
+  };
+
   handleRangeSliders();
   handleThemeSelector();
   handleAccessibilityOptions();
+  handleDeleteAccount();
 });

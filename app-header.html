@@ -30,38 +30,16 @@
         aria-expanded="false"
       >
         <i class="bi bi-bell fs-5"></i>
-        <span class="notification-badge badge rounded-pill bg-danger">2</span>
+        <span
+          id="notification-badge"
+          class="notification-badge badge rounded-pill bg-danger"
+        ></span>
       </a>
-      <ul class="dropdown-menu dropdown-menu-end">
+      <ul id="notification-dropdown" class="dropdown-menu dropdown-menu-end">
         <li class="p-2 text-center border-bottom">
           <strong>Notifications</strong>
         </li>
-        <li>
-          <a
-            class="dropdown-item d-flex align-items-start py-2"
-            href="./app-matches.html"
-            ><i class="bi bi-heart-fill text-danger me-2 mt-1"></i>
-            <div>
-              New match with <strong>Bruce</strong>!<small
-                class="d-block text-muted"
-                >15 minutes ago</small
-              >
-            </div></a
-          >
-        </li>
-        <li>
-          <a
-            class="dropdown-item d-flex align-items-start py-2"
-            href="./app-messages.html"
-            ><i class="bi bi-chat-dots-fill text-primary me-2 mt-1"></i>
-            <div>
-              <strong>Pebbles</strong> sent a message.<small
-                class="d-block text-muted"
-                >2 hours ago</small
-              >
-            </div></a
-          >
-        </li>
+        <div id="notification-items"></div>
         <li>
           <a
             class="dropdown-item text-center text-muted small py-2"
@@ -111,3 +89,38 @@
     </div>
   </div>
 </header>
+<script src="./assets/js/data-service.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const notifications = DataService.getNotifications();
+    const badge = document.getElementById("notification-badge");
+    const itemsContainer = document.getElementById("notification-items");
+
+    badge.textContent = notifications.length;
+
+    if (notifications.length === 0) {
+      itemsContainer.innerHTML = `<li><p class="text-muted text-center my-2">No new notifications</p></li>`;
+    } else {
+      itemsContainer.innerHTML = notifications
+        .map((n) => {
+          const isMatch = n.type === "match";
+          const iconClass = isMatch
+            ? "bi-heart-fill text-danger"
+            : "bi-chat-dots-fill text-primary";
+          const link = isMatch ? "./app-matches.html" : "./app-messages.html";
+          return `
+            <li>
+              <a class="dropdown-item d-flex align-items-start py-2" href="${link}">
+                <i class="bi ${iconClass} me-2 mt-1"></i>
+                <div>
+                  ${n.message}
+                  <small class="d-block text-muted">${n.time}</small>
+                </div>
+              </a>
+            </li>
+          `;
+        })
+        .join("");
+    }
+  });
+</script>

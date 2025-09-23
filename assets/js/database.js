@@ -166,6 +166,60 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       localStorage.setItem("tindogLikes", JSON.stringify(sampleLikes));
     }
+
+    if (!localStorage.getItem("tindogMessages")) {
+      const sampleMessages = {
+        bruce: {
+          name: "Bruce",
+          avatar: "./assets/images/bruce.jpg",
+          messages: [
+            {
+              type: "received",
+              text: "Hey! Is your human free for a playdate this weekend?",
+              time: "5:30 PM",
+              read: false,
+            },
+            {
+              type: "sent",
+              text: "Woof! Yes! I would love that!",
+              time: "5:31 PM",
+              read: true,
+            },
+            {
+              type: "received",
+              text: "Great! How about the dog park on Saturday around 3 PM?",
+              time: "5:32 PM",
+              read: false,
+            },
+            {
+              type: "sent",
+              text: "Sure, let's meet at the park!",
+              time: "5:42 PM",
+              read: true,
+            },
+          ],
+        },
+        pebbles: {
+          name: "Pebbles",
+          avatar: "./assets/images/dog-img.jpg",
+          messages: [
+            {
+              type: "received",
+              text: "Haha, my human is so slow.",
+              time: "2h ago",
+              read: true,
+            },
+            {
+              type: "sent",
+              text: "Mine too! They can never keep up on walks.",
+              time: "1h ago",
+              read: true,
+            },
+          ],
+        },
+      };
+      localStorage.setItem("tindogMessages", JSON.stringify(sampleMessages));
+    }
   };
 
   initializeData();

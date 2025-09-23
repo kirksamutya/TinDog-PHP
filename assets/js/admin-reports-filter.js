@@ -6,6 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
     let allReports = JSON.parse(localStorage.getItem("tindogReports")) || [];
 
+    const createUserCell = (user) => `
+      <div class="d-flex align-items-center">
+          <div class="user-avatar-initials me-3">
+            ${user.firstName.charAt(0)}${user.lastName.charAt(0)}
+          </div>
+          <div>
+            <strong>${user.firstName} ${user.lastName}</strong>
+          </div>
+      </div>`;
+
     const renderTable = () => {
       reportTableBody.innerHTML = "";
       allReports.forEach((report) => {
@@ -14,36 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!reportedUser || !reportingUser) return;
 
-        const reportedUserCell = `
-          <div class="d-flex align-items-center">
-              <div class="user-avatar-initials me-3">${reportedUser.firstName.charAt(
-                0
-              )}${reportedUser.lastName.charAt(0)}</div>
-              <div><strong>${reportedUser.firstName} ${
-          reportedUser.lastName
-        }</strong></div>
-          </div>`;
-
-        const reportingUserCell = `
-          <div class="d-flex align-items-center">
-              <div class="user-avatar-initials me-3">${reportingUser.firstName.charAt(
-                0
-              )}${reportingUser.lastName.charAt(0)}</div>
-              <div>${reportingUser.firstName} ${reportingUser.lastName}</div>
-          </div>`;
-
-        let statusBadge;
         const statusText =
           report.status.charAt(0).toUpperCase() + report.status.slice(1);
+        let statusBadge;
         switch (report.status) {
           case "open":
+          case "banned":
             statusBadge = `<span class="badge bg-danger">${statusText}</span>`;
             break;
           case "suspended":
             statusBadge = `<span class="badge bg-warning text-dark">${statusText}</span>`;
-            break;
-          case "banned":
-            statusBadge = `<span class="badge bg-danger">${statusText}</span>`;
             break;
           default:
             statusBadge = `<span class="badge bg-success">${statusText}</span>`;
@@ -65,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const row = document.createElement("tr");
         row.dataset.reportId = report.id;
         row.innerHTML = `
-                <td>${reportedUserCell}</td>
-                <td>${reportingUserCell}</td>
+                <td>${createUserCell(reportedUser)}</td>
+                <td>${createUserCell(reportingUser)}</td>
                 <td>${report.reason}</td>
                 <td>${report.date}</td>
                 <td>${statusBadge}</td>
