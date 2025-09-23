@@ -1,4 +1,3 @@
-// assets/js/app-swipe-logic.js
 document.addEventListener("DOMContentLoaded", function () {
   const swipeDeck = document.querySelector(".swipe-deck");
   if (!swipeDeck) return;
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const allCards = swipeDeck.querySelectorAll(".match-card:not(.removed)");
 
     if (allCards.length === 0) {
-      if (noMoreMatchesMessage) noMoreMatchesMessage.style.display = "flex";
+      if (noMoreMatchesMessage) noMoreMatchesMessage.style.display = "block";
       if (swipeActions) swipeActions.style.display = "none";
       if (swipeDeck) swipeDeck.style.display = "none";
       activeCard = null;

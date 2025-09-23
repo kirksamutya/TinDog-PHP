@@ -1,10 +1,3 @@
-/*
-* TinDog Application Styles
-* -------------------------
-* Contains all styles for the main, logged-in application
-* experience, including dashboard, profiles, and messages.
-*/
-
 body {
   font-size: 0.875rem;
 }
@@ -20,7 +13,6 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Core Application Flexbox Layout */
 .app-body {
   display: flex;
   flex-direction: column;
@@ -74,7 +66,6 @@ body {
   flex-grow: 1;
   overflow-y: auto;
 }
-/* End of Core Layout */
 
 .dashboard-header .navbar-brand {
   color: var(--brand-primary);
@@ -226,7 +217,6 @@ body {
   display: none !important;
 }
 
-/* Dashboard Specific Styles */
 .dashboard-welcome-header {
   padding: 2rem;
   border-radius: var(--border-radius-medium);
@@ -340,7 +330,6 @@ body {
   border-radius: 50%;
 }
 
-/* My Matches Specific Styles */
 .filter-bar {
   display: flex;
   gap: 0.5rem;
@@ -455,7 +444,6 @@ body {
   background-color: #6c757d;
 }
 
-/* Find Matches (Swipe) Specific Styles */
 .page-find-matches.main-content {
   display: flex;
   flex-direction: column;
@@ -590,12 +578,27 @@ body {
   color: var(--brand-primary);
 }
 
-/* Messages Specific Styles */
+.empty-deck-state {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #6c757d;
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+.empty-deck-state .bi {
+  font-size: 4rem;
+  color: var(--brand-primary);
+}
+
 .page-messages.main-content {
   display: flex;
   flex-direction: column;
   padding: 0;
-  height: calc(100vh - 60px); /* Full viewport height minus header */
+  height: calc(100vh - 60px);
 }
 
 .chat-container-wrapper {
@@ -825,7 +828,7 @@ body {
   .page-messages .chat-window {
     display: none;
     position: absolute;
-    top: 60px; /* Header height */
+    top: 60px;
     left: 0;
     right: 0;
     bottom: 0;
@@ -842,7 +845,6 @@ body {
   }
 }
 
-/* Profile Page Specific Styles */
 .page-profile.main-content {
   display: flex;
   flex-direction: column;
@@ -1013,7 +1015,6 @@ body {
   opacity: 1;
 }
 
-/* Edit Profile Specific Styles */
 .photo-upload-container {
   position: relative;
   cursor: pointer;
@@ -1073,7 +1074,6 @@ body {
   text-align: left;
 }
 
-/* Settings Page Specific Styles */
 .settings-card {
   background-color: #fff;
   border: 1px solid var(--border-color);
@@ -1133,7 +1133,6 @@ body {
   font-weight: 600;
 }
 
-/* Notifications / Activity Feed Styles */
 .activity-feed-container .icon-wrapper,
 .notification-card .icon-wrapper {
   width: 40px;
@@ -1191,7 +1190,6 @@ body {
   box-shadow: var(--box-shadow-light);
 }
 
-/* Premium Features Styles (e.g., Who Liked Me) */
 .badge-premium {
   background: linear-gradient(
     90deg,
@@ -1248,7 +1246,6 @@ body {
   opacity: 1;
 }
 
-/* Dark Theme Styles */
 .dark-theme.app-body {
   background-color: #121212;
   color: #e0e0e0;
