@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "Guides our technical direction and translates creative concepts into functional, polished applications.",
           signUpDate: "Jul 01, 2024",
           lastSeen: "5 minutes ago",
+          dogAvatar: "./assets/images/jorjee-one.jpg",
+          dogCoverPhoto: "./assets/images/jorjee-three.jpg",
         },
         cruz_juan: {
           firstName: "Juan",
@@ -60,6 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "A gentle soul who loves cuddles more than anything. My favorite activity is napping in a sunbeam.",
           signUpDate: "Jan 15, 2024",
           lastSeen: "Yesterday",
+          dogAvatar: "https://placedog.net/500/500?id=51",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=52",
         },
         gonzales_pedro: {
           firstName: "Pedro",
@@ -78,6 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "Small but mighty! I've got a big personality and love to be the center of attention. Let's go on an adventure!",
           signUpDate: "Mar 01, 2024",
           lastSeen: "1 week ago",
+          dogAvatar: "https://placedog.net/500/500?id=21",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=22",
         },
         reyes_sofia: {
           firstName: "Sofia",
@@ -96,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "I love swimming, fetching, and making new friends. I'm a happy-go-lucky girl looking for a playmate.",
           signUpDate: "Jun 10, 2024",
           lastSeen: "3 days ago",
+          dogAvatar: "https://placedog.net/500/500?id=41",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=42",
         },
         tan_andres: {
           firstName: "Andres",
@@ -114,6 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "A bit of a couch potato, but I'm very loyal. I enjoy short walks and long naps.",
           signUpDate: "Jul 04, 2024",
           lastSeen: "1 month ago",
+          dogAvatar: "https://placedog.net/500/500?id=61",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=62",
         },
       };
       localStorage.setItem("tindogUsers", JSON.stringify(sampleUsers));
@@ -167,58 +177,27 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("tindogLikes", JSON.stringify(sampleLikes));
     }
 
-    if (!localStorage.getItem("tindogMessages")) {
-      const sampleMessages = {
-        bruce: {
-          name: "Bruce",
-          avatar: "./assets/images/bruce.jpg",
+    if (!localStorage.getItem("tindogConversations")) {
+      const sampleConversations = {
+        santos_maria_saavedra_roel: {
           messages: [
             {
-              type: "received",
-              text: "Hey! Is your human free for a playdate this weekend?",
-              time: "5:30 PM",
-              read: false,
+              sender: "santos_maria",
+              text: "Hey! Kisses would love to meet Jorjee!",
+              time: "4:30 PM",
             },
             {
-              type: "sent",
-              text: "Woof! Yes! I would love that!",
-              time: "5:31 PM",
-              read: true,
-            },
-            {
-              type: "received",
-              text: "Great! How about the dog park on Saturday around 3 PM?",
-              time: "5:32 PM",
-              read: false,
-            },
-            {
-              type: "sent",
-              text: "Sure, let's meet at the park!",
-              time: "5:42 PM",
-              read: true,
-            },
-          ],
-        },
-        pebbles: {
-          name: "Pebbles",
-          avatar: "./assets/images/dog-img.jpg",
-          messages: [
-            {
-              type: "received",
-              text: "Haha, my human is so slow.",
-              time: "2h ago",
-              read: true,
-            },
-            {
-              type: "sent",
-              text: "Mine too! They can never keep up on walks.",
-              time: "1h ago",
-              read: true,
+              sender: "saavedra_roel",
+              text: "Definitely! Are you free this weekend?",
+              time: "4:32 PM",
             },
           ],
         },
       };
-      localStorage.setItem("tindogMessages", JSON.stringify(sampleMessages));
+      localStorage.setItem(
+        "tindogConversations",
+        JSON.stringify(sampleConversations)
+      );
     }
   };
 

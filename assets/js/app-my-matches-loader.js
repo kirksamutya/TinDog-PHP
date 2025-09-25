@@ -6,12 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
     const allLikes = JSON.parse(localStorage.getItem("tindogLikes")) || {};
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    const allBlocks = JSON.parse(localStorage.getItem("tindogBlocks")) || {};
+
+    const myBlockList = allBlocks[loggedInUserId] || [];
 
     const currentUserLikes = allLikes[loggedInUserId] || [];
     let matchesHtml = "";
     let matchCount = 0;
 
     currentUserLikes.forEach((likedUserId) => {
+      if (myBlockList.includes(likedUserId)) return;
+
       const otherUserLikes = allLikes[likedUserId] || [];
       if (otherUserLikes.includes(loggedInUserId)) {
         const matchUser = allUsers[likedUserId];
