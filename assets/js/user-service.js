@@ -1,9 +1,16 @@
 function createUser(userData) {
   const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
 
-  const newUserId = (userData.firstName + "_" + userData.lastName)
+  const baseId = (userData.firstName + "_" + userData.lastName)
     .toLowerCase()
     .replace(/\s/g, "_");
+
+  let newUserId = baseId;
+  let counter = 1;
+  while (allUsers[newUserId]) {
+    newUserId = `${baseId}_${counter}`;
+    counter++;
+  }
 
   allUsers[newUserId] = {
     ...userData,
