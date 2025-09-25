@@ -1,4 +1,3 @@
-// assets/js/app-swipe-logic.js
 document.addEventListener("DOMContentLoaded", function () {
   const swipeDeck = document.querySelector(".swipe-deck");
   if (!swipeDeck) return;

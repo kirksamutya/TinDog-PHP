@@ -7,9 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
+    const allBlocks = JSON.parse(localStorage.getItem("tindogBlocks")) || {};
+
+    const myBlockList = allBlocks[loggedInUserId] || [];
+    const usersWhoBlockedMe = Object.keys(allBlocks).filter((userId) =>
+      allBlocks[userId].includes(loggedInUserId)
+    );
+    const combinedBlockList = new Set([...myBlockList, ...usersWhoBlockedMe]);
 
     const potentialMatches = Object.entries(allUsers).filter(
-      ([userId, user]) => user.role === "user" && userId !== loggedInUserId
+      ([userId, user]) =>
+        user.role === "user" &&
+        userId !== loggedInUserId &&
+        !combinedBlockList.has(userId)
     );
 
     let cardsHtml = "";
@@ -34,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     swipeDeck.innerHTML = cardsHtml;
-
     document.dispatchEvent(new Event("deckPopulated"));
   };
 

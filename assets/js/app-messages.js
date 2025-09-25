@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatBody = document.querySelector(".chat-body");
   const backButton = document.querySelector(".back-button");
   const searchInput = document.getElementById("conversation-search");
+  const reportButton = document.querySelector(
+    "[data-bs-target='#reportUserModal']"
+  );
 
   const conversations = {
     bruce: {
@@ -82,6 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
       conversation.messages.map(createMessageHTML).join("") +
       getTypingIndicatorHTML();
     chatBody.scrollTop = chatBody.scrollHeight;
+
+    if (reportButton) {
+      reportButton.setAttribute("data-reported-user-id", dogNameKey);
+      reportButton.setAttribute("data-reported-user-name", conversation.name);
+    }
   };
 
   const handleSendMessage = (event) => {
@@ -174,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("input", handleSearch);
   }
 
-  // Load the first conversation on desktop by default
   if (window.innerWidth >= 768 && conversationItems.length > 0) {
     conversationItems[0].click();
   }

@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "Guides our technical direction and translates creative concepts into functional, polished applications.",
           signUpDate: "Jul 01, 2024",
           lastSeen: "5 minutes ago",
+          dogAvatar: "./assets/images/jorjee-one.jpg",
+          dogCoverPhoto: "./assets/images/jorjee-three.jpg",
         },
         cruz_juan: {
           firstName: "Juan",
@@ -60,6 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "A gentle soul who loves cuddles more than anything. My favorite activity is napping in a sunbeam.",
           signUpDate: "Jan 15, 2024",
           lastSeen: "Yesterday",
+          dogAvatar: "https://placedog.net/500/500?id=51",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=52",
         },
         gonzales_pedro: {
           firstName: "Pedro",
@@ -78,6 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "Small but mighty! I've got a big personality and love to be the center of attention. Let's go on an adventure!",
           signUpDate: "Mar 01, 2024",
           lastSeen: "1 week ago",
+          dogAvatar: "https://placedog.net/500/500?id=21",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=22",
         },
         reyes_sofia: {
           firstName: "Sofia",
@@ -96,6 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "I love swimming, fetching, and making new friends. I'm a happy-go-lucky girl looking for a playmate.",
           signUpDate: "Jun 10, 2024",
           lastSeen: "3 days ago",
+          dogAvatar: "https://placedog.net/500/500?id=41",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=42",
         },
         tan_andres: {
           firstName: "Andres",
@@ -114,6 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "A bit of a couch potato, but I'm very loyal. I enjoy short walks and long naps.",
           signUpDate: "Jul 04, 2024",
           lastSeen: "1 month ago",
+          dogAvatar: "https://placedog.net/500/500?id=61",
+          dogCoverPhoto: "https://placedog.net/1200/400?id=62",
         },
       };
       localStorage.setItem("tindogUsers", JSON.stringify(sampleUsers));
