@@ -12,7 +12,11 @@ const DataService = {
   },
 
   getAllMessages: () => {
-    return JSON.parse(localStorage.getItem("tindogMessages")) || {};
+    return JSON.parse(localStorage.getItem("tindogConversations")) || {};
+  },
+
+  getAllReports: () => {
+    return JSON.parse(localStorage.getItem("tindogReports")) || [];
   },
 
   getDashboardStats: () => {
@@ -96,6 +100,8 @@ const DataService = {
 
     const allUsers = DataService.getAllUsers();
     const allLikes = DataService.getAllLikes();
+    const allConversations = DataService.getAllMessages();
+    const allReports = DataService.getAllReports();
 
     if (allUsers[userIdToDelete]) {
       delete allUsers[userIdToDelete];
@@ -113,8 +119,25 @@ const DataService = {
       }
     }
 
+    Object.keys(allConversations).forEach((key) => {
+      if (key.includes(userIdToDelete)) {
+        delete allConversations[key];
+      }
+    });
+
+    const remainingReports = allReports.filter(
+      (report) =>
+        report.reportedUserId !== userIdToDelete &&
+        report.reportedByUserId !== userIdToDelete
+    );
+
     localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
     localStorage.setItem("tindogLikes", JSON.stringify(allLikes));
+    localStorage.setItem(
+      "tindogConversations",
+      JSON.stringify(allConversations)
+    );
+    localStorage.setItem("tindogReports", JSON.stringify(remainingReports));
 
     return true;
   },
