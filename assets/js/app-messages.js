@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   if (!chatContainerWrapper) return;
 
-  const conversationItems = document.querySelectorAll(".conversation-item");
-  const chatWindow = document.querySelector(".chat-window");
+  const convListBody = document.querySelector(".conv-list-body");
   const chatHeaderName = document.getElementById("chat-header-name");
   const chatHeaderAvatar = document.getElementById("chat-header-avatar");
   const messageForm = document.getElementById("message-form");
@@ -17,172 +16,135 @@ document.addEventListener("DOMContentLoaded", () => {
     "[data-bs-target='#reportUserModal']"
   );
 
-  const conversations = {
-    bruce: {
-      name: "Bruce",
-      avatar: "./assets/images/bruce.jpg",
-      messages: [
-        {
-          type: "received",
-          text: "Hey! Is your human free for a playdate this weekend?",
-          time: "5:30 PM",
-        },
-        {
-          type: "sent",
-          text: "Woof! Yes! I would love that!",
-          time: "5:31 PM",
-        },
-        {
-          type: "received",
-          text: "Great! How about the dog park on Saturday around 3 PM?",
-          time: "5:32 PM",
-        },
-        {
-          type: "sent",
-          text: "Sure, let's meet at the park!",
-          time: "5:42 PM",
-        },
-      ],
-    },
-    pebbles: {
-      name: "Pebbles",
-      avatar: "./assets/images/dog-img.jpg",
-      messages: [
-        {
-          type: "received",
-          text: "Haha, my human is so slow.",
-          time: "2h ago",
-        },
-        {
-          type: "sent",
-          text: "Mine too! They can never keep up on walks.",
-          time: "1h ago",
-        },
-      ],
-    },
+  let currentConversationKey = null;
+  let currentMatchUserId = null;
+  const loggedInUserId = DataService.getLoggedInUserId();
+
+  const getConversationKey = (userId1, userId2) => {
+    return [userId1, userId2].sort().join("_");
   };
 
   const createMessageHTML = (message) => {
-    return `<div class="message ${message.type}">
+    const messageType = message.sender === loggedInUserId ? "sent" : "received";
+    return `<div class="message ${messageType}">
               <p>${message.text}</p>
               <span class="message-time">${message.time}</span>
             </div>`;
   };
 
-  const getTypingIndicatorHTML = () => {
-    return `<div class="message received typing-indicator" style="display: none;">
-                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-              </div>`;
-  };
+  const loadConversation = (matchUserId) => {
+    const allUsers = DataService.getAllUsers();
+    const matchUser = allUsers[matchUserId];
+    if (!matchUser) return;
 
-  const loadConversation = (dogNameKey) => {
-    const conversation = conversations[dogNameKey.toLowerCase()];
-    if (!conversation) return;
+    currentMatchUserId = matchUserId;
+    currentConversationKey = getConversationKey(loggedInUserId, matchUserId);
 
-    chatHeaderName.textContent = conversation.name;
-    chatHeaderAvatar.src = conversation.avatar;
-    chatBody.innerHTML =
-      conversation.messages.map(createMessageHTML).join("") +
-      getTypingIndicatorHTML();
-    chatBody.scrollTop = chatBody.scrollHeight;
+    chatHeaderName.textContent = matchUser.dogName;
+    chatHeaderAvatar.src = matchUser.dogAvatar;
 
     if (reportButton) {
-      reportButton.setAttribute("data-reported-user-id", dogNameKey);
-      reportButton.setAttribute("data-reported-user-name", conversation.name);
+      reportButton.setAttribute("data-reported-user-id", matchUserId);
+      reportButton.setAttribute("data-reported-user-name", matchUser.dogName);
     }
+
+    const allConversations =
+      JSON.parse(localStorage.getItem("tindogConversations")) || {};
+    const conversation = allConversations[currentConversationKey] || {
+      messages: [],
+    };
+
+    chatBody.innerHTML = conversation.messages.map(createMessageHTML).join("");
+    chatBody.scrollTop = chatBody.scrollHeight;
   };
 
   const handleSendMessage = (event) => {
     event.preventDefault();
     const messageText = messageInput.value.trim();
-    if (messageText === "") return;
+    if (messageText === "" || !currentConversationKey) return;
 
-    const time = new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const sentMessageHTML = createMessageHTML({
-      type: "sent",
-      text: messageText,
-      time: time,
-    });
-
-    const typingIndicatorElement = chatBody.querySelector(".typing-indicator");
-    if (typingIndicatorElement) {
-      chatBody.insertBefore(
-        document.createRange().createContextualFragment(sentMessageHTML),
-        typingIndicatorElement
-      );
+    const allConversations =
+      JSON.parse(localStorage.getItem("tindogConversations")) || {};
+    if (!allConversations[currentConversationKey]) {
+      allConversations[currentConversationKey] = { messages: [] };
     }
 
-    messageInput.value = "";
+    const newMessage = {
+      sender: loggedInUserId,
+      text: messageText,
+      time: new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    };
+
+    allConversations[currentConversationKey].messages.push(newMessage);
+    localStorage.setItem(
+      "tindogConversations",
+      JSON.stringify(allConversations)
+    );
+
+    chatBody.innerHTML += createMessageHTML(newMessage);
     chatBody.scrollTop = chatBody.scrollHeight;
-
-    setTimeout(() => {
-      if (typingIndicatorElement) typingIndicatorElement.style.display = "flex";
-      chatBody.scrollTop = chatBody.scrollHeight;
-
-      setTimeout(() => {
-        if (typingIndicatorElement)
-          typingIndicatorElement.style.display = "none";
-        const replyTime = new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-        const receivedMessageHTML = createMessageHTML({
-          type: "received",
-          text: "Woof woof!",
-          time: replyTime,
-        });
-        chatBody.insertBefore(
-          document.createRange().createContextualFragment(receivedMessageHTML),
-          typingIndicatorElement
-        );
-        chatBody.scrollTop = chatBody.scrollHeight;
-      }, 2000);
-    }, 500);
+    messageInput.value = "";
   };
 
-  const handleSearch = (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    conversationItems.forEach((item) => {
-      const name = item.querySelector(".conv-name").textContent.toLowerCase();
-      item.style.display = name.includes(searchTerm) ? "flex" : "none";
-    });
-  };
+  const loadConversationList = () => {
+    const allUsers = DataService.getAllUsers();
+    const allLikes = DataService.getAllLikes();
+    const myLikes = allLikes[loggedInUserId] || [];
+    let listHtml = "";
 
-  conversationItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      conversationItems.forEach((i) => i.classList.remove("active"));
-      item.classList.add("active");
-      loadConversation(item.dataset.dog);
-      if (window.innerWidth < 768) {
-        chatContainerWrapper.classList.add("chat-active");
+    myLikes.forEach((likedUserId) => {
+      const theirLikes = allLikes[likedUserId] || [];
+      if (theirLikes.includes(loggedInUserId)) {
+        const matchUser = allUsers[likedUserId];
+        if (matchUser) {
+          listHtml += `
+            <li class="conversation-item" data-user-id="${likedUserId}">
+              <div class="avatar-wrapper">
+                <img src="${matchUser.dogAvatar}" alt="${matchUser.dogName}" class="avatar" />
+                <span class="status-indicator online"></span>
+              </div>
+              <div class="conv-details">
+                <div class="conv-name">${matchUser.dogName}</div>
+                <div class="conv-preview">Click to view messages.</div>
+              </div>
+            </li>`;
+        }
       }
     });
-  });
 
-  if (backButton) {
-    backButton.addEventListener("click", () => {
-      chatContainerWrapper.classList.remove("chat-active");
-      conversationItems.forEach((i) => i.classList.remove("active"));
+    convListBody.innerHTML = listHtml;
+    addEventListenersToConvItems();
+  };
+
+  const addEventListenersToConvItems = () => {
+    const conversationItems = document.querySelectorAll(".conversation-item");
+    conversationItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        conversationItems.forEach((i) => i.classList.remove("active"));
+        item.classList.add("active");
+        loadConversation(item.dataset.userId);
+        if (window.innerWidth < 768) {
+          chatContainerWrapper.classList.add("chat-active");
+        }
+      });
     });
-  }
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 768) {
-      chatContainerWrapper.classList.remove("chat-active");
-    }
-  });
+  };
 
   if (messageForm) {
     messageForm.addEventListener("submit", handleSendMessage);
   }
-  if (searchInput) {
-    searchInput.addEventListener("input", handleSearch);
+
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      chatContainerWrapper.classList.remove("chat-active");
+      document
+        .querySelectorAll(".conversation-item")
+        .forEach((i) => i.classList.remove("active"));
+    });
   }
 
-  if (window.innerWidth >= 768 && conversationItems.length > 0) {
-    conversationItems[0].click();
-  }
+  loadConversationList();
 });
