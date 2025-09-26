@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="./assets/images/favicon-transparent.png"
+      href="/assets/images/favicon-transparent.png"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
@@ -21,12 +21,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
   <body class="gradient-background d-flex flex-column min-vh-100">
     <header class="py-3 text-center">
       <a
-        href="./index.html"
+        href="/index.html"
         class="navbar-brand fs-1 text-decoration-none"
         style="color: white"
         >tindog</a
@@ -47,11 +47,11 @@
             Send Reset Link
           </button>
           <div class="text-center mt-3">
-            <p><a href="./auth-login.html">Back to Login</a></p>
+            <p><a href="/auth/index.php">Back to Login</a></p>
           </div>
         </form>
         <hr />
-        <a href="./index.html" class="text-decoration-none text-muted small"
+        <a href="/index.html" class="text-decoration-none text-muted small"
           ><i class="bi bi-house-door me-2"></i>Back to Home</a
         >
       </div>

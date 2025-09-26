@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="./assets/images/favicon-transparent.png"
+      href="/assets/images/favicon-transparent.png"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
@@ -21,12 +21,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
   <body class="gradient-background d-flex flex-column min-vh-100">
     <header class="py-3 text-center">
       <a
-        href="./index.html"
+        href="/index.html"
         class="navbar-brand fs-1 text-decoration-none"
         style="color: white"
         >tindog</a
@@ -77,7 +77,7 @@
                 >Remember me</label
               >
             </div>
-            <a href="./auth-forgot.html" class="text-decoration-none small"
+            <a href="/auth/forgot-password.php" class="text-decoration-none small"
               >Forgot password?</a
             >
           </div>
@@ -86,20 +86,20 @@
           </button>
           <div class="text-center mt-3">
             <p>
-              Don't have an account? <a href="./auth-register.html">Sign Up</a>
+              Don't have an account? <a href="/auth/register.php">Sign Up</a>
             </p>
           </div>
         </form>
         <hr />
-        <a href="./index.html" class="text-decoration-none text-muted small"
+        <a href="/index.html" class="text-decoration-none text-muted small"
           ><i class="bi bi-house-door me-2"></i>Back to Home</a
         >
       </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/database.js"></script>
-    <script src="./assets/js/auth-form-validator.js"></script>
-    <script src="./assets/js/auth-login-handler.js"></script>
-    <script src="./assets/js/ui-password-toggle.js"></script>
+    <script src="/assets/js/lib/database.js"></script>
+    <script src="/assets/js/auth/form-validator.js"></script>
+    <script src="/assets/js/auth/login-handler.js"></script>
+    <script src="/assets/js/lib/password-toggle.js"></script>
   </body>
 </html>

@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="./assets/images/favicon-transparent.png"
+      href="/assets/images/favicon-transparent.png"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
   <body class="gradient-background">
     <div class="container py-5">
@@ -117,13 +117,13 @@
         </div>
       </div>
       <div class="text-center mt-4">
-        <a href="./page-pricing.html" class="text-white text-decoration-none"
+        <a href="/public/pricing.html" class="text-white text-decoration-none"
           ><i class="bi bi-arrow-left me-2"></i>Back to Pricing</a
         >
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/auth-form-validator.js"></script>
-    <script src="./assets/js/app-checkout-logic.js"></script>
+    <script src="/assets/js/auth/form-validator.js"></script>
+    <script src="/assets/js/app/checkout-logic.js"></script>
   </body>
 </html>

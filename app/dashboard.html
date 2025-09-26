@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="./assets/images/favicon-transparent.png"
+      href="/assets/images/favicon-transparent.png"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
@@ -21,14 +21,14 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
   </head>
   <body class="app-body">
-    <div data-component="./app-header.html"></div>
+    <div data-component="/components/app-header.html"></div>
     <div class="container-fluid">
       <div class="row">
         <nav
-          data-component="./sidebar-nav-content.html"
+          data-component="/components/app-sidebar.html"
           id="sidebar-nav-container"
           class="col-md-3 col-lg-2 d-md-block sidebar-nav dashboard-sidebar collapse"
         ></nav>
@@ -42,7 +42,7 @@
             <div class="col-lg-8">
               <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
                 <div class="col">
-                  <a href="./app-matches.html" class="kpi-card-link">
+                  <a href="/app/matches/" class="kpi-card-link">
                     <div class="kpi-card matches h-100">
                       <div class="kpi-icon icon-matches">
                         <i class="bi bi-star-fill"></i>
@@ -56,7 +56,7 @@
                   </a>
                 </div>
                 <div class="col">
-                  <a href="./app-messages.html" class="kpi-card-link">
+                  <a href="/app/messages.html" class="kpi-card-link">
                     <div class="kpi-card messages h-100">
                       <div class="kpi-icon icon-messages">
                         <i class="bi bi-chat-dots-fill"></i>
@@ -70,7 +70,7 @@
                   </a>
                 </div>
                 <div class="col">
-                  <a href="./app-profile.html" class="kpi-card-link">
+                  <a href="/app/profile/" class="kpi-card-link">
                     <div class="kpi-card views h-100">
                       <div class="kpi-icon icon-views">
                         <i class="bi bi-eye-fill"></i>
@@ -84,7 +84,7 @@
                   </a>
                 </div>
                 <div class="col">
-                  <a href="./page-pricing.html" class="kpi-card-link">
+                  <a href="/public/pricing.html" class="kpi-card-link">
                     <div class="kpi-card plan h-100">
                       <div class="kpi-icon icon-plan">
                         <i class="bi bi-gem"></i>
@@ -107,36 +107,35 @@
                       page to start swiping and discover new friends for your
                       pup.
                     </p>
-                    <a href="./app-find-matches.html" class="btn btn-primary"
+                    <a href="/app/matches/find.html" class="btn btn-primary"
                       >Find Matches</a
                     >
                   </div>
                 </div>
               </div>
               <div
-                data-component="./app-pups-nearby.html"
+                data-component="/components/app/pups-nearby.html"
                 id="pups-nearby-component"
               ></div>
             </div>
 
             <div class="col-lg-4">
               <div
-                data-component="./app-activity-feed.html"
+                data-component="/components/app/activity-feed.html"
                 class="mb-4"
                 id="activity-feed-component"
               ></div>
-              <div data-component="./app-tip-of-the-day.html"></div>
+              <div data-component="/components/app/tip-of-the-day.html"></div>
             </div>
           </div>
         </main>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/data-service.js"></script>
-    <script src="./assets/js/component-loader.js"></script>
-    <script src="./assets/js/auth-guard.js"></script>
-    <script src="./assets/js/app-header-handler.js"></script>
-    <script src="./assets/js/app-dashboard.js"></script>
-    <script src="./assets/js/app-activity-handler.js"></script>
+    <script src="/assets/js/lib/data-service.js"></script>
+    <script src="/assets/js/utils/component-loader.js"></script>
+    <script src="/assets/js/app/header-handler.js"></script>
+    <script src="/assets/js/app/dashboard.js"></script>
+    <script src="/assets/js/app/activity-handler.js"></script>
   </body>
 </html>

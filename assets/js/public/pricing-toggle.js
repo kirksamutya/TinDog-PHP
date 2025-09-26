@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   billingToggle.addEventListener("change", () => {
     const isAnnual = billingToggle.checked;
 
-    // Update prices on the cards
     pricingCards.forEach((card) => {
       const monthlyPrice = card.dataset.monthlyPrice;
       const annualPrice = card.dataset.annualPrice;
@@ -28,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Update checkout links
     checkoutLinks.forEach((link) => {
       const originalHref = link.dataset.originalHref;
       if (isAnnual) {

@@ -25,6 +25,25 @@ This project was built using the following technologies:
 - [CSS3](https://en.wikipedia.org/wiki/CSS)
 - [JavaScript](https://www.javascript.com/)
 
+### 🏗️ Project Structure
+
+This project follows a structured and scalable file organization to ensure clarity and maintainability.
+
+- **`/` (Root)**: Contains the main `index.html` landing page.
+- **`/admin`**: Contains all HTML pages for the administrator dashboard.
+- **`/app`**: Contains all HTML pages for the core, logged-in user application.
+- **`/auth`**: Contains all HTML pages related to the authentication flow (login, registration, password reset, etc.).
+- **`/public`**: Contains all public-facing static pages, such as "About Us," "Contact," "Blog," and "Pricing."
+- **`/components`**: Contains reusable HTML partials (like headers, footers, and sidebars) that are dynamically loaded into pages.
+- **`/assets`**: Contains all static assets, which are further organized:
+  - **`/css`**: Modular stylesheets. `main.css` acts as the entry point, importing the others.
+  - **`/images`**: All image files used throughout the project.
+  - **`/js`**: The JavaScript source code is organized by its role:
+    - **`/lib`**: Core, application-wide services for data, database simulation, etc.
+    - **`/utils`**: Reusable, generic utility functions that are not specific to any one part of the app (e.g., `component-loader.js`, `form-validator.js`).
+    - **`/pages`**: Scripts that are specific to individual public-facing pages (e.g., `blog-filter.js`).
+    - **`/admin`**, **`/app`**, **`/auth`**: Scripts that contain logic specific to their corresponding sections of the application.
+
 ## 🚀 Getting Started
 
 To get a local copy up and running, follow these simple steps.
