@@ -1,3 +1,10 @@
+/*
+* TinDog Main Application Styles
+* ------------------------------
+* Contains all styles for the authenticated user-facing application,
+* including the dashboard, profiles, messaging, and matching.
+*/
+
 body {
   font-size: 0.875rem;
 }

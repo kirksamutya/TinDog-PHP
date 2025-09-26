@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dogSize: document.getElementById("dogSize").value,
       age: document.getElementById("dogAge").value,
       bio: document.getElementById("dogBio").value,
+      dogAvatar: document.getElementById("dog-photo-preview").src,
     };
 
     const newUserId = createUser(newUser);

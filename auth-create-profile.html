@@ -157,6 +157,44 @@
             </div>
           </div>
           <div class="wizard-form-step">
+            <div class="text-center mb-4">
+              <h4>Step 4: Upload a Photo</h4>
+            </div>
+            <div
+              class="wizard-form-content d-flex flex-column align-items-center justify-content-center"
+            >
+              <label for="dog-photo-upload" class="photo-upload-container">
+                <img
+                  src="https://placedog.net/500/500?id=1"
+                  alt="Dog photo preview"
+                  class="photo-upload-preview"
+                  id="dog-photo-preview"
+                />
+                <div class="photo-upload-prompt">
+                  <i class="bi bi-camera-fill"></i>
+                </div>
+              </label>
+              <input
+                type="file"
+                id="dog-photo-upload"
+                class="d-none"
+                accept="image/*"
+                data-preview-target="dog-photo-preview"
+              />
+              <p class="text-muted mt-2">
+                Click the image to upload a photo of your dog.
+              </p>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-secondary btn-back">
+                <i class="bi bi-arrow-left"></i> Back
+              </button>
+              <button type="button" class="btn btn-tindog-primary btn-next">
+                Next <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="wizard-form-step">
             <div
               class="text-center wizard-form-content justify-content-center d-flex flex-column"
             >
@@ -182,5 +220,6 @@
     <script src="./assets/js/database.js"></script>
     <script src="./assets/js/user-service.js"></script>
     <script src="./assets/js/auth-wizard.js"></script>
+    <script src="./assets/js/app-photo-preview.js"></script>
   </body>
 </html>
