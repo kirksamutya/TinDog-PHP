@@ -98,12 +98,33 @@
                   </a>
                 </div>
               </div>
-
-              <div data-component="./app-pups-nearby.html"></div>
+              <div id="getting-started-section" style="display: none">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Ready to Find a Match?</h5>
+                    <p class="card-text">
+                      Your profile is all set! Head over to the "Find Matches"
+                      page to start swiping and discover new friends for your
+                      pup.
+                    </p>
+                    <a href="./app-find-matches.html" class="btn btn-primary"
+                      >Find Matches</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                data-component="./app-pups-nearby.html"
+                id="pups-nearby-component"
+              ></div>
             </div>
 
             <div class="col-lg-4">
-              <div data-component="./app-activity-feed.html" class="mb-4"></div>
+              <div
+                data-component="./app-activity-feed.html"
+                class="mb-4"
+                id="activity-feed-component"
+              ></div>
               <div data-component="./app-tip-of-the-day.html"></div>
             </div>
           </div>
@@ -114,6 +135,7 @@
     <script src="./assets/js/data-service.js"></script>
     <script src="./assets/js/component-loader.js"></script>
     <script src="./assets/js/auth-guard.js"></script>
+    <script src="./assets/js/app-header-handler.js"></script>
     <script src="./assets/js/app-dashboard.js"></script>
     <script src="./assets/js/app-activity-handler.js"></script>
   </body>

@@ -1,70 +1,99 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const settingsKey = "tindogDiscoverySettings";
+  const allUsers = DataService.getAllUsers();
+  const loggedInUserId = DataService.getLoggedInUserId();
+  const currentUser = allUsers[loggedInUserId];
+  const isMastiffUser = currentUser && currentUser.plan === "mastiff";
+
+  const defaultSettings = {
+    distance: 50,
+    age: 8,
+    dogSex: "any",
+    dogSize: "any",
+    showOnTindog: true,
+  };
+
+  let currentSettings =
+    JSON.parse(localStorage.getItem(settingsKey)) || defaultSettings;
+
+  const distanceRange = document.getElementById("distanceRange");
+  const distanceValue = document.getElementById("distance-value");
+  const ageRange = document.getElementById("ageRange");
+  const ageValue = document.getElementById("age-value");
+  const sexFilter = document.getElementById("filterDogSex");
+  const sizeFilter = document.getElementById("filterDogSize");
+  const showOnTindogToggle = document.getElementById("show-on-tindog");
+
+  const saveSettings = () => {
+    localStorage.setItem(settingsKey, JSON.stringify(currentSettings));
+  };
+
+  const loadSettings = () => {
+    if (distanceRange) distanceRange.value = currentSettings.distance;
+    if (distanceValue)
+      distanceValue.textContent = `${currentSettings.distance} km`;
+    if (ageRange) ageRange.value = currentSettings.age;
+    if (ageValue) ageValue.textContent = `1 - ${currentSettings.age} years`;
+    if (sexFilter) sexFilter.value = currentSettings.dogSex;
+    if (sizeFilter) sizeFilter.value = currentSettings.dogSize;
+    if (showOnTindogToggle)
+      showOnTindogToggle.checked = currentSettings.showOnTindog;
+  };
+
   const handleRangeSliders = () => {
-    const distanceRange = document.getElementById("distanceRange");
-    const distanceValue = document.getElementById("distance-value");
-    const ageRange = document.getElementById("ageRange");
-    const ageValue = document.getElementById("age-value");
-
-    if (distanceRange && distanceValue) {
+    if (distanceRange) {
       distanceRange.addEventListener("input", (event) => {
-        distanceValue.textContent = `${event.target.value} km`;
+        const value = event.target.value;
+        distanceValue.textContent = `${value} km`;
+        currentSettings.distance = value;
+        saveSettings();
       });
     }
-
-    if (ageRange && ageValue) {
+    if (ageRange) {
       ageRange.addEventListener("input", (event) => {
-        ageValue.textContent = `1 - ${event.target.value} years`;
+        const value = event.target.value;
+        ageValue.textContent = `1 - ${value} years`;
+        currentSettings.age = value;
+        saveSettings();
       });
     }
   };
 
-  const handleThemeSelector = () => {
-    const themeOptions = document.querySelectorAll(".theme-option");
-    themeOptions.forEach((option) => {
-      option.addEventListener("click", function () {
-        const selectedTheme = this.dataset.theme;
+  const handleAdvancedFilters = () => {
+    const fieldset = document.getElementById("advanced-filters-fieldset");
+    const upgradePrompt = document.getElementById("upgrade-for-filters");
 
-        document.body.classList.remove("dark-theme");
-        if (selectedTheme === "dark") {
-          document.body.classList.add("dark-theme");
-        }
+    if (!fieldset || !upgradePrompt) return;
 
-        themeOptions.forEach((btn) => btn.classList.remove("active"));
-        this.classList.add("active");
-      });
-    });
-  };
-
-  const handleAccessibilityOptions = () => {
-    const reduceMotionToggle = document.getElementById("reduce-motion");
-    if (reduceMotionToggle) {
-      reduceMotionToggle.addEventListener("change", (event) => {
-        if (event.target.checked) {
-          document.body.classList.add("reduce-motion");
-        } else {
-          document.body.classList.remove("reduce-motion");
-        }
-      });
-    }
-  };
-
-  const handleDeleteAccount = () => {
-    const confirmButton = document.getElementById("confirmDeleteAccountBtn");
-    if (!confirmButton) return;
-
-    confirmButton.addEventListener("click", () => {
-      const loggedInUserId = DataService.getLoggedInUserId();
-      const isDeleted = DataService.deleteUser(loggedInUserId);
-
-      if (isDeleted) {
-        sessionStorage.clear();
-        window.location.href = "./index.html";
+    if (isMastiffUser) {
+      fieldset.disabled = false;
+      upgradePrompt.style.display = "none";
+      if (sexFilter) {
+        sexFilter.addEventListener("change", (e) => {
+          currentSettings.dogSex = e.target.value;
+          saveSettings();
+        });
       }
-    });
+      if (sizeFilter) {
+        sizeFilter.addEventListener("change", (e) => {
+          currentSettings.dogSize = e.target.value;
+          saveSettings();
+        });
+      }
+    } else {
+      fieldset.disabled = true;
+      upgradePrompt.style.display = "block";
+    }
   };
 
+  if (showOnTindogToggle) {
+    showOnTindogToggle.addEventListener("change", (e) => {
+      currentSettings.showOnTindog = e.target.checked;
+      saveSettings();
+    });
+  }
+
+  loadSettings();
   handleRangeSliders();
-  handleThemeSelector();
-  handleAccessibilityOptions();
-  handleDeleteAccount();
+  handleAdvancedFilters();
 });

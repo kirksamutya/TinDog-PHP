@@ -1140,6 +1140,17 @@ body {
   font-weight: 600;
 }
 
+.upgrade-prompt .btn {
+  background-color: var(--brand-primary);
+  color: white;
+  font-weight: 600;
+}
+
+#advanced-filters-fieldset:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .activity-feed-container .icon-wrapper,
 .notification-card .icon-wrapper {
   width: 40px;

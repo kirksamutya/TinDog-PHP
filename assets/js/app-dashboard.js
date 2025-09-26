@@ -58,8 +58,31 @@ document.addEventListener("DOMContentLoaded", () => {
       stats.profileViews;
   };
 
+  const initNewUserDashboard = () => {
+    const loggedInUserId = DataService.getLoggedInUserId();
+    const allUsers = DataService.getAllUsers();
+    const currentUser = allUsers[loggedInUserId];
+
+    if (currentUser && !currentUser.lastSeen) {
+      const gettingStartedSection = document.getElementById(
+        "getting-started-section"
+      );
+      const pupsNearbyComponent = document.getElementById(
+        "pups-nearby-component"
+      );
+      const activityFeedComponent = document.getElementById(
+        "activity-feed-component"
+      );
+
+      if (gettingStartedSection) gettingStartedSection.style.display = "block";
+      if (pupsNearbyComponent) pupsNearbyComponent.style.display = "none";
+      if (activityFeedComponent) activityFeedComponent.style.display = "none";
+    }
+  };
+
   setDynamicGreeting();
   updateDashboardStats();
+  initNewUserDashboard();
 
   document.addEventListener("componentsLoaded", setDynamicDogTip, {
     once: true,
