@@ -1,33 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const isPremiumUser = false; // Change this to `false` to test the basic mode.
+  const page = document.getElementById("likes-page");
+  if (!page) return;
+
+  const allUsers = DataService.getAllUsers();
+  const loggedInUserId = DataService.getLoggedInUserId();
+  const currentUser = allUsers[loggedInUserId];
+
+  const isPremiumUser =
+    currentUser &&
+    (currentUser.plan === "labrador" || currentUser.plan === "mastiff");
 
   const images = document.querySelectorAll(".liked-by-img");
-
-  const upgradeElements = document.querySelectorAll(
-    ".page-header p, .btn-tindog-primary"
-  );
-
-  function setBasicMode() {
-    images.forEach((img) => {
-      img.classList.add("liked-by-img");
-    });
-    upgradeElements.forEach((el) => {
-      el.style.display = "block";
-    });
-  }
-
-  function setPremiumMode() {
-    images.forEach((img) => {
-      img.classList.remove("liked-by-img");
-    });
-    upgradeElements.forEach((el) => {
-      el.style.display = "none";
-    });
-  }
+  const upgradeMessage = document.getElementById("upgrade-message");
+  const upgradeButton = document.getElementById("upgrade-button");
 
   if (isPremiumUser) {
-    setPremiumMode();
+    images.forEach((img) => {
+      img.classList.remove("liked-by-img");
+      img.classList.add("liked-by-img-unblurred");
+    });
+    if (upgradeMessage) upgradeMessage.style.display = "none";
+    if (upgradeButton) upgradeButton.style.display = "none";
   } else {
-    setBasicMode();
+    images.forEach((img) => {
+      img.classList.add("liked-by-img");
+      img.classList.remove("liked-by-img-unblurred");
+    });
+    if (upgradeMessage) upgradeMessage.style.display = "block";
+    if (upgradeButton) upgradeButton.style.display = "block";
   }
 });

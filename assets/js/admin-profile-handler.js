@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileForm = document.getElementById("admin-profile-form");
   const passwordForm = document.getElementById("change-password-form");
   const allUsers = DataService.getAllUsers();
-  const adminUser = allUsers["master_admin"];
+  const loggedInAdminId = DataService.getLoggedInAdminId();
+  const adminUser = allUsers[loggedInAdminId];
   const passwordModal = new bootstrap.Modal(
     document.getElementById("changePasswordModal")
   );
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const firstNameInput = document.getElementById("firstName");
   const lastNameInput = document.getElementById("lastName");
   const emailInput = document.getElementById("email");
+  const adminRole = document.getElementById("admin-role");
 
   const loadAdminData = () => {
     if (adminUser) {
@@ -23,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
       firstNameInput.value = adminUser.firstName;
       lastNameInput.value = adminUser.lastName;
       emailInput.value = adminUser.email;
+      adminRole.textContent = adminUser.masterAdmin
+        ? "Master Admin"
+        : "Administrator";
     }
   };
 
@@ -45,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     adminUser.firstName = firstNameInput.value;
     adminUser.lastName = lastNameInput.value;
     adminUser.email = emailInput.value;
-    allUsers["master_admin"] = adminUser;
+    allUsers[loggedInAdminId] = adminUser;
     localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
     window.location.reload();
   });
@@ -74,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     adminUser.password = newPassword;
-    allUsers["master_admin"] = adminUser;
+    allUsers[loggedInAdminId] = adminUser;
     localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
     passwordModal.hide();
     alert("Password changed successfully!");

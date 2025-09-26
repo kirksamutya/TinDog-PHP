@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const allUsers = JSON.parse(localStorage.getItem("tindogUsers")) || {};
     const loggedInUserId = sessionStorage.getItem("loggedInUserId");
     const allBlocks = JSON.parse(localStorage.getItem("tindogBlocks")) || {};
+    const discoverySettings =
+      JSON.parse(localStorage.getItem("tindogDiscoverySettings")) || {};
 
     const myBlockList = allBlocks[loggedInUserId] || [];
     const usersWhoBlockedMe = Object.keys(allBlocks).filter((userId) =>
@@ -15,12 +17,38 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     const combinedBlockList = new Set([...myBlockList, ...usersWhoBlockedMe]);
 
-    const potentialMatches = Object.entries(allUsers).filter(
-      ([userId, user]) =>
-        user.role === "user" &&
-        userId !== loggedInUserId &&
-        !combinedBlockList.has(userId)
-    );
+    let potentialMatches = Object.entries(allUsers).filter(([userId, user]) => {
+      const isUser = user.role === "user";
+      const isNotMe = userId !== loggedInUserId;
+      const isNotBlocked = !combinedBlockList.has(userId);
+
+      if (!isUser || !isNotMe || !isNotBlocked) {
+        return false;
+      }
+
+      const matchesSex =
+        !discoverySettings.dogSex ||
+        discoverySettings.dogSex === "any" ||
+        user.dogSex === discoverySettings.dogSex;
+      const matchesSize =
+        !discoverySettings.dogSize ||
+        discoverySettings.dogSize === "any" ||
+        user.dogSize === discoverySettings.dogSize;
+      const matchesAge =
+        !discoverySettings.age || user.age <= discoverySettings.age;
+
+      return matchesSex && matchesSize && matchesAge;
+    });
+
+    potentialMatches.sort(([, a], [, b]) => {
+      if (a.plan === "mastiff" && b.plan !== "mastiff") {
+        return -1;
+      }
+      if (b.plan === "mastiff" && a.plan !== "mastiff") {
+        return 1;
+      }
+      return 0;
+    });
 
     let cardsHtml = "";
     potentialMatches.forEach(([userId, user]) => {

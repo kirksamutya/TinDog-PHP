@@ -3,6 +3,10 @@ const DataService = {
     return sessionStorage.getItem("loggedInUserId") || "saavedra_roel";
   },
 
+  getLoggedInAdminId: () => {
+    return sessionStorage.getItem("loggedInAdminId");
+  },
+
   getAllUsers: () => {
     return JSON.parse(localStorage.getItem("tindogUsers")) || {};
   },
@@ -99,47 +103,14 @@ const DataService = {
     if (!userIdToDelete) return false;
 
     const allUsers = DataService.getAllUsers();
-    const allLikes = DataService.getAllLikes();
-    const allConversations = DataService.getAllMessages();
-    const allReports = DataService.getAllReports();
 
     if (allUsers[userIdToDelete]) {
-      delete allUsers[userIdToDelete];
+      allUsers[userIdToDelete].status = "banned";
+      localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+      return true;
     }
 
-    if (allLikes[userIdToDelete]) {
-      delete allLikes[userIdToDelete];
-    }
-
-    for (const likerId in allLikes) {
-      const userLikes = allLikes[likerId];
-      const index = userLikes.indexOf(userIdToDelete);
-      if (index > -1) {
-        userLikes.splice(index, 1);
-      }
-    }
-
-    Object.keys(allConversations).forEach((key) => {
-      if (key.includes(userIdToDelete)) {
-        delete allConversations[key];
-      }
-    });
-
-    const remainingReports = allReports.filter(
-      (report) =>
-        report.reportedUserId !== userIdToDelete &&
-        report.reportedByUserId !== userIdToDelete
-    );
-
-    localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-    localStorage.setItem("tindogLikes", JSON.stringify(allLikes));
-    localStorage.setItem(
-      "tindogConversations",
-      JSON.stringify(allConversations)
-    );
-    localStorage.setItem("tindogReports", JSON.stringify(remainingReports));
-
-    return true;
+    return false;
   },
 
   getActivityFeed: function () {
