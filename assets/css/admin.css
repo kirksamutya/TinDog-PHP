@@ -196,8 +196,8 @@ body {
 
 .nav-tabs .nav-link.active {
   color: var(--brand-primary);
-  border-color: var(--brand-primary) !important;
-  border-bottom-width: 3px;
+  border-color: #dee2e6 #dee2e6 #fff;
+  border-bottom: 3px solid var(--brand-primary);
 }
 .nav-tabs .nav-link {
   color: var(--text-muted);
