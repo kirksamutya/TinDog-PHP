@@ -77,7 +77,9 @@
                 >Remember me</label
               >
             </div>
-            <a href="/auth/forgot-password.php" class="text-decoration-none small"
+            <a
+              href="/auth/forgot-password.php"
+              class="text-decoration-none small"
               >Forgot password?</a
             >
           </div>
@@ -100,6 +102,6 @@
     <script src="/assets/js/lib/database.js"></script>
     <script src="/assets/js/auth/form-validator.js"></script>
     <script src="/assets/js/auth/login-handler.js"></script>
-    <script src="/assets/js/lib/password-toggle.js"></script>
+    <script src="/assets/js/utils/password-toggle.js"></script>
   </body>
 </html>

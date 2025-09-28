@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF--8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TinDog - Admin Login</title>
     <link
@@ -91,6 +91,6 @@
     <script src="/assets/js/lib/database.js"></script>
     <script src="/assets/js/auth/form-validator.js"></script>
     <script src="/assets/js/auth/admin.js"></script>
-    <script src="/assets/js/lib/password-toggle.js"></script>
+    <script src="/assets/js/utils/password-toggle.js"></script>
   </body>
 </html>

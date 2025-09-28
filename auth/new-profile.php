@@ -218,8 +218,8 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/lib/database.js"></script>
-    <script src="/assets/js/lib/user-service.js"></script>
+    <script src="/assets/js/user-service.js"></script>
     <script src="/assets/js/auth/wizard.js"></script>
-    <script src="/assets/js/app/photo-preview.js"></script>
+    <script src="/assets/js/utils/photo-preview.js"></script>
   </body>
 </html>
