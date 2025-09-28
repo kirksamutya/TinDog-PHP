@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const initBillingPage = () => {
     const planDetails = {
       chihuahua: { name: "Chihuahua Plan", price: "₱0", cycle: "/mo" },
-      labrador: { name: "Labrador Plan", price: "₱149", cycle: "/mo" },
-      mastiff: { name: "Mastiff Plan", price: "₱299", cycle: "/mo" },
+      labrador: { name: "Labrador Plan", price: "₱49", cycle: "/mo" },
+      mastiff: { name: "Mastiff Plan", price: "₱99", cycle: "/mo" },
     };
 
     const loggedInUserId = DataService.getLoggedInUserId();
