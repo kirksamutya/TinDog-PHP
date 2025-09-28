@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TinDog - FAQ</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/favicon-transparent.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <div data-component="/components/header.html"></div>
+    <main class="content-wrapper py-5 bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h1>Frequently Asked Questions</h1>
+          <p class="lead text-muted">Have a question? We're here to help. 🐕</p>
+        </div>
+        <h4 class="mb-3">General</h4>
+        <div class="accordion shadow-sm" id="faqAccordionGeneral">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer1"
+              >
+                What is TinDog?
+              </button>
+            </h2>
+            <div
+              id="answer1"
+              class="accordion-collapse collapse show"
+              data-bs-parent="#faqAccordionGeneral"
+            >
+              <div class="accordion-body">
+                TinDog is a social application designed to help dog owners find
+                and connect with other dog owners in their area for playdates,
+                walks, and friendships. It's a fun and easy way to help your dog
+                socialize!
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer2"
+              >
+                Is my personal information safe?
+              </button>
+            </h2>
+            <div
+              id="answer2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordionGeneral"
+            >
+              <div class="accordion-body">
+                Absolutely. We take your privacy seriously. Your profile only
+                shows your first name and your dog's details. Your full name,
+                email, and other sensitive information are never shared with
+                other users. You can read more in our Privacy Policy.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="mb-3 mt-5">Profile & Matching</h4>
+        <div class="accordion shadow-sm" id="faqAccordionProfile">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer-p1"
+              >
+                How does matching work?
+              </button>
+            </h2>
+            <div
+              id="answer-p1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordionProfile"
+            >
+              <div class="accordion-body">
+                It's simple! In the "Find Matches" section, you swipe right on a
+                dog's profile if you'd like your pup to meet them, and left if
+                not. If the other dog owner also swipes right on your dog's
+                profile, it's a match! You can then find them in "My Matches"
+                and start chatting.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer-p2"
+              >
+                How do I edit my profile or my dog's profile?
+              </button>
+            </h2>
+            <div
+              id="answer-p2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordionProfile"
+            >
+              <div class="accordion-body">
+                Navigate to the "My Profile" page from the sidebar. From there,
+                you will see an "Edit Profile" button. On the edit screen, you
+                can switch between "Dog's Information" and "Owner's Information"
+                using the tabs at the top to update your details.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#answer-p3"
+              >
+                How do the Discovery Settings work?
+              </button>
+            </h2>
+            <div
+              id="answer-p3"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordionProfile"
+            >
+              <div class="accordion-body">
+                In the "Settings" page, you can adjust the "Maximum Distance"
+                and "Age Range" sliders. This will filter the dogs you see in
+                the "Find Matches" section to better suit your preferences for
+                location and playmate age.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="mb-3 mt-5">Billing & Subscriptions</h4>
+        <div class="accordion shadow-sm" id="faqAccordionBilling">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#faqBilling1"
+              >
+                Can I change my plan later?
+              </button>
+            </h2>
+            <div
+              id="faqBilling1"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordionBilling"
+            >
+              <div class="accordion-body">
+                Yes! You can upgrade or downgrade your plan at any time from
+                your account settings or by visiting the Pricing page.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#faqBilling2"
+              >
+                What payment methods do you accept?
+              </button>
+            </h2>
+            <div
+              id="faqBilling2"
+              class="accordion-collapse collapse"
+              data-bs-parent="#faqAccordionBilling"
+            >
+              <div class="accordion-body">
+                We accept all major credit cards. For payments in the
+                Philippines, we also support GCash and Maya.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div data-component="/components/footer.html"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/utils/component-loader.js"></script>
+  </body>
+</html>
