@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorAlert = document.getElementById("login-error-alert");
     const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
 
-    let loggedInUserId = null;
+    let loggedInUser = null;
     errorAlert.style.display = "none";
 
     if (allUsers) {
@@ -18,21 +18,26 @@ document.addEventListener("DOMContentLoaded", () => {
             user.password === password &&
             user.role === "user"
           ) {
-            loggedInUserId = userId;
+            loggedInUser = { id: userId, ...user };
             break;
           }
         }
       }
     }
 
-    if (loggedInUserId) {
+    if (loggedInUser) {
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
       } else {
         localStorage.removeItem("rememberedEmail");
       }
-      sessionStorage.setItem("loggedInUserId", loggedInUserId);
-      window.location.href = "../app/dashboard.html";
+      sessionStorage.setItem("loggedInUserId", loggedInUser.id);
+
+      if (loggedInUser.status === "active") {
+        window.location.href = "../app/dashboard.html";
+      } else {
+        window.location.href = `../app/status.html?status=${loggedInUser.status}`;
+      }
     } else {
       errorAlert.textContent = "Invalid user credentials. Please try again.";
       errorAlert.style.display = "block";
