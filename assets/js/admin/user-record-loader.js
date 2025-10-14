@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       userData.signUpDate || "N/A";
     document.getElementById("lastSeen").textContent =
       userData.lastSeen || "N/A";
-    editButton.href = `./admin-user-edit.html?user=${userId}`;
+    editButton.href = `./edit.html?user=${userId}`;
 
     if (userData.role === "admin") {
       document.getElementById("details-title").textContent = "Account Details";
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmDeleteBtn.addEventListener("click", () => {
       delete allUsers[userId];
       localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-      window.location.href = "./admin-user-management.html";
+      window.location.href = "./index.html";
     });
   };
 

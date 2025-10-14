@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const newUserId = createUser(newUserData);
-      window.location.href = `./admin-user-record.html?user=${newUserId}`;
+      window.location.href = `../users/record.html?user=${newUserId}`;
     });
   }
 });

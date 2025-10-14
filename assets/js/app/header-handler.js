@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ? "bi-heart-fill text-danger"
             : "bi-chat-dots-fill text-primary";
           const link = isMatch
-            ? "./app-matches.html"
-            : `./app-messages.html?user=${n.user.id}`;
+            ? "./matches/index.html"
+            : `./messages.html?user=${n.user.id}`;
           return `
             <li>
               <a class="dropdown-item d-flex align-items-start py-2" href="${link}">

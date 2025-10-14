@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "btn-outline-secondary"
         : "btn-tindog-primary";
       const link = isMatch
-        ? `./app-view-profile.html?user=${user.id}`
-        : `./app-messages.html`;
+        ? `./profile/view.html?user=${user.id}`
+        : `./messages.html`;
 
       return `
         <div class="card notification-card unread">

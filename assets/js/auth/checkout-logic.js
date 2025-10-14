@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const handleCheckout = () => {
-    window.location.href = "./auth-create-profile.html";
+    window.location.href = "./new-profile.html";
   };
 
   initializeCheckoutPage();

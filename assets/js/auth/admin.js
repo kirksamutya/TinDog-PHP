@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (loggedInAdminId) {
       sessionStorage.setItem("loggedInAdminId", loggedInAdminId);
-      window.location.href = "./admin-dashboard.html";
+      window.location.href = "../admin/dashboard.html";
     } else if (errorAlert) {
       errorAlert.textContent =
         "Invalid administrator credentials. Please try again.";

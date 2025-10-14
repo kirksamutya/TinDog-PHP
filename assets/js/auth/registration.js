@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const handleRegistration = (form) => {
-    window.location.href = "./auth-create-profile.html";
+    window.location.href = "./new-profile.html";
   };
 
   const termsCheckbox = document.getElementById("terms");
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch("./page-terms.html")
+    fetch("../public/terms.html")
       .then((response) => response.text())
       .then((html) => {
         const parser = new DOMParser();

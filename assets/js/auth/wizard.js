@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const newUserId = createUser(newUser);
     sessionStorage.setItem("loggedInUserId", newUserId);
-    window.location.href = "./app-dashboard.html";
+    window.location.href = "../app/dashboard.html";
   });
 
   updateWizardState();

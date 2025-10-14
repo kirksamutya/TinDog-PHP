@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const iconClass = isMatch ? "bi-heart-fill" : "bi-chat-dots-fill";
       const iconWrapperClass = `activity-${type}`;
       const button = isMatch
-        ? `<a href="./app-matches.html" class="btn btn-sm btn-outline-secondary ms-auto">View</a>`
-        : `<a href="./app-messages.html" class="btn btn-sm btn-tindog-primary ms-auto">Reply</a>`;
+        ? `<a href="./matches/index.html" class="btn btn-sm btn-outline-secondary ms-auto">View</a>`
+        : `<a href="./messages.html" class="btn btn-sm btn-tindog-primary ms-auto">Reply</a>`;
 
       const listItem = document.createElement("li");
       listItem.className = "list-group-item d-flex align-items-center";
