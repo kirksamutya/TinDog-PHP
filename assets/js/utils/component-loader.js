@@ -1,44 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const animateDashboardComponents = () => {
-    const kpiCards = document.querySelectorAll(".kpi-card");
-    const activityFeed = document.querySelector(".activity-feed-container");
-    const pupsNearby = document.querySelector(".pups-nearby-card");
-    const tipCard = document.querySelector(".tip-card");
+  const getRelativePath = () => {
+    // Correctly calculates the path to the root from the current page.
+    const path = window.location.pathname;
+    const pathSegments = path
+      .split("/")
+      .filter((segment) => segment.length > 0);
+    // Assumes the repo name is the first segment on GitHub Pages
+    const repoName = "TinDog-PHP";
+    const repoIndex = pathSegments.indexOf(repoName);
 
-    const componentsToAnimate = [
-      ...kpiCards,
-      pupsNearby,
-      activityFeed,
-      tipCard,
-    ];
+    if (repoIndex === -1) {
+      // Likely on a local server, simple relative pathing works.
+      const depth = pathSegments.length - 1;
+      return depth > 0 ? "../".repeat(depth) : "./";
+    }
 
-    componentsToAnimate.forEach((el, index) => {
-      if (el) {
-        setTimeout(() => {
-          el.classList.add("visible");
-        }, index * 100);
-      }
-    });
+    const depthAfterRepo = pathSegments.length - repoIndex - 1;
+    return depthAfterRepo > 0 ? "../".repeat(depthAfterRepo) : "./";
   };
 
-  const fetchAndInjectComponent = (componentContainer) => {
+  const fetchAndInjectComponent = async (componentContainer) => {
     const componentUrl = componentContainer.dataset.component;
     if (!componentUrl) return;
 
-    return fetch(componentUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Component not found at ${componentUrl}`);
-        }
-        return response.text();
-      })
-      .then((htmlContent) => {
-        componentContainer.innerHTML = htmlContent;
-        if (componentContainer.id === "sidebar-nav-container") {
-          setActiveSidebarLink(componentContainer);
-        }
-      })
-      .catch((error) => console.error("Component Loader Error:", error));
+    try {
+      const response = await fetch(componentUrl);
+      if (!response.ok) {
+        throw new Error(`Component not found at ${componentUrl}`);
+      }
+      let htmlContent = await response.text();
+      const relativePath = getRelativePath();
+
+      // Regex to find src or href starting with "/" but not "//"
+      htmlContent = htmlContent.replace(
+        /(src|href)="\/([^/])/g,
+        `$1="${relativePath}$2`
+      );
+
+      componentContainer.innerHTML = htmlContent;
+
+      if (componentContainer.id === "sidebar-nav-container") {
+        setActiveSidebarLink(componentContainer);
+      }
+    } catch (error) {
+      console.error("Component Loader Error:", error);
+    }
   };
 
   const setActiveSidebarLink = (sidebar) => {
@@ -51,6 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
         link.classList.add("active");
       } else {
         link.classList.remove("active");
+      }
+    });
+  };
+
+  const animateDashboardComponents = () => {
+    const componentsToAnimate = document.querySelectorAll(
+      ".kpi-card, .pups-nearby-card, .activity-feed-container, .tip-card"
+    );
+    componentsToAnimate.forEach((el, index) => {
+      if (el) {
+        setTimeout(() => {
+          el.classList.add("visible");
+        }, index * 100);
       }
     });
   };
