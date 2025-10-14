@@ -1,27 +1,37 @@
-function getBasePath() {
+// --- START: Accurate Base Path Calculation ---
+let basePath = "/"; // Default for local development
+(function () {
   const path = window.location.pathname;
   const repoName = "/TinDog-PHP/";
   const repoIndex = path.indexOf(repoName);
   if (repoIndex > -1) {
-    return path.substring(0, repoIndex + repoName.length);
+    basePath = path.substring(0, repoIndex + repoName.length);
   }
-  return "/";
-}
+})();
+// --- END: Accurate Base Path Calculation ---
 
 document.addEventListener("DOMContentLoaded", () => {
   const fetchAndInjectComponent = async (componentContainer) => {
     const componentUrl = componentContainer.dataset.component;
     if (!componentUrl) return;
 
+    // Use the pre-calculated basePath to fetch the component correctly
+    const finalComponentUrl = new URL(componentUrl, window.location.href)
+      .pathname;
+
     try {
-      const response = await fetch(componentUrl);
+      const response = await fetch(finalComponentUrl);
       if (!response.ok) {
-        throw new Error(`Component not found at ${componentUrl}`);
+        throw new Error(`Component not found at ${finalComponentUrl}`);
       }
       let htmlContent = await response.text();
-      const basePath = getBasePath();
 
-      htmlContent = htmlContent.replace(/(src|href)="\//g, `$1="${basePath}`);
+      // Regex to find src or href attributes that start with "/" but not "//"
+      // and prepend the correct basePath.
+      htmlContent = htmlContent.replace(
+        /(src|href)="\/(?!\/)/g,
+        `$1="${basePath}`
+      );
 
       componentContainer.innerHTML = htmlContent;
 
@@ -38,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = sidebar.querySelectorAll(".nav-link");
 
     navLinks.forEach((link) => {
-      const linkPath = new URL(link.href).pathname;
+      // Create a full URL object to easily get the pathname
+      const linkPath = new URL(link.href, window.location.origin).pathname;
       if (currentPagePath === linkPath) {
         link.classList.add("active");
       } else {
