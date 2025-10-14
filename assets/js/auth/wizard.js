@@ -1,3 +1,13 @@
+function getBasePath() {
+  const path = window.location.pathname;
+  const repoName = "/TinDog-PHP/";
+  const repoIndex = path.indexOf(repoName);
+  if (repoIndex > -1) {
+    return path.substring(0, repoIndex + repoName.length);
+  }
+  return "/";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("create-profile-form");
   if (!form) return;
@@ -85,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const newUserId = createUser(newUser);
     sessionStorage.setItem("loggedInUserId", newUserId);
-    window.location.href = "../app/dashboard.html";
+    window.location.href = getBasePath() + "app/dashboard.html";
   });
 
   updateWizardState();

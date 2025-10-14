@@ -1,3 +1,13 @@
+function getBasePath() {
+  const path = window.location.pathname;
+  const repoName = "/TinDog-PHP/";
+  const repoIndex = path.indexOf(repoName);
+  if (repoIndex > -1) {
+    return path.substring(0, repoIndex + repoName.length);
+  }
+  return "/";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const handleLogin = (form) => {
     const email = form.querySelector("#email").value;
@@ -33,10 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       sessionStorage.setItem("loggedInUserId", loggedInUser.id);
 
+      const basePath = getBasePath();
       if (loggedInUser.status === "active") {
-        window.location.href = "../app/dashboard.html";
+        window.location.href = basePath + "app/dashboard.html";
       } else {
-        window.location.href = `../app/status.html?status=${loggedInUser.status}`;
+        window.location.href = `${basePath}app/status.html?status=${loggedInUser.status}`;
       }
     } else {
       errorAlert.textContent = "Invalid user credentials. Please try again.";
