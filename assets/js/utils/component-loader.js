@@ -1,24 +1,14 @@
+function getBasePath() {
+  const path = window.location.pathname;
+  const repoName = "/TinDog-PHP/";
+  const repoIndex = path.indexOf(repoName);
+  if (repoIndex > -1) {
+    return path.substring(0, repoIndex + repoName.length);
+  }
+  return "/";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const getRelativePath = () => {
-    // Correctly calculates the path to the root from the current page.
-    const path = window.location.pathname;
-    const pathSegments = path
-      .split("/")
-      .filter((segment) => segment.length > 0);
-    // Assumes the repo name is the first segment on GitHub Pages
-    const repoName = "TinDog-PHP";
-    const repoIndex = pathSegments.indexOf(repoName);
-
-    if (repoIndex === -1) {
-      // Likely on a local server, simple relative pathing works.
-      const depth = pathSegments.length - 1;
-      return depth > 0 ? "../".repeat(depth) : "./";
-    }
-
-    const depthAfterRepo = pathSegments.length - repoIndex - 1;
-    return depthAfterRepo > 0 ? "../".repeat(depthAfterRepo) : "./";
-  };
-
   const fetchAndInjectComponent = async (componentContainer) => {
     const componentUrl = componentContainer.dataset.component;
     if (!componentUrl) return;
@@ -29,13 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Component not found at ${componentUrl}`);
       }
       let htmlContent = await response.text();
-      const relativePath = getRelativePath();
+      const basePath = getBasePath();
 
-      // Regex to find src or href starting with "/" but not "//"
-      htmlContent = htmlContent.replace(
-        /(src|href)="\/([^/])/g,
-        `$1="${relativePath}$2`
-      );
+      htmlContent = htmlContent.replace(/(src|href)="\//g, `$1="${basePath}`);
 
       componentContainer.innerHTML = htmlContent;
 

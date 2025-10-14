@@ -1,3 +1,13 @@
+function getBasePath() {
+  const path = window.location.pathname;
+  const repoName = "/TinDog-PHP/";
+  const repoIndex = path.indexOf(repoName);
+  if (repoIndex > -1) {
+    return path.substring(0, repoIndex + repoName.length);
+  }
+  return "/";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const handleAdminLogin = (form) => {
     const email = form.querySelector("#email").value;
@@ -28,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (loggedInAdminId) {
       sessionStorage.setItem("loggedInAdminId", loggedInAdminId);
-      window.location.href = "../admin/dashboard.html";
+      window.location.href = getBasePath() + "admin/dashboard.html";
     } else if (errorAlert) {
       errorAlert.textContent =
         "Invalid administrator credentials. Please try again.";
