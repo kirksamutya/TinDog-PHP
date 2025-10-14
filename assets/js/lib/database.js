@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "Guides our technical direction and translates creative concepts into functional, polished applications.",
           signUpDate: "Jul 01, 2024",
           lastSeen: "5 minutes ago",
-          dogAvatar: "./assets/images/jorjee-one.jpg",
-          dogCoverPhoto: "./assets/images/jorjee-three.jpg",
+          dogAvatar: "../assets/images/jorjee-one.jpg",
+          dogCoverPhoto: "../assets/images/jorjee-three.jpg",
         },
         cruz_juan: {
           firstName: "Juan",

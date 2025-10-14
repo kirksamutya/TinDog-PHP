@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const messageUserBtn = document.getElementById("message-user-btn");
       if (messageUserBtn) {
-        messageUserBtn.href = `./app-messages.html?user=${userId}`;
+        messageUserBtn.href = `../messages.html?user=${userId}`;
       }
 
       const profileAvatar = document.getElementById("profile-avatar");

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("rememberedEmail");
       }
       sessionStorage.setItem("loggedInUserId", loggedInUserId);
-      window.location.href = "./app-dashboard.html";
+      window.location.href = "../app/dashboard.html";
     } else {
       errorAlert.textContent = "Invalid user credentials. Please try again.";
       errorAlert.style.display = "block";

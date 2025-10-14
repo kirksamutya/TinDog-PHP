@@ -7,14 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const loggedInAdminId = DataService.getLoggedInAdminId();
 
     if (!loggedInAdminId) {
-      window.location.href = "/auth/admin.html";
+      window.location.href = "../../auth/admin.html";
       return;
     }
 
     const adminUser = allUsers[loggedInAdminId];
     if (!adminUser) {
       console.error("Admin user data not found for ID:", loggedInAdminId);
-      window.location.href = "/auth/admin.html";
+      window.location.href = "../../auth/admin.html";
       return;
     }
 

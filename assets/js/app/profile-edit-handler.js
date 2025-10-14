@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-      window.location.href = "./app-profile.html";
+      window.location.href = "./index.html";
     });
   }
 });

@@ -39,12 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="card-footer">
                   <div class="btn-group w-100">
                     <a
-                      href="./app-view-profile.html?user=${likedUserId}"
+                      href="../profile/view.html?user=${likedUserId}"
                       class="btn btn-tindog-outline"
                       ><i class="bi bi-person-fill"></i></a
                     >
                     <a
-                      href="./app-messages.html?user=${likedUserId}"
+                      href="../messages.html?user=${likedUserId}"
                       class="btn btn-tindog-primary"
                       ><i class="bi bi-chat-dots-fill me-2"></i>Message</a
                     >

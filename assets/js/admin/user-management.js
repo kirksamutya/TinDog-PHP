@@ -70,10 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
               <td>${statusBadge}</td>
               <td class="text-end">
                   <div class="btn-group" role="group">
-                      <a href="/admin/users/record.html?user=${
+                      <a href="./record.html?user=${
                         user.id
                       }" class="btn btn-sm btn-outline-secondary">View</a>
-                      <a href="/admin/users/edit.html?user=${
+                      <a href="./edit.html?user=${
                         user.id
                       }" class="btn btn-sm btn-outline-secondary ${actionsDisabled}">Edit</a>
                       <button type="button" class="btn btn-sm btn-outline-danger" data-user-id="${

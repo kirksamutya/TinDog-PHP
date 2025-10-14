@@ -30,9 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
     checkoutLinks.forEach((link) => {
       const originalHref = link.dataset.originalHref;
       if (isAnnual) {
-        link.href = `${originalHref}&billing=annual`;
+        link.href = `../auth/checkout.html${originalHref.substring(
+          originalHref.indexOf("?")
+        )}&billing=annual`;
       } else {
-        link.href = originalHref;
+        link.href = `../auth/checkout.html${originalHref.substring(
+          originalHref.indexOf("?")
+        )}`;
       }
     });
   });
