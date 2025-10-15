@@ -1,5 +1,4 @@
-// --- START: Accurate Base Path Calculation ---
-let basePath = "/"; // Default for local development
+let basePath = "/";
 (function () {
   const path = window.location.pathname;
   const repoName = "/TinDog-PHP/";
@@ -8,14 +7,12 @@ let basePath = "/"; // Default for local development
     basePath = path.substring(0, repoIndex + repoName.length);
   }
 })();
-// --- END: Accurate Base Path Calculation ---
 
 document.addEventListener("DOMContentLoaded", () => {
   const fetchAndInjectComponent = async (componentContainer) => {
     const componentUrl = componentContainer.dataset.component;
     if (!componentUrl) return;
 
-    // Use the pre-calculated basePath to fetch the component correctly
     const finalComponentUrl = new URL(componentUrl, window.location.href)
       .pathname;
 
@@ -25,9 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(`Component not found at ${finalComponentUrl}`);
       }
       let htmlContent = await response.text();
-
-      // Regex to find src or href attributes that start with "/" but not "//"
-      // and prepend the correct basePath.
       htmlContent = htmlContent.replace(
         /(src|href)="\/(?!\/)/g,
         `$1="${basePath}`
@@ -48,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const navLinks = sidebar.querySelectorAll(".nav-link");
 
     navLinks.forEach((link) => {
-      // Create a full URL object to easily get the pathname
       const linkPath = new URL(link.href, window.location.origin).pathname;
       if (currentPagePath === linkPath) {
         link.classList.add("active");

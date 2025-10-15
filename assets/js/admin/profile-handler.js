@@ -1,22 +1,46 @@
+function getBasePath() {
+  const path = window.location.pathname;
+  const repoName = "/TinDog-PHP/";
+  const repoIndex = path.indexOf(repoName);
+  if (repoIndex > -1) {
+    return path.substring(0, repoIndex + repoName.length);
+  }
+  return "/";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const initAdminProfile = () => {
+  const initAdminProfile = async () => {
+    const adminProfileSection = document.querySelector(".page-header");
+    if (!adminProfileSection) return;
+
+    const loggedInAdminId = sessionStorage.getItem("loggedInAdminId");
+    if (!loggedInAdminId) {
+      window.location.href = getBasePath() + "auth/admin.html";
+      return;
+    }
+
+    let adminUser;
+    try {
+      const response = await fetch(
+        getBasePath() + `api/get-admin-profile.php?user=${loggedInAdminId}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to load admin data.");
+      }
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.message);
+      }
+      adminUser = result.data;
+    } catch (error) {
+      console.error("Error fetching admin profile:", error);
+      document.querySelector(".main-content").innerHTML =
+        '<p class="text-danger p-4">Error loading admin profile. Please try again.</p>';
+      return;
+    }
+
     const profileForm = document.getElementById("admin-profile-form");
     if (!profileForm) return;
-
-    const allUsers = DataService.getAllUsers();
-    const loggedInAdminId = DataService.getLoggedInAdminId();
-
-    if (!loggedInAdminId) {
-      window.location.href = "../../auth/admin.html";
-      return;
-    }
-
-    const adminUser = allUsers[loggedInAdminId];
-    if (!adminUser) {
-      console.error("Admin user data not found for ID:", loggedInAdminId);
-      window.location.href = "../../auth/admin.html";
-      return;
-    }
 
     const passwordForm = document.getElementById("change-password-form");
     const passwordModal = new bootstrap.Modal(
@@ -33,84 +57,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const loadAdminData = () => {
       avatar.textContent =
-        adminUser.firstName.charAt(0) + adminUser.lastName.charAt(0);
-      displayName.textContent = adminUser.displayName;
-      displayNameInput.value = adminUser.displayName;
-      firstNameInput.value = adminUser.firstName;
-      lastNameInput.value = adminUser.lastName;
+        adminUser.first_name.charAt(0) + adminUser.last_name.charAt(0);
+      displayName.textContent = adminUser.display_name;
+      displayNameInput.value = adminUser.display_name;
+      firstNameInput.value = adminUser.first_name;
+      lastNameInput.value = adminUser.last_name;
       emailInput.value = adminUser.email;
-      adminRole.textContent = adminUser.masterAdmin
+      adminRole.textContent = adminUser.is_master_admin
         ? "Master Admin"
         : "Administrator";
     };
 
-    const showPasswordAlert = (message, isError = false) => {
-      const alertDiv = document.getElementById("password-change-alert");
-      alertDiv.textContent = message;
-      alertDiv.className = `alert mt-3 ${
-        isError ? "alert-danger" : "alert-success"
-      }`;
-      alertDiv.style.display = "block";
-    };
-
     profileForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (!profileForm.checkValidity()) {
-        profileForm.classList.add("was-validated");
-        return;
-      }
-      adminUser.displayName = displayNameInput.value;
-      adminUser.firstName = firstNameInput.value;
-      adminUser.lastName = lastNameInput.value;
-      adminUser.email = emailInput.value;
-      allUsers[loggedInAdminId] = adminUser;
-      localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-      window.location.reload();
+      alert("Save changes functionality is not yet implemented.");
     });
 
     passwordForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const currentPassword = document.getElementById("currentPassword").value;
-      const newPassword = document.getElementById("newPassword").value;
-      const confirmNewPassword =
-        document.getElementById("confirmNewPassword").value;
-
-      if (currentPassword !== adminUser.password) {
-        document.getElementById("currentPassword").classList.add("is-invalid");
-        showPasswordAlert("Incorrect current password.", true);
-        return;
-      }
-      if (newPassword !== confirmNewPassword) {
-        document
-          .getElementById("confirmNewPassword")
-          .classList.add("is-invalid");
-        showPasswordAlert("New passwords do not match.", true);
-        return;
-      }
-      if (!passwordForm.checkValidity()) {
-        passwordForm.classList.add("was-validated");
-        showPasswordAlert("Please fix the validation errors.", true);
-        return;
-      }
-
-      adminUser.password = newPassword;
-      allUsers[loggedInAdminId] = adminUser;
-      localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-      passwordModal.hide();
-      alert("Password changed successfully!");
-      window.location.reload();
+      alert("Change password functionality is not yet implemented.");
     });
-
-    document
-      .getElementById("changePasswordModal")
-      .addEventListener("hidden.bs.modal", () => {
-        passwordForm.reset();
-        passwordForm.classList.remove("was-validated");
-        document.getElementById("password-change-alert").style.display = "none";
-        document.querySelectorAll(".form-control").forEach((input) => {
-          input.classList.remove("is-invalid");
-        });
-      });
 
     loadAdminData();
   };
