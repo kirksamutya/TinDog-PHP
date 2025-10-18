@@ -13,37 +13,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = form.querySelector("#email").value;
     const password = form.querySelector("#password").value;
     const errorAlert = document.getElementById("login-error-alert");
-    const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
+    errorAlert.style.display = "none";
 
-    let loggedInAdminId = null;
-    if (errorAlert) {
-      errorAlert.style.display = "none";
-    }
-
-    if (allUsers) {
-      for (const userId in allUsers) {
-        if (Object.prototype.hasOwnProperty.call(allUsers, userId)) {
-          const user = allUsers[userId];
-          if (
-            user.email === email &&
-            user.password === password &&
-            user.role === "admin"
-          ) {
-            loggedInAdminId = userId;
-            break;
-          }
+    fetch(getBasePath() + "api/admin-login.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          sessionStorage.setItem("loggedInAdminId", data.adminId);
+          window.location.href = getBasePath() + "admin/dashboard.html";
+        } else {
+          errorAlert.textContent = data.message;
+          errorAlert.style.display = "block";
         }
-      }
-    }
-
-    if (loggedInAdminId) {
-      sessionStorage.setItem("loggedInAdminId", loggedInAdminId);
-      window.location.href = getBasePath() + "admin/dashboard.html";
-    } else if (errorAlert) {
-      errorAlert.textContent =
-        "Invalid administrator credentials. Please try again.";
-      errorAlert.style.display = "block";
-    }
+      })
+      .catch((error) => {
+        console.error("Login Error:", error);
+        errorAlert.textContent = "An unexpected error occurred.";
+        errorAlert.style.display = "block";
+      });
   };
 
   if (window.initializeFormValidation) {

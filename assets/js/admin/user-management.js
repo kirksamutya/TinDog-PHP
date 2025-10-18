@@ -1,19 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const initUserManagement = () => {
+  function getBasePath() {
+    const path = window.location.pathname;
+    const repoName = "/TinDog-PHP/";
+    const repoIndex = path.indexOf(repoName);
+    if (repoIndex > -1) {
+      return path.substring(0, repoIndex + repoName.length);
+    }
+    return "/";
+  }
+
+  const initUserManagement = async () => {
     const userTableBody = document.querySelector("table tbody");
     const searchInput = document.getElementById("user-search-input");
-    const sortableHeaders = document.querySelectorAll(".sortable-header");
 
-    let allUsers = Object.entries(DataService.getAllUsers()).map(
-      ([id, user]) => ({
-        id,
-        ...user,
-      })
-    );
-    let currentSort = {
-      key: "name",
-      direction: "asc",
-    };
+    let allUsers = [];
+    try {
+      const response = await fetch(getBasePath() + "api/get-users.php");
+      allUsers = await response.json();
+    } catch (error) {
+      console.error("Failed to fetch users:", error);
+      userTableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Could not load user data. Check API path and console.</td></tr>`;
+      return;
+    }
 
     const renderTable = (usersToRender) => {
       userTableBody.innerHTML = "";
@@ -23,10 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       usersToRender.forEach((user) => {
-        const planText = user.plan
-          ? user.plan.charAt(0).toUpperCase() + user.plan.slice(1)
-          : "N/A";
-
         let statusBadge;
         switch (user.status) {
           case "active":
@@ -42,91 +46,64 @@ document.addEventListener("DOMContentLoaded", () => {
             statusBadge = `<span class="badge bg-secondary">Unknown</span>`;
         }
 
-        let roleText = "Standard User";
-        if (user.role === "admin" && user.masterAdmin) {
-          roleText = "Master Admin";
-        } else if (user.role === "admin") {
-          roleText = "Administrator";
-        }
-
-        const actionsDisabled = user.masterAdmin ? "disabled" : "";
+        let roleText =
+          user.role === "admin"
+            ? user.is_master_admin
+              ? "Master Admin"
+              : "Administrator"
+            : "Standard User";
+        const actionsDisabled = user.is_master_admin ? "disabled" : "";
 
         const row = `
-          <tr>
-              <td>
-                  <div class="d-flex align-items-center">
-                      <div class="user-avatar-initials me-3">${user.firstName.charAt(
-                        0
-                      )}${user.lastName.charAt(0)}</div>
-                      <div>
-                        <strong>${user.firstName} ${user.lastName}</strong>
-                        <small class="d-block text-muted">ID: ${user.id}</small>
-                      </div>
-                  </div>
-              </td>
-              <td>${user.email}</td>
-              <td>${roleText}</td>
-              <td>${planText}</td>
-              <td>${statusBadge}</td>
-              <td class="text-end">
-                  <div class="btn-group" role="group">
-                      <a href="./record.html?user=${
-                        user.id
-                      }" class="btn btn-sm btn-outline-secondary">View</a>
-                      <a href="./edit.html?user=${
-                        user.id
-                      }" class="btn btn-sm btn-outline-secondary ${actionsDisabled}">Edit</a>
-                      <button type="button" class="btn btn-sm btn-outline-danger" data-user-id="${
-                        user.id
-                      }" ${actionsDisabled}>Delete</button>
-                  </div>
-              </td>
-          </tr>
-        `;
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="user-avatar-initials me-3">${user.first_name.charAt(
+                                  0
+                                )}${user.last_name.charAt(0)}</div>
+                                <div><strong>${user.first_name} ${
+          user.last_name
+        }</strong><small class="d-block text-muted">ID: ${user.id}</small></div>
+                            </div>
+                        </td>
+                        <td>${user.email}</td>
+                        <td>${roleText}</td>
+                        <td>N/A</td>
+                        <td>${statusBadge}</td>
+                        <td class="text-end">
+                            <div class="btn-group" role="group">
+                                <a href="./record.html?user=${
+                                  user.id
+                                }" class="btn btn-sm btn-outline-secondary">View</a>
+                                <a href="./edit.html?user=${
+                                  user.id
+                                }" class="btn btn-sm btn-outline-secondary ${actionsDisabled}">Edit</a>
+                                <button type="button" class="btn btn-sm btn-outline-danger" data-user-id="${
+                                  user.id
+                                }" data-user-name="${user.first_name} ${
+          user.last_name
+        }" ${actionsDisabled}>Delete</button>
+                            </div>
+                        </td>
+                    </tr>`;
         userTableBody.innerHTML += row;
       });
     };
 
-    const filterAndSortTable = () => {
+    const filterTable = () => {
       const searchTerm = searchInput.value.toLowerCase();
-      let filteredUsers = allUsers.filter(
+      const filteredUsers = allUsers.filter(
         (user) =>
-          user.id.toLowerCase().includes(searchTerm) ||
-          user.firstName.toLowerCase().includes(searchTerm) ||
-          user.lastName.toLowerCase().includes(searchTerm) ||
+          user.id.toString().includes(searchTerm) ||
+          `${user.first_name} ${user.last_name}`
+            .toLowerCase()
+            .includes(searchTerm) ||
           user.email.toLowerCase().includes(searchTerm)
       );
-
-      filteredUsers.sort((a, b) => {
-        const aValue = a[currentSort.key] || "";
-        const bValue = b[currentSort.key] || "";
-        if (aValue < bValue) return currentSort.direction === "asc" ? -1 : 1;
-        if (aValue > bValue) return currentSort.direction === "asc" ? 1 : -1;
-        return 0;
-      });
-
       renderTable(filteredUsers);
     };
 
-    searchInput.addEventListener("input", filterAndSortTable);
-
-    sortableHeaders.forEach((header) => {
-      header.addEventListener("click", () => {
-        const sortBy = header.dataset.sortBy;
-        if (currentSort.key === sortBy) {
-          currentSort.direction =
-            currentSort.direction === "asc" ? "desc" : "asc";
-        } else {
-          currentSort.key = sortBy;
-          currentSort.direction = "asc";
-        }
-
-        sortableHeaders.forEach((h) => h.classList.remove("asc", "desc"));
-        header.classList.add(currentSort.direction);
-
-        filterAndSortTable();
-      });
-    });
+    searchInput.addEventListener("input", filterTable);
 
     const deleteModal = new bootstrap.Modal(
       document.getElementById("deleteUserModal")
@@ -138,26 +115,38 @@ document.addEventListener("DOMContentLoaded", () => {
       const button = event.target.closest(".btn-outline-danger");
       if (button && !button.hasAttribute("disabled")) {
         userToDelete = button.dataset.userId;
-        const user = allUsers.find((u) => u.id === userToDelete);
-        document.getElementById(
-          "userNameToDelete"
-        ).textContent = `${user.firstName} ${user.lastName}`;
+        document.getElementById("userNameToDelete").textContent =
+          button.dataset.userName;
         deleteModal.show();
       }
     });
 
-    confirmDeleteBtn.addEventListener("click", function () {
+    confirmDeleteBtn.addEventListener("click", async function () {
       if (userToDelete) {
-        DataService.deleteUser(userToDelete);
-        window.location.reload();
+        try {
+          const response = await fetch(getBasePath() + "api/delete-user.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId: userToDelete }),
+          });
+          const data = await response.json();
+          if (data.success) {
+            window.location.reload();
+          } else {
+            alert("Error: " + data.message);
+          }
+        } catch (error) {
+          console.error("Delete failed:", error);
+          alert("An error occurred while deleting the user.");
+        }
+        deleteModal.hide();
       }
-      deleteModal.hide();
     });
 
-    filterAndSortTable();
+    renderTable(allUsers);
   };
 
-  if (document.querySelector(".table")) {
+  if (document.querySelector("table")) {
     document.addEventListener("componentsLoaded", initUserManagement);
   }
 });

@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!form.checkValidity()) {
       form.classList.add("was-validated");
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const newUser = {
+    const newUserData = {
       firstName: document.getElementById("ownerFirstName").value,
       lastName: document.getElementById("ownerLastName").value,
       email: `${document
@@ -83,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .value.toLowerCase()}.${document
         .getElementById("ownerLastName")
         .value.toLowerCase()}@example.com`,
+      password: "Password123", // Default password for new users
+      role: "user",
       location: document.getElementById("location").value,
       dogName: document.getElementById("dogName").value,
       dogBreed: document.getElementById("dogBreed").value,
@@ -93,9 +95,27 @@ document.addEventListener("DOMContentLoaded", () => {
       dogAvatar: document.getElementById("dog-photo-preview").src,
     };
 
-    const newUserId = createUser(newUser);
-    sessionStorage.setItem("loggedInUserId", newUserId);
-    window.location.href = getBasePath() + "app/dashboard.html";
+    try {
+      const response = await fetch(getBasePath() + "api/create-user.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newUserData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        sessionStorage.setItem("loggedInUserId", result.userId);
+        window.location.href = getBasePath() + "app/dashboard.html";
+      } else {
+        alert(`Error: ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Failed to create user:", error);
+      alert(
+        "An unexpected error occurred. Please check the console and try again."
+      );
+    }
   });
 
   updateWizardState();

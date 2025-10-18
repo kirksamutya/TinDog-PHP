@@ -1,8 +1,18 @@
+function getBasePath() {
+  const path = window.location.pathname;
+  const repoName = "/TinDog-PHP/";
+  const repoIndex = path.indexOf(repoName);
+  if (repoIndex > -1) {
+    return path.substring(0, repoIndex + repoName.length);
+  }
+  return "/";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const createUserForm = document.getElementById("create-user-form");
 
   if (createUserForm) {
-    createUserForm.addEventListener("submit", function (event) {
+    createUserForm.addEventListener("submit", async function (event) {
       event.preventDefault();
       if (!this.checkValidity()) {
         event.stopPropagation();
@@ -10,34 +20,47 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const userRole = document.getElementById("userRole").value;
-      const firstName = document.getElementById("firstName").value;
-      const lastName = document.getElementById("lastName").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
       const newUserData = {
-        firstName,
-        lastName,
-        email,
-        password,
-        role: userRole,
+        role: document.getElementById("userRole").value,
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
       };
 
-      if (userRole === "user") {
+      if (newUserData.role === "admin") {
+        newUserData.displayName = `${newUserData.firstName} ${newUserData.lastName}`;
+      } else {
         newUserData.location = document.getElementById("ownerLocation").value;
         newUserData.dogName = document.getElementById("dogName").value;
         newUserData.dogBreed = document.getElementById("dogBreed").value;
         newUserData.dogSex = document.getElementById("dogSex").value;
         newUserData.dogSize = document.getElementById("dogSize").value;
         newUserData.plan = document.getElementById("subscriptionPlan").value;
-      } else {
-        newUserData.displayName = `${firstName} ${lastName}`;
-        newUserData.plan = "N/A";
       }
 
-      const newUserId = createUser(newUserData);
-      window.location.href = `../users/record.html?user=${newUserId}`;
+      try {
+        const response = await fetch(getBasePath() + "api/create-user.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newUserData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          window.location.href = `${getBasePath()}admin/users/record.html?user=${
+            result.userId
+          }`;
+        } else {
+          alert(`Error: ${result.message}`);
+        }
+      } catch (error) {
+        console.error("Failed to create user:", error);
+        alert(
+          "An unexpected error occurred. Please check the console and try again."
+        );
+      }
     });
   }
 });
