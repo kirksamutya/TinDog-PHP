@@ -10,7 +10,7 @@ if ($userId <= 0) {
 }
 
 $connection = connect();
-$statement = $connection->prepare("SELECT user_id AS id, email, first_name, last_name, display_name, role, status, is_master_admin FROM users WHERE user_id = ? AND role = 'admin'");
+$statement = $connection->prepare("SELECT user_id AS id, email, first_name, last_name, display_name, role, status, is_master_admin FROM users WHERE user_id = ?");
 $statement->bind_param("i", $userId);
 $statement->execute();
 $result = $statement->get_result();
@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     echo json_encode(['success' => true, 'data' => $user]);
 } else {
     http_response_code(404);
-    echo json_encode(['success' => false, 'message' => 'Admin user not found.']);
+    echo json_encode(['success' => false, 'message' => 'User not found.']);
 }
 
 $statement->close();

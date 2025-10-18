@@ -1,6 +1,7 @@
 <?php
 require 'database.php';
 
+// Get user ID from the query string (e.g., ?user=1)
 $userId = $_GET['user'] ?? 0;
 
 if ($userId <= 0) {
@@ -10,15 +11,7 @@ if ($userId <= 0) {
 }
 
 $connection = connect();
-
-$statement = $connection->prepare("
-    SELECT 
-        u.user_id AS id, u.email, u.first_name, u.last_name, u.role, u.status, u.is_master_admin, u.created_at, u.last_seen,
-        p.display_name, p.location, p.owner_bio, p.dog_name, p.dog_breed, p.dog_age, p.dog_sex, p.dog_size, p.dog_bio
-    FROM users u
-    LEFT JOIN profiles p ON u.user_id = p.user_id
-    WHERE u.user_id = ?
-");
+$statement = $connection->prepare("SELECT user_id AS id, email, first_name, last_name, display_name, role, status, is_master_admin FROM users WHERE user_id = ?");
 $statement->bind_param("i", $userId);
 $statement->execute();
 $result = $statement->get_result();
