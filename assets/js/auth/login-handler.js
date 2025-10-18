@@ -14,45 +14,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = form.querySelector("#password").value;
     const rememberMe = form.querySelector("#rememberMe").checked;
     const errorAlert = document.getElementById("login-error-alert");
-    const allUsers = JSON.parse(localStorage.getItem("tindogUsers"));
-
-    let loggedInUser = null;
     errorAlert.style.display = "none";
 
-    if (allUsers) {
-      for (const userId in allUsers) {
-        if (Object.prototype.hasOwnProperty.call(allUsers, userId)) {
-          const user = allUsers[userId];
-          if (
-            user.email === email &&
-            user.password === password &&
-            user.role === "user"
-          ) {
-            loggedInUser = { id: userId, ...user };
-            break;
+    fetch(getBasePath() + "api/login.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          if (rememberMe) {
+            localStorage.setItem("rememberedEmail", email);
+          } else {
+            localStorage.removeItem("rememberedEmail");
           }
+          sessionStorage.setItem("loggedInUserId", data.userId);
+
+          const basePath = getBasePath();
+          if (data.status === "active") {
+            window.location.href = basePath + "app/dashboard.html";
+          } else {
+            window.location.href = `${basePath}app/status.html?status=${data.status}`;
+          }
+        } else {
+          errorAlert.textContent = data.message;
+          errorAlert.style.display = "block";
         }
-      }
-    }
-
-    if (loggedInUser) {
-      if (rememberMe) {
-        localStorage.setItem("rememberedEmail", email);
-      } else {
-        localStorage.removeItem("rememberedEmail");
-      }
-      sessionStorage.setItem("loggedInUserId", loggedInUser.id);
-
-      const basePath = getBasePath();
-      if (loggedInUser.status === "active") {
-        window.location.href = basePath + "app/dashboard.html";
-      } else {
-        window.location.href = `${basePath}app/status.html?status=${loggedInUser.status}`;
-      }
-    } else {
-      errorAlert.textContent = "Invalid user credentials. Please try again.";
-      errorAlert.style.display = "block";
-    }
+      })
+      .catch((error) => {
+        console.error("Login Error:", error);
+        errorAlert.textContent = "An unexpected error occurred.";
+        errorAlert.style.display = "block";
+      });
   };
 
   const emailInput = document.getElementById("email");
