@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 }" class="btn btn-sm btn-outline-secondary">View</a>
                                 <a href="./edit.html?user=${
                                   user.id
-                                }" class="btn btn-sm btn-outline-secondary ${actionsDisabled}">Edit</a>
+                                }" class="btn btn-sm btn-outline-secondary">Edit</a>
                                 <button type="button" class="btn btn-sm btn-outline-danger" data-user-id="${
                                   user.id
                                 }" data-user-name="${user.first_name} ${

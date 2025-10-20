@@ -13,8 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const componentUrl = componentContainer.dataset.component;
     if (!componentUrl) return;
 
-    const finalComponentUrl = new URL(componentUrl, window.location.href)
-      .pathname;
+    // Use basePath to make sure it points inside /TinDog-PHP/
+    let finalComponentUrl = componentUrl;
+
+    // If it's an absolute path (starts with "/"), prefix with basePath
+    if (finalComponentUrl.startsWith("/")) {
+      finalComponentUrl = basePath + finalComponentUrl.substring(1);
+    }
 
     try {
       const response = await fetch(finalComponentUrl);
