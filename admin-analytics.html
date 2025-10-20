@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TinDog - Admin Analytics</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicon-transparent.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body>
+    <div data-component="./admin-header.html"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          data-component="./admin-sidebar.html"
+          class="col-md-3 col-lg-2 d-md-block p-0"
+        ></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+
+            <h1 class="h2">Analytics</h1>
+            <p class="mb-0">A performance overview of the TinDog platform.</p>
+          </div>
+
+          <!-- Summary Cards 2x2 -->
+          <div class="row g-4">
+            <!-- Users -->
+            <div class="col-12 col-md-6">
+              <a href="admin-user-management.html" class="text-decoration-none">
+                <div class="card text-center shadow-sm h-100">
+                  <div class="card-body">
+                    <i class="bi bi-people-fill fs-1 text-info"></i>
+                    <h5 class="card-title mt-2">Users</h5>
+                    <p class="fs-4 fw-bold mb-0" id="total-users">0</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Matches -->
+            <div class="col-12 col-md-6">
+              <a href="./admin-matches.html" class="text-decoration-none">
+                <div class="card text-center shadow-sm h-100">
+                  <div class="card-body">
+                    <i class="bi bi-heart-fill fs-1 text-danger"></i>
+                    <h5 class="card-title mt-2">Matches</h5>
+                    <p class="fs-4 fw-bold mb-0" id="total-matches">0</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Revenue -->
+            <div class="col-12 col-md-6">
+              <a href="./admin-revenue.html" class="text-decoration-none">
+                <div class="card text-center shadow-sm h-100">
+                  <div class="card-body">
+                    <i class="bi bi-currency-dollar fs-1 text-success"></i>
+                    <h5 class="card-title mt-2">Revenue</h5>
+                    <p class="fs-4 fw-bold mb-1" id="revenue-amount">$0</p>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-success"
+                        role="progressbar"
+                        id="revenue-progress"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <!-- Reports -->
+            <div class="col-12 col-md-6">
+              <a href="./admin-reports.html" class="text-decoration-none">
+                <div class="card text-center shadow-sm h-100">
+                  <div class="card-body">
+                    <i
+                      class="bi bi-file-earmark-text-fill fs-1 text-secondary"
+                    ></i>
+                    <h5 class="card-title mt-2">Reports</h5>
+                    <p class="fs-4 fw-bold mb-1" id="reports-count">0</p>
+                    <div class="progress">
+                      <div
+                        class="progress-bar bg-secondary"
+                        role="progressbar"
+                        id="reports-progress"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/admin-analytics-charts.js"></script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TinDog - System Settings</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="./assets/images/favicon-transparent.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body>
+    <div data-component="./admin-header.html"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          data-component="./admin-sidebar.html"
+          class="col-md-3 col-lg-2 d-md-block p-0"
+        ></div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+          <div class="page-header gradient-background">
+            <h1 class="h2">System Settings</h1>
+            <p class="mb-0">Configure global application settings.</p>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="card-body">
+              <h5 class="fw-bold mb-3 border-bottom pb-2">
+                Content & Moderation
+              </h5>
+              <div class="form-check form-switch mb-3">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="auto-flag-images"
+                  data-setting="autoFlagImages"
+                />
+                <label class="form-check-label" for="auto-flag-images"
+                  >Automatically flag inappropriate images</label
+                >
+              </div>
+              <div class="mb-3">
+                <label for="report-threshold" class="form-label"
+                  >Auto-Suspend Report Threshold</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="report-threshold"
+                  style="max-width: 150px"
+                  data-setting="reportThreshold"
+                />
+                <div class="form-text">
+                  Automatically suspend a user after this many reports.
+                </div>
+              </div>
+              <hr />
+
+              <h5 class="fw-bold my-3 border-bottom pb-2">
+                Matching Configuration
+              </h5>
+              <div class="mb-3">
+                <label for="location-weight" class="form-label"
+                  >Location Proximity Weighting</label
+                >
+                <input
+                  type="range"
+                  class="form-range"
+                  id="location-weight"
+                  min="0"
+                  max="100"
+                  data-setting="locationWeight"
+                />
+                <div class="form-text">
+                  Increase to more strongly prioritize closer matches.
+                </div>
+              </div>
+              <hr />
+
+              <h5 class="fw-bold my-3 border-bottom pb-2">Feature Flags</h5>
+              <div class="form-check form-switch mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="enable-super-likes"
+                  data-setting="enableSuperLikes"
+                />
+                <label class="form-check-label" for="enable-super-likes"
+                  >Enable "Super Likes" Feature</label
+                >
+              </div>
+              <hr />
+              <h5 class="fw-bold my-3 border-bottom pb-2">Maintenance Mode</h5>
+              <div class="form-check form-switch mb-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="maintenance-mode"
+                  data-setting="maintenanceMode"
+                />
+                <label class="form-check-label" for="maintenance-mode"
+                  >Enable Maintenance Mode</label
+                >
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/component-loader.js"></script>
+    <script src="./assets/js/admin-system-settings-handler.js"></script>
+  </body>
+</html>
