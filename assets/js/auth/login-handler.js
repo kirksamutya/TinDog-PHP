@@ -9,33 +9,36 @@ function getBasePath() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const handleLogin = (form) => {
+  const handleUserLogin = (form) => {
     const email = form.querySelector("#email").value;
     const password = form.querySelector("#password").value;
-    const rememberMe = form.querySelector("#rememberMe").checked;
     const errorAlert = document.getElementById("login-error-alert");
     errorAlert.style.display = "none";
 
     fetch("http://127.0.0.1:8000/api/user-login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
       body: JSON.stringify({ email, password }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw errorData;
+          });
+        }
+        return response.json();
+      })
       .then((data) => {
         if (data.success) {
-          if (rememberMe) {
-            localStorage.setItem("rememberedEmail", email);
-          } else {
-            localStorage.removeItem("rememberedEmail");
-          }
           sessionStorage.setItem("loggedInUserId", data.userId);
 
-          const basePath = getBasePath();
-          if (data.status === "active") {
-            window.location.href = basePath + "app/dashboard.html";
+          if (data.status === "new") {
+            window.location.href = getBasePath() + "auth/new-profile.html";
           } else {
-            window.location.href = `${basePath}app/status.html?status=${data.status}`;
+            window.location.href = getBasePath() + "app/dashboard.html";
           }
         } else {
           errorAlert.textContent = data.message;
@@ -44,21 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => {
         console.error("Login Error:", error);
-        errorAlert.textContent = "An unexpected error occurred.";
+        errorAlert.textContent =
+          error.message || "An unexpected error occurred.";
         errorAlert.style.display = "block";
       });
   };
 
-  const emailInput = document.getElementById("email");
-  const rememberMeCheckbox = document.getElementById("rememberMe");
-  const rememberedEmail = localStorage.getItem("rememberedEmail");
-
-  if (rememberedEmail && emailInput) {
-    emailInput.value = rememberedEmail;
-    rememberMeCheckbox.checked = true;
-  }
-
   if (window.initializeFormValidation) {
-    window.initializeFormValidation("login-form", handleLogin);
+    window.initializeFormValidation("auth-login-form", handleUserLogin);
   }
 });
