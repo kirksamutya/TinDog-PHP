@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.success) {
           sessionStorage.setItem("loggedInAdminId", data.adminId);
+          sessionStorage.setItem("adminToken", data.token); // <-- THIS IS THE FIX
           window.location.href = getBasePath() + "admin/dashboard.html";
         } else {
           errorAlert.textContent = data.message;
