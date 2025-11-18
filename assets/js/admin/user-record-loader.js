@@ -1,124 +1,186 @@
-function getBasePath() {
-  const path = window.location.pathname;
-  const repoName = "/TinDog-PHP/";
-  const repoIndex = path.indexOf(repoName);
-  if (repoIndex > -1) {
-    return path.substring(0, repoIndex + repoName.length);
-  }
-  return "/";
-}
-
-document.addEventListener("componentsLoaded", () => {
-  const initUserRecord = async () => {
-    console.log("✅ initUserRecord running...");
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get("user");
-    if (!userId) {
-      document.querySelector(".main-content").innerHTML =
-        '<p class="text-danger">No user ID provided.</p>';
-      return;
-    }
-
-    let userData;
-    try {
-      const response = await fetch(
-        getBasePath() + `api/get-user-details.php?user=${userId}`
-      );
-      if (!response.ok) throw new Error("User not found or server error.");
-      const result = await response.json();
-      if (!result.success) throw new Error(result.message);
-
-      userData = result.data;
-      console.log("📦 Got userData:", userData);
-    } catch (error) {
-      console.error("Failed to fetch user details:", error);
-      document.querySelector(
-        ".main-content"
-      ).innerHTML = `<p class="text-danger">Could not load user data for user ID ${userId}.</p>`;
-      return;
-    }
-
-    // === Populate Owner Details ===
-    const fullNameEl = document.getElementById("fullName");
-    const emailEl = document.getElementById("email");
-    const signUpDateEl = document.getElementById("signUpDate");
-    const lastSeenEl = document.getElementById("lastSeen");
-
-    fullNameEl.textContent = `${userData.first_name} ${userData.last_name}`;
-    emailEl.textContent = userData.email;
-    signUpDateEl.textContent = userData.signup_date || "";
-    lastSeenEl.textContent = userData.last_seen || "";
-
-    // Make sure owner details are visible
-    [fullNameEl, emailEl].forEach((el) => (el.style.display = "block"));
-    [signUpDateEl.parentElement, lastSeenEl.parentElement].forEach((el) => {
-      el.style.display = el.textContent.trim() ? "block" : "none";
-    });
-
-    console.log("Owner details:", fullNameEl.textContent, emailEl.textContent);
-
-    // === Buttons ===
-    const editButton = document.getElementById("editUserBtn");
-    const deleteButton = document.getElementById("deleteUserBtn");
-    editButton.href = `./edit.html?user=${userId}`;
-    if (userData.role === "admin" && userData.is_master_admin) {
-      editButton.classList.add("disabled");
-      deleteButton.classList.add("disabled");
-    }
-
-    // === Dog Profile (hide if empty) ===
-    const dogSection = document.getElementById("dog-profile-section");
-    if (!userData.dog_name && !userData.dog_breed && !userData.dog_age) {
-      dogSection.style.display = "none";
-    } else {
-      dogSection.style.display = "block";
-    }
-
-    // === Activity Tab ===
-    const activityTab = document.getElementById("activity-tab");
-    const activityPane = document.getElementById("activity");
-    if (!userData.activity || userData.activity.length === 0) {
-      activityTab.style.display = "none";
-      activityPane.style.display = "none";
-    } else {
-      activityTab.style.display = "block";
-      activityPane.style.display = "block";
-      activityPane.innerHTML = ""; // populate with activity items if needed
-    }
-
-    // === Billing Tab ===
-    const billingTab = document.getElementById("billing-tab");
-    const billingPane = document.getElementById("billing");
-    const billingPlanEl = document.getElementById("billingPlan");
-    const billingNextEl = document.getElementById("billingNextPayment");
-    const billingMethodEl = document.getElementById("billingPaymentMethod");
-
-    billingPlanEl.textContent = userData.billing_plan || "";
-    billingNextEl.textContent = userData.billing_next_payment || "";
-    billingMethodEl.textContent = userData.billing_payment_method || "";
-
-    // Only show billing tab/pane if at least one field has data
-    const hasBillingData =
-      billingPlanEl.textContent.trim() ||
-      billingNextEl.textContent.trim() ||
-      billingMethodEl.textContent.trim();
-
-    if (!hasBillingData) {
-      billingTab.style.display = "none";
-      billingPane.style.display = "none";
-    } else {
-      billingTab.style.display = "block";
-      billingPane.style.display = "block";
-    }
-
-    // === Ensure Overview Tab is visible ===
-    const overviewPane = document.getElementById("overview");
-    overviewPane.classList.add("show", "active");
-    overviewPane.style.display = "block";
-
-    console.log("🎯 Finished rendering user details");
-  };
-
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("✅ User Record Loader v1.4 Loaded");
   initUserRecord();
 });
+
+const initUserRecord = async () => {
+  // 1. Get User ID
+  const urlParams = new URLSearchParams(window.location.search);
+  const userId = urlParams.get("user") || urlParams.get("id");
+
+  if (!userId) {
+    showError("No user ID provided in the URL.");
+    return;
+  }
+
+  // 2. Get Token
+  const token = sessionStorage.getItem("adminToken");
+  if (!token) {
+    window.location.href = "../../auth/admin.html";
+    return;
+  }
+
+  try {
+    console.log(`Fetching data for User ID: ${userId}...`);
+
+    // 3. Fetch Data
+    const response = await fetch(`http://127.0.0.1:8000/api/users/${userId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`API Error (${response.status}): ${errorText}`);
+    }
+
+    const result = await response.json();
+    const userData = result.data || result;
+
+    // 4. Render Profile
+    renderUserProfile(userData);
+
+    // 5. Setup Delete Button
+    setupDeleteButton(userId);
+  } catch (error) {
+    console.error("User Load Error:", error);
+    showError(
+      `<strong>Connection Failed.</strong><br>Details: ${error.message}`
+    );
+  }
+};
+
+function renderUserProfile(user) {
+  // --- Owner Info ---
+  setText(
+    "fullName",
+    user.display_name || `${user.first_name} ${user.last_name}`
+  );
+  setText("email", user.email);
+
+  const joinedDate = user.signup_date || user.created_at;
+  setText("signUpDate", formatDate(joinedDate));
+
+  const lastSeenDate = user.last_seen || user.updated_at;
+  setText("lastSeen", formatDate(lastSeenDate));
+
+  // --- Dog Info ---
+  const dogSection = document.getElementById("dog-profile-section");
+  if (!user.dog_name) {
+    if (dogSection) dogSection.style.display = "none";
+  } else {
+    if (dogSection) dogSection.style.display = "block";
+    setText("dogName", user.dog_name);
+    setText("dogBreed", user.dog_breed || "Unknown Breed");
+    setText("dogAge", user.dog_age ? `${user.dog_age} years` : "N/A");
+    setText("dogSex", user.dog_sex || user.gender || "N/A");
+    setText("dogSize", user.dog_size || "N/A");
+    setText("dogLocation", user.location || "N/A");
+    setText("dogBio", user.dog_bio || "No bio available.");
+  }
+
+  // --- Billing ---
+  setText("billingPlan", (user.plan || "Free").toUpperCase());
+  toggleElement("billingNextPaymentRow", false);
+  toggleElement("billingPaymentMethodRow", false);
+
+  // --- Buttons ---
+  const editBtn = document.getElementById("editUserBtn");
+  if (editBtn) editBtn.href = `./edit.html?id=${user.id}`;
+
+  // Show Content
+  const overview = document.getElementById("overview");
+  if (overview) {
+    overview.classList.add("show", "active");
+    overview.style.display = "block";
+  }
+}
+
+function setupDeleteButton(userId) {
+  const deleteBtn = document.getElementById("deleteUserBtn");
+  if (deleteBtn) {
+    // Clone to remove old listeners
+    const newDeleteBtn = deleteBtn.cloneNode(true);
+    deleteBtn.parentNode.replaceChild(newDeleteBtn, deleteBtn);
+
+    newDeleteBtn.addEventListener("click", () => handleDeleteUser(userId));
+  }
+}
+
+async function handleDeleteUser(userId) {
+  if (
+    !confirm(
+      "Are you sure you want to delete this user? This action cannot be undone."
+    )
+  ) {
+    return;
+  }
+
+  const token = sessionStorage.getItem("adminToken");
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/api/users/${userId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 403) {
+        alert("⛔ " + (data.message || "Permission Denied."));
+      } else {
+        alert("Error: " + (data.message || "Delete failed."));
+      }
+      return;
+    }
+
+    alert("User deleted successfully.");
+    window.location.href = "./index.html";
+  } catch (error) {
+    console.error("Delete failed:", error);
+    alert("Connection error while deleting.");
+  }
+}
+
+// --- Utilities ---
+
+function setText(id, text) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = text || "N/A";
+}
+
+function toggleElement(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? "block" : "none";
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "Never";
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function showError(htmlMsg) {
+  const container = document.querySelector(".main-content");
+  if (container) {
+    container.innerHTML = `
+            <div class="p-4">
+                <div class="alert alert-danger">
+                    ${htmlMsg}
+                </div>
+                <a href="index.html" class="btn btn-secondary mt-2">Back to User List</a>
+            </div>`;
+  }
+}
