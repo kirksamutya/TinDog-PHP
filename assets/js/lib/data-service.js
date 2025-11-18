@@ -7,8 +7,37 @@ const DataService = {
     return sessionStorage.getItem("loggedInAdminId");
   },
 
-  getAllUsers: () => {
-    return JSON.parse(localStorage.getItem("tindogUsers")) || {};
+  /**
+   * Fetches all users from the API for the admin panel.
+   */
+  getAllUsers: async () => {
+    const token = sessionStorage.getItem("adminToken"); // Get the token from login
+
+    if (!token) {
+      console.error("Admin token not found. Please log in again.");
+      throw new Error("Authentication token not found.");
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/users", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`, // Send the token for auth
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to fetch users");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Error in getAllUsers:", error);
+      throw error;
+    }
   },
 
   getAllLikes: () => {
@@ -23,6 +52,7 @@ const DataService = {
     return JSON.parse(localStorage.getItem("tindogReports")) || [];
   },
 
+  // We will migrate these functions next, after the user table is working.
   getDashboardStats: () => {
     const loggedInUserId = DataService.getLoggedInUserId();
     const allLikes = DataService.getAllLikes();
@@ -61,55 +91,13 @@ const DataService = {
   },
 
   getNotifications: () => {
-    const loggedInUserId = DataService.getLoggedInUserId();
-    const allUsers = DataService.getAllUsers();
-    const allLikes = DataService.getAllLikes();
-    const allMessages = DataService.getAllMessages();
-    const notifications = [];
-
-    const currentUserLikes = allLikes[loggedInUserId] || [];
-    currentUserLikes.forEach((likedUserId) => {
-      const otherUserLikes = allLikes[likedUserId] || [];
-      if (otherUserLikes.includes(loggedInUserId)) {
-        const matchUser = allUsers[likedUserId];
-        if (matchUser) {
-          notifications.push({
-            type: "match",
-            message: `You have a new match with <strong>${matchUser.dogName}</strong>!`,
-            time: "12m ago",
-            user: matchUser,
-          });
-        }
-      }
-    });
-
-    Object.entries(allMessages).forEach(([key, convo]) => {
-      const unread = convo.messages.some(
-        (msg) => msg.type === "received" && !msg.read
-      );
-      if (unread) {
-        notifications.push({
-          type: "message",
-          message: `<strong>${convo.name}</strong> sent you a new message.`,
-          time: "2h ago",
-          user: convo,
-        });
-      }
-    });
-    return notifications;
+    // This will also be migrated
+    return [];
   },
 
   deleteUser: (userIdToDelete) => {
+    // This will be migrated
     if (!userIdToDelete) return false;
-
-    const allUsers = DataService.getAllUsers();
-
-    if (allUsers[userIdToDelete]) {
-      allUsers[userIdToDelete].status = "banned";
-      localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
-      return true;
-    }
-
     return false;
   },
 
