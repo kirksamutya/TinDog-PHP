@@ -154,9 +154,8 @@ function updateSortIcons(activeHeader) {
   });
   const icon = activeHeader.querySelector(".sort-icon");
   if (icon) {
-    icon.className = `bi bi-caret-${
-      state.sortDirection === "asc" ? "up" : "down"
-    }-fill sort-icon`;
+    icon.className = `bi bi-caret-${state.sortDirection === "asc" ? "up" : "down"
+      }-fill sort-icon`;
   }
 }
 
@@ -176,7 +175,19 @@ function buildUserRow(user) {
     displayRole = user.is_master_admin ? "Master Admin" : "Administrator";
   }
 
-  // Note: We put the ID and Name into the delete button's onclick
+  // Permission Check
+  const currentAdminIsMaster = sessionStorage.getItem("isMasterAdmin") === "true";
+  const isTargetAdmin = role === "admin";
+  const canManage = !isTargetAdmin || currentAdminIsMaster;
+
+  const editBtn = canManage
+    ? `<a href="./edit.html?user=${user.id}" class="btn btn-sm btn-outline-secondary">Edit</a>`
+    : `<button class="btn btn-sm btn-outline-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">Edit</button>`;
+
+  const deleteBtn = canManage
+    ? `<button type="button" class="btn btn-sm btn-outline-danger" onclick="handleDeleteClick(${user.id}, '${fullName.replace(/'/g, "\\'")}')">Delete</button>`
+    : `<button class="btn btn-sm btn-outline-danger" disabled style="opacity: 0.5; cursor: not-allowed;">Delete</button>`;
+
   return `
     <tr>
       <td>
@@ -187,9 +198,8 @@ function buildUserRow(user) {
           </div>
         </div>
       </td>
-      <td><span class="badge bg-${
-        role === "admin" ? "primary" : "secondary"
-      }">${displayRole}</span></td>
+      <td><span class="badge bg-${role === "admin" ? "primary" : "secondary"
+    }">${displayRole}</span></td>
       <td>${plan.toUpperCase()}</td> 
       <td>${user.location || "N/A"}</td> <td>
         <span class="badge bg-${getStatusColor(status)}">
@@ -198,17 +208,10 @@ function buildUserRow(user) {
       </td>
       <td class="text-end">
         <div class="btn-group" role="group">
-           <a href="./record.html?user=${
-             user.id
-           }" class="btn btn-sm btn-outline-secondary">View</a>
-           <a href="./edit.html?user=${
-             user.id
-           }" class="btn btn-sm btn-outline-secondary">Edit</a>
-           <button type="button" class="btn btn-sm btn-outline-danger" 
-             onclick="handleDeleteClick(${user.id}, '${fullName.replace(
-    /'/g,
-    "\\'"
-  )}')">Delete</button>
+           <a href="./record.html?user=${user.id
+    }" class="btn btn-sm btn-outline-secondary">View</a>
+           ${editBtn}
+           ${deleteBtn}
         </div>
       </td>
     </tr>

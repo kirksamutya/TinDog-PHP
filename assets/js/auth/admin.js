@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.success) {
           sessionStorage.setItem("loggedInAdminId", data.adminId);
-          sessionStorage.setItem("adminToken", data.token); // <-- THIS IS THE FIX
+          sessionStorage.setItem("adminToken", data.token);
+          sessionStorage.setItem("adminRole", data.role);
+          sessionStorage.setItem("isMasterAdmin", data.is_master_admin ? "true" : "false");
           window.location.href = getBasePath() + "admin/dashboard.html";
         } else {
           errorAlert.textContent = data.message;
