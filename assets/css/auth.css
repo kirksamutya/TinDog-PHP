@@ -112,3 +112,25 @@
 .photo-upload-container:hover .photo-upload-prompt {
   opacity: 1;
 }
+
+/* 
+   Suppress "valid" (green) feedback for login forms.
+   We only want to show red errors for invalid input, 
+   not green checkmarks for "technically valid" (non-empty) input.
+   Using body selector to increase specificity over Bootstrap.
+*/
+body .no-success-validation.was-validated .form-control:valid,
+body .no-success-validation .form-control.is-valid {
+  border-color: #dee2e6 !important;
+  /* Fallback to standard gray */
+  border-color: var(--border-color, #dee2e6) !important;
+  padding-right: 0.75rem !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+body .no-success-validation.was-validated .form-control:valid:focus,
+body .no-success-validation .form-control.is-valid:focus {
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 76, 104, 0.25) !important;
+}
