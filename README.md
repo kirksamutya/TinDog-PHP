@@ -55,11 +55,18 @@ To get a local copy up and running, follow these simple steps.
 
 ### Installation
 
-1.  Clone the repo
+1.  **Clone the repo**
     ```sh
-    git clone [https://github.com/itsAnthonySaavedra/TinDog-PHP.git](https://github.com/itsAnthonySaavedra/TinDog-PHP.git)
+    git clone https://github.com/itsAnthonySaavedra/TinDog-PHP.git
     ```
-2.  Open `index.html` in your browser or with your local server.
+2.  **Ensure the Backend is Running**
+    *   This frontend requires the `TinDog-API` backend to be running on `http://127.0.0.1:8000`.
+    *   Follow the setup instructions in the [TinDog-API Repository](https://github.com/itsAnthonySaavedra/TinDog-API).
+
+3.  **Run the Frontend**
+    *   Open the project folder in VS Code.
+    *   Use the "Live Server" extension to serve `index.html`.
+    *   Navigate to `http://127.0.0.1:5500/TinDog-PHP/` (or your local server address).
 
 ## 🤝 Contributing
 
