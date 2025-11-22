@@ -83,20 +83,49 @@ function renderUserProfile(user) {
     setText("dogBio", user.dog_bio || "No bio available.");
   }
 
-  // --- Billing ---
-  setText("billingPlan", (user.plan || "Free").toUpperCase());
-  toggleElement("billingNextPaymentRow", false);
-  toggleElement("billingPaymentMethodRow", false);
+  // --- Role Based UI ---
+  const isViewedUserAdmin = user.role === "admin";
+  setText("details-title", isViewedUserAdmin ? "Admin Details" : "Owner Details");
 
-  // --- Buttons ---
+  // Toggle Tabs for Admin vs User
+  const activityTab = document.querySelector('a[href="#activity"]').parentElement;
+  const billingTab = document.querySelector('a[href="#billing"]').parentElement;
+
+  if (isViewedUserAdmin) {
+    if (activityTab) activityTab.style.display = "none";
+    if (billingTab) billingTab.style.display = "none";
+  } else {
+    if (activityTab) activityTab.style.display = "block";
+    if (billingTab) billingTab.style.display = "block";
+  }
+
+  // --- Buttons & Permissions ---
   const editBtn = document.getElementById("editUserBtn");
-  if (editBtn) editBtn.href = `./edit.html?id=${user.id}`;
+  const deleteBtn = document.getElementById("deleteUserBtn");
+
+  const currentAdminIsMaster = sessionStorage.getItem("isMasterAdmin") === "true";
+
+  // Rule: Only Master Admin can Edit/Delete other Admins
+  if (isViewedUserAdmin && !currentAdminIsMaster) {
+    if (editBtn) {
+      editBtn.classList.add("disabled");
+      editBtn.style.pointerEvents = "none";
+      editBtn.style.opacity = "0.5";
+    }
+    if (deleteBtn) {
+      deleteBtn.disabled = true;
+      deleteBtn.style.display = "none"; // Or just disable it
+    }
+  } else {
+    if (editBtn) editBtn.href = `./edit.html?id=${user.id}`;
+    // Delete button is setup in setupDeleteButton
+  }
 
   // Show Content
   const overview = document.getElementById("overview");
   if (overview) {
     overview.classList.add("show", "active");
-    overview.style.display = "block";
+    // REMOVED: overview.style.display = "block"; <-- This was causing the whitespace/stacking issue!
   }
 }
 

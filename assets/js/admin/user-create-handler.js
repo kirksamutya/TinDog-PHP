@@ -12,6 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const createUserForm = document.getElementById("create-user-form");
 
   if (createUserForm) {
+    // Permission Check: Only Master Admin can create Admins
+    const currentAdminIsMaster = sessionStorage.getItem("isMasterAdmin") === "true";
+    const roleSelect = document.getElementById("userRole");
+
+    if (roleSelect && !currentAdminIsMaster) {
+      // Remove "Administrator" option
+      for (let i = 0; i < roleSelect.options.length; i++) {
+        if (roleSelect.options[i].value === "admin") {
+          roleSelect.remove(i);
+          break;
+        }
+      }
+    }
+
     createUserForm.addEventListener("submit", async function (event) {
       event.preventDefault();
       if (!this.checkValidity()) {
@@ -49,9 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await response.json();
 
         if (response.ok && result.success) {
-          window.location.href = `${getBasePath()}admin/users/record.html?user=${
-            result.userId
-          }`;
+          window.location.href = `${getBasePath()}admin/users/record.html?user=${result.userId
+            }`;
         } else {
           alert(`Error: ${result.message}`);
         }
