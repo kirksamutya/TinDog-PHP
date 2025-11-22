@@ -1,27 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const initAdminReports = () => {
+  const initAdminReports = async () => {
     const filterButtons = document.querySelectorAll(".filter-bar .btn-filter");
     const reportTableBody = document.querySelector("table tbody");
     const searchInput = document.getElementById("report-search-input");
     const sortableHeaders = document.querySelectorAll(".sortable-header");
 
-    const allUsers = DataService.getAllUsers();
-    let allReports = DataService.getAllReports();
+    let allReports = [];
     let currentSort = { key: null, direction: "asc" };
     let currentFilter = "open";
 
-    allReports.forEach((report) => {
-      const reportedUser = allUsers[report.reportedUserId];
-      const reportingUser = allUsers[report.reportedByUserId];
-      report.reportedUserName = reportedUser
-        ? `${reportedUser.firstName} ${reportedUser.lastName}`
-        : "Unknown";
-      report.reportingUserName = reportingUser
-        ? `${reportingUser.firstName} ${reportingUser.lastName}`
-        : "Unknown";
-      report.reportedUserId = report.reportedUserId;
-      report.reportedByUserId = report.reportedByUserId;
-    });
+    // --- API Integration ---
+    const token = sessionStorage.getItem("adminToken");
+    if (!token) {
+      window.location.href = "../../auth/admin.html";
+      return;
+    }
+
+    const fetchReports = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/reports", {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json"
+          }
+        });
+        const result = await response.json();
+        if (result.success) {
+          allReports = result.data.map(report => ({
+            ...report,
+            reportedUserName: report.reported_user ? (report.reported_user.display_name || `${report.reported_user.first_name} ${report.reported_user.last_name}`) : "Unknown",
+            reportingUserName: report.reported_by ? (report.reported_by.display_name || `${report.reported_by.first_name} ${report.reported_by.last_name}`) : "Unknown",
+            date: new Date(report.created_at).toLocaleDateString()
+          }));
+          filterAndSortTable();
+        }
+      } catch (error) {
+        console.error("Error fetching reports:", error);
+        reportTableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Error loading reports.</td></tr>`;
+      }
+    };
+
+    const updateReportStatus = async (reportId, newStatus) => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/reports/${reportId}`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        if (response.ok) {
+          // Refresh data
+          fetchReports();
+          return true;
+        } else {
+          alert("Failed to update report status.");
+          return false;
+        }
+      } catch (error) {
+        console.error("Error updating report:", error);
+        alert("Connection error.");
+        return false;
+      }
+    };
 
     const createUserCell = (user) => {
       if (!user) {
@@ -30,13 +74,16 @@ document.addEventListener("DOMContentLoaded", () => {
                   <div><strong>Unknown User</strong></div>
                 </div>`;
       }
+      const displayName = user.display_name || `${user.first_name} ${user.last_name}`;
+      const initials = displayName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
       return `
       <div class="d-flex align-items-center">
           <div class="user-avatar-initials me-3">
-            ${user.firstName.charAt(0)}${user.lastName.charAt(0)}
+            ${initials}
           </div>
           <div>
-            <strong>${user.firstName} ${user.lastName}</strong>
+            <strong>${displayName}</strong>
             <small class="d-block text-muted">ID: ${user.id}</small>
           </div>
       </div>`;
@@ -49,11 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       reportsToRender.forEach((report) => {
-        const reportedUser = allUsers[report.reportedUserId];
-        const reportingUser = allUsers[report.reportedByUserId];
-
-        const statusText =
-          report.status.charAt(0).toUpperCase() + report.status.slice(1);
+        const statusText = report.status.charAt(0).toUpperCase() + report.status.slice(1);
         let statusBadge;
         switch (report.status) {
           case "open":
@@ -85,8 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const row = document.createElement("tr");
         row.dataset.reportId = report.id;
         row.innerHTML = `
-                <td>${createUserCell(reportedUser)}</td>
-                <td>${createUserCell(reportingUser)}</td>
+                <td>${createUserCell(report.reported_user)}</td>
+                <td>${createUserCell(report.reported_by)}</td>
                 <td>${report.reason}</td>
                 <td>${report.date}</td>
                 <td>${statusBadge}</td>
@@ -103,9 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
           (currentFilter === "all" || report.status === currentFilter) &&
           (report.reportedUserName.toLowerCase().includes(searchTerm) ||
             report.reportingUserName.toLowerCase().includes(searchTerm) ||
-            report.reason.toLowerCase().includes(searchTerm) ||
-            report.reportedUserId.toLowerCase().includes(searchTerm) ||
-            report.reportedByUserId.toLowerCase().includes(searchTerm))
+            report.reason.toLowerCase().includes(searchTerm))
       );
 
       if (currentSort.key) {
@@ -193,20 +234,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (button.classList.contains("view-details-btn")) {
         const report = allReports.find((r) => r.id == activeReportId);
-        const reportedUser = allUsers[report.reportedUserId];
-        const reportingUser = allUsers[report.reportedByUserId];
 
-        document.getElementById(
-          "modalReportedUser"
-        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
-        document.getElementById(
-          "modalReportedBy"
-        ).textContent = `${reportingUser.firstName} ${reportingUser.lastName}`;
+        document.getElementById("modalReportedUser").textContent = report.reportedUserName;
+        document.getElementById("modalReportedBy").textContent = report.reportingUserName;
         document.getElementById("modalReason").textContent = report.reason;
         document.getElementById("modalDate").textContent = report.date;
-        document.getElementById(
-          "actionUserName"
-        ).textContent = `${reportedUser.firstName} ${reportedUser.lastName}`;
+        document.getElementById("actionUserName").textContent = report.reportedUserName;
 
         const modalStatusBadge = document.getElementById("modalStatus");
         modalStatusBadge.className = "badge";
@@ -223,11 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
         switchToDetailsView();
         reportModal.show();
       } else if (button.classList.contains("resolve-btn")) {
-        const reportIndex = allReports.findIndex((r) => r.id == activeReportId);
-        if (reportIndex !== -1) {
-          allReports[reportIndex].status = "resolved";
-          localStorage.setItem("tindogReports", JSON.stringify(allReports));
-          filterAndSortTable();
+        if (confirm("Mark this report as resolved?")) {
+          updateReportStatus(activeReportId, "resolved");
         }
       }
     });
@@ -241,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    confirmActionButton.addEventListener("click", () => {
+    confirmActionButton.addEventListener("click", async () => {
       if (!activeReportId) return;
 
       const selectedAction = document.querySelector(
@@ -250,28 +280,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!selectedAction) return;
 
       const newStatus = selectedAction.value.toLowerCase();
-      const reportIndex = allReports.findIndex((r) => r.id == activeReportId);
-      const report = allReports[reportIndex];
-      const user = allUsers[report.reportedUserId];
 
-      if (newStatus === "suspended" || newStatus === "banned") {
-        user.status = newStatus;
-        localStorage.setItem("tindogUsers", JSON.stringify(allUsers));
+      const success = await updateReportStatus(activeReportId, newStatus);
+      if (success) {
+        reportModal.hide();
       }
-
-      allReports[reportIndex].status = newStatus;
-      localStorage.setItem("tindogReports", JSON.stringify(allReports));
-
-      reportModal.hide();
-      filterAndSortTable();
     });
 
     reportModalElement.addEventListener("hidden.bs.modal", () => {
       switchToDetailsView();
-      filterAndSortTable();
     });
 
-    filterAndSortTable();
+    // Initial Load
+    fetchReports();
   };
 
   if (document.querySelector("table")) {

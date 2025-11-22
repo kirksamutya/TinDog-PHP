@@ -181,12 +181,17 @@ function buildUserRow(user) {
   const canManage = !isTargetAdmin || currentAdminIsMaster;
 
   const editBtn = canManage
-    ? `<a href="./edit.html?user=${user.id}" class="btn btn-sm btn-outline-secondary">Edit</a>`
-    : `<button class="btn btn-sm btn-outline-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">Edit</button>`;
+    ? `<a href="./edit.html?user=${user.id}" class="btn btn-sm btn-outline-secondary" title="Edit"><i class="bi bi-pencil"></i></a>`
+    : `<button class="btn btn-sm btn-outline-secondary" disabled style="opacity: 0.5; cursor: not-allowed;" title="Edit"><i class="bi bi-pencil"></i></button>`;
 
   const deleteBtn = canManage
-    ? `<button type="button" class="btn btn-sm btn-outline-danger" onclick="handleDeleteClick(${user.id}, '${fullName.replace(/'/g, "\\'")}')">Delete</button>`
-    : `<button class="btn btn-sm btn-outline-danger" disabled style="opacity: 0.5; cursor: not-allowed;">Delete</button>`;
+    ? `<button type="button" class="btn btn-sm btn-outline-danger" onclick="handleDeleteClick(${user.id}, '${fullName.replace(/'/g, "\\'")}')" title="Delete"><i class="bi bi-trash"></i></button>`
+    : `<button class="btn btn-sm btn-outline-danger" disabled style="opacity: 0.5; cursor: not-allowed;" title="Delete"><i class="bi bi-trash"></i></button>`;
+
+  // Only show report button if target is NOT an admin
+  const reportBtn = !isTargetAdmin
+    ? `<button type="button" class="btn btn-sm btn-outline-warning text-dark" onclick="handleReportClick(${user.id}, '${fullName.replace(/'/g, "\\'")}')" title="Report"><i class="bi bi-exclamation-triangle"></i></button>`
+    : '';
 
   return `
     <tr>
@@ -209,8 +214,9 @@ function buildUserRow(user) {
       <td class="text-end">
         <div class="btn-group" role="group">
            <a href="./record.html?user=${user.id
-    }" class="btn btn-sm btn-outline-secondary">View</a>
+    }" class="btn btn-sm btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
            ${editBtn}
+           ${reportBtn}
            ${deleteBtn}
         </div>
       </td>
@@ -231,7 +237,7 @@ function getStatusColor(status) {
   }
 }
 
-// --- DELETE LOGIC (Moved directly here) ---
+// --- DELETE LOGIC ---
 window.handleDeleteClick = async (userId, userName) => {
   if (
     !confirm(
@@ -274,4 +280,63 @@ window.handleDeleteClick = async (userId, userName) => {
     console.error("Delete Error:", error);
     alert("Connection error.");
   }
+};
+
+// --- REPORT LOGIC ---
+window.handleReportClick = (userId, userName) => {
+  const modalElement = document.getElementById("reportUserModal");
+  const modal = new bootstrap.Modal(modalElement);
+
+  document.getElementById("reportModalUserName").textContent = userName;
+  document.getElementById("reportUserId").value = userId;
+  document.getElementById("reportReason").value = ""; // Clear previous input
+
+  modal.show();
+
+  // Handle Submit
+  const submitBtn = document.getElementById("submitReportBtn");
+  // Remove old listeners to prevent duplicates
+  const newSubmitBtn = submitBtn.cloneNode(true);
+  submitBtn.parentNode.replaceChild(newSubmitBtn, submitBtn);
+
+  newSubmitBtn.addEventListener("click", async () => {
+    const reason = document.getElementById("reportReason").value.trim();
+    if (!reason) {
+      alert("Please enter a reason for the report.");
+      return;
+    }
+
+    const token = sessionStorage.getItem("adminToken");
+    if (!token) {
+      alert("Unauthorized. Please log in.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/reports", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          reported_user_id: userId,
+          reason: reason
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("User reported successfully.");
+        modal.hide();
+      } else {
+        alert("Error: " + (result.message || "Failed to report user."));
+      }
+    } catch (error) {
+      console.error("Report Error:", error);
+      alert("Connection error.");
+    }
+  });
 };
