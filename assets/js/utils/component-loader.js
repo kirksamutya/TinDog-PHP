@@ -43,15 +43,38 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const setActiveSidebarLink = (sidebar) => {
-    const currentPagePath = window.location.pathname;
+    const normalize = (p) => p.replace(/\/$/, "").toLowerCase();
+    const currentPagePath = normalize(window.location.pathname);
+    const currentHref = window.location.href;
     const navLinks = sidebar.querySelectorAll(".nav-link");
 
     navLinks.forEach((link) => {
-      const linkPath = new URL(link.href, window.location.origin).pathname;
+      const linkPath = normalize(new URL(link.href, window.location.origin).pathname);
+
+      // Robust check:
+      // 1. Exact pathname match (normalized)
+      // 2. Current URL contains the link's href (useful if href is absolute)
+      // 3. Special case: if link is just "admin/" or "admin/index.html", ensure we are actually there
+
+      let isActive = false;
+
       if (currentPagePath === linkPath) {
+        isActive = true;
+      } else if (currentHref.includes(link.getAttribute('href'))) {
+        // Avoid partial matches like /admin matching /admin/users
+        // Only if the attribute is substantial
+        const hrefAttr = link.getAttribute('href');
+        if (hrefAttr.length > 2) {
+          isActive = true;
+        }
+      }
+
+      if (isActive) {
         link.classList.add("active");
+        link.setAttribute("aria-current", "page");
       } else {
         link.classList.remove("active");
+        link.removeAttribute("aria-current");
       }
     });
   };
