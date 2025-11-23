@@ -75,43 +75,60 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const newUserData = {
-      firstName: document.getElementById("ownerFirstName").value,
-      lastName: document.getElementById("ownerLastName").value,
-      email: `${document
-        .getElementById("ownerFirstName")
-        .value.toLowerCase()}.${document
-        .getElementById("ownerLastName")
-        .value.toLowerCase()}@example.com`,
-      password: "Password123", // Default password for new users
-      role: "user",
+    const userId = sessionStorage.getItem("loggedInUserId");
+    const token = sessionStorage.getItem("userToken");
+
+    if (!userId || !token) {
+      alert("Session expired. Please login again.");
+      window.location.href = "./index.html";
+      return;
+    }
+
+    // Collect personality tags
+    const personalityTags = [];
+    document.querySelectorAll('#personality-tags-container input[type="checkbox"]:checked').forEach(checkbox => {
+      personalityTags.push(checkbox.value);
+    });
+
+    // Get dog photo base64 string if available
+    const dogPhotoPreview = document.getElementById("dog-photo-preview");
+    const dogPhotoBase64 = dogPhotoPreview && dogPhotoPreview.src.startsWith("data:") ? dogPhotoPreview.src : null;
+
+    // Map form fields to backend expected fields
+    const profileData = {
+      first_name: document.getElementById("ownerFirstName").value,
+      last_name: document.getElementById("ownerLastName").value,
       location: document.getElementById("location").value,
-      dogName: document.getElementById("dogName").value,
-      dogBreed: document.getElementById("dogBreed").value,
-      dogSex: document.getElementById("dogSex").value,
-      dogSize: document.getElementById("dogSize").value,
-      age: document.getElementById("dogAge").value,
-      bio: document.getElementById("dogBio").value,
-      dogAvatar: document.getElementById("dog-photo-preview").src,
+      // Dog Fields
+      dog_name: document.getElementById("dogName").value,
+      dog_breed: document.getElementById("dogBreed").value,
+      dog_sex: document.getElementById("dogSex").value,
+      dog_size: document.getElementById("dogSize").value,
+      dog_age: document.getElementById("dogAge").value,
+      dog_bio: document.getElementById("dogBio").value,
+      dog_personalities: personalityTags.join(','),
+      dog_avatar: dogPhotoBase64,
     };
 
     try {
-      const response = await fetch(getBasePath() + "api/create-user.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUserData),
+      const response = await fetch(`http://127.0.0.1:8000/api/users/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(profileData),
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
-        sessionStorage.setItem("loggedInUserId", result.userId);
         window.location.href = getBasePath() + "app/dashboard.html";
       } else {
-        alert(`Error: ${result.message}`);
+        alert(`Error: ${result.message || "Failed to update profile."}`);
       }
     } catch (error) {
-      console.error("Failed to create user:", error);
+      console.error("Failed to update profile:", error);
       alert(
         "An unexpected error occurred. Please check the console and try again."
       );

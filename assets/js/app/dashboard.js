@@ -1,90 +1,96 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const setDynamicGreeting = () => {
+  const token = sessionStorage.getItem("userToken");
+  if (!token) {
+    window.location.href = "../auth/index.html";
+    return;
+  }
+
+  const fetchDashboardData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/user/dashboard", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+          updateDashboardUI(result.data);
+        }
+      } else {
+        console.error("Failed to fetch dashboard data");
+      }
+    } catch (error) {
+      console.error("Dashboard Error:", error);
+    }
+  };
+
+  const updateDashboardUI = (data) => {
+    // 1. Greeting
     const greetingElement = document.getElementById("welcome-greeting");
-    if (!greetingElement) return;
+    if (greetingElement) greetingElement.textContent = data.greeting;
 
-    const currentHour = new Date().getHours();
-    let greetingText = "Welcome Back!";
+    // 2. Stats
+    document.querySelector(".kpi-card.matches .kpi-value").textContent = data.stats.newMatches;
+    document.querySelector(".kpi-card.messages .kpi-value").textContent = data.stats.unreadMessages;
+    document.querySelector(".kpi-card.messages .kpi-caption").textContent = `from ${data.stats.unreadConversations} conversations`;
+    document.querySelector(".kpi-card.views .kpi-value").textContent = data.stats.profileViews;
+    document.querySelector(".kpi-card.plan .kpi-value").textContent = data.stats.currentPlan;
 
-    if (currentHour < 12) {
-      greetingText = "Good Morning!";
-    } else if (currentHour < 18) {
-      greetingText = "Good Afternoon!";
-    } else {
-      greetingText = "Good Evening!";
-    }
+    // 3. Pups Nearby
+    renderPupsNearby(data.pupsNearby);
 
-    greetingElement.textContent = greetingText;
-  };
-
-  const setDynamicDogTip = () => {
-    const dogCareTips = [
-      "Instead of just walking, engage your dog's mind with a 'sniffari,' allowing them to explore scents at their own pace. This is mentally tiring and very rewarding for them.",
-      "Rotate your dog's toys weekly. A toy that has been hidden for a week can feel brand new and more exciting than one that is always available.",
-      "For safe socialization, choose a calm, neutral environment. Keep initial meetings short and positive, and always watch for relaxed body language from both dogs.",
-      "Check your dog's paws for cracks, cuts, or foreign objects after walks, especially on hot pavement or rough terrain. A little paw balm can help soothe dry pads.",
-      "Use puzzle feeders or treat-dispensing toys for meals. This turns feeding time into a fun challenge that provides excellent mental stimulation.",
-      "Reinforce basic commands like 'sit' and 'stay' in short, fun sessions. This not only keeps their training sharp but also strengthens your bond.",
-      "Many human foods are toxic to dogs, including chocolate, grapes, onions, and xylitol (an artificial sweetener). Always check before sharing a snack.",
-      "A dog's dental health is crucial. Regular brushing with dog-specific toothpaste can prevent painful dental disease down the line.",
-      "Tailor exercise to your dog's breed and age. A 30-minute walk is great for a Basset Hound, but a Border Collie may need a vigorous game of fetch to be truly content.",
-      "Notice your dog's drinking habits. A sudden increase in thirst can be a sign of underlying health issues and warrants a call to your vet.",
-      "Create a designated 'safe space' for your dog with their bed and a favorite toy. This gives them a secure place to retreat to when they feel overwhelmed or tired.",
-      "When leaving your dog alone, provide a special toy they only get when you're away. This can create a positive association with your departure and reduce separation anxiety.",
-    ];
-
+    // 4. Tip of the Day
     const tipElement = document.getElementById("dog-tip-of-the-day");
-    if (tipElement) {
-      const today = new Date();
-      const dayOfYear = Math.floor(
-        (today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)
-      );
-      const tipIndex = dayOfYear % dogCareTips.length;
-      tipElement.textContent = dogCareTips[tipIndex];
+    if (tipElement) tipElement.textContent = data.tip;
+
+    // 5. Update Sidebar (if handler exists)
+    if (typeof SidebarHandler !== 'undefined') {
+      SidebarHandler.updateUI(data.user);
     }
   };
 
-  const updateDashboardStats = () => {
-    const stats = DataService.getDashboardStats();
+  const renderPupsNearby = (pups) => {
+    const container = document.getElementById("pups-nearby-component");
+    if (!container) return;
 
-    document.querySelector(".kpi-card.matches .kpi-value").textContent =
-      stats.newMatches;
-    document.querySelector(".kpi-card.messages .kpi-value").textContent =
-      stats.unreadMessages;
-    document.querySelector(
-      ".kpi-card.messages .kpi-caption"
-    ).textContent = `from ${stats.unreadConversations} conversations`;
-    document.querySelector(".kpi-card.views .kpi-value").textContent =
-      stats.profileViews;
-  };
+    // Clear existing content (or the placeholder component)
+    container.innerHTML = `
+      <div class="card h-100">
+        <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Pups Nearby</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush" id="pups-list">
+            <!-- Pups go here -->
+          </div>
+        </div>
+      </div>
+    `;
 
-  const initNewUserDashboard = () => {
-    const loggedInUserId = DataService.getLoggedInUserId();
-    const allUsers = DataService.getAllUsers();
-    const currentUser = allUsers[loggedInUserId];
+    const list = container.querySelector("#pups-list");
 
-    if (currentUser && !currentUser.lastSeen) {
-      const gettingStartedSection = document.getElementById(
-        "getting-started-section"
-      );
-      const pupsNearbyComponent = document.getElementById(
-        "pups-nearby-component"
-      );
-      const activityFeedComponent = document.getElementById(
-        "activity-feed-component"
-      );
-
-      if (gettingStartedSection) gettingStartedSection.style.display = "block";
-      if (pupsNearbyComponent) pupsNearbyComponent.style.display = "none";
-      if (activityFeedComponent) activityFeedComponent.style.display = "none";
+    if (pups.length === 0) {
+      list.innerHTML = '<div class="p-3 text-center text-muted">No pups nearby yet.</div>';
+      return;
     }
+
+    pups.forEach(pup => {
+      const item = document.createElement("div");
+      item.className = "list-group-item d-flex align-items-center border-0 px-3 py-2";
+      item.innerHTML = `
+        <img src="${pup.avatar}" class="rounded-circle me-3" width="40" height="40" style="object-fit: cover;">
+        <div class="flex-grow-1">
+          <h6 class="mb-0">${pup.name}</h6>
+          <small class="text-muted">${pup.distance}</small>
+        </div>
+        <button class="btn btn-sm btn-tindog-primary rounded-pill">View</button>
+      `;
+      list.appendChild(item);
+    });
   };
 
-  setDynamicGreeting();
-  updateDashboardStats();
-  initNewUserDashboard();
-
-  document.addEventListener("componentsLoaded", setDynamicDogTip, {
-    once: true,
-  });
+  fetchDashboardData();
 });

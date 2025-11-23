@@ -45,7 +45,7 @@ function setupEventListeners() {
   });
 }
 
-// --- FETCH LOGIC (Moved directly here) ---
+// --- FETCH LOGIC ---
 async function loadUsers() {
   const tableBody = document.querySelector("table tbody");
   const token = sessionStorage.getItem("adminToken");
@@ -135,12 +135,12 @@ function getValueForSort(user, column) {
       return (
         user.display_name || `${user.first_name} ${user.last_name}`
       ).toLowerCase();
-    case "email":
-      return (user.email || "").toLowerCase();
     case "role":
       return (user.role || "").toLowerCase();
     case "plan":
       return (user.plan || "N/A").toLowerCase();
+    case "location":
+      return (user.location || "").toLowerCase();
     case "status":
       return (user.status || "").toLowerCase();
     default:
@@ -164,9 +164,7 @@ function buildUserRow(user) {
     user.display_name ||
     `${user.first_name || ""} ${user.last_name || ""}`.trim() ||
     "Unknown";
-  const avatar = user.dog_avatar || "../../assets/images/dog-img.jpg";
   const role = user.role || "user";
-  const plan = user.plan || "free";
   const status = user.status || "active";
 
   // Determine Role Display Text
@@ -193,6 +191,14 @@ function buildUserRow(user) {
     ? `<button type="button" class="btn btn-sm btn-outline-warning text-dark" onclick="handleReportClick(${user.id}, '${fullName.replace(/'/g, "\\'")}')" title="Report"><i class="bi bi-exclamation-triangle"></i></button>`
     : '';
 
+  // Plan Logic
+  let displayPlan = (user.plan || "chihuahua").toUpperCase();
+  if (role === 'admin') {
+    displayPlan = "FREE";
+  } else {
+    if (displayPlan === 'FREE') displayPlan = 'CHIHUAHUA';
+  }
+
   return `
     <tr>
       <td>
@@ -203,18 +209,17 @@ function buildUserRow(user) {
           </div>
         </div>
       </td>
-      <td><span class="badge bg-${role === "admin" ? "primary" : "secondary"
-    }">${displayRole}</span></td>
-      <td>${plan.toUpperCase()}</td> 
-      <td>${user.location || "N/A"}</td> <td>
+      <td><span class="badge bg-${role === "admin" ? "primary" : "secondary"}">${displayRole}</span></td>
+      <td>${displayPlan}</td> 
+      <td>${user.location || "N/A"}</td>
+      <td>
         <span class="badge bg-${getStatusColor(status)}">
           ${status.charAt(0).toUpperCase() + status.slice(1)}
         </span>
       </td>
       <td class="text-end">
         <div class="btn-group" role="group">
-           <a href="./record.html?user=${user.id
-    }" class="btn btn-sm btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
+           <a href="./record.html?user=${user.id}" class="btn btn-sm btn-outline-secondary" title="View"><i class="bi bi-eye"></i></a>
            ${editBtn}
            ${reportBtn}
            ${deleteBtn}

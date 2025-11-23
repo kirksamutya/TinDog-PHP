@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((data) => {
         if (data.success) {
           sessionStorage.setItem("loggedInUserId", data.userId);
+          sessionStorage.setItem("userToken", data.token);
 
           if (data.status === "new") {
             window.location.href = getBasePath() + "auth/new-profile.html";
