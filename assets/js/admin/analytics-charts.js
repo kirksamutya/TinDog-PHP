@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const token = sessionStorage.getItem("adminToken");
+  const token = sessionStorage.getItem("userToken");
   if (!token) {
     console.error("No admin token found. Redirecting...");
-    window.location.href = "../../auth/admin.html";
+    window.location.href = "../auth/admin.html";
     return;
   }
 
@@ -82,16 +82,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     // For robustness, let's assume we'll update the HTML to have IDs or use querySelector.
     // Based on previous file view, they didn't have unique IDs.
     // Let's try to find them by context or just update the text if we can identify the element.
-    
+
     // Strategy: Select all .kpi-value and update in order? Risky.
     // Better: Update the HTML to include IDs. But I can't edit HTML right now easily without context switch.
     // Let's use specific selectors based on the icon or title.
-    
+
     const cards = document.querySelectorAll('.kpi-card');
     cards.forEach(card => {
       const title = card.querySelector('.kpi-title').textContent.trim();
       const valueEl = card.querySelector('.kpi-value');
-      
+
       if (title === 'Total Users') valueEl.textContent = data.total_users.toLocaleString();
       if (title === 'Monthly Revenue') valueEl.textContent = '₱' + data.monthly_revenue.toLocaleString();
       if (title === 'Open Reports') valueEl.textContent = data.open_reports;
@@ -148,11 +148,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (dauCtx) {
       // Since we only have current DAU, we'll show a single bar or a placeholder message if history is empty
       if (data.dau_history && data.dau_history.length > 0) {
-         // Render history if available
+        // Render history if available
       } else {
-         // Show current DAU as a single big number or a single bar?
-         // Let's do a single bar for "Today"
-         new Chart(dauCtx, {
+        // Show current DAU as a single big number or a single bar?
+        // Let's do a single bar for "Today"
+        new Chart(dauCtx, {
           type: "bar",
           data: {
             labels: ["Today"],
@@ -170,8 +170,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Session Duration - We don't have data, so maybe hide or show "No Data"
     const sessionCtx = document.getElementById("sessionDurationChart")?.getContext("2d");
     if (sessionCtx) {
-        // Placeholder for now as agreed (or just leave empty)
-        // new Chart(sessionCtx, { ... });
+      // Placeholder for now as agreed (or just leave empty)
+      // new Chart(sessionCtx, { ... });
     }
   };
 
@@ -190,25 +190,25 @@ document.addEventListener("DOMContentLoaded", async () => {
             },
           ],
         },
-        options: { 
-            responsive: true, 
-            maintainAspectRatio: false,
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed !== null) {
-                                label += new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(context.parsed);
-                            }
-                            return label;
-                        }
-                    }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  let label = context.label || '';
+                  if (label) {
+                    label += ': ';
+                  }
+                  if (context.parsed !== null) {
+                    label += new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(context.parsed);
+                  }
+                  return label;
                 }
+              }
             }
+          }
         },
       });
     }
@@ -239,27 +239,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   await fetchDemographics();
   await fetchEngagement();
   await fetchRevenue();
-  
+
+  // Static table render (can be dynamic later)
   // Static table render (can be dynamic later)
   const renderRetentionCohortTable = () => {
     const tableBody = document.getElementById("retention-cohort-table");
     if (!tableBody) return;
-    const cohorts = [
-      { cohort: "Sep 1 - Sep 7", values: ["100%", "55%", "40%", "30%"] },
-      { cohort: "Sep 8 - Sep 14", values: ["100%", "60%", "45%", "—"] },
-      { cohort: "Sep 15 - Sep 21", values: ["100%", "65%", "—", "—"] },
-      { cohort: "Sep 22 - Today", values: ["100%", "—", "—", "—"] },
-    ];
-    tableBody.innerHTML = cohorts
-      .map(
-        (c) => `
-      <tr>
-        <th class="text-start">${c.cohort}</th>
-        ${c.values.map((v) => `<td>${v}</td>`).join("")}
-      </tr>
-    `
-      )
-      .join("");
+
+    // Empty state for now to avoid fake data
+    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No retention data available yet.</td></tr>`;
   };
   renderRetentionCohortTable();
 });

@@ -48,7 +48,7 @@ function setupEventListeners() {
 // --- FETCH LOGIC ---
 async function loadUsers() {
   const tableBody = document.querySelector("table tbody");
-  const token = sessionStorage.getItem("adminToken");
+  const token = sessionStorage.getItem("userToken");
 
   if (!token) {
     console.warn("No admin token found.");
@@ -252,7 +252,7 @@ window.handleDeleteClick = async (userId, userName) => {
     return;
   }
 
-  const token = sessionStorage.getItem("adminToken");
+  const token = sessionStorage.getItem("userToken");
   if (!token) {
     alert("Unauthorized. Please log in.");
     return;
@@ -311,7 +311,7 @@ window.handleReportClick = (userId, userName) => {
       return;
     }
 
-    const token = sessionStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("userToken");
     if (!token) {
       alert("Unauthorized. Please log in.");
       return;

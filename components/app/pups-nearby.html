@@ -3,54 +3,12 @@
     <h5 class="mb-0">Pups Nearby</h5>
   </div>
   <div class="card-body">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item d-flex align-items-center">
-        <img
-          src="/assets/images/dog-img.jpg"
-          class="nearby-avatar me-3"
-          alt="Pebbles"
-        />
-        <div>
-          <strong>Kisses</strong>
-          <small class="d-block text-muted">0.5 km away</small>
+    <ul class="list-group list-group-flush" id="pups-list">
+      <!-- Pups will be loaded here via JS -->
+      <li class="list-group-item text-center text-muted py-4">
+        <div class="spinner-border spinner-border-sm text-secondary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-        <a
-          href="/app/matches/find.html"
-          class="btn btn-sm btn-tindog-outline ms-auto"
-          >View</a
-        >
-      </li>
-      <li class="list-group-item d-flex align-items-center">
-        <img
-          src="/assets/images/bruce.jpg"
-          class="nearby-avatar me-3"
-          alt="Bruce"
-        />
-        <div>
-          <strong>Max</strong>
-          <small class="d-block text-muted">1.2 km away</small>
-        </div>
-        <a
-          href="/app/matches/find.html"
-          class="btn btn-sm btn-tindog-outline ms-auto"
-          >View</a
-        >
-      </li>
-      <li class="list-group-item d-flex align-items-center">
-        <img
-          src="https://placedog.net/400/400?id=45"
-          class="nearby-avatar me-3"
-          alt="Rocky"
-        />
-        <div>
-          <strong>Rocky</strong>
-          <small class="d-block text-muted">2.0 km away</small>
-        </div>
-        <a
-          href="/app/matches/find.html"
-          class="btn btn-sm btn-tindog-outline ms-auto"
-          >View</a
-        >
       </li>
     </ul>
   </div>

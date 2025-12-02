@@ -104,4 +104,35 @@ const DataService = {
   getActivityFeed: function () {
     return this.getNotifications();
   },
+
+  resolvePath: (path) => {
+    if (!path) return null;
+
+    // 1. If it's a data URL or absolute URL, return as is
+    if (path.startsWith('data:') || path.startsWith('http') || path.startsWith('/')) {
+      return path;
+    }
+
+    // 2. Clean up relative path indicators
+    // Remove all occurrences of "../" and "./"
+    const cleanPath = path.replace(/^(\.\.\/|\.\/)+/, '');
+
+    // 3. Determine current depth and prepend correct prefix
+    const currentPath = window.location.pathname;
+
+    // Check for deep paths (profile, matches, admin, etc.)
+    // We can count the slashes to determine depth relative to root
+    // Root: /index.html or / (depth 1)
+    // App: /app/dashboard.html (depth 2)
+    // Deep: /app/profile/index.html (depth 3)
+
+    // Simple heuristic based on known structure:
+    const isDeep = currentPath.includes('/profile/') ||
+      currentPath.includes('/matches/') ||
+      currentPath.includes('/admin/users/');
+
+    const prefix = isDeep ? '../../' : '../';
+
+    return `${prefix}${cleanPath}`;
+  },
 };

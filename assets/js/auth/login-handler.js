@@ -35,8 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.success) {
           sessionStorage.setItem("loggedInUserId", data.userId);
           sessionStorage.setItem("userToken", data.token);
+          sessionStorage.setItem("userRole", data.role);
+          sessionStorage.setItem("isMasterAdmin", data.is_master_admin);
 
-          if (data.status === "new") {
+          if (data.role === 'admin') {
+            window.location.href = getBasePath() + "admin/dashboard.html";
+          } else if (data.status === "new") {
             window.location.href = getBasePath() + "auth/new-profile.html";
           } else {
             window.location.href = getBasePath() + "app/dashboard.html";

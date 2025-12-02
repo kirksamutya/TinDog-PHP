@@ -10,6 +10,23 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="../../assets/css/main.css" />
+  <style>
+    /* Ensure edit button is visible on top of image */
+    .edit-cover-btn {
+      z-index: 10;
+      opacity: 0.9;
+    }
+
+    .edit-cover-btn:hover {
+      opacity: 1;
+    }
+
+    /* Ensure avatar is on top */
+    .profile-avatar-wrapper {
+      z-index: 20;
+      position: relative;
+    }
+  </style>
 </head>
 
 <body class="app-body">
@@ -21,95 +38,94 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content page-profile">
         <div class="profile-container">
           <div class="profile-cover-photo position-relative">
-            <img src="../../assets/images/jorjee-three.jpg" alt="Cover Photo" />
-            <a href="#" class="edit-cover-btn btn btn-light btn-sm">
+            <img src="../../assets/images/default-cover.jpg" id="profile-cover" alt="Cover Photo" class="w-100"
+              style="height: 175px; object-fit: cover;" />
+            <a href="#" class="edit-cover-btn btn btn-light btn-sm position-absolute bottom-0 end-0 m-3 shadow-sm">
               <i class="bi bi-camera-fill me-1"></i> Edit Cover
             </a>
           </div>
           <div class="profile-card">
-            <div class="profile-avatar-wrapper">
-              <img src="../../assets/images/jorjee-one.jpg" class="profile-avatar" alt="Profile Avatar" />
-              <a href="#" class="edit-avatar-btn btn btn-light btn-sm">
-                <i class="bi bi-camera-fill"></i>
-              </a>
+            <div class="profile-avatar-wrapper text-center" style="margin-top: -75px;">
+              <div class="position-relative d-inline-block">
+                <img src="../../assets/images/default-avatar.png" id="profile-avatar"
+                  class="profile-avatar rounded-circle border border-4 border-white shadow-sm" alt="Profile Avatar"
+                  style="width: 150px; height: 150px; object-fit: cover; background: white;" />
+                <a href="#"
+                  class="edit-avatar-btn btn btn-light btn-sm position-absolute bottom-0 end-0 mb-2 me-2 rounded-circle shadow-sm"
+                  style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                  <i class="bi bi-camera-fill" style="font-size: 0.8rem;"></i>
+                </a>
+              </div>
             </div>
-            <ul class="nav nav-tabs">
+
+            <ul class="nav nav-tabs justify-content-center border-bottom-0 mb-3 mt-3" id="profileTabs">
               <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#dog-profile"
-                  data-avatar-src="../../assets/images/jorjee-one.jpg">Dog's Profile</a>
+                <a class="nav-link active fw-bold" data-bs-toggle="tab" href="#dog-profile" id="dog-tab-link"
+                  data-avatar-src="../../assets/images/default-avatar.png">Dog's Profile</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#owner-profile"
-                  data-avatar-src="../../assets/images/anthony.jpg">Owner's Profile</a>
+                <a class="nav-link fw-bold" data-bs-toggle="tab" href="#owner-profile" id="owner-tab-link"
+                  data-avatar-src="../../assets/images/default-avatar.png">Owner's Profile</a>
               </li>
             </ul>
+
             <div class="tab-content">
               <div class="tab-pane fade show active" id="dog-profile">
                 <div class="profile-info text-center pt-3">
-                  <h2 class="h3 mb-1" id="dog-name"></h2>
-                  <div class="profile-meta-info my-3 flex-wrap justify-content-center">
-                    <div class="meta-item">
-                      <i class="bi bi-person-badge"></i>
-                      <span id="dog-breed"></span>
+                  <h2 class="h3 mb-1 fw-bold" id="dog-name">Loading...</h2>
+                  <div class="profile-meta-info my-3 flex-wrap justify-content-center gap-3 d-flex">
+                    <div class="meta-item badge bg-light text-dark p-2 border rounded-pill">
+                      <i class="bi bi-paw text-primary me-1"></i>
+                      <span id="dog-breed">...</span>
                     </div>
-                    <div class="meta-item">
-                      <i class="bi bi-gender-female"></i>
-                      <span id="dog-sex"></span>
+                    <div class="meta-item badge bg-light text-dark p-2 border rounded-pill">
+                      <i class="bi bi-gender-ambiguous text-danger me-1"></i>
+                      <span id="dog-sex">...</span>
                     </div>
-                    <div class="meta-item">
-                      <i class="bi bi-rulers"></i>
-                      <span id="dog-size"></span>
+                    <div class="meta-item badge bg-light text-dark p-2 border rounded-pill">
+                      <i class="bi bi-rulers text-success me-1"></i>
+                      <span id="dog-size">...</span>
                     </div>
-                    <div class="meta-item">
-                      <i class="bi bi-calendar-heart"></i>
-                      <span id="dog-age"></span>
+                    <div class="meta-item badge bg-light text-dark p-2 border rounded-pill">
+                      <i class="bi bi-calendar-heart text-warning me-1"></i>
+                      <span id="dog-age">...</span>
                     </div>
                   </div>
-                  <a href="./edit.html?tab=dog" class="btn btn-sm btn-tindog-primary"><i class="bi bi-pencil me-1"></i>
+                  <a href="./edit.html?tab=dog" class="btn btn-sm btn-tindog-primary rounded-pill px-3"><i
+                      class="bi bi-pencil me-1"></i>
                     Edit Dog's Profile</a>
                 </div>
-                <hr />
+                <hr class="my-4" />
                 <div class="profile-details p-3">
-                  <h5 class="mb-2">About</h5>
-                  <p class="text-muted" id="dog-bio"></p>
-                  <h5 class="mt-4 mb-3">Personality</h5>
-                  <div class="mt-2">
-                    <span class="profile-tag">Playful</span>
-                    <span class="profile-tag">Cuddly</span>
-                    <span class="profile-tag">Loves Treats</span>
-                    <span class="profile-tag">Friendly</span>
+                  <h5 class="mb-2 fw-bold">About</h5>
+                  <p class="text-muted" id="dog-bio">Loading...</p>
+                  <h5 class="mt-4 mb-3 fw-bold">Personality</h5>
+                  <div class="mt-2 d-flex flex-wrap gap-2" id="dog-personalities">
+                    <span class="text-muted small">No personalities added yet.</span>
                   </div>
-                  <h5 class="mt-4 mb-3">Photo Gallery</h5>
-                  <div class="photo-gallery-grid">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal"
-                      data-bs-image-src="../../assets/images/jorjee-one.jpg" class="gallery-item"><img
-                        src="../../assets/images/jorjee-one.jpg" alt="Jorjee photo 1" /></a>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal"
-                      data-bs-image-src="../../assets/images/jorjee-two.jpg" class="gallery-item"><img
-                        src="../../assets/images/jorjee-two.jpg" alt="Jorjee photo 2" /></a>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal"
-                      data-bs-image-src="../../assets/images/jorjee-three.jpg" class="gallery-item"><img
-                        src="../../assets/images/jorjee-three.jpg" alt="Jorjee photo 3" /></a>
+                  <h5 class="mt-4 mb-3 fw-bold">Photo Gallery</h5>
+                  <div class="photo-gallery-grid" id="dog-photos">
+                    <p class="text-muted small">No photos uploaded yet.</p>
                   </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="owner-profile">
                 <div class="profile-info text-center pt-3">
-                  <h2 class="h3 mb-1" id="owner-name"></h2>
-                  <p class="text-muted">Dog's Human</p>
-                  <div class="profile-meta-info my-3">
-                    <div class="meta-item">
-                      <i class="bi bi-geo-alt"></i>
-                      <span id="owner-location"></span>
+                  <h2 class="h3 mb-1 fw-bold" id="owner-name">Loading...</h2>
+                  <p class="text-muted mb-2">Dog's Human</p>
+                  <div class="profile-meta-info my-3 d-flex justify-content-center">
+                    <div class="meta-item text-muted">
+                      <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                      <span id="owner-location">...</span>
                     </div>
                   </div>
-                  <a href="./edit.html?tab=owner" class="btn btn-sm btn-tindog-primary"><i
+                  <a href="./edit.html?tab=owner" class="btn btn-sm btn-outline-secondary rounded-pill px-3"><i
                       class="bi bi-pencil me-1"></i> Edit Owner's Profile</a>
                 </div>
-                <hr />
+                <hr class="my-4" />
                 <div class="profile-details p-3">
-                  <h5 class="mb-2">About Me</h5>
-                  <p class="text-muted" id="owner-bio"></p>
+                  <h5 class="mb-2 fw-bold">About Me</h5>
+                  <p class="text-muted" id="owner-bio">Loading...</p>
                 </div>
               </div>
             </div>
@@ -120,9 +136,11 @@
   </div>
   <div class="modal fade" id="galleryModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <img src="" class="img-fluid" alt="Gallery Image" />
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-body p-0 text-center">
+          <img src="" class="img-fluid rounded shadow-lg" alt="Gallery Image" />
+          <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+            data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
       </div>
     </div>
@@ -131,6 +149,7 @@
   <script src="../../assets/js/lib/data-service.js"></script>
   <script src="../../assets/js/utils/component-loader.js"></script>
   <script src="../../assets/js/app/header-handler.js"></script>
+  <script src="../../assets/js/app/sidebar-handler.js"></script>
   <script src="../../assets/js/app/user-handler.js"></script>
   <script src="../../assets/js/app/profile-handler.js"></script>
   <script src="../../assets/js/app/gallery-modal.js"></script>
