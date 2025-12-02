@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const token = sessionStorage.getItem("adminToken");
+    const token = sessionStorage.getItem("userToken");
     if (!token) {
         console.error("No admin token found. Redirecting...");
-        window.location.href = "../../auth/admin.html";
+        window.location.href = "../auth/admin.html";
         return;
     }
 

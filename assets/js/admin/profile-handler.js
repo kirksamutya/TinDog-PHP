@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const adminProfileSection = document.querySelector(".page-header");
     if (!adminProfileSection) return;
 
-    const loggedInAdminId = sessionStorage.getItem("loggedInAdminId");
-    const token = sessionStorage.getItem("adminToken");
+    const loggedInAdminId = sessionStorage.getItem("loggedInUserId");
+    const token = sessionStorage.getItem("userToken");
 
     if (!loggedInAdminId || !token) {
       window.location.href = getBasePath() + "auth/admin.html";

@@ -1,27 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const chatContainerWrapper = document.querySelector(
-    ".chat-container-wrapper"
-  );
+  const chatContainerWrapper = document.querySelector(".chat-container-wrapper");
   if (!chatContainerWrapper) return;
 
   const convListBody = document.querySelector(".conv-list-body");
+  const convListEmpty = document.getElementById("conv-list-empty");
+
+  const chatHeader = document.getElementById("chat-header");
   const chatHeaderName = document.getElementById("chat-header-name");
   const chatHeaderAvatar = document.getElementById("chat-header-avatar");
+
+  const chatEmptyState = document.getElementById("chat-empty-state");
+  const chatContent = document.querySelector(".chat-content");
   const messageForm = document.getElementById("message-form");
   const messageInput = document.getElementById("message-input");
-  const chatBody = document.querySelector(".chat-body");
+
   const backButton = document.querySelector(".back-button");
-  const searchInput = document.getElementById("conversation-search");
-  const reportButton = document.querySelector(
-    "[data-bs-target='#reportUserModal']"
-  );
+  const reportButton = document.querySelector("[data-bs-target='#reportUserModal']");
 
   let currentConversationKey = null;
   let currentMatchUserId = null;
-  const loggedInUserId = DataService.getLoggedInUserId();
+  let matches = [];
 
-  const getConversationKey = (userId1, userId2) => {
-    return [userId1, userId2].sort().join("_");
+  // Helper to get logged in user ID (from token or session)
+  // Since we don't have a direct way to get ID from token in JS without decoding,
+  // we'll rely on the matches API to give us the context or just use local storage for messages keyed by match ID.
+  const getLoggedInUserId = () => {
+    // This is a placeholder. In a real app, decode the JWT.
+    // For now, we'll use a session storage value if available, or just 'me'
+    return sessionStorage.getItem("userId") || "me";
+  };
+
+  const loggedInUserId = getLoggedInUserId();
+
+  const getConversationKey = (matchId) => {
+    return `chat_${matchId}`;
   };
 
   const createMessageHTML = (message) => {
@@ -33,29 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const loadConversation = (matchUserId) => {
-    const allUsers = DataService.getAllUsers();
-    const matchUser = allUsers[matchUserId];
-    if (!matchUser) return;
+    const match = matches.find(m => m.user.id == matchUserId);
+    if (!match) return;
 
     currentMatchUserId = matchUserId;
-    currentConversationKey = getConversationKey(loggedInUserId, matchUserId);
+    currentConversationKey = getConversationKey(matchUserId);
 
-    chatHeaderName.textContent = matchUser.dogName;
-    chatHeaderAvatar.src = matchUser.dogAvatar;
+    // Update Header
+    chatHeaderName.textContent = match.user.name;
+    const avatarSrc = DataService.resolvePath(match.user.avatar) || DataService.resolvePath('assets/images/default-avatar.png');
+    chatHeaderAvatar.src = avatarSrc;
 
     if (reportButton) {
       reportButton.setAttribute("data-reported-user-id", matchUserId);
-      reportButton.setAttribute("data-reported-user-name", matchUser.dogName);
+      reportButton.setAttribute("data-reported-user-name", match.user.name);
     }
 
-    const allConversations =
-      JSON.parse(localStorage.getItem("tindogConversations")) || {};
-    const conversation = allConversations[currentConversationKey] || {
-      messages: [],
-    };
+    // Show Chat UI, Hide Empty State
+    chatEmptyState.style.display = "none";
+    chatHeader.style.display = "flex";
+    chatContent.style.display = "block";
+    messageForm.style.display = "flex";
 
-    chatBody.innerHTML = conversation.messages.map(createMessageHTML).join("");
-    chatBody.scrollTop = chatBody.scrollHeight;
+    // Load Messages from Local Storage (Simulation)
+    const allConversations = JSON.parse(localStorage.getItem("tindogConversations")) || {};
+    const conversation = allConversations[currentConversationKey] || { messages: [] };
+
+    chatContent.innerHTML = conversation.messages.map(createMessageHTML).join("");
+    chatContent.scrollTop = chatContent.scrollHeight;
   };
 
   const handleSendMessage = (event) => {
@@ -63,8 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageText = messageInput.value.trim();
     if (messageText === "" || !currentConversationKey) return;
 
-    const allConversations =
-      JSON.parse(localStorage.getItem("tindogConversations")) || {};
+    const allConversations = JSON.parse(localStorage.getItem("tindogConversations")) || {};
     if (!allConversations[currentConversationKey]) {
       allConversations[currentConversationKey] = { messages: [] };
     }
@@ -79,58 +95,87 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     allConversations[currentConversationKey].messages.push(newMessage);
-    localStorage.setItem(
-      "tindogConversations",
-      JSON.stringify(allConversations)
-    );
+    localStorage.setItem("tindogConversations", JSON.stringify(allConversations));
 
-    chatBody.innerHTML += createMessageHTML(newMessage);
-    chatBody.scrollTop = chatBody.scrollHeight;
+    chatContent.innerHTML += createMessageHTML(newMessage);
+    chatContent.scrollTop = chatContent.scrollHeight;
     messageInput.value = "";
   };
 
-  const loadConversationList = () => {
-    const allUsers = DataService.getAllUsers();
-    const allLikes = DataService.getAllLikes();
-    const myLikes = allLikes[loggedInUserId] || [];
-    let listHtml = "";
+  const loadMatches = async () => {
+    const token = sessionStorage.getItem("userToken");
+    if (!token) return;
 
-    myLikes.forEach((likedUserId) => {
-      const theirLikes = allLikes[likedUserId] || [];
-      if (theirLikes.includes(loggedInUserId)) {
-        const matchUser = allUsers[likedUserId];
-        if (matchUser) {
-          listHtml += `
-            <li class="conversation-item" data-user-id="${likedUserId}">
-              <div class="avatar-wrapper">
-                <img src="${matchUser.dogAvatar}" alt="${matchUser.dogName}" class="avatar" />
-                <span class="status-indicator online"></span>
-              </div>
-              <div class="conv-details">
-                <div class="conv-name">${matchUser.dogName}</div>
-                <div class="conv-preview">Click to view messages.</div>
-              </div>
-            </li>`;
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/matches", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+          matches = result.data;
+          renderConversationList();
         }
       }
-    });
-
-    convListBody.innerHTML = listHtml;
-    addEventListenersToConvItems();
+    } catch (error) {
+      console.error("Matches Load Error:", error);
+    }
   };
 
-  const addEventListenersToConvItems = () => {
-    const conversationItems = document.querySelectorAll(".conversation-item");
-    conversationItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        conversationItems.forEach((i) => i.classList.remove("active"));
-        item.classList.add("active");
-        loadConversation(item.dataset.userId);
+  const renderConversationList = () => {
+    convListBody.innerHTML = "";
+
+    if (matches.length === 0) {
+      convListBody.style.display = "none";
+      if (convListEmpty) convListEmpty.style.display = "block";
+      return;
+    }
+
+    convListBody.style.display = "block";
+    if (convListEmpty) convListEmpty.style.display = "none";
+
+    matches.forEach((match) => {
+      const li = document.createElement("li");
+      li.classList.add("conversation-item");
+      li.dataset.userId = match.user.id;
+
+      const avatarSrc = DataService.resolvePath(match.user.avatar) || DataService.resolvePath('assets/images/default-avatar.png');
+
+      li.innerHTML = `
+        <div class="avatar-wrapper">
+          <img src="${avatarSrc}" alt="${match.user.name}" class="avatar" />
+          <span class="status-indicator online"></span>
+        </div>
+        <div class="conv-details">
+          <div class="conv-name">${match.user.name}</div>
+          <div class="conv-preview">Click to start chatting</div>
+        </div>
+      `;
+
+      li.addEventListener("click", () => {
+        document.querySelectorAll(".conversation-item").forEach(i => i.classList.remove("active"));
+        li.classList.add("active");
+        loadConversation(match.user.id);
+
         if (window.innerWidth < 768) {
           chatContainerWrapper.classList.add("chat-active");
         }
       });
+
+      convListBody.appendChild(li);
     });
+
+    // Check URL params to auto-select a user
+    const urlParams = new URLSearchParams(window.location.search);
+    const userIdParam = urlParams.get('user');
+    if (userIdParam) {
+      const item = document.querySelector(`.conversation-item[data-user-id="${userIdParam}"]`);
+      if (item) item.click();
+    }
   };
 
   if (messageForm) {
@@ -140,11 +185,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (backButton) {
     backButton.addEventListener("click", () => {
       chatContainerWrapper.classList.remove("chat-active");
-      document
-        .querySelectorAll(".conversation-item")
-        .forEach((i) => i.classList.remove("active"));
+      document.querySelectorAll(".conversation-item").forEach(i => i.classList.remove("active"));
+
+      // Reset to empty state on mobile back? Maybe not necessary, but good for UX
+      // chatEmptyState.style.display = "flex";
+      // chatHeader.style.display = "none";
+      // chatContent.style.display = "none";
+      // messageForm.style.display = "none";
     });
   }
 
-  loadConversationList();
+  loadMatches();
 });

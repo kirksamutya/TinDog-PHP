@@ -56,40 +56,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("pups-nearby-component");
     if (!container) return;
 
-    // Clear existing content (or the placeholder component)
-    container.innerHTML = `
-      <div class="card h-100">
-        <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Pups Nearby</h5>
+    if (!pups || pups.length === 0) {
+      container.innerHTML = `
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-header bg-transparent border-0">
+                <h5 class="mb-0 fw-bold">Pups Nearby</h5>
+            </div>
+            <div class="card-body text-center d-flex flex-column align-items-center justify-content-center py-5">
+                <div class="mb-3 p-3 bg-light rounded-circle">
+                    <i class="bi bi-geo-alt-fill text-muted fs-1"></i>
+                </div>
+                <h6 class="text-muted mb-1">No pups nearby right now</h6>
+                <p class="text-muted small mb-3">Expand your search area or try again later.</p>
+                <a href="./find.html" class="btn btn-sm btn-outline-tindog-primary rounded-pill px-4">Find Matches</a>
+            </div>
         </div>
-        <div class="card-body p-0">
-          <div class="list-group list-group-flush" id="pups-list">
-            <!-- Pups go here -->
-          </div>
-        </div>
-      </div>
-    `;
-
-    const list = container.querySelector("#pups-list");
-
-    if (pups.length === 0) {
-      list.innerHTML = '<div class="p-3 text-center text-muted">No pups nearby yet.</div>';
+      `;
       return;
     }
 
-    pups.forEach(pup => {
-      const item = document.createElement("div");
-      item.className = "list-group-item d-flex align-items-center border-0 px-3 py-2";
-      item.innerHTML = `
-        <img src="${pup.avatar}" class="rounded-circle me-3" width="40" height="40" style="object-fit: cover;">
-        <div class="flex-grow-1">
-          <h6 class="mb-0">${pup.name}</h6>
-          <small class="text-muted">${pup.distance}</small>
+    const pupsList = pups
+      .map(
+        (pup) => `
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-flex align-items-center">
+          <img src="${pup.avatar || '../assets/images/default-avatar.png'}" class="rounded-circle me-3" width="50" height="50" style="object-fit: cover;">
+          <div>
+            <h6 class="mb-0">${pup.name}</h6>
+            <small class="text-muted">${pup.distance}</small>
+          </div>
         </div>
-        <button class="btn btn-sm btn-tindog-primary rounded-pill">View</button>
-      `;
-      list.appendChild(item);
-    });
+        <button class="btn btn-sm btn-tindog-primary rounded-pill px-3">View</button>
+      </div>
+    `
+      )
+      .join("");
+
+    container.innerHTML = `
+      <div class="card h-100">
+        <div class="card-header bg-transparent border-0">
+          <h5 class="mb-0">Pups Nearby</h5>
+        </div>
+        <div class="card-body">
+          ${pupsList}
+        </div>
+      </div>
+    `;
   };
 
   fetchDashboardData();

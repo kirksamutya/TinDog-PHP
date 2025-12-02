@@ -4,8 +4,6 @@ const SidebarHandler = {
         if (!token) return;
 
         try {
-            // We can reuse the dashboard data if available, or fetch it
-            // For simplicity, we'll fetch it here to ensure sidebar works independently
             const response = await fetch("http://127.0.0.1:8000/api/user/dashboard", {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -17,28 +15,43 @@ const SidebarHandler = {
                 const result = await response.json();
                 if (result.success) {
                     SidebarHandler.updateUI(result.data.user);
+                } else {
+                    console.error("API Error:", result.message);
                 }
+            } else {
+                console.error("HTTP Error:", response.status);
             }
         } catch (error) {
             console.error("Sidebar Error:", error);
         }
     },
 
-    updateUI: (user) => {
-        const avatarEl = document.getElementById("sidebar-user-avatar");
-        const nameEl = document.getElementById("sidebar-user-name");
-        const planEl = document.getElementById("sidebar-user-plan");
 
-        if (avatarEl) {
-            // Handle Base64 or URL
-            if (user.avatar && !user.avatar.startsWith('http') && !user.avatar.startsWith('data:')) {
-                // If it's just a filename, assume it's not supported yet or handle accordingly
-                // For now, our backend sends full URL or Base64
-            }
-            avatarEl.src = user.avatar || '../assets/images/default-avatar.png';
-        }
-        if (nameEl) nameEl.textContent = user.name;
-        if (planEl) planEl.textContent = user.plan + " Plan";
+
+    updateUI: (user) => {
+        // Sidebar Elements
+        const sidebarAvatar = document.getElementById("sidebar-user-avatar");
+        const sidebarName = document.getElementById("sidebar-user-name");
+        const sidebarPlan = document.getElementById("sidebar-user-plan");
+
+        // Header Elements
+        const headerAvatar = document.getElementById("header-user-avatar");
+        const headerName = document.getElementById("header-user-name");
+
+        // Resolve Avatar Path
+        // Priority: Owner Avatar -> Avatar -> Default
+        const rawAvatar = user.owner_avatar || user.avatar;
+        const defaultAvatar = DataService.resolvePath('assets/images/default-avatar.png');
+        const resolvedAvatar = DataService.resolvePath(rawAvatar) || defaultAvatar;
+
+        // Update Sidebar
+        if (sidebarAvatar) sidebarAvatar.src = resolvedAvatar;
+        if (sidebarName) sidebarName.textContent = user.name;
+        if (sidebarPlan) sidebarPlan.textContent = user.plan + " Plan";
+
+        // Update Header
+        if (headerAvatar) headerAvatar.src = resolvedAvatar;
+        if (headerName) headerName.textContent = user.name;
     },
 };
 

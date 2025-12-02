@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("edit-user-form");
   const urlParams = new URLSearchParams(window.location.search);
   const userId = urlParams.get("id") || urlParams.get("user");
-  const token = sessionStorage.getItem("adminToken");
+  const token = sessionStorage.getItem("userToken");
 
   if (!userId) {
     alert("No user ID provided.");
@@ -54,9 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
         adminFields.style.display = "block";
         displayNameInput.value = user.display_name || "";
       } else {
-        pageTitle.innerText = `Edit User: ${user.first_name || ""} ${
-          user.last_name || ""
-        }`;
+        pageTitle.innerText = `Edit User: ${user.first_name || ""} ${user.last_name || ""
+          }`;
         standardFields.style.display = "block";
         adminFields.style.display = "none";
       }

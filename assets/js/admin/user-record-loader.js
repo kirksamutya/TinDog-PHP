@@ -14,7 +14,7 @@ const initUserRecord = async () => {
   }
 
   // 2. Get Token
-  const token = sessionStorage.getItem("adminToken");
+  const token = sessionStorage.getItem("userToken");
   if (!token) {
     window.location.href = "../../auth/admin.html";
     return;

@@ -2,8 +2,6 @@ const UserHandler = {
     init: async () => {
         const token = sessionStorage.getItem("userToken");
         if (!token) {
-            // Redirect to login if not on public page? 
-            // For now, just return to avoid errors on public pages if any
             return;
         }
 
@@ -19,7 +17,7 @@ const UserHandler = {
                 const result = await response.json();
                 if (result.success) {
                     UserHandler.updateHeader(result.data.user);
-                    UserHandler.updateSidebar(result.data.user);
+                    // Sidebar is handled by sidebar-handler.js
                 }
             }
         } catch (error) {
@@ -31,18 +29,18 @@ const UserHandler = {
         const headerAvatar = document.querySelector(".header-avatar");
         const headerName = document.querySelector("#navbarUserDropdown span");
 
-        if (headerAvatar) headerAvatar.src = user.avatar || '../assets/images/default-avatar.png';
+        if (headerAvatar) {
+            // Determine correct path to assets based on current location
+            // If we are in a sub-sub folder (like profile/index.html or matches/index.html), go up 2 levels.
+            // If we are in a sub folder (like dashboard.html), go up 1 level.
+            const path = window.location.pathname;
+            const isDeep = path.includes('/profile/') || path.includes('/matches/') || path.includes('/admin/users/');
+            const assetsPath = isDeep ? '../../assets' : '../assets';
+            const defaultAvatar = `${assetsPath}/images/default-avatar.png`;
+
+            headerAvatar.src = user.owner_avatar || user.avatar || defaultAvatar;
+        }
         if (headerName) headerName.textContent = user.name;
-    },
-
-    updateSidebar: (user) => {
-        const avatarEl = document.getElementById("sidebar-user-avatar");
-        const nameEl = document.getElementById("sidebar-user-name");
-        const planEl = document.getElementById("sidebar-user-plan");
-
-        if (avatarEl) avatarEl.src = user.avatar || '../assets/images/default-avatar.png';
-        if (nameEl) nameEl.textContent = user.name;
-        if (planEl) planEl.textContent = user.plan + " Plan";
     },
 };
 

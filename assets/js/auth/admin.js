@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          sessionStorage.setItem("loggedInAdminId", data.adminId);
-          sessionStorage.setItem("adminToken", data.token);
-          sessionStorage.setItem("adminRole", data.role);
+          sessionStorage.setItem("loggedInUserId", data.adminId); // Standardized key
+          sessionStorage.setItem("userToken", data.token);        // Standardized key
+          sessionStorage.setItem("userRole", data.role);          // Standardized key
           sessionStorage.setItem("isMasterAdmin", data.is_master_admin ? "true" : "false");
           window.location.href = getBasePath() + "admin/dashboard.html";
         } else {

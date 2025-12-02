@@ -54,9 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch(getBasePath() + "api/create-user.php", {
+        const token = sessionStorage.getItem("userToken");
+        const response = await fetch("http://127.0.0.1:8000/api/users", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/json"
+          },
           body: JSON.stringify(newUserData),
         });
 

@@ -75,19 +75,6 @@ body {
   color: var(--text-light);
   border-color: var(--brand-primary);
   font-weight: 600;
-}
-
-.kpi-card {
-  box-shadow: var(--box-shadow-light);
-}
-
-.kpi-card:hover {
-  border-color: var(--brand-primary);
-}
-
-.kpi-title {
-  color: var(--text-muted);
-  font-size: 0.875rem;
   font-weight: 500;
 }
 
