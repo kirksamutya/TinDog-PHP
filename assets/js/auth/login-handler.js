@@ -33,10 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((data) => {
         if (data.success) {
-          sessionStorage.setItem("loggedInUserId", data.userId);
-          sessionStorage.setItem("userToken", data.token);
-          sessionStorage.setItem("userRole", data.role);
-          sessionStorage.setItem("isMasterAdmin", data.is_master_admin);
+          DataService.saveSession(data);
 
           if (data.role === 'admin') {
             window.location.href = getBasePath() + "admin/dashboard.html";
