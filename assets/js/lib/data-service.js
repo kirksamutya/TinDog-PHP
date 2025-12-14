@@ -1,4 +1,9 @@
 const DataService = {
+  // Centralized Session Management
+  getToken: () => {
+    return sessionStorage.getItem("userToken");
+  },
+
   getLoggedInUserId: () => {
     return sessionStorage.getItem("loggedInUserId") || "saavedra_roel";
   },
@@ -7,11 +12,27 @@ const DataService = {
     return sessionStorage.getItem("loggedInAdminId");
   },
 
+  saveSession: (data) => {
+    sessionStorage.setItem("loggedInUserId", data.userId);
+    sessionStorage.setItem("userToken", data.token);
+    sessionStorage.setItem("userRole", data.role);
+    sessionStorage.setItem("userPlan", data.plan || "free");
+    sessionStorage.setItem("isMasterAdmin", data.is_master_admin);
+  },
+
+  clearSession: () => {
+    sessionStorage.removeItem("loggedInUserId");
+    sessionStorage.removeItem("userToken");
+    sessionStorage.removeItem("userRole");
+    sessionStorage.removeItem("userPlan");
+    sessionStorage.removeItem("isMasterAdmin");
+  },
+
   /**
    * Fetches all users from the API for the admin panel.
    */
   getAllUsers: async () => {
-    const token = sessionStorage.getItem("adminToken"); // Get the token from login
+    const token = DataService.getToken(); // Updated to use centralized getter
 
     if (!token) {
       console.error("Admin token not found. Please log in again.");
